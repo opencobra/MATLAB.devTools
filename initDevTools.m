@@ -59,10 +59,10 @@ function initDevTools(repoURL)
     gitConf.fullForkDir = [gitConf.localDir, gitConf.forkDirName];
 
     % clone the fork
-    % cloneFork();
+    cloneFork();
 
     % proceed with configuring the fork
-    % configureFork();
+    configureFork();
 
     % update the fork
 
