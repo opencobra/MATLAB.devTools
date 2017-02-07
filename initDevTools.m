@@ -43,7 +43,7 @@ function initDevTools(repoURL)
         end
 
         if exist(gitConf.localDir, 'dir') ~= 7
-            reply = input(' -> The specified directory does not exist. Do you want to create it? Y/N [Y]:', 's');
+            reply = input([' -> The specified directory (', gitConf.localDir,') does not exist. Do you want to create it? Y/N [Y]:'], 's');
 
             % create the directory if requested
             if isempty(reply) || strcmp(reply, 'Y')
@@ -65,9 +65,10 @@ function initDevTools(repoURL)
     configureFork();
 
     % update the fork
+    updateFork(true);
 
     % print the current configuration
-    fprintf([gitCmd.lead, '- Configuration --', gitCmd.trail, gitCmd.trail])
+    fprintf([gitCmd.lead, gitCmd.lead, '- Configuration --', gitCmd.trail, gitCmd.trail])
     fprintf([gitCmd.lead, '    GitHub username:      ', gitConf.username, gitCmd.trail]);
     fprintf([gitCmd.lead, '    Local directory :     ', gitConf.fullForkDir, gitCmd.trail])
     fprintf([gitCmd.lead, '    Remote fork URL:      ', gitConf.forkURL, gitCmd.trail]);
