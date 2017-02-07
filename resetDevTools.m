@@ -8,5 +8,9 @@ function resetDevTools()
     clear global gitConf;
     clear global gitCmd;
 
-    fprintf([tmpCmd.lead, 'The development tools have been reset.', tmpCmd.success, tmpCmd.trail]);
+    if exist(tmpCmd, 'var')
+        fprintf([tmpCmd.lead, 'The development tools have been reset.', tmpCmd.success, tmpCmd.trail]);
+    else
+        fprintf('Nothing to be done.\n')
+    end
 end
