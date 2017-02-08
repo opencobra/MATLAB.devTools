@@ -38,7 +38,7 @@ function updateFork(force)
         end
 
         % pull eventual changes from other contributors or administrators
-        [status, ~] = system(['git pull origin', branches{k}]);
+        [status, ~] = system(['git pull origin ', branches{k}]);
         if status == 0
             fprintf([gitCmd.lead, 'Changes on ', branches{k},' branch of fork pulled.', gitCmd.success, gitCmd.trail]);
         else
