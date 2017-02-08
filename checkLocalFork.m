@@ -3,6 +3,9 @@ function checkLocalFork()
     global gitConf
     global gitCmd
 
+    checkSystem(mfilename);
+
+    % retrieve the current directory
     currentDir = pwd;
 
     % check if the forked directory already exists
@@ -24,4 +27,5 @@ function checkLocalFork()
 
     % change back to the current directory
     cd(currentDir);
+
 end

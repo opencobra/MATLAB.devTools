@@ -5,10 +5,7 @@ function cloneFork()
 
     currentDir = pwd;
 
-    % check if the fork exists remotely
-    checkRemoteFork();
-
-    % check if the fork exists locally
+    % check if the fork exists remotely and locally
     checkLocalFork();
 
     % if the fork does not exist, clone it
@@ -34,7 +31,7 @@ function cloneFork()
 
         % check if the fork is up-to-date
         if status == 0 && isempty(result)
-            fprintf([gitCmd.lead, 'Your cobratoolbox fork (username: ', gitConf.username, ') is already cloned and up-to-date. ', gitCmd.success, gitCmd.trail]);
+            fprintf([gitCmd.lead, 'Your cobratoolbox fork (username: ', gitConf.userName, ') is already cloned and up-to-date. ', gitCmd.success, gitCmd.trail]);
         % proceed to update the fork
         else
             fprintf([gitCmd.lead, 'Your fork is not up-to-date. Please update using "updateMyFork();".', gitCmd.fail, gitCmd.trail]);

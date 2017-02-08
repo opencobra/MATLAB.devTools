@@ -18,7 +18,7 @@ function configureFork()
         % retrieve a list of remotes
         [status, result] = system('git remote -v');
 
-        if status == 0 && contains(result, 'origin') && contains(result, 'upstream') && contains(result, gitConf.username) && contains(result, gitConf.remoteUserName)
+        if status == 0 && contains(result, 'origin') && contains(result, 'upstream') && contains(result, gitConf.userName) && contains(result, gitConf.remoteUserName)
             fprintf([gitCmd.lead, 'Your fork is properly configured. ', gitCmd.success, gitCmd.trail]);
         else
             [status, ~] = system(['git remote add upstream ', gitConf.remoteRepoURL]);

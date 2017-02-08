@@ -13,7 +13,7 @@ function initDevTools(repoURL)
         gitConf.remoteRepoURL = repoURL;
     end
 
-    if ~isfield(gitConf, 'username'), gitConf.username = []; end
+    if ~isfield(gitConf, 'username'), gitConf.userName = []; end
     if ~isfield(gitConf, 'localDir'), gitConf.localDir = []; end
 
     % parse the remoteRepoURL
@@ -23,9 +23,12 @@ function initDevTools(repoURL)
     gitConf.remoteUserName = gitConf.remoteRepoURL(sepIndices(3)+1:sepIndices(4)-1);
 
     % request the Github username
-    if isempty(gitConf.username)
-        gitConf.username = input(' -> Please enter your Github username: ', 's');
+    if isempty(gitConf.userName)
+        gitConf.userName = input(' -> Please enter your Github username: ', 's');
     end
+
+    % check if the fork exists remotely
+    checkRemoteFork();
 
     % request the local directory
     if isempty(gitConf.localDir)
@@ -69,7 +72,7 @@ function initDevTools(repoURL)
 
     % print the current configuration
     fprintf([gitCmd.lead, gitCmd.lead, '- Configuration --', gitCmd.trail, gitCmd.trail])
-    fprintf([gitCmd.lead, '    GitHub username:      ', gitConf.username, gitCmd.trail]);
+    fprintf([gitCmd.lead, '    GitHub username:      ', gitConf.userName, gitCmd.trail]);
     fprintf([gitCmd.lead, '    Local directory :     ', gitConf.fullForkDir, gitCmd.trail])
     fprintf([gitCmd.lead, '    Remote fork URL:      ', gitConf.forkURL, gitCmd.trail]);
     fprintf([gitCmd.lead, '    Remote opencobra URL: ', gitConf.remoteRepoURL, gitCmd.trail]);

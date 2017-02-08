@@ -1,4 +1,4 @@
-function updateMyFork(force)
+function updateFork(force)
 
     global gitConf
     global gitCmd
@@ -35,6 +35,14 @@ function updateMyFork(force)
             fprintf([gitCmd.lead, 'Local ', branches{k},' branch checked out.', gitCmd.success, gitCmd.trail]);
         else
             error([gitCmd.lead, 'Impossible to checkout the ', branches{k},' branch.']);
+        end
+
+        % pull eventual changes from other contributors or administrators
+        [status, ~] = system(['git pull origin', branches{k}]);
+        if status == 0
+            fprintf([gitCmd.lead, 'Changes on ', branches{k},' branch of fork pulled.', gitCmd.success, gitCmd.trail]);
+        else
+            error([gitCmd.lead, 'Impossible to pull changes from ', branches{k},' branch of fork.']);
         end
 
         % fetch the changes from upstream
