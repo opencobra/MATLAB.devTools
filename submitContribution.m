@@ -124,7 +124,7 @@ function contributeFiles(branchName)
                 reply = input([gitCmd.lead, 'Do you want to open a pull request (PR)? Y/N [N]: '], 's');
 
                 if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
-                    openPR();
+                    openPR(branchName);
                 else
                     fprintf([gitCmd.lead, 'You opted not to submit a pull request (PR). You may open a PR using "openPR()".', gitCmd.trail]);
                 end
