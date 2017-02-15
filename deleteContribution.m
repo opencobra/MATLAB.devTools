@@ -1,4 +1,4 @@
-function deleteBranch(branchName)
+function deleteContribution(branchName)
 
     global gitConf
     global gitCmd

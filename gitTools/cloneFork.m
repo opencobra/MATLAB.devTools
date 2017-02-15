@@ -17,8 +17,19 @@ function cloneFork()
         % change to the local directory
         cd(gitConf.localDir);
 
-        fprintf(['Cloning the fork ', gitConf.forkURL, gitCmd.trail]);
-        system(['git clone ', gitConf.forkURL, ' ', gitConf.forkDirName]);
+        if gitConf.verbose
+            fprintf(['Cloning the fork ', gitConf.forkURL, gitCmd.trail]);
+        end
+
+        [status, ~] = system(['git clone ', gitConf.forkURL, ' ', gitConf.forkDirName]);
+
+        if status == 0
+            if gitConf.verbose
+                fprintf([gitCmd.lead, 'The fork ', gitConf.forkURL, ' has been cloned.', gitCmd.success, gitCmd.trail]);
+            end
+        else
+            error([gitCmd.lead, 'The fork ', gitConf.forkURL, ' could not be cloned.', gitCmd.fail]);
+        end
 
     % if the fork already exists
     else
@@ -31,10 +42,14 @@ function cloneFork()
 
         % check if the fork is up-to-date
         if status == 0 && isempty(result)
-            fprintf([gitCmd.lead, 'Your cobratoolbox fork (username: ', gitConf.userName, ') is already cloned and up-to-date. ', gitCmd.success, gitCmd.trail]);
+            if gitConf.verbose
+                fprintf([gitCmd.lead, 'Your cobratoolbox fork (username: ', gitConf.userName, ') is already cloned and up-to-date. ', gitCmd.success, gitCmd.trail]);
+            end
         % proceed to update the fork
         else
-            fprintf([gitCmd.lead, 'Your fork is not up-to-date. Please update using "updateMyFork();".', gitCmd.fail, gitCmd.trail]);
+            if gitConf.verbose
+                fprintf([gitCmd.lead, 'Your fork is not up-to-date. Please update using "updateMyFork();".', gitCmd.fail, gitCmd.trail]);
+            end
         end
     end
 

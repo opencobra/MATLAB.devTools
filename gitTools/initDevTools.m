@@ -51,9 +51,11 @@ function initDevTools(repoURL)
             % create the directory if requested
             if isempty(reply) || strcmp(reply, 'Y')
                 system(['mkdir ', gitConf.localDir]);
-                fprintf([gitCmd.lead, 'The directory has been created.', gitCmd.success, gitCmd.trail]);
+                if gitConf.verbose
+                    fprintf([gitCmd.lead, 'The directory has been created.', gitCmd.success, gitCmd.trail]);
+                end
             else
-                warning([gitCmd.lead, 'The specified directory does not exist.', gitCmd.fail]);
+                error([gitCmd.lead, 'The specified directory does not exist.', gitCmd.fail]);
             end
         end
     end

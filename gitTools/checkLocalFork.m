@@ -20,9 +20,13 @@ function checkLocalFork()
             error([gitCmd.lead, 'The current folder contains the public version. Contributions can only be made from your own fork.'])
         end
 
-        fprintf([gitCmd.lead, 'The local folder of the fork exists (', gitConf.fullForkDir,').', gitCmd.success, gitCmd.trail]);
+        if gitConf.verbose
+            fprintf([gitCmd.lead, 'The local folder of the fork exists (', gitConf.fullForkDir,').', gitCmd.success, gitCmd.trail]);
+        end
     else
-        fprintf([gitCmd.lead, 'The fork is not yet cloned in the folder ', gitConf.fullForkDir, '.', gitCmd.fail, gitCmd.trail]);
+        if gitConf.verbose
+            fprintf([gitCmd.lead, 'The fork is not yet cloned in the folder ', gitConf.fullForkDir, '.', gitCmd.fail, gitCmd.trail]);
+        end
     end
 
     % change back to the current directory

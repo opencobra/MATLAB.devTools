@@ -13,5 +13,5 @@ function openPR(branchName)
     if status == 0 && contains(result, '200 OK')
         fprintf([gitCmd.lead, 'You can open a pull request (PR) by clicking on \n\n\t', prURL, '?expand=1\n\n']);
     else
-        fprintf([gitCmd.lead, 'The branch ', branchName, ' does not exist or has no commits.', gitCmd.fail, gitCmd.trail])
+        error([gitCmd.lead, 'The branch ', branchName, ' does not exist or has no commits.', gitCmd.fail, gitCmd.trail])
     end

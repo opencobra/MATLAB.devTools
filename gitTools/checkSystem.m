@@ -4,6 +4,7 @@ function checkSystem(callerName)
     global gitCmd
 
     gitConf.leadForkDirName = 'fork-';
+    gitConf.verbose = true
     gitCmd.lead = 'dev>  ';
     gitCmd.success = ' (Success) ';
     gitCmd.fail = ' (Error) ';
@@ -17,7 +18,9 @@ function checkSystem(callerName)
     [status, result] = system('git --version');
 
     if status == 0 && contains(result, 'git version')
-        fprintf([gitCmd.lead, '(', callerName, ') git is properly installed.', gitCmd.success, gitCmd.trail]);
+        if gitConf.verbose
+            fprintf([gitCmd.lead, '(', callerName, ') git is properly installed.', gitCmd.success, gitCmd.trail]);
+        end
     else
         error([gitCmd.lead, '(', callerName, ') git is not installed. Please follow the guidelines how to install git.']);
     end
@@ -26,7 +29,9 @@ function checkSystem(callerName)
     [status, result] = system('curl --version');
 
     if status == 0 && contains(result, 'curl') && contains(result, 'http')
-        fprintf([gitCmd.lead, '(', callerName, ') curl is properly installed.', gitCmd.success, gitCmd.trail]);
+        if gitConf.verbose
+            fprintf([gitCmd.lead, '(', callerName, ') curl is properly installed.', gitCmd.success, gitCmd.trail]);
+        end
     else
         error([gitCmd.lead, '(', callerName, ') curl is not installed. Please follow the guidelines how to install curl.']);
     end

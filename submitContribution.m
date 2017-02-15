@@ -1,4 +1,4 @@
-function contributeFiles(branchName)
+function submitContribution(branchName)
 
     global gitConf
     global gitCmd
@@ -16,27 +16,25 @@ function contributeFiles(branchName)
     end
 
     % initialize the array for storing the file names to be added
-    addFiles = {};
-
     addFileOrder = true;
 
     if length(arrResult) > 10
-        reply = input([gitCmd.lead, 'You currently have more than 10 changed files. Are you sure that you want to continue? Y/N [N]: '], 's');
+        reply = input([gitCmd.lead, ' -> You currently have more than 10 changed files. Are you sure that you want to continue? Y/N [N]: '], 's');
 
         if isempty(reply) || contains(reply, 'n') || contains(reply, 'N')
             addFileOrder = false;
         end
     end
     if length(arrResult) > 20
-        warn([gitCmd.lead, 'You currently have more than 50 new files to add. Consider splitting them into multiple commits (typically only a few files per commit).'])
+        error([gitCmd.lead, 'You currently have more than 50 new files to add. Consider splitting them into multiple commits (typically only a few files per commit).'])
     end
 
     if addFileOrder
-
+        % initialize a counter variable
         countAddFiles = 0;
 
         % push the file(s) to the repository
-        updateFork(false); % silent update
+        updateFork();
 
         % get the branch name
         checkoutBranch(branchName);
@@ -47,48 +45,72 @@ function contributeFiles(branchName)
             % split the file name into 2 parts
             tmpFileNameChunks = strsplit(tmpFileName{1}, ' ');
 
+            % retrieve the status of the file
+            if isempty(tmpFileNameChunks{1})
+              fullFileStatus = tmpFileNameChunks{2};
+            else
+              fullFileStatus = tmpFileNameChunks{1};
+            end
+
+            % retrieve the file name
+            fullFileName = tmpFileName(length(tmpFileNameChunks{1})+1:end);
+
             % add deleted files
-            if ~isempty(tmpFileName) && contains(tmpFileNameChunks{1}, 'D')
-                reply = input([gitCmd.lead, ' -> You deleted ', tmpFileNameChunks{2:end}, 'Do you want to commit this deletion? Y/N [N]: '], 's');
+            if ~isempty(tmpFileName) && contains(fullFileStatus, 'D')
+                reply = input([gitCmd.lead, ' -> You deleted ', fullFileName, 'Do you want to commit this deletion? Y/N [N]: '], 's');
 
                 if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                     countAddFiles = countAddFiles + 1;
-                    [status, ~] = system(['git add ', tmpFileNameChunks{2:end}]);
+                    [status, ~] = system(['git add ', fullFileName]);
                     if status == 0
-                        fprintf([gitCmd.lead, 'The file ', tmpFileNameChunks{2:end}, ' has been added to the stage.', gitCmd.success, gitCmd.trail]);
+                        if gitConf.verbose
+                            fprintf([gitCmd.lead, 'The file ', fullFileName, ' has been added to the stage.', gitCmd.success, gitCmd.trail]);
+                        end
                     else
-                        error([gitCmd.lead, 'The file ', tmpFileNameChunks{2:end}, ' could not be added to the stage.', gitCmd.fail, gitCmd.trail]);
+                        error([gitCmd.lead, 'The file ', fullFileName, ' could not be added to the stage.', gitCmd.fail, gitCmd.trail]);
                     end
                 end
             end
 
             % add modified files
-            if ~isempty(tmpFileName) && contains(tmpFileNameChunks{1}, 'M')
-                reply = input([gitCmd.lead, ' -> You modified ', tmpFileNameChunks{2:end}, 'Do you want to commit the changes? Y/N [N]: '], 's');
+            if ~isempty(tmpFileName) && contains(fullFileStatus, 'M')
+                reply = input([gitCmd.lead, ' -> You modified ', fullFileName, 'Do you want to commit the changes? Y/N [N]: '], 's');
 
                 if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                     countAddFiles = countAddFiles + 1;
-                    [status, ~] = system(['git add ', tmpFileNameChunks{2:end}]);
+                    [status, ~] = system(['git add ', fullFileName]);
                     if status == 0
-                        fprintf([gitCmd.lead, 'The file ', tmpFileNameChunks{2:end}, ' has been added to the stage.', gitCmd.success, gitCmd.trail]);
+                        if gitConf.verbose
+                            fprintf([gitCmd.lead, 'The file <', fullFileName, '> has been added to the stage.', gitCmd.success, gitCmd.trail]);
+                        end
                     else
-                        error([gitCmd.lead, 'The file ', tmpFileNameChunks{2:end}, ' could not be added to the stage.', gitCmd.fail, gitCmd.trail]);
+                        error([gitCmd.lead, 'The file <', fullFileName, '> could not be added to the stage.', gitCmd.fail, gitCmd.trail]);
                     end
                 end
             end
 
             % add untracked files
-            if ~isempty(tmpFileName) && contains(tmpFileNameChunks{1}, '??')
-                reply = input([gitCmd.lead, ' -> Do you want to add the new file ', tmpFileNameChunks{2:end}, '? Y/N [N]: '], 's');
+            if ~isempty(tmpFileName) && contains(fullFileStatus, '??')
+                reply = input([gitCmd.lead, ' -> Do you want to add the new file ', fullFileName, '? Y/N [N]: '], 's');
                 if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                     countAddFiles = countAddFiles + 1;
-                    [status, ~] = system(['git add ', tmpFileNameChunks{2:end}]);
+                    [status, ~] = system(['git add ', fullFileName]);
                     if status == 0
-                        fprintf([gitCmd.lead, 'The file ', tmpFileNameChunks{2:end}, ' has been added to the stage.', gitCmd.success, gitCmd.trail]);
+                        if gitConf.verbose
+                            fprintf([gitCmd.lead, 'The file <', fullFileName, '> has been added to the stage.', gitCmd.success, gitCmd.trail]);
+                        end
                     else
-                        error([gitCmd.lead, 'The file ', tmpFileNameChunks{2:end}, ' could not be added to the stage.', gitCmd.fail, gitCmd.trail]);
+                        error([gitCmd.lead, 'The file <', fullFileName, '> could not be added to the stage.', gitCmd.fail, gitCmd.trail]);
                     end
                 end
+            end
+
+            % already staged file
+            if ~isempty(tmpFileName) && contains(fullFileStatus, 'A')
+                if gitConf.verbose
+                    fprintf([gitCmd.lead, 'The file <', fullFileName, '> is already on stage.', gitCmd.success, gitCmd.trail]);
+                end
+                countAddFiles = countAddFiles + 1
             end
         end
 
@@ -96,7 +118,7 @@ function contributeFiles(branchName)
 
         % set a commit message
         if countAddFiles > 0
-            fprintf([gitCmd.lead, 'You have opted for ', num2str(countAddFiles), ' files to be added in one commit.', gitCmd.trail]);
+            fprintf([gitCmd.lead, 'You have selected ', num2str(countAddFiles), ' files to be added in one commit.', gitCmd.trail]);
 
             if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                 commitMsg = input([gitCmd.lead, ' -> Please enter a commit message (example: "Fixing bug with input arguments"): '], 's');
@@ -107,10 +129,10 @@ function contributeFiles(branchName)
                     if status == 0
                         pushStatus = true;
                     else
-                        fprintf([gitCmd.lead, 'Your commit message cannot be set.', gitCmd.fail, gitCmd.trail]);
+                        error([gitCmd.lead, 'Your commit message cannot be set.', gitCmd.fail, gitCmd.trail]);
                     end
                 else
-                    fprintf([gitCmd.lead, 'Please enter a commit message that has more than 10 characters.', gitCmd.fail, gitCmd.trail]);
+                    error([gitCmd.lead, 'Please enter a commit message that has more than 10 characters.', gitCmd.fail, gitCmd.trail]);
                 end
             end
         end
