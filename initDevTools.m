@@ -24,7 +24,7 @@ function initDevTools(repoURL)
 
     % request the Github username
     if isempty(gitConf.userName)
-        gitConf.userName = input(' -> Please enter your Github username: ', 's');
+        gitConf.userName = input([gitCmd.lead, ' -> Please enter your Github username: '], 's');
     end
 
     % check if the fork exists remotely
@@ -32,7 +32,7 @@ function initDevTools(repoURL)
 
     % request the local directory
     if isempty(gitConf.localDir)
-        reply = input([' -> Please define the local path to your fork\n    example: ~/work/git\n    current: ', pwd,'\n    Enter the path (press ENTER to use the current path): '], 's');
+        reply = input([gitCmd.lead, ' -> Please define the local path to your fork\n    example: ~/work/git\n    current: ', pwd,'\n    Enter the path (press ENTER to use the current path): '], 's');
 
         if isempty(reply)
             gitConf.localDir = pwd;

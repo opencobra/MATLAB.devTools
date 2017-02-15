@@ -26,9 +26,9 @@ function updateFork(force)
     for k = 1:length(branches)
         % checkout the branch k
         if status == 0 && contains(resultList, branches{k})
-            [status, result] = system(['git checkout ', branches{k}]); % make sure that the branch is master
+            [status, ~] = system(['git checkout ', branches{k}]); % make sure that the branch is master
         else
-            [status, result] = system(['git checkout -b ', branches{k}]); % make sure that the branch is master
+            [status, ~] = system(['git checkout -b ', branches{k}]); % make sure that the branch is master
         end
 
         if status == 0 && contains(resultList, branches{k})
