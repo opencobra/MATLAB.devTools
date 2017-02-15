@@ -96,10 +96,10 @@ function contributeFiles(branchName)
 
         % set a commit message
         if countAddFiles > 0
-            fprintf([gitCmd.lead, 'You have opted for ', num2str(length(addFiles)), ' files to be added in one commit.', gitCmd.trail]);
+            fprintf([gitCmd.lead, 'You have opted for ', countAddFiles, ' files to be added in one commit.', gitCmd.trail]);
 
             if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
-                commitMsg = input([gitCmd.lead, 'Please enter a commit message (example: "Fixing bug with input arguments"): '], 's');
+                commitMsg = input([gitCmd.lead, ' -> Please enter a commit message (example: "Fixing bug with input arguments"): '], 's');
 
                 if ~isempty(commitMsg)
                     [status, ~] = system(['git commit -m', commitMsg]);
@@ -117,11 +117,11 @@ function contributeFiles(branchName)
 
         % push to the branch in the fork
         if pushStatus
-            fprintf([gitCmd.lead, 'Pushing ', num2str(length(addFiles)), ' to your branch <', branchName, '>', gitCmd.trail])
+            fprintf([gitCmd.lead, 'Pushing ', countAddFiles, ' to your branch <', branchName, '>', gitCmd.trail])
             [status, ~] = system(['git push origin ', branchName, ' --force']);
 
             if status == 0
-                reply = input([gitCmd.lead, 'Do you want to open a pull request (PR)? Y/N [N]: '], 's');
+                reply = input([gitCmd.lead, ' -> Do you want to open a pull request (PR)? Y/N [N]: '], 's');
 
                 if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                     openPR(branchName);
