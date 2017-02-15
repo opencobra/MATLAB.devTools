@@ -8,7 +8,7 @@ function initDevTools(repoURL)
 
     % main public repository
     if nargin < 1
-        gitConf.remoteRepoURL = 'https://github.com/cobrabot/trial_wo_errors.git';%'https://github.com/opencobra/cobratoolbox.git';
+        gitConf.remoteRepoURL = 'https://github.com/opencobra/cobratoolbox.git';%'https://github.com/cobrabot/trial_wo_errors.git';
     else
         gitConf.remoteRepoURL = repoURL;
     end
