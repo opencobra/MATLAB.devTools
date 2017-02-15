@@ -17,7 +17,7 @@ function initContribution(branchName)
 
     % checkout the branch of the feature
     checkoutBranch(branchName);
-
+    
     % provide a success message
     fprintf([gitCmd.lead, ' -> You may now start working on your new feature <', branchName, '>.', gitCmd.trail]);
     fprintf([gitCmd.lead, ' -> You may run "deleteContribution(\''', branchName, '\''); if you want to delete your existing contribution.', gitCmd.trail]);

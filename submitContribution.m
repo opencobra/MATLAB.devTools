@@ -145,7 +145,7 @@ function submitContribution(branchName)
 
         % push to the branch in the fork
         if pushStatus
-            fprintf([gitCmd.lead, 'Pushing ', num2str(countAddFiles), 'file', (countAddFiles > 1) ? 's' : '',' to your branch <', branchName, '>', gitCmd.trail])
+            fprintf([gitCmd.lead, 'Pushing ', num2str(countAddFiles), ' file(s) to your branch <', branchName, '>', gitCmd.trail])
             [status, ~] = system(['git push origin ', branchName, ' --force']);
 
             if status == 0

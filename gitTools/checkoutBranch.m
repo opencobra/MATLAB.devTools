@@ -54,6 +54,7 @@ function checkoutBranch(branchName)
         checkoutFlag = '-b';
     end
 
+    % properly checkout the branch
     [status, ~] = system(['git checkout ', checkoutFlag, ' ', branchName]);
 
     if status == 0
@@ -61,15 +62,33 @@ function checkoutBranch(branchName)
             fprintf([gitCmd.lead, 'The ', branchName, ' branch has been checked out.', gitCmd.success, gitCmd.trail]);
         end
 
-        % push the newly created branch to the fork
-        [status, ~] = system(['git push origin ', branchName]);
+        % rebase if the branch already existed
+        if ~strcmp(checkoutFlag, '-b') && ~strcmp(branchName, 'develop') && ~strcmp(branchName, 'master')
+            %if there are no unstaged changes
+            [status, result] = system('git status -s');
 
-        if status == 0
-            if gitConf.verbose
-                fprintf([gitCmd.lead, 'The ', branchName, ' branch has been pushed to your fork.', gitCmd.success, gitCmd.trail]);
+            if isempty(result)
+                [status, ~] = system(['git rebase develop']);
+
+                if status == 0
+                    if gitConf.verbose
+                        fprintf([gitCmd.lead, 'The ', branchName, ' branch has been rebased.', gitCmd.success, gitCmd.trail]);
+                    end
+                else
+                    error([gitCmd.lead, 'The ', branchName, ' branch could not be rebased.', gitCmd.fail]);
+                end
             end
         else
-            error([gitCmd.lead, 'The ', branchName, ' branch could not be pushed to your fork.', gitCmd.fail, gitCmd.trail]);
+            % push the newly created branch to the fork
+            [status, ~] = system(['git push origin ', branchName]);
+
+            if status == 0
+                if gitConf.verbose
+                    fprintf([gitCmd.lead, 'The ', branchName, ' branch has been pushed to your fork.', gitCmd.success, gitCmd.trail]);
+                end
+            else
+                error([gitCmd.lead, 'The ', branchName, ' branch could not be pushed to your fork.', gitCmd.fail, gitCmd.trail]);
+            end
         end
     else
         error([gitCmd.lead, 'The branch ', branchName, ' cannot be checked out.', gitCmd.fail, gitCmd.trail]);
