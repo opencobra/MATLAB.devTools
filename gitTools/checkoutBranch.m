@@ -74,6 +74,13 @@ function checkoutBranch(branchName)
                     if gitConf.verbose
                         fprintf([gitCmd.lead, 'The ', branchName, ' branch has been rebased.', gitCmd.success, gitCmd.trail]);
                     end
+                    % push by force the rebased branch
+                    [status, ~] = system(['git push origin ', branchName, '--force']);
+                    if status == 0
+                        if gitConf.verbose
+                            fprintf([gitCmd.lead, 'The ', branchName, ' branch has been pushed to your fork by force.', gitCmd.success, gitCmd.trail]);
+                        end
+                    end
                 else
                     error([gitCmd.lead, 'The ', branchName, ' branch could not be rebased.', gitCmd.fail]);
                 end
