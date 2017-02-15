@@ -49,7 +49,7 @@ function contributeFiles(branchName)
 
             % add deleted files
             if ~isempty(tmpFileName) && contains(tmpFileNameChunks{1}, 'D')
-                reply = input([gitCmd.lead, 'You deleted ', tmpFileNameChunks{2:end}, 'Do you want to commit this deletion? Y/N [N]: '], 's');
+                reply = input([gitCmd.lead, ' -> You deleted ', tmpFileNameChunks{2:end}, 'Do you want to commit this deletion? Y/N [N]: '], 's');
 
                 if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                     countAddFiles = countAddFiles + 1;
@@ -64,7 +64,7 @@ function contributeFiles(branchName)
 
             % add modified files
             if ~isempty(tmpFileName) && contains(tmpFileNameChunks{1}, 'M')
-                reply = input([gitCmd.lead, 'You modified ', tmpFileNameChunks{2:end}, 'Do you want to commit the changes? Y/N [N]: '], 's');
+                reply = input([gitCmd.lead, ' -> You modified ', tmpFileNameChunks{2:end}, 'Do you want to commit the changes? Y/N [N]: '], 's');
 
                 if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                     countAddFiles = countAddFiles + 1;
@@ -79,7 +79,7 @@ function contributeFiles(branchName)
 
             % add untracked files
             if ~isempty(tmpFileName) && contains(tmpFileNameChunks{1}, '??')
-                reply = input([gitCmd.lead, 'Do you want to add the new file ', tmpFileNameChunks{2:end}, '? Y/N [N]: '], 's');
+                reply = input([gitCmd.lead, ' -> Do you want to add the new file ', tmpFileNameChunks{2:end}, '? Y/N [N]: '], 's');
                 if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                     countAddFiles = countAddFiles + 1;
                     [status, ~] = system(['git add ', tmpFileNameChunks{2:end}]);
@@ -96,7 +96,7 @@ function contributeFiles(branchName)
 
         % set a commit message
         if countAddFiles > 0
-            fprintf([gitCmd.lead, 'You have opted for ', countAddFiles, ' files to be added in one commit.', gitCmd.trail]);
+            fprintf([gitCmd.lead, 'You have opted for ', num2str(countAddFiles), ' files to be added in one commit.', gitCmd.trail]);
 
             if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                 commitMsg = input([gitCmd.lead, ' -> Please enter a commit message (example: "Fixing bug with input arguments"): '], 's');
@@ -107,7 +107,7 @@ function contributeFiles(branchName)
                     if status == 0
                         pushStatus = true;
                     else
-                        error([gitCmd.lead, 'Your commit message cannot be set.', gitCmd.fail, gitCmd.trail]);
+                        fprintf([gitCmd.lead, 'Your commit message cannot be set.', gitCmd.fail, gitCmd.trail]);
                     end
                 else
                     fprintf([gitCmd.lead, 'Please enter a commit message that has more than 10 characters.', gitCmd.fail, gitCmd.trail]);
@@ -117,7 +117,7 @@ function contributeFiles(branchName)
 
         % push to the branch in the fork
         if pushStatus
-            fprintf([gitCmd.lead, 'Pushing ', countAddFiles, ' to your branch <', branchName, '>', gitCmd.trail])
+            fprintf([gitCmd.lead, 'Pushing ', num2str(countAddFiles), ' to your branch <', branchName, '>', gitCmd.trail])
             [status, ~] = system(['git push origin ', branchName, ' --force']);
 
             if status == 0
