@@ -78,11 +78,16 @@ function updateFork(force)
             forceText = '';
         end
 
-        [status, ~] = system(['git push origin ', branches{k}, ' ', forceFlag]);
-        if status == 0
-            fprintf([gitCmd.lead, 'The ', branches{k}, ' branch has been updated on the fork', forceText, '.', gitCmd.success, gitCmd.trail]);
+        [status, result] = system(['git push origin ', branches{k}, ' ', forceFlag]);
+        if contains(result, 'Username for')
+            gitConf.userName = input(' -> Please enter your Github username: ', '');
+            gitConf.userName = input(' -> Please enter your Github password: ', '');
         else
-            error([gitCmd.lead, 'Impossible to update ', branches{k}, 'on fork.']);
+            if status == 0
+                fprintf([gitCmd.lead, 'The ', branches{k}, ' branch has been updated on the fork', forceText, '.', gitCmd.success, gitCmd.trail]);
+            else
+                error([gitCmd.lead, 'Impossible to update ', branches{k}, ' on fork.']);
+            end
         end
     end
 
