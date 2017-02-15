@@ -22,9 +22,21 @@ function initDevTools(repoURL)
     gitConf.remoteRepoName = gitConf.remoteRepoURL(sepIndices(4)+1:end-4);
     gitConf.remoteUserName = gitConf.remoteRepoURL(sepIndices(3)+1:sepIndices(4)-1);
 
-    % request the Github username
-    if isempty(gitConf.userName)
-        gitConf.userName = input([gitCmd.lead, ' -> Please enter your Github username: '], 's');
+    [status, result] = system('git config --get github.user');
+
+    gitConf.userName = strtrim(result);
+
+    if status == 0
+        fprintf([gitCmd.lead, 'Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]);
+    else
+        if gitConf.verbose
+            fprintf([gitCmd.lead, 'The Github username could not be retrieved.', gitCmd.fail, gitCmd.trail]);
+        end
+
+        % request the Github username
+        if isempty(gitConf.userName)
+            gitConf.userName = input([gitCmd.lead, ' -> Please enter your Github username: '], 's');
+        end
     end
 
     % check if the fork exists remotely
