@@ -34,7 +34,7 @@ function submitContribution(branchName)
         countAddFiles = 0;
 
         % push the file(s) to the repository
-        updateFork();
+        updateFork(false);
 
         % get the branch name
         checkoutBranch(branchName);
@@ -45,19 +45,25 @@ function submitContribution(branchName)
             % split the file name into 2 parts
             tmpFileNameChunks = strsplit(tmpFileName{1}, ' ');
 
-            % retrieve the status of the file
-            if isempty(tmpFileNameChunks{1})
-              fullFileStatus = tmpFileNameChunks{2};
-            else
-              fullFileStatus = tmpFileNameChunks{1};
-            end
+            fullFileStatus = '';
+            fullFileName = '';
 
-            % retrieve the file name
-            fullFileName = tmpFileName(length(tmpFileNameChunks{1})+1:end);
+            statusFlag = false;
+
+            % retrieve the file name and the status of the file
+            for k = 1:length(tmpFileNameChunks)-1
+                if ~isempty(tmpFileNameChunks{k}) && ~contains(tmpFileNameChunks{k}, '.')
+                    fullFileStatus = tmpFileNameChunks{k};
+                    statusFlag = true;
+                end
+                if statusFlag
+                    fullFileName = tmpFileNameChunks{k+1};
+                end
+            end
 
             % add deleted files
             if ~isempty(tmpFileName) && contains(fullFileStatus, 'D')
-                reply = input([gitCmd.lead, ' -> You deleted ', fullFileName, 'Do you want to commit this deletion? Y/N [N]: '], 's');
+                reply = input([gitCmd.lead, ' -> You deleted ', fullFileName, '. Do you want to commit this deletion? Y/N [N]: '], 's');
 
                 if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                     countAddFiles = countAddFiles + 1;
@@ -74,7 +80,7 @@ function submitContribution(branchName)
 
             % add modified files
             if ~isempty(tmpFileName) && contains(fullFileStatus, 'M')
-                reply = input([gitCmd.lead, ' -> You modified ', fullFileName, 'Do you want to commit the changes? Y/N [N]: '], 's');
+                reply = input([gitCmd.lead, ' -> You modified ', fullFileName, '. Do you want to commit the changes? Y/N [N]: '], 's');
 
                 if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                     countAddFiles = countAddFiles + 1;
@@ -139,7 +145,7 @@ function submitContribution(branchName)
 
         % push to the branch in the fork
         if pushStatus
-            fprintf([gitCmd.lead, 'Pushing ', num2str(countAddFiles), ' to your branch <', branchName, '>', gitCmd.trail])
+            fprintf([gitCmd.lead, 'Pushing ', num2str(countAddFiles), 'file', (countAddFiles > 1) ? 's' : '',' to your branch <', branchName, '>', gitCmd.trail])
             [status, ~] = system(['git push origin ', branchName, ' --force']);
 
             if status == 0

@@ -4,7 +4,7 @@ function checkSystem(callerName)
     global gitCmd
 
     gitConf.leadForkDirName = 'fork-';
-    gitConf.verbose = true
+    gitConf.verbose = true;
     gitCmd.lead = 'dev>  ';
     gitCmd.success = ' (Success) ';
     gitCmd.fail = ' (Error) ';

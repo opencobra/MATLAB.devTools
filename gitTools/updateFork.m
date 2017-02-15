@@ -98,7 +98,7 @@ function updateFork(force)
                     fprintf([gitCmd.lead, 'The <', branches{k}, '> branch has been updated on the fork', forceText, '.', gitCmd.success, gitCmd.trail]);
                 end
             else
-                error([gitCmd.lead, 'Impossible to update <', branches{k}, '> on your fork (', gitConf.forkURL,').']);
+                error([gitCmd.lead, 'Impossible to update <', branches{k}, '> on your fork (', gitConf.forkURL, ').']);
             end
         end
     end
