@@ -43,7 +43,7 @@ function updateFork(force)
         end
 
         % pull eventual changes from other contributors or administrators
-        [status, ~] = system(['git pull origin ', branches{k}]);
+        [status, ~] = system(['git fetch origin ', branches{k}]);
         if status == 0
             if gitConf.verbose
                 fprintf([gitCmd.lead, 'Changes on ', branches{k},' branch of fork pulled.', gitCmd.success, gitCmd.trail]);
@@ -62,24 +62,26 @@ function updateFork(force)
             error([gitCmd.lead, 'Impossible to fetch upstream.']);
         end
 
-        % merge the changes from upstream to the branch
-        [status, ~] = system(['git merge upstream/', branches{k}]);
-        if status == 0
-            if gitConf.verbose
-                fprintf([gitCmd.lead, 'Merged upstream/', branches{k}, ' into ', branches{k}, '.', gitCmd.success, gitCmd.trail]);
+        if ~force
+            % merge the changes from upstream to the branch
+            [status, ~] = system(['git merge upstream/', branches{k}]);
+            if status == 0
+                if gitConf.verbose
+                    fprintf([gitCmd.lead, 'Merged upstream/', branches{k}, ' into ', branches{k}, '.', gitCmd.success, gitCmd.trail]);
+                end
+            else
+                error([gitCmd.lead, 'Impossible to merge upstream/', branches{k}]);
             end
-        else
-            error([gitCmd.lead, 'Impossible to merge upstream/', branches{k}]);
         end
 
         if force
             [status, ~] = system(['git reset --hard upstream/', branches{k}]);
             if status == 0
                 if gitConf.verbose
-                    fprintf([gitCmd.lead, 'The ', branches{k}, ' branch of the fork has been reset by force.', gitCmd.success, gitCmd.trail]);
+                    fprintf([gitCmd.lead, 'The ', branches{k}, ' branch of the fork has been reset.', gitCmd.success, gitCmd.trail]);
                 end
             else
-                error([gitCmd.lead, 'Impossible reset the branch', branches{k}, ' of the fork by force.']);
+                error([gitCmd.lead, 'Impossible to reset the branch', branches{k}, ' of the fork.']);
             end
 
             % set the flag for a force push
