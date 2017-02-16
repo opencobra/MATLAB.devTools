@@ -21,10 +21,10 @@ function checkSystem(callerName)
 
     if status == 0 && contains(result, 'git version')
         if gitConf.verbose
-            fprintf([gitCmd.lead, ' [', mfilename,'] ', callerName, ' git is properly installed.', gitCmd.success, gitCmd.trail]);
+            fprintf([gitCmd.lead, ' [', mfilename, ']', callerName, ' git is properly installed.', gitCmd.success, gitCmd.trail]);
         end
     else
-        error([gitCmd.lead, ' [', mfilename,'] ', callerName, ' git is not installed. Please follow the guidelines how to install git.']);
+        error([gitCmd.lead, ' [', mfilename, ']', callerName, ' git is not installed. Please follow the guidelines how to install git.']);
     end
 
     % check if curl is properly installed
@@ -32,9 +32,9 @@ function checkSystem(callerName)
 
     if status == 0 && contains(result, 'curl') && contains(result, 'http')
         if gitConf.verbose
-            fprintf([gitCmd.lead, ' [', mfilename,'] ', callerName, ' curl is properly installed.', gitCmd.success, gitCmd.trail]);
+            fprintf([gitCmd.lead, ' [', mfilename, ']', callerName, ' curl is properly installed.', gitCmd.success, gitCmd.trail]);
         end
     else
-        error([gitCmd.lead, ' [', mfilename,'] ', callerName, ' curl is not installed. Please follow the guidelines how to install curl.']);
+        error([gitCmd.lead, ' [', mfilename, ']', callerName, ' curl is not installed. Please follow the guidelines how to install curl.']);
     end
 end

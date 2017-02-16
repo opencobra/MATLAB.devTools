@@ -25,7 +25,7 @@ function checkLocalFork()
         end
     else
         if gitConf.verbose
-            fprintf([gitCmd.lead, ' [', mfilename, '] The fork is not yet cloned in the folder ', gitConf.fullForkDir, '.', gitCmd.fail, gitCmd.trail]);
+            fprintf([gitCmd.lead, ' [', mfilename, '] The fork is not yet cloned in the folder ', gitConf.fullForkDir, '.', gitCmd.trail]);
         end
     end
 

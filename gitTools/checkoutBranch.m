@@ -72,12 +72,12 @@ function checkoutBranch(branchName)
             if status == 0 && isempty(result)
                 [status, result1] = system(['git rebase develop']);
 
-                if status == 0
+                if status == 0 && ~contains(result, 'up to date')
                     if gitConf.verbose
                         fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch has been rebased with <develop>.', gitCmd.success, gitCmd.trail]);
                     end
                     % push by force the rebased branch
-                    [status, result2] = system(['git push origin ', branchName, '--force']);
+                    [status, result2] = system(['git push origin ', branchName, ' --force']);
                     if status == 0
                         if gitConf.verbose
                             fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch has been pushed to your fork by force.', gitCmd.success, gitCmd.trail]);
@@ -87,8 +87,7 @@ function checkoutBranch(branchName)
                         error([gitCmd.lead, ' [', mfilename, '] The <', branchName ,'> branch could not be pushed to your fork.', gitCmd.fail]);
                     end
                 else
-                    result1
-                    error([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch could not be rebased.', gitCmd.fail]);
+                    fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch has not been rebased and is up to date.', gitCmd.success, gitCmd.trail]);
                 end
             end
         else
