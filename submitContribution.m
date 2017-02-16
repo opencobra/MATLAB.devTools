@@ -16,7 +16,12 @@ function submitContribution(branchName)
     end
 
     % initialize the array for storing the file names to be added
-    addFileOrder = true;
+    if ~isempty(result) > 0
+        addFileOrder = true;
+    else
+        addFileOrder = false;
+        fprintf([gitCmd.lead, 'There is nothing to contribute. Please make changes to ', pwd, gitCmd.fail, gitCmd.trail]);
+    end
 
     if length(arrResult) > 10
         reply = input([gitCmd.lead, ' -> You currently have more than 10 changed files. Are you sure that you want to continue? Y/N [N]: '], 's');
@@ -126,20 +131,18 @@ function submitContribution(branchName)
         if countAddFiles > 0
             fprintf([gitCmd.lead, 'You have selected ', num2str(countAddFiles), ' files to be added in one commit.', gitCmd.trail]);
 
-            if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
-                commitMsg = input([gitCmd.lead, ' -> Please enter a commit message (example: "Fixing bug with input arguments"): '], 's');
+            commitMsg = input([gitCmd.lead, ' -> Please enter a commit message (example: "Fixing bug with input arguments"): '], 's');
 
-                if ~isempty(commitMsg)
-                    [status, ~] = system(['git commit -m', commitMsg]);
-                    fprintf([gitCmd.lead, 'Your commit message has been set.', gitCmd.success, gitCmd.trail]);
-                    if status == 0
-                        pushStatus = true;
-                    else
-                        error([gitCmd.lead, 'Your commit message cannot be set.', gitCmd.fail, gitCmd.trail]);
-                    end
+            if ~isempty(commitMsg)
+                [status, ~] = system(['git commit -m', commitMsg]);
+                fprintf([gitCmd.lead, 'Your commit message has been set.', gitCmd.success, gitCmd.trail]);
+                if status == 0
+                    pushStatus = true;
                 else
-                    error([gitCmd.lead, 'Please enter a commit message that has more than 10 characters.', gitCmd.fail, gitCmd.trail]);
+                    error([gitCmd.lead, 'Your commit message cannot be set.', gitCmd.fail, gitCmd.trail]);
                 end
+            else
+                error([gitCmd.lead, 'Please enter a commit message that has more than 10 characters.', gitCmd.fail, gitCmd.trail]);
             end
         end
 

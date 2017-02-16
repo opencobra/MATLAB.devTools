@@ -26,16 +26,19 @@ function updateFork(force)
     for k = 1:length(branches)
         % checkout the branch k
         if status == 0 && contains(resultList, branches{k})
-            [status, ~] = system(['git checkout ', branches{k}]); % make sure that the branch is master
+            [status, result] = system(['git checkout ', branches{k}]); % make sure that the branch is master
         else
-            [status, ~] = system(['git checkout -b ', branches{k}]); % make sure that the branch is master
+            [status, result] = system(['git checkout -b ', branches{k}]); % make sure that the branch is master
         end
+
+        [status, resultList] = system('git branch --list');
 
         if status == 0 && contains(resultList, branches{k})
             if gitConf.verbose
                 fprintf([gitCmd.lead, 'Local ', branches{k},' branch checked out.', gitCmd.success, gitCmd.trail]);
             end
         else
+            result
             error([gitCmd.lead, 'Impossible to checkout the ', branches{k},' branch.']);
         end
 
@@ -89,6 +92,7 @@ function updateFork(force)
         end
 
         [status, result] = system(['git push origin ', branches{k}, ' ', forceFlag]);
+
         if contains(result, 'Username for')
             gitConf.userName = input(' -> Please enter your Github username: ', '');
             gitConf.userName = input(' -> Please enter your Github password: ', '');
