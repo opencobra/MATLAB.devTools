@@ -8,7 +8,7 @@ function initDevTools(repoURL)
 
     % main public repository
     if nargin < 1
-        gitConf.remoteRepoURL = 'https://github.com/opencobra/cobratoolbox.git';%'https://github.com/cobrabot/trial_wo_errors.git';
+        gitConf.remoteRepoURL = 'https://github.com/cobrabot/trial_wo_errors.git'; %https://github.com/opencobra/cobratoolbox.git';
     else
         gitConf.remoteRepoURL = repoURL;
     end
@@ -29,9 +29,8 @@ function initDevTools(repoURL)
     if status == 0
         fprintf([gitCmd.lead, 'Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]);
     else
-        if gitConf.verbose
-            fprintf([gitCmd.lead, 'The Github username could not be retrieved.', gitCmd.fail, gitCmd.trail]);
-        end
+        result
+        error([gitCmd.lead, 'The Github username could not be retrieved.', gitCmd.fail, gitCmd.trail]);
 
         % request the Github username
         if isempty(gitConf.userName)
@@ -76,13 +75,15 @@ function initDevTools(repoURL)
     gitConf.fullForkDir = [gitConf.localDir, gitConf.forkDirName];
 
     % clone the fork
-    cloneFork();
+    freshClone = cloneFork();
 
     % proceed with configuring the fork
     configureFork();
 
     % update the fork
-    updateFork(true);
+    if ~freshClone
+        updateFork(true);
+    end
 
     % print the current configuration
     fprintf([gitCmd.lead, ' -- Configuration --', gitCmd.trail, gitCmd.trail])
