@@ -1,4 +1,4 @@
-function cloneFork()
+function freshClone = cloneFork()
 
     global gitConf
     global gitCmd
@@ -7,6 +7,8 @@ function cloneFork()
 
     % check if the fork exists remotely and locally
     checkLocalFork();
+
+    freshClone = false;
 
     % if the fork does not exist, clone it
     if exist(gitConf.localDir, 'dir') ~= 7
@@ -27,6 +29,7 @@ function cloneFork()
             if gitConf.verbose
                 fprintf([gitCmd.lead, 'The fork ', gitConf.forkURL, ' has been cloned.', gitCmd.success, gitCmd.trail]);
             end
+            freshClone = true;
         else
             error([gitCmd.lead, 'The fork ', gitConf.forkURL, ' could not be cloned.', gitCmd.fail]);
         end
