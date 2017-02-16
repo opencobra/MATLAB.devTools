@@ -6,6 +6,9 @@ function submitContribution(branchName)
     % change the directory to the local directory of the fork
     cd(gitConf.fullForkDir);
 
+    % check if branch exists
+    checkoutBranch(branchName);
+
     % retrieve a list of remotes
     [status, result] = system('git status -s');
 
@@ -161,7 +164,7 @@ function submitContribution(branchName)
 
         % push to the branch in the fork
         if pushStatus
-            fprintf([gitCmd.lead, ' [', mfilename,'] Pushing ', num2str(countAddFiles), ' file(s) to your branch <', branchName, '>', gitCmd.trail])
+            fprintf([gitCmd.lead, ' [', mfilename,'] Pushing ', num2str(countAddFiles), ' change(s) to your branch <', branchName, '>', gitCmd.trail])
             [status, result] = system(['git push origin ', branchName, ' --force']);
 
             if status == 0
@@ -170,7 +173,7 @@ function submitContribution(branchName)
                 if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                     openPR(branchName);
                 else
-                    fprintf([gitCmd.lead, ' [', mfilename,'] You opted not to submit a pull request (PR). You may open a PR using "openPR()".', gitCmd.trail]);
+                    fprintf([gitCmd.lead, ' [', mfilename,'] You can open a pull request (PR) later using "openPR(\''', branchName,'\'')".', gitCmd.trail]);
                 end
             else
                 result
