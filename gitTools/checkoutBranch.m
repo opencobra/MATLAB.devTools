@@ -49,9 +49,6 @@ function checkoutBranch(branchName)
             result
             error([gitCmd.lead, 'The changes of the <develop> branch could not be pulled.', gitCmd.fail]);
         end
-    else
-        resultList
-        error([gitCmd.lead, ' [', mfilename, '] The list of branches cannot be retrieved.', gitCmd.fail]);
     end
 
     % checkout a new branch if it doesn't exist

@@ -87,7 +87,7 @@ function initDevTools(repoURL)
     end
 
     % print the current configuration
-    fprintf([gitCmd.lead, ' [', mfilename,'] -- Configuration --', gitCmd.trail, gitCmd.trail])
+    fprintf([gitCmd.lead, ' [', mfilename,'] -- Configuration --      ', gitCmd.trail])
     fprintf([gitCmd.lead, ' [', mfilename,']    GitHub username:      ', gitConf.userName, gitCmd.trail]);
     fprintf([gitCmd.lead, ' [', mfilename,']    Local directory :     ', gitConf.fullForkDir, gitCmd.trail])
     fprintf([gitCmd.lead, ' [', mfilename,']    Remote fork URL:      ', gitConf.forkURL, gitCmd.trail]);

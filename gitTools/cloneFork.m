@@ -43,14 +43,14 @@ function freshClone = cloneFork()
         cd(gitConf.fullForkDir)
 
         % retrieve a short status from git
-        [status, ~] = system('git status -s');
+        [status, result] = system('git status -s');
 
         % check if the fork is up-to-date
         if status == 0 && isempty(result)
             if gitConf.verbose
                 fprintf([gitCmd.lead, ' [', mfilename,'] Your cobratoolbox fork (username: ', gitConf.userName, ') is already cloned and up-to-date. ', gitCmd.success, gitCmd.trail]);
             end
-            
+
         % proceed to update the fork
         else
             if gitConf.verbose

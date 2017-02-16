@@ -16,7 +16,7 @@ function configureFork()
         cd(gitConf.fullForkDir);
 
         % retrieve a list of remotes
-        [status, ~] = system('git remote -v');
+        [status, result] = system('git remote -v');
 
         if status == 0 && contains(result, 'origin') && contains(result, 'upstream') && contains(result, gitConf.userName) && contains(result, gitConf.remoteUserName)
             if gitConf.verbose

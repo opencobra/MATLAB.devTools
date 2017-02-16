@@ -30,19 +30,19 @@ function updateFork(force)
                 [status, result] = system(['git checkout ', branches{k}]);
 
                 if status == 0
-                    fprintf([gitCmd.lead, ' [', mfilename,'] The branch <', branchName, '> was checked out.', gitCmd.success, gitCmd.trail]);
+                    fprintf([gitCmd.lead, ' [', mfilename,'] The branch <', branches{k}, '> was checked out.', gitCmd.success, gitCmd.trail]);
                 else
                     result
-                    fprintf([gitCmd.lead, ' [', mfilename,'] The branch <', branchName, '> could not be checked out.', gitCmd.fail]);
+                    fprintf([gitCmd.lead, ' [', mfilename,'] The branch <', branches{k}, '> could not be checked out.', gitCmd.fail]);
                 end
             else
                 [status, result] = system(['git checkout -b ', branches{k}]);
 
                 if status == 0
-                    fprintf([gitCmd.lead, ' [', mfilename,'] The branch <', branchName, '> was checked out.', gitCmd.success, gitCmd.trail]);
+                    fprintf([gitCmd.lead, ' [', mfilename,'] The branch <', branches{k}, '> was checked out.', gitCmd.success, gitCmd.trail]);
                 else
                     result
-                    fprintf([gitCmd.lead, ' [', mfilename,'] The branch <', branchName, '> could not be checked out.', gitCmd.fail]);
+                    fprintf([gitCmd.lead, ' [', mfilename,'] The branch <', branches{k}, '> could not be checked out.', gitCmd.fail]);
                 end
             end
 
@@ -61,7 +61,7 @@ function updateFork(force)
             [status, result] = system(['git fetch origin ', branches{k}]);  % no pull
             if status == 0
                 if gitConf.verbose
-                    fprintf([gitCmd.lead, 'Changes on ', branches{k},' branch of fork pulled.', gitCmd.success, gitCmd.trail]);
+                    fprintf([gitCmd.lead, ' [', mfilename,'] Changes on ', branches{k},' branch of fork pulled.', gitCmd.success, gitCmd.trail]);
                 end
             else
                 result
