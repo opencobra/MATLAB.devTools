@@ -141,6 +141,11 @@ function submitContribution(branchName)
             commitMsg = input([gitCmd.lead, ' [', mfilename,'] -> Please enter a commit message (example: "Fixing bug with input arguments"): '], 's');
 
             if ~isempty(commitMsg)
+
+                if ~strcmp(commitMsg(1), '"') || ~strcmp(commitMsg(end), '"')
+                    commitMsg = ['"', commitMsg, '"'];
+                end
+
                 [status, result] = system(['git commit -m', commitMsg]);
                 fprintf([gitCmd.lead, ' [', mfilename,'] Your commit message has been set.', gitCmd.success, gitCmd.trail]);
                 if status == 0
@@ -156,7 +161,7 @@ function submitContribution(branchName)
 
         % push to the branch in the fork
         if pushStatus
-            fprintf([gitCmd.lead, 'Pushing ', num2str(countAddFiles), ' file(s) to your branch <', branchName, '>', gitCmd.trail])
+            fprintf([gitCmd.lead, ' [', mfilename,'] Pushing ', num2str(countAddFiles), ' file(s) to your branch <', branchName, '>', gitCmd.trail])
             [status, result] = system(['git push origin ', branchName, ' --force']);
 
             if status == 0
