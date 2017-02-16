@@ -54,7 +54,7 @@ function updateFork(force)
                 end
             else
                 result
-                error([gitCmd.lead, ' [', mfilename,'] Impossible to checkout the ', branches{k},' branch.']);
+                error([gitCmd.lead, ' [', mfilename,'] Impossible to checkout the ', branches{k},' branch.', gitCmd.fail]);
             end
 
             % pull eventual changes from other contributors or administrators
@@ -65,7 +65,7 @@ function updateFork(force)
                 end
             else
                 result
-                error([gitCmd.lead, 'Impossible to pull changes from ', branches{k},' branch of fork.']);
+                error([gitCmd.lead, 'Impossible to pull changes from ', branches{k},' branch of fork.', gitCmd.fail]);
             end
 
             % fetch the changes from upstream
@@ -88,7 +88,7 @@ function updateFork(force)
                     end
                 else
                     result
-                    error([gitCmd.lead, ' [', mfilename,'] Impossible to merge upstream/', branches{k}]);
+                    error([gitCmd.lead, ' [', mfilename,'] Impossible to merge upstream/', branches{k}, gitCmd.fail]);
                 end
             end
 
@@ -100,7 +100,7 @@ function updateFork(force)
                     end
                 else
                     result
-                    error([gitCmd.lead, ' [', mfilename,'] Impossible to reset the branch', branches{k}, ' of the fork.']);
+                    error([gitCmd.lead, ' [', mfilename,'] Impossible to reset the branch', branches{k}, ' of the fork.', gitCmd.fail]);
                 end
 
                 % set the flag for a force push
@@ -122,10 +122,15 @@ function updateFork(force)
                         fprintf([gitCmd.lead, ' [', mfilename,'] The <', branches{k}, '> branch has been updated on the fork', forceText, '.', gitCmd.success, gitCmd.trail]);
                     end
                 else
-                    error([gitCmd.lead, ' [', mfilename,'] Impossible to update <', branches{k}, '> on your fork (', gitConf.forkURL, ').']);
+                    result
+                    error([gitCmd.lead, ' [', mfilename,'] Impossible to update <', branches{k}, '> on your fork (', gitConf.forkURL, ').', gitCmd.fail]);
                 end
             end
         end
+    else
+      resultList
+      error([gitCmd.lead, ' [', mfilename,'] Impossible to retrieve the branches of your local fork.', gitCmd.fail]);
+    end
 
     % change back to the original directory
     cd(currentDir);

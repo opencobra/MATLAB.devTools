@@ -30,7 +30,7 @@ function configureFork()
                 end
             else
                 result
-                error([gitCmd.lead, ' [', mfilename,'] ', gitConf.remoteRepoURL, ' could not be added as remote named "upstream".', gitCmd.fail, gitCmd.trail]);
+                error([gitCmd.lead, ' [', mfilename,'] ', gitConf.remoteRepoURL, ' could not be added as remote named "upstream".', gitCmd.fail]);
             end
         end
     end

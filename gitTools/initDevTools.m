@@ -30,7 +30,7 @@ function initDevTools(repoURL)
         fprintf([gitCmd.lead, ' [', mfilename,'] Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]);
     else
         result
-        error([gitCmd.lead, ' [', mfilename,'] The Github username could not be retrieved.', gitCmd.fail, gitCmd.trail]);
+        error([gitCmd.lead, ' [', mfilename,'] The Github username could not be retrieved.', gitCmd.fail]);
 
         % request the Github username
         if isempty(gitConf.userName)

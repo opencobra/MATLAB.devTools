@@ -13,7 +13,7 @@ function submitContribution(branchName)
         arrResult = strsplit(result, '\n');
     else
         result
-        error([gitCmd.lead, ' [', mfilename,'] The status of the repository cannot be retrieved', gitCmd.fail, gitCmd.trail]);
+        error([gitCmd.lead, ' [', mfilename,'] The status of the repository cannot be retrieved', gitCmd.fail]);
     end
 
     % initialize the array for storing the file names to be added
@@ -21,7 +21,7 @@ function submitContribution(branchName)
         addFileOrder = true;
     else
         addFileOrder = false;
-        fprintf([gitCmd.lead, ' [', mfilename,'] There is nothing to contribute. Please make changes to ', pwd, gitCmd.fail, gitCmd.trail]);
+        fprintf([gitCmd.lead, ' [', mfilename,'] There is nothing to contribute. Please make changes to ', pwd, gitCmd.trail]);
     end
 
     % provide a warning if there are more than 10 files to add (and less than 20 files)

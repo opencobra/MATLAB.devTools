@@ -104,12 +104,12 @@ function checkoutBranch(branchName)
                 end
             else
                 result3
-                error([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch could not be pushed to your fork.', gitCmd.fail, gitCmd.trail]);
+                error([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch could not be pushed to your fork.', gitCmd.fail]);
             end
         end
     else
         result0
-        error([gitCmd.lead, ' [', mfilename, '] The branch <', branchName, '> cannot be checked out.', gitCmd.fail, gitCmd.trail]);
+        error([gitCmd.lead, ' [', mfilename, '] The branch <', branchName, '> cannot be checked out.', gitCmd.fail]);
     end
 
     % change back to the current directory

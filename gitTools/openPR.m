@@ -16,6 +16,6 @@ function openPR(branchName)
         fprintf([gitCmd.lead, ' [', mfilename,'] You can open a pull request (PR) by clicking on \n\n\t', prURL, '?expand=1\n\n']);
     else
         result
-        error([gitCmd.lead, ' [', mfilename,'] The branch <', branchName, '> does not exist or has no commits.', gitCmd.fail, gitCmd.trail])
+        error([gitCmd.lead, ' [', mfilename,'] The branch <', branchName, '> does not exist or has no commits.', gitCmd.fail])
     end
 end

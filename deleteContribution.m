@@ -38,7 +38,7 @@ function deleteContribution(branchName)
                 fprintf([gitCmd.lead, ' [', mfilename,'] The remote <', branchName, '> branch has been deleted.', gitCmd.success, gitCmd.trail]);
             else
                 result1
-                error([gitCmd.lead, ' [', mfilename,'] The remote <', branchName,'> branch could not be deleted.', gitCmd.fail, gitCmd.trail]);
+                error([gitCmd.lead, ' [', mfilename,'] The remote <', branchName,'> branch could not be deleted.', gitCmd.fail]);
             end
         else
             result
