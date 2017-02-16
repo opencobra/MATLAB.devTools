@@ -7,7 +7,6 @@ function checkDevTools()
     if ~isfield(gitConf, 'username') || ~isfield(gitConf, 'localDir')
         initDevTools();
     else
-        fprintf([gitCmd.lead, 'The development tools are properly configured.', gitCmd.success, gitCmd.trail]);
+        fprintf([gitCmd.lead, ' [', mfilename,'] The development tools are properly configured.', gitCmd.success, gitCmd.trail]);
     end
-
 end

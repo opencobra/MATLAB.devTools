@@ -6,5 +6,5 @@ function resetDevTools()
     clear global gitConf;
     clear global gitCmd;
 
-    fprintf('The development tools have been reset.\n');
+    fprintf(' [', mfilename,'] The development tools have been reset.\n');
 end

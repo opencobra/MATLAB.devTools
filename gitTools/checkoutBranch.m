@@ -20,7 +20,7 @@ function checkoutBranch(branchName)
 
     if status == 0 && isempty(indexDevelop) %&& abs(indexDevelop-indexStar) > 10 % colors might be denoted as [32m etc.
         if gitConf.verbose
-            fprintf([gitCmd.lead, 'The current branch is not the <develop> branch.', gitCmd.fail, gitCmd.trail]);
+            fprintf([gitCmd.lead, ' [', mfilename, '] The current branch is not the <develop> branch.', gitCmd.fail, gitCmd.trail]);
         end
 
         % update the fork locally
@@ -31,22 +31,27 @@ function checkoutBranch(branchName)
 
         if status == 0 && (contains(resultList, '* develop') || contains(result, 'Already on'))
             if gitConf.verbose
-                fprintf([gitCmd.lead, 'The current branch is <develop>.', gitCmd.success, gitCmd.trail]);
+                fprintf([gitCmd.lead, ' [', mfilename, '] The current branch is <develop>.', gitCmd.success, gitCmd.trail]);
             end
         else
+            result
             error([gitCmd.lead, 'An error occurred and the <develop> branch cannot be checked out']);
         end
 
         % make sure that the develop branch is up to date
-        [status, ~] = system('git pull origin develop');
+        [status, result] = system('git pull origin develop');
 
         if status == 0
             if gitConf.verbose
-                fprintf([gitCmd.lead, 'The changes of the <develop> branch of your fork have been pulled.', gitCmd.success, gitCmd.trail]);
+                fprintf([gitCmd.lead, ' [', mfilename, '] The changes of the <develop> branch of your fork have been pulled.', gitCmd.success, gitCmd.trail]);
             end
         else
-            error([gitCmd.lead, 'The changes of the <develop> branch could not be pulled.', gitCmd.fail, gitCmd.trail]);
+            result
+            error([gitCmd.lead, 'The changes of the <develop> branch could not be pulled.', gitCmd.fail]);
         end
+    else
+        resultList
+        error([gitCmd.lead, ' [', mfilename, '] The list of branches cannot be retrieved.', gitCmd.fail]);
     end
 
     % checkout a new branch if it doesn't exist
@@ -55,11 +60,11 @@ function checkoutBranch(branchName)
     end
 
     % properly checkout the branch
-    [status, ~] = system(['git checkout ', checkoutFlag, ' ', branchName]);
+    [status, result0] = system(['git checkout ', checkoutFlag, ' ', branchName]);
 
     if status == 0
         if gitConf.verbose
-            fprintf([gitCmd.lead, 'The <', branchName, '> branch has been checked out.', gitCmd.success, gitCmd.trail]);
+            fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch has been checked out.', gitCmd.success, gitCmd.trail]);
         end
 
         % rebase if the branch already existed
@@ -67,38 +72,44 @@ function checkoutBranch(branchName)
             %if there are no unstaged changes
             [status, result] = system('git status -s');
 
-            if isempty(result)
-                [status, ~] = system(['git rebase develop']);
+            if status == 0 && isempty(result)
+                [status, result1] = system(['git rebase develop']);
 
                 if status == 0
                     if gitConf.verbose
-                        fprintf([gitCmd.lead, 'The <', branchName, '> branch has been rebased with <develop>.', gitCmd.success, gitCmd.trail]);
+                        fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch has been rebased with <develop>.', gitCmd.success, gitCmd.trail]);
                     end
                     % push by force the rebased branch
-                    [status, ~] = system(['git push origin ', branchName, '--force']);
+                    [status, result2] = system(['git push origin ', branchName, '--force']);
                     if status == 0
                         if gitConf.verbose
-                            fprintf([gitCmd.lead, 'The <', branchName, '> branch has been pushed to your fork by force.', gitCmd.success, gitCmd.trail]);
+                            fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch has been pushed to your fork by force.', gitCmd.success, gitCmd.trail]);
                         end
+                    else
+                        result2
+                        error([gitCmd.lead, ' [', mfilename, '] The <', branchName ,'> branch could not be pushed to your fork.', gitCmd.fail]);
                     end
                 else
-                    error([gitCmd.lead, 'The <', branchName, '> branch could not be rebased.', gitCmd.fail]);
+                    result1
+                    error([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch could not be rebased.', gitCmd.fail]);
                 end
             end
         else
             % push the newly created branch to the fork
-            [status, ~] = system(['git push origin ', branchName]);
+            [status, result3] = system(['git push origin ', branchName]);
 
             if status == 0
                 if gitConf.verbose
-                    fprintf([gitCmd.lead, 'The <', branchName, '> branch has been pushed to your fork.', gitCmd.success, gitCmd.trail]);
+                    fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch has been pushed to your fork.', gitCmd.success, gitCmd.trail]);
                 end
             else
-                error([gitCmd.lead, 'The <', branchName, '> branch could not be pushed to your fork.', gitCmd.fail, gitCmd.trail]);
+                result3
+                error([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch could not be pushed to your fork.', gitCmd.fail, gitCmd.trail]);
             end
         end
     else
-        error([gitCmd.lead, 'The branch <', branchName, '> cannot be checked out.', gitCmd.fail, gitCmd.trail]);
+        result0
+        error([gitCmd.lead, ' [', mfilename, '] The branch <', branchName, '> cannot be checked out.', gitCmd.fail, gitCmd.trail]);
     end
 
     % change back to the current directory

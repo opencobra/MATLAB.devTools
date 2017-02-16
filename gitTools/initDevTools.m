@@ -27,14 +27,14 @@ function initDevTools(repoURL)
     gitConf.userName = strtrim(result);
 
     if status == 0
-        fprintf([gitCmd.lead, 'Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]);
+        fprintf([gitCmd.lead, ' [', mfilename,'] Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]);
     else
         result
-        error([gitCmd.lead, 'The Github username could not be retrieved.', gitCmd.fail, gitCmd.trail]);
+        error([gitCmd.lead, ' [', mfilename,'] The Github username could not be retrieved.', gitCmd.fail, gitCmd.trail]);
 
         % request the Github username
         if isempty(gitConf.userName)
-            gitConf.userName = input([gitCmd.lead, ' -> Please enter your Github username: '], 's');
+            gitConf.userName = input([gitCmd.lead, ' [', mfilename,'] -> Please enter your Github username: '], 's');
         end
     end
 
@@ -43,7 +43,7 @@ function initDevTools(repoURL)
 
     % request the local directory
     if isempty(gitConf.localDir)
-        reply = input([gitCmd.lead, ' -> Please define the local path to your fork\n    example: ~/work/git/hub/forks\n    current: ', pwd,'\n    Enter the path (press ENTER to use the current path): '], 's');
+        reply = input([gitCmd.lead, ' [', mfilename,'] -> Please define the local path to your fork\n    example: ~/work/git/hub/forks\n    current: ', pwd,'\n    Enter the path (press ENTER to use the current path): '], 's');
 
         if isempty(reply)
             gitConf.localDir = pwd;
@@ -57,20 +57,21 @@ function initDevTools(repoURL)
         end
 
         if exist(gitConf.localDir, 'dir') ~= 7
-            reply = input([' -> The specified directory (', gitConf.localDir,') does not exist. Do you want to create it? Y/N [Y]:'], 's');
+            reply = input([gitmd.lead, ' [', mfilename,'] -> The specified directory (', gitConf.localDir,') does not exist. Do you want to create it? Y/N [Y]:'], 's');
 
             % create the directory if requested
             if isempty(reply) || strcmp(reply, 'Y')
                 system(['mkdir ', gitConf.localDir]);
                 if gitConf.verbose
-                    fprintf([gitCmd.lead, 'The directory has been created.', gitCmd.success, gitCmd.trail]);
+                    fprintf([gitCmd.lead, ' [', mfilename,'] The directory has been created.', gitCmd.success, gitCmd.trail]);
                 end
             else
-                error([gitCmd.lead, 'The specified directory does not exist.', gitCmd.fail]);
+                error([gitCmd.lead, ' [', mfilename,'] The specified directory does not exist.', gitCmd.fail]);
             end
         end
     end
 
+    % define the fork directory name
     gitConf.forkDirName = [gitConf.leadForkDirName, gitConf.remoteRepoName];
     gitConf.fullForkDir = [gitConf.localDir, gitConf.forkDirName];
 
@@ -86,10 +87,10 @@ function initDevTools(repoURL)
     end
 
     % print the current configuration
-    fprintf([gitCmd.lead, ' -- Configuration --', gitCmd.trail, gitCmd.trail])
-    fprintf([gitCmd.lead, '    GitHub username:      ', gitConf.userName, gitCmd.trail]);
-    fprintf([gitCmd.lead, '    Local directory :     ', gitConf.fullForkDir, gitCmd.trail])
-    fprintf([gitCmd.lead, '    Remote fork URL:      ', gitConf.forkURL, gitCmd.trail]);
-    fprintf([gitCmd.lead, '    Remote opencobra URL: ', gitConf.remoteRepoURL, gitCmd.trail]);
+    fprintf([gitCmd.lead, ' [', mfilename,'] -- Configuration --', gitCmd.trail, gitCmd.trail])
+    fprintf([gitCmd.lead, ' [', mfilename,']    GitHub username:      ', gitConf.userName, gitCmd.trail]);
+    fprintf([gitCmd.lead, ' [', mfilename,']    Local directory :     ', gitConf.fullForkDir, gitCmd.trail])
+    fprintf([gitCmd.lead, ' [', mfilename,']    Remote fork URL:      ', gitConf.forkURL, gitCmd.trail]);
+    fprintf([gitCmd.lead, ' [', mfilename,']    Remote opencobra URL: ', gitConf.remoteRepoURL, gitCmd.trail]);
 
 end

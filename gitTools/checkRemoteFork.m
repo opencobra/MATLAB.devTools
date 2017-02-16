@@ -3,9 +3,8 @@ function checkRemoteFork()
     global gitConf
     global gitCmd
 
+    % check the system
     checkSystem(mfilename);
-
-    % check remote fork
 
     % check the URLs of the fork and the remote repository
     if ~isempty(gitConf.userName)
@@ -17,16 +16,16 @@ function checkRemoteFork()
             gitConf.forkURL = [gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '.git'];
 
             if gitConf.verbose
-                fprintf([gitCmd.lead, 'The original repository has already been forked on Github (', gitConf.forkURL,').', gitCmd.success, gitCmd.trail]);
+                fprintf([gitCmd.lead, ' [', mfilename, '] The original repository has already been forked on Github (', gitConf.forkURL,').', gitCmd.success, gitCmd.trail]);
             end
         else
+            result
             tmpCmd = gitCmd;
             tmpConf = gitConf;
             resetDevTools();
-            error([tmpCmd.lead, 'The URL of the fork (', tmpConf.remoteServerName, tmpConf.userName, '/', tmpConf.remoteRepoName, ') is not reachable or does not exist.\n Please browse to ', tmpConf.remoteRepoURL, ' in order to fork the repository (click on the button FORK).', tmpCmd.fail, tmpCmd.trail]);
+            error([tmpCmd.lead, ' [', mfilename, '] The URL of the fork (', tmpConf.remoteServerName, tmpConf.userName, '/', tmpConf.remoteRepoName, ') is not reachable or does not exist.\n Please browse to ', tmpConf.remoteRepoURL, ' in order to fork the repository (click on the button FORK).', tmpCmd.fail, tmpCmd.trail]);
         end
     else
-        error([gitCmd.lead, 'The entered Github username (', gitConf.userName, ') is not valid.']);
+        error([gitCmd.lead, ' [', mfilename, '] The entered Github username (', gitConf.userName, ') is not valid.']);
     end
-
 end

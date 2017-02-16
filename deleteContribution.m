@@ -12,29 +12,37 @@ function deleteContribution(branchName)
         % checkout the develop branch
         checkoutBranch('develop');
 
-        %check here if branch exists
-        [status, result] = system(['curl -s --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName, '| head -n 1']);
-
-        if status == 0 && contains(result, '200 OK')
-
-            % delete the remote branch
-            [status, ~] = system(['git push origin --delete ', branchName]);
+        % delete the local branch
+        if ~contains(branchName, 'develop') && ~contains(branchName, 'master')
+            [status, result2] = system(['git branch -D ', branchName]);
 
             if status == 0
-                fprintf([gitCmd.lead, 'The remote <', branchName, '> branch has been deleted.', gitCmd.success, gitCmd.trail]);
+                fprintf([gitCmd.lead, ' [', mfilename,'] The local <', branchName, '> branch has been deleted.', gitCmd.success, gitCmd.trail]);
             else
-                error([gitCmd.lead, 'The remote <', branchName,'> branch could not be deleted.', gitCmd.fail, gitCmd.trail]);
+                result2
+                error([gitCmd.lead, ' [', mfilename,'] The local <', branchName,'> branch could not be deleted.', gitCmd.fail]);
             end
-
+        else
+            error([gitCmd.lead, ' [', mfilename,'] You cannot delete the <master> or the <develop> branche', gitCmd.fail]);
         end
 
-        [status, result] = system(['git branch -D ', branchName]);
+        % check if branch exists remotely
+        [status, result] = system(['curl -s --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName, '| head -n 1']);
 
-        if status == 0
-            fprintf([gitCmd.lead, 'The local <', branchName, '> branch has been deleted.', gitCmd.success, gitCmd.trail]);
+        % delete the remote branch
+        if status == 0 && contains(result, '200 OK')
+
+            [status, result1] = system(['git push origin --delete ', branchName]);
+
+            if status == 0
+                fprintf([gitCmd.lead, ' [', mfilename,'] The remote <', branchName, '> branch has been deleted.', gitCmd.success, gitCmd.trail]);
+            else
+                result1
+                error([gitCmd.lead, ' [', mfilename,'] The remote <', branchName,'> branch could not be deleted.', gitCmd.fail, gitCmd.trail]);
+            end
         else
             result
-            error([gitCmd.lead, 'The local <', branchName,'> branch could not be deleted.', gitCmd.fail, gitCmd.trail]);
+            error([gitCmd.lead, ' [', mfilename,'] The remote <', branchName,'> does not exist.', gitCmd.fail]);
         end
     end
 end

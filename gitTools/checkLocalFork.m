@@ -17,19 +17,18 @@ function checkLocalFork()
         remoteFrags = strsplit(result);
 
         if status == 0 && strcmp(remoteFrags(1), 'origin') && strcmp(remoteFrags(2), gitConf.remoteRepoURL) && strcmp(remoteFrags(4), 'origin') && strcmp(remoteFrags(5), gitConf.remoteRepoURL)
-            error([gitCmd.lead, 'The current folder contains the public version. Contributions can only be made from your own fork.'])
+            error([gitCmd.lead, ' [', mfilename, '] The current folder contains the public version. Contributions can only be made from your own fork.'])
         end
 
         if gitConf.verbose
-            fprintf([gitCmd.lead, 'The local folder of the fork exists (', gitConf.fullForkDir,').', gitCmd.success, gitCmd.trail]);
+            fprintf([gitCmd.lead, ' [', mfilename, '] The local folder of the fork exists (', gitConf.fullForkDir,').', gitCmd.success, gitCmd.trail]);
         end
     else
         if gitConf.verbose
-            fprintf([gitCmd.lead, 'The fork is not yet cloned in the folder ', gitConf.fullForkDir, '.', gitCmd.fail, gitCmd.trail]);
+            fprintf([gitCmd.lead, ' [', mfilename, '] The fork is not yet cloned in the folder ', gitConf.fullForkDir, '.', gitCmd.fail, gitCmd.trail]);
         end
     end
 
     % change back to the current directory
     cd(currentDir);
-
 end
