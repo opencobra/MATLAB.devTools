@@ -15,14 +15,30 @@ function deleteContribution(branchName)
 
             % delete the local branch
 
-                [status, result2] = system(['git branch -D ', branchName]);
+            % retrieve a list of branches
+            [status, result] = system('git branch --list');
 
-                if status == 0
-                    fprintf([gitCmd.lead, ' [', mfilename,'] The local <', branchName, '> branch has been deleted.', gitCmd.success, gitCmd.trail]);
+            if status == 0
+                arrResult = strsplit(result, '\n');
+                arrResult(~cellfun(@isempty, arrResult));
+
+                if contains(arrResult, branchName)
+                    % delete the branch locally
+                    [status, result2] = system(['git branch -D ', branchName]);
+
+                    if status == 0
+                        fprintf([gitCmd.lead, ' [', mfilename,'] The local <', branchName, '> branch has been deleted.', gitCmd.success, gitCmd.trail]);
+                    else
+                        result2
+                        error([gitCmd.lead, ' [', mfilename,'] The local <', branchName,'> branch could not be deleted.', gitCmd.fail]);
+                    end
                 else
-                    result2
-                    error([gitCmd.lead, ' [', mfilename,'] The local <', branchName,'> branch could not be deleted.', gitCmd.fail]);
+                    fprintf([gitCmd.lead, ' [', mfilename,'] The local <', branchName,'> does not exist.', gitCmd.fail, gitCmd.trail]);
                 end
+            else
+                result
+                error([gitCmd.lead, ' [', mfilename,'] The branch list could not be retrieved.', gitCmd.fail]);
+            end
 
             % check if branch exists remotely
             [status, result] = system(['curl -s --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName]);
@@ -39,7 +55,7 @@ function deleteContribution(branchName)
                     error([gitCmd.lead, ' [', mfilename,'] The remote <', branchName,'> branch could not be deleted.', gitCmd.fail]);
                 end
             else
-                fprintf([gitCmd.lead, ' [', mfilename,'] The remote <', branchName,'> does not exist.', gitCmd.fail]);
+                fprintf([gitCmd.lead, ' [', mfilename,'] The remote <', branchName,'> does not exist.', gitCmd.fail, gitCmd.trail]);
             end
         end
     else
