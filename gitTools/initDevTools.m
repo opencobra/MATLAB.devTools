@@ -22,28 +22,56 @@ function initDevTools(repoURL)
     gitConf.remoteRepoName = gitConf.remoteRepoURL(sepIndices(4)+1:end-4);
     gitConf.remoteUserName = gitConf.remoteRepoURL(sepIndices(3)+1:sepIndices(4)-1);
 
-    [status, result] = system('git config --get github.user');
-
+    [status, result] = system('git config --get user.name');
     gitConf.userName = strtrim(result);
 
     if status == 0
         fprintf([gitCmd.lead, ' [', mfilename,'] Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]);
     else
-        result
-        error([gitCmd.lead, ' [', mfilename,'] The Github username could not be retrieved.', gitCmd.fail]);
+        fprintf([gitCmd.lead, ' [', mfilename,'] The Github username could not be retrieved.', gitCmd.fail, gitCmd.trail]);
 
         % request the Github username
         if isempty(gitConf.userName)
             gitConf.userName = input([gitCmd.lead, ' [', mfilename,'] -> Please enter your Github username: '], 's');
+            [status, result1] = system(['git config --global user.name "', gitConf.userName, '"']);
+            if status == 0
+                fprintf([gitCmd.lead, ' [', mfilename,'] Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]);
+            else
+                result1
+                error([gitCmd.lead, ' [', mfilename,'] Your Github username could not be set.', gitCmd.fail]);
+            end
         end
     end
+    
+    [status, result] = system('git config --get user.email');
+    gitConf.userEmail = strtrim(result);
+
+    if status == 0
+        fprintf([gitCmd.lead, ' [', mfilename,'] Your Github email is: ', gitConf.userEmail, '. ', gitCmd.success, gitCmd.trail]);
+    else
+        fprintf([gitCmd.lead, ' [', mfilename,'] The Github email could not be retrieved.', gitCmd.fail, gitCmd.trail]);
+
+        % request the Github username
+        if isempty(gitConf.userEmail)
+            gitConf.userEmail = input([gitCmd.lead, ' [', mfilename,'] -> Please enter your Github email: '], 's');
+            
+            [status, result1] = system(['git config --global user.email "', gitConf.userEmail, '"']);
+            if status == 0
+                fprintf([gitCmd.lead, ' [', mfilename,'] Your Github email is: ', gitConf.userEmail, '. ', gitCmd.success, gitCmd.trail]);
+            else
+                result1
+                error([gitCmd.lead, ' [', mfilename,'] Your Github email could not be set.', gitCmd.fail]);
+            end
+        end
+    end
+    
 
     % check if the fork exists remotely
     checkRemoteFork();
 
     % request the local directory
     if isempty(gitConf.localDir)
-        reply = input([gitCmd.lead, ' [', mfilename,'] -> Please define the local path to your fork\n    example: ~/work/git/hub/forks\n    current: ', strrep(pwd,'\','\\'),'\n    Enter the path (press ENTER to use the current path): '], 's');
+        reply = input([gitCmd.lead, ' [', mfilename,'] -> Please define the local path to your fork\n       current: ', strrep(pwd,'\','\\'),'\n       Enter the path (press ENTER to use the current path): '], 's');
 
         if isempty(reply)
             gitConf.localDir = strrep(pwd,'\','\\');

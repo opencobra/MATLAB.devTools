@@ -9,7 +9,7 @@ function checkRemoteFork()
     % check the URLs of the fork and the remote repository
     if ~isempty(gitConf.userName)
 
-        [status, result] = system(['curl -s --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '| head -n 1']);
+        [status, result] = system(['curl -s --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName]);
 
         % check if the URL exists
         if status == 0 && contains(result, '200 OK')
