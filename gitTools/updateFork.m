@@ -112,19 +112,19 @@ function updateFork(force)
                 forceText = '';
             end
 
+            % push and asking the password
+            system(['git push origin ', branches{k}, ' ', forceFlag, ' -q --dry-run']);
+
+            % second push is to retr
             [status, result] = system(['git push origin ', branches{k}, ' ', forceFlag]);
 
-            if contains(result, 'Username for')
-                result
-            else
-                if status == 0
-                    if gitConf.verbose
-                        fprintf([gitCmd.lead, ' [', mfilename,'] The <', branches{k}, '> branch has been updated on the fork', forceText, '.', gitCmd.success, gitCmd.trail]);
-                    end
-                else
-                    result
-                    error([gitCmd.lead, ' [', mfilename,'] Impossible to update <', branches{k}, '> on your fork (', gitConf.forkURL, ').', gitCmd.fail]);
+            if status == 0
+                if gitConf.verbose
+                    fprintf([gitCmd.lead, ' [', mfilename,'] The <', branches{k}, '> branch has been updated on the fork', forceText, '.', gitCmd.success, gitCmd.trail]);
                 end
+            else
+                result
+                error([gitCmd.lead, ' [', mfilename,'] Impossible to update <', branches{k}, '> on your fork (', gitConf.forkURL, ').', gitCmd.fail]);
             end
         end
     else
