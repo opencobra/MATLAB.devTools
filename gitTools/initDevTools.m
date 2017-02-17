@@ -53,7 +53,7 @@ function initDevTools(repoURL)
 
         % add a fileseparator if not included
         if ~strcmp(gitConf.localDir(end), filesep)
-            gitConf.localDir = [gitConf.localDir, filesep];
+            gitConf.localDir = strrep([gitConf.localDir, filesep],'\','\\');
         end
 
         if exist(gitConf.localDir, 'dir') ~= 7
@@ -72,8 +72,8 @@ function initDevTools(repoURL)
     end
 
     % define the fork directory name
-    gitConf.forkDirName = [gitConf.leadForkDirName, gitConf.remoteRepoName];
-    gitConf.fullForkDir = [gitConf.localDir, gitConf.forkDirName];
+    gitConf.forkDirName = strrep([gitConf.leadForkDirName, gitConf.remoteRepoName],'\','\\');
+    gitConf.fullForkDir = strrep([gitConf.localDir, gitConf.forkDirName],'\','\\');
 
     % clone the fork
     freshClone = cloneFork();
