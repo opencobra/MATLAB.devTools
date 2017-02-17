@@ -25,7 +25,7 @@ function deleteContribution(branchName)
                 end
 
             % check if branch exists remotely
-            [status, result] = system(['curl -s --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName, '| head -n 1']);
+            [status, result] = system(['curl -s --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName]);
 
             % delete the remote branch
             if status == 0 && contains(result, '200 OK')
@@ -39,8 +39,7 @@ function deleteContribution(branchName)
                     error([gitCmd.lead, ' [', mfilename,'] The remote <', branchName,'> branch could not be deleted.', gitCmd.fail]);
                 end
             else
-                result
-                error([gitCmd.lead, ' [', mfilename,'] The remote <', branchName,'> does not exist.', gitCmd.fail]);
+                fprintf([gitCmd.lead, ' [', mfilename,'] The remote <', branchName,'> does not exist.', gitCmd.fail]);
             end
         end
     else
