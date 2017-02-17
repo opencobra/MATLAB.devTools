@@ -22,7 +22,7 @@ function deleteContribution(branchName)
                 arrResult = strsplit(result, '\n');
                 arrResult(~cellfun(@isempty, arrResult));
 
-                if contains(arrResult, branchName)
+                if contains(result, branchName)
                     % delete the branch locally
                     [status, result2] = system(['git branch -D ', branchName]);
 

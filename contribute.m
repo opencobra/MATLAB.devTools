@@ -17,6 +17,7 @@ function contribute
             % ask for a name of the feature/branch
             if choice == 1
                 reply = input('  -> Please enter a name of the new feature that you want to work on (example: add-constraints): ', 's');
+                exitFlag = false;
             else
                 % initialize the development tools
                 initDevTools();
