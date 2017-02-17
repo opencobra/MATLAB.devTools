@@ -24,7 +24,7 @@ function submitContribution(branchName)
         addFileOrder = true;
     else
         addFileOrder = false;
-        fprintf([gitCmd.lead, ' [', mfilename,'] There is nothing to contribute. Please make changes to ', pwd, gitCmd.trail]);
+        fprintf([gitCmd.lead, ' [', mfilename,'] There is nothing to contribute. Please make changes to ', strrep(pwd,'\','\\'), gitCmd.trail]);
     end
 
     % provide a warning if there are more than 10 files to add (and less than 20 files)

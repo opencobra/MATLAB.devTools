@@ -6,7 +6,7 @@ function checkLocalFork()
     checkSystem(mfilename);
 
     % retrieve the current directory
-    currentDir = pwd;
+    currentDir = strrep(pwd,'\','\\');
 
     % check if the forked directory already exists
     if exist(gitConf.fullForkDir, 'dir') == 7

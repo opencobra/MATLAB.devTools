@@ -11,7 +11,7 @@ function updateFork(force)
     % check first if the fork is correctly installed
     checkLocalFork();
 
-    currentDir = pwd;
+    currentDir = strrep(pwd,'\','\\');
 
     % list the branches that should be updated
     branches = {'master', 'develop'};

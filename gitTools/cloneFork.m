@@ -3,7 +3,7 @@ function freshClone = cloneFork()
     global gitConf
     global gitCmd
 
-    currentDir = pwd;
+    currentDir = strrep(pwd,'\','\\');
 
     % check if the fork exists remotely and locally
     checkLocalFork();

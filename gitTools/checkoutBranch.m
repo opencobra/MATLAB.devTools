@@ -4,7 +4,7 @@ function checkoutBranch(branchName)
     global gitCmd
 
     % save the currentDir
-    currentDir = pwd;
+    currentDir = strrep(pwd,'\','\\');
 
     % change the directory to the local directory of the fork
     cd(gitConf.fullForkDir);

@@ -4,7 +4,7 @@ function configureFork()
     global gitCmd
 
     % save the currentDir
-    currentDir = pwd;
+    currentDir = strrep(pwd,'\','\\');
 
     % if the fork does not exist, clone it
     if exist(gitConf.fullForkDir) ~= 7

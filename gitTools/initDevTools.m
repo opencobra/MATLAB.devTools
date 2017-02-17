@@ -43,10 +43,10 @@ function initDevTools(repoURL)
 
     % request the local directory
     if isempty(gitConf.localDir)
-        reply = input([gitCmd.lead, ' [', mfilename,'] -> Please define the local path to your fork\n    example: ~/work/git/hub/forks\n    current: ', pwd,'\n    Enter the path (press ENTER to use the current path): '], 's');
+        reply = input([gitCmd.lead, ' [', mfilename,'] -> Please define the local path to your fork\n    example: ~/work/git/hub/forks\n    current: ', strrep(pwd,'\','\\'),'\n    Enter the path (press ENTER to use the current path): '], 's');
 
         if isempty(reply)
-            gitConf.localDir = pwd;
+            gitConf.localDir = strrep(pwd,'\','\\');
         else
             gitConf.localDir = reply;
         end
