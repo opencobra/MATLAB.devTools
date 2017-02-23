@@ -1,4 +1,8 @@
 function checkDevTools()
+% The COBRA Toolbox: Development tools
+%
+% PURPOSE: checks the configuration of the development tools
+%
 
     global gitConf
     global gitCmd

@@ -1,4 +1,8 @@
 function checkLocalFork()
+% The COBRA Toolbox: Development tools
+%
+% PURPOSE: checks the configuration of remotes in the local copy of the fork
+%
 
     global gitConf
     global gitCmd

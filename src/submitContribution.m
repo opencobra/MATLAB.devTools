@@ -1,4 +1,8 @@
 function submitContribution(branchName)
+% The COBRA Toolbox: Development tools
+%
+% PURPOSE: submit an existing contribution named <branchName>
+%
 
     global gitConf
     global gitCmd

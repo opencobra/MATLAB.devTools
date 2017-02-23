@@ -1,4 +1,8 @@
 function openPR(branchName)
+% The COBRA Toolbox: Development tools
+%
+% PURPOSE: provides a pull request URL from <branchName> to <develop> on the upstream
+%
 
     global gitConf
     global gitCmd

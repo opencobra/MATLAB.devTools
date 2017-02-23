@@ -1,4 +1,8 @@
 function contribute
+% The COBRA Toolbox: Development tools
+%
+% PURPOSE: displays a menu and calls the respective subfunctions
+%
 
     global gitConf
     global gitCmd

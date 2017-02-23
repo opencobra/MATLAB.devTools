@@ -1,4 +1,8 @@
 function checkRemoteFork()
+% The COBRA Toolbox: Development tools
+%
+% PURPOSE: checks whether the fork exists remotely
+%
 
     global gitConf
     global gitCmd

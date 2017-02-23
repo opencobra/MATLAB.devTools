@@ -1,4 +1,8 @@
 function updateFork(force)
+% The COBRA Toolbox: Development tools
+%
+% PURPOSE: updates the fork and the submodules of the repository
+%
 
     global gitConf
     global gitCmd
@@ -18,6 +22,15 @@ function updateFork(force)
 
     % change to the directory of the fork
     cd(gitConf.fullForkDir)
+
+    % initialize and update the submodules
+    [status1, result1] = system(['git submodule init && git submodule update']);
+    if status1 == 0
+        fprintf([gitCmd.lead, ' [', mfilename,'] The submodules have been initialized.', gitCmd.success, gitCmd.trail]);
+    else
+        result1
+        error([gitCmd.lead, ' [', mfilename,'] The submodules could not be initialized.', gitCmd.fail]);
+    end
 
     % retrieve a list of all the branches
     [status, resultList] = system('git branch --list');

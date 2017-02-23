@@ -1,4 +1,8 @@
 function deleteContribution(branchName)
+% The COBRA Toolbox: Development tools
+%
+% PURPOSE: deletes and existing contribution named <branchName>
+%
 
     global gitConf
     global gitCmd

@@ -1,4 +1,8 @@
 function checkSystem(callerName)
+% The COBRA Toolbox: Development tools
+%
+% PURPOSE: checks the configuration of the system (installation of git and curl)
+%
 
     global gitConf
     global gitCmd

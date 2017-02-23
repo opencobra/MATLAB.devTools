@@ -1,4 +1,8 @@
 function configureFork()
+% The COBRA Toolbox: Development tools
+%
+% PURPOSE: configures the remotes of the local fork (upstream)
+%
 
     global gitConf
     global gitCmd

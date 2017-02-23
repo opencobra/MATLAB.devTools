@@ -1,4 +1,8 @@
 function initContribution(branchName)
+% The COBRA Toolbox: Development tools
+%
+% PURPOSE: initializes a contribution named <branchName>
+%
 
     global gitConf
     global gitCmd

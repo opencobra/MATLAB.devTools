@@ -1,4 +1,8 @@
 function checkoutBranch(branchName)
+% The COBRA Toolbox: Development tools
+%
+% PURPOSE: checks out a branch named <branchName> locally and remotely
+%
 
     global gitConf
     global gitCmd

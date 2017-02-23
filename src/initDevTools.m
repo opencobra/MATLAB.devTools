@@ -1,4 +1,8 @@
 function initDevTools(repoURL)
+% The COBRA Toolbox: Development tools
+%
+% PURPOSE: initializes the development tools (username and email are requested if not configured)
+%
 
     global gitConf
     global gitCmd

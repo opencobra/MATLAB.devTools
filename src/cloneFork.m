@@ -1,4 +1,8 @@
 function freshClone = cloneFork()
+% The COBRA Toolbox: Development tools
+%
+% PURPOSE: clones the fork and updates the submodules of the repository
+%
 
     global gitConf
     global gitCmd
