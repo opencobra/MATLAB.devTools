@@ -8,7 +8,7 @@ function initDevTools(repoURL)
 
     % main public repository
     if nargin < 1
-        gitConf.remoteRepoURL = 'https://github.com/cobrabot/trial_wo_errors.git'; %https://github.com/opencobra/cobratoolbox.git';
+        gitConf.remoteRepoURL = 'https://github.com/opencobra/cobratoolbox.git';
     else
         gitConf.remoteRepoURL = repoURL;
     end
@@ -42,7 +42,7 @@ function initDevTools(repoURL)
             end
         end
     end
-    
+
     [status, result] = system('git config --get user.email');
     gitConf.userEmail = strtrim(result);
 
@@ -54,7 +54,7 @@ function initDevTools(repoURL)
         % request the Github username
         if isempty(gitConf.userEmail)
             gitConf.userEmail = input([gitCmd.lead, ' [', mfilename,'] -> Please enter your Github email: '], 's');
-            
+
             [status, result1] = system(['git config --global user.email "', gitConf.userEmail, '"']);
             if status == 0
                 fprintf([gitCmd.lead, ' [', mfilename,'] Your Github email is: ', gitConf.userEmail, '. ', gitCmd.success, gitCmd.trail]);
@@ -64,7 +64,7 @@ function initDevTools(repoURL)
             end
         end
     end
-    
+
 
     % check if the fork exists remotely
     checkRemoteFork();
