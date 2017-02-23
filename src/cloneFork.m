@@ -38,7 +38,7 @@ function freshClone = cloneFork()
             % change to the fork directory
             cd(gitConf.fullForkDir)
 
-            [status1, result1] = system(['git submodule init && git submodule update']);
+            [status1, result1] = system(['git submodule update --init']);
             if status1 == 0
                 fprintf([gitCmd.lead, ' [', mfilename,'] The submodules have been initialized.', gitCmd.success, gitCmd.trail]);
             else
