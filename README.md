@@ -1,12 +1,12 @@
 # The COBRA Toolbox - Developer Tools
 
-Making a contribution to The COBRA Toolbox is straightforward. Let me see this [**in action**](https://)!
+Making a contribution to The COBRA Toolbox is straightforward.
 
 ![video](assets/video.gif)
 
 ## Pre-requisites
 
-Please follow the system configuration instructions for the first time. You may skip this if your system is already set up and you have `git` configured.
+Please follow the [configuration instructions](PREREQUISITES.md) for the first time. You may skip this if your system is already set up and you have `git` configured.
 
 ## How can I contribute?
 
