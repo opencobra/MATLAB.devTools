@@ -30,6 +30,14 @@ function freshClone = cloneFork()
             if gitConf.verbose
                 fprintf([gitCmd.lead, ' [', mfilename,'] The fork ', gitConf.forkURL, ' has been cloned.', gitCmd.success, gitCmd.trail]);
             end
+            
+            [status1, result1] = system(['git submodule init && git submodule update']);
+            if status1 == 0
+                fprintf([gitCmd.lead, ' [', mfilename,'] The submodules have been initialized.', gitCmd.success, gitCmd.trail]);
+            else
+                result1
+                error([gitCmd.lead, ' [', mfilename,'] The submodules could not be initialized.', gitCmd.fail]);
+            end
             freshClone = true;
         else
             result
