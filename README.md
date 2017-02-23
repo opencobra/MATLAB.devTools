@@ -2,7 +2,7 @@
 
 Making a contribution to The COBRA Toolbox is straightforward. Let me see this [**in action**](https://)!
 
-[![asciicast](https://asciinema.org/a/cptn1yy7ifku856c3le7d9443.png)](https://asciinema.org/a/cptn1yy7ifku856c3le7d9443)
+![video](assets/video.gif)
 
 ## Pre-requisites
 
