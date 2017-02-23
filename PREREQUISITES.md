@@ -6,7 +6,13 @@ You must have `git` and `curl` installed. In addition, please ensure that you ha
 
 **Windows**
 
-provide the Windows instructions here
+Please download the `git` tools for Windows from [here](https://git-scm.com/download). During the installation process, please ensure that you select **Use Git from the Windows Command Prompt**. In addition, please make sure that you select **Checkout as-is, commit Unix-style line endings**.
+
+<div align="center">
+<img src="assets/installation_git_windows_0.png" height="220px">&nbsp;&nbsp;&nbsp;<img src="assets/installation_git_windows_1.png" height="220px">.
+</div>
+<br>
+
 
 **Linux (Ubuntu)**
 

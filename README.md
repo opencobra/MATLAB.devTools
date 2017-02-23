@@ -10,7 +10,7 @@ Please follow the [configuration instructions](PREREQUISITES.md) for the first t
 
 ## How can I contribute?
 
-In order to start contributing, follow the [installation instructions](https://github.com/opencobra/cobratoolbox/) of The COBRA Toolbox. Type, after you have installed The COBRA Toolbox with all its submodules, in `MATLAB`:
+In order to start contributing, follow the [installation instructions](https://github.com/opencobra/cobratoolbox/blob/master/README.md) of The COBRA Toolbox. Type, after you have installed The COBRA Toolbox with all its submodules, in `MATLAB`:
 ```
 >> contribute
 ```
@@ -35,4 +35,4 @@ Once you submit your contribution (menu item 3), you will be presented with a li
 
 ## I need more guidance
 
-If you don't want to get your hands dirty right away, start-off by reading the [Contributing Guide](https://).
+If you don't want to get your hands dirty right away, start-off by reading the [Contributing Guide](https://github.com/opencobra/cobratoolbox/blob/master/.github/CONTRIBUTING.md).
