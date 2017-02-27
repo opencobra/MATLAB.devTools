@@ -10,12 +10,17 @@ function initContribution(branchName)
     % initialize the development tools
     initDevTools();
 
+    if gitConf.verbose
+        originCall = [' [', mfilename, '] '];
+    else
+        originCall  = '';
+    end
+
     % request a name of the new feature
     if nargin < 1
-        branchName = input([gitCmd.lead, ' [', mfilename,'] -> Please enter a name of the feature that you want to work on (example: add-constraints.): '], 's');
-
-        if isempty(branchName)
-            branchName = ['new-feature-', num2str(floor(floor(sum(clock))*randi(100)/100))];
+        branchName = '';
+        while isempty(branchName)
+            branchName = input([gitCmd.lead, originCall, ' -> Please enter a name of the feature that you want to work on (example: add-constraints): '], 's');
         end
     end
 
