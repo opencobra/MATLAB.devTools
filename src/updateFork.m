@@ -37,19 +37,27 @@ function updateFork(force)
                 [status, result] = system(['git checkout ', branches{k}]);
 
                 if status == 0
-                    fprintf([gitCmd.lead, ' [', mfilename,'] The branch <', branches{k}, '> was checked out.', gitCmd.success, gitCmd.trail]);
+                    if gitConf.verbose
+                        fprintf([gitCmd.lead, ' [', mfilename,'] The branch <', branches{k}, '> was checked out.', gitCmd.success, gitCmd.trail]);
+                    end
                 else
                     result
-                    fprintf([gitCmd.lead, ' [', mfilename,'] The branch <', branches{k}, '> could not be checked out.', gitCmd.fail]);
+                    if gitConf.verbose
+                        fprintf([gitCmd.lead, ' [', mfilename,'] The branch <', branches{k}, '> could not be checked out.', gitCmd.fail]);
+                    end
                 end
             else
                 [status, result] = system(['git checkout -b ', branches{k}]);
 
                 if status == 0
-                    fprintf([gitCmd.lead, ' [', mfilename,'] The branch <', branches{k}, '> was checked out.', gitCmd.success, gitCmd.trail]);
+                    if gitConf.verbose
+                        fprintf([gitCmd.lead, ' [', mfilename,'] The branch <', branches{k}, '> was checked out.', gitCmd.success, gitCmd.trail]);
+                    end
                 else
                     result
-                    fprintf([gitCmd.lead, ' [', mfilename,'] The branch <', branches{k}, '> could not be checked out.', gitCmd.fail]);
+                    if gitConf.verbose
+                        fprintf([gitCmd.lead, ' [', mfilename,'] The branch <', branches{k}, '> could not be checked out.', gitCmd.fail]);
+                    end
                 end
             end
 

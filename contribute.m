@@ -1,4 +1,4 @@
-function contribute
+function contribute(verbose)
 % The COBRA Toolbox: Development tools
 %
 % PURPOSE: displays a menu and calls the respective subfunctions
@@ -7,10 +7,15 @@ function contribute
     global gitConf
     global gitCmd
 
+    if nargin < 1
+        gitConf.verbose = false;
+    else
+        gitConf.verbose = true;
+    end
+
     fprintf('\n\n      _____   _____   _____   _____     _____     |\n     /  ___| /  _  \\ |  _  \\ |  _  \\   / ___ \\    |   COnstraint-Based Reconstruction and Analysis\n     | |     | | | | | |_| | | |_| |  | |___| |   |   The COBRA Toolbox - 2017\n     | |     | | | | |  _  { |  _  /  |  ___  |   |\n     | |___  | |_| | | |_| | | | \\ \\  | |   | |   |   Documentation:\n     \\_____| \\_____/ |_____/ |_|  \\_\\ |_|   |_|   |   http://opencobra.github.io/cobratoolbox\n                                                  | \n\n');
 
-
-    choice = input('\n     [1] Initialize a contribution.\n     [2] Continue a contribution.\n     [3] Submit/publish a contribution.\n     [4] Delete a contribution.\n\n  -> Please select what you want to do (enter the number): ', 's');
+    choice = input('\n      [1] Initialize a contribution.\n      [2] Continue a contribution.\n      [3] Submit/publish a contribution.\n      [4] Delete a contribution.\n\n  -> Please select what you want to do (enter the number): ', 's');
 
     choice = str2num(choice);
 
@@ -20,7 +25,7 @@ function contribute
         if ~isempty(choice) && length(choice) > 0
             % ask for a name of the feature/branch
             if choice == 1
-                reply = input('  -> Please enter a name of the new feature that you want to work on (example: add-constraints): ', 's');
+                reply = input('   -> Please enter a name of the new feature that you want to work on (example: add-constraints): ', 's');
                 exitFlag = false;
             else
                 % initialize the development tools
@@ -49,12 +54,12 @@ function contribute
                         end
                         fprintf('\n');
                     else
-                        reply = input('  -> You do not have any features. Do you want to start a new contribution? Y/N [Y]', 's');
+                        reply = input('   -> You do not have any features. Do you want to start a new contribution? Y/N [Y]', 's');
                         if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                             initContribution;
                             exitFlag = true;
                         else
-                            fprintf('  -> Please start again. Goodbye.\n')
+                            fprintf('   -> Please start again. Goodbye.\n')
                             exitFlag = true;
                         end
                     end
@@ -64,15 +69,15 @@ function contribute
                     reply = '';
                     if choice == 2
                         while isempty(reply)
-                            reply = input('  -> Please enter the name of the feature that you want to continue working on (example: add-constraints): ', 's');
+                            reply = input('   -> Please enter the name of the feature that you want to continue working on (example: add-constraints): ', 's');
                         end
                     elseif choice == 3
                         while isempty(reply)
-                            reply = input('  -> Please enter the name of the feature that you want to submit/publish (example: add-constraints): ', 's');
+                            reply = input('   -> Please enter the name of the feature that you want to submit/publish (example: add-constraints): ', 's');
                         end
                     elseif choice == 4
                         while isempty(reply)
-                            reply = input('  -> Please enter the name of the feature that you want to delete (example: add-constraints): ', 's');
+                            reply = input('   -> Please enter the name of the feature that you want to delete (example: add-constraints): ', 's');
                         end
                     end
                 end

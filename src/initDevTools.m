@@ -29,17 +29,24 @@ function initDevTools(repoURL)
     [status, result] = system('git config --get user.name');
     gitConf.userName = strtrim(result);
 
-    if status == 0
-        fprintf([gitCmd.lead, ' [', mfilename,'] Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]);
+    if gitConf.verbose
+        originCall = [' [', mfilename, '] '];
     else
-        fprintf([gitCmd.lead, ' [', mfilename,'] The Github username could not be retrieved.', gitCmd.fail, gitCmd.trail]);
+        originCall  = '';
+    end
+
+    %((gitConf.verbose == true) ? 'test' : '')
+    if status == 0
+        fprintf([gitCmd.lead, originCall, 'Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]); %
+    else
+        fprintf([gitCmd.lead, originCall, 'The Github username could not be retrieved.', gitCmd.fail, gitCmd.trail]);
 
         % request the Github username
         if isempty(gitConf.userName)
             gitConf.userName = input([gitCmd.lead, ' [', mfilename,'] -> Please enter your Github username: '], 's');
             [status, result1] = system(['git config --global user.name "', gitConf.userName, '"']);
             if status == 0
-                fprintf([gitCmd.lead, ' [', mfilename,'] Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]);
+                fprintf([gitCmd.lead, originCall, 'Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]);
             else
                 result1
                 error([gitCmd.lead, ' [', mfilename,'] Your Github username could not be set.', gitCmd.fail]);
@@ -51,9 +58,9 @@ function initDevTools(repoURL)
     gitConf.userEmail = strtrim(result);
 
     if status == 0
-        fprintf([gitCmd.lead, ' [', mfilename,'] Your Github email is: ', gitConf.userEmail, '. ', gitCmd.success, gitCmd.trail]);
+        fprintf([gitCmd.lead, originCall, 'Your Github email is: ', gitConf.userEmail, '. ', gitCmd.success, gitCmd.trail]);
     else
-        fprintf([gitCmd.lead, ' [', mfilename,'] The Github email could not be retrieved.', gitCmd.fail, gitCmd.trail]);
+        fprintf([gitCmd.lead, originCall, 'The Github email could not be retrieved.', gitCmd.fail, gitCmd.trail]);
 
         % request the Github username
         if isempty(gitConf.userEmail)
@@ -61,7 +68,7 @@ function initDevTools(repoURL)
 
             [status, result1] = system(['git config --global user.email "', gitConf.userEmail, '"']);
             if status == 0
-                fprintf([gitCmd.lead, ' [', mfilename,'] Your Github email is: ', gitConf.userEmail, '. ', gitCmd.success, gitCmd.trail]);
+                fprintf([gitCmd.lead, originCall, 'Your Github email is: ', gitConf.userEmail, '. ', gitCmd.success, gitCmd.trail]);
             else
                 result1
                 error([gitCmd.lead, ' [', mfilename,'] Your Github email could not be set.', gitCmd.fail]);
@@ -75,7 +82,7 @@ function initDevTools(repoURL)
 
     % request the local directory
     if isempty(gitConf.localDir)
-        reply = input([gitCmd.lead, ' [', mfilename,'] -> Please define the local path to your fork\n       current: ', strrep(pwd,'\','\\'),'\n       Enter the path (press ENTER to use the current path): '], 's');
+        reply = input([gitCmd.lead, originCall, ' -> Please define the local path to your fork\n       current: ', strrep(pwd,'\','\\'),'\n       Enter the path (press ENTER to use the current path): '], 's');
 
         if isempty(reply)
             gitConf.localDir = strrep(pwd,'\','\\');
@@ -89,7 +96,7 @@ function initDevTools(repoURL)
         end
 
         if exist(gitConf.localDir, 'dir') ~= 7
-            reply = input([gitmd.lead, ' [', mfilename,'] -> The specified directory (', gitConf.localDir,') does not exist. Do you want to create it? Y/N [Y]:'], 's');
+            reply = input([gitmd.lead, originCall, ' -> The specified directory (', gitConf.localDir,') does not exist. Do you want to create it? Y/N [Y]:'], 's');
 
             % create the directory if requested
             if isempty(reply) || strcmp(reply, 'Y')
@@ -119,10 +126,10 @@ function initDevTools(repoURL)
     end
 
     % print the current configuration
-    fprintf([gitCmd.lead, ' [', mfilename,'] -- Configuration --      ', gitCmd.trail])
-    fprintf([gitCmd.lead, ' [', mfilename,']    GitHub username:      ', gitConf.userName, gitCmd.trail]);
-    fprintf([gitCmd.lead, ' [', mfilename,']    Local directory :     ', gitConf.fullForkDir, gitCmd.trail])
-    fprintf([gitCmd.lead, ' [', mfilename,']    Remote fork URL:      ', gitConf.forkURL, gitCmd.trail]);
-    fprintf([gitCmd.lead, ' [', mfilename,']    Remote opencobra URL: ', gitConf.remoteRepoURL, gitCmd.trail]);
+    fprintf([gitCmd.lead, originCall, ' -- Configuration --      ', gitCmd.trail])
+    fprintf([gitCmd.lead, originCall, '    GitHub username:      ', gitConf.userName, gitCmd.trail]);
+    fprintf([gitCmd.lead, originCall, '    Local directory :     ', gitConf.fullForkDir, gitCmd.trail])
+    fprintf([gitCmd.lead, originCall, '    Remote fork URL:      ', gitConf.forkURL, gitCmd.trail]);
+    fprintf([gitCmd.lead, originCall, '    Remote opencobra URL: ', gitConf.remoteRepoURL, gitCmd.trail]);
 
 end

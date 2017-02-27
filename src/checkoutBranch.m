@@ -55,20 +55,10 @@ function checkoutBranch(branchName)
         end
     end
 
-    % checkout a new branch if it doesn't exist
-    arrResult = strsplit(resultList, '\n');
-    arrResult = strtrim(arrResult);
-    arrResult(~cellfun(@isempty, arrResult));
-
-    checkoutFlag = '';
-    i = 1;
-    while i <= length(arrResult)
-        if status == 0 && ~strcmp(branchName, arrResult{i}) && strcmp( arrResult{i}, '* develop') && strcmp(arrResult{i}, '* master')
-            checkoutFlag = '-b';
-            i = length(arrResult) + 1;
-        else
-            i = i + 1;
-        end
+    if ~checkBranchExistence(branchName)
+        checkoutFlag = '-b';
+    else
+        checkoutFlag = '';
     end
 
     % properly checkout the branch
@@ -102,7 +92,9 @@ function checkoutBranch(branchName)
                         error([gitCmd.lead, ' [', mfilename, '] The <', branchName ,'> branch could not be pushed to your fork.', gitCmd.fail]);
                     end
                 else
-                    fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch has not been rebased and is up to date.', gitCmd.success, gitCmd.trail]);
+                    if gitConf.verbose
+                        fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch has not been rebased and is up to date.', gitCmd.success, gitCmd.trail]);
+                    end
                 end
             end
         else
