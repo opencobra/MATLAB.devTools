@@ -14,7 +14,7 @@ function checkoutBranch(branchName)
     cd(gitConf.fullForkDir);
 
     % retrieve a list of all the branches
-    [status, resultList] = system('git branch --list');
+    [status, resultList] = system('git branch --list | tr -s "[:cntrl:]" "\n"');
 
     checkoutFlag = '';
 
@@ -31,9 +31,9 @@ function checkoutBranch(branchName)
         updateFork(true);
 
         % checkout the develop branch
-        [status, result] = system('git checkout develop');
+        [status1, result] = system('git checkout develop');
 
-        if status == 0 && (contains(resultList, '* develop') || contains(result, 'Already on'))
+        if status1 == 0 && (contains(resultList, '* develop') || contains(result, 'Already on'))
             if gitConf.verbose
                 fprintf([gitCmd.lead, ' [', mfilename, '] The current branch is <develop>.', gitCmd.success, gitCmd.trail]);
             end
@@ -43,9 +43,9 @@ function checkoutBranch(branchName)
         end
 
         % make sure that the develop branch is up to date
-        [status, result] = system('git pull origin develop');
+        [status2, result] = system('git pull origin develop');
 
-        if status == 0
+        if status2 == 0
             if gitConf.verbose
                 fprintf([gitCmd.lead, ' [', mfilename, '] The changes of the <develop> branch of your fork have been pulled.', gitCmd.success, gitCmd.trail]);
             end
@@ -57,11 +57,17 @@ function checkoutBranch(branchName)
 
     % checkout a new branch if it doesn't exist
     arrResult = strsplit(resultList, '\n');
+    arrResult = strtrim(arrResult);
     arrResult(~cellfun(@isempty, arrResult));
 
-    for i = 1:length(arrResult)
-        if status == 0 && ~strcmp(arrResult{i}, branchName)  %~contains(resultList, branchName)
+    checkoutFlag = '';
+    i = 1;
+    while i <= length(arrResult)
+        if status == 0 && ~strcmp(branchName, arrResult{i}) && strcmp( arrResult{i}, '* develop') && strcmp(arrResult{i}, '* master')
             checkoutFlag = '-b';
+            i = length(arrResult) + 1;
+        else
+            i = i + 1;
         end
     end
 

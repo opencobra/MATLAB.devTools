@@ -27,7 +27,7 @@ function updateFork(force)
     updateSubmodules();
 
     % retrieve a list of all the branches
-    [status, resultList] = system('git branch --list');
+    [status, resultList] = system('git branch --list | tr -s "[:cntrl:]" "\n"');
 
     if status == 0
         % loop through the list of branches
@@ -53,7 +53,7 @@ function updateFork(force)
                 end
             end
 
-            [status, resultList] = system('git branch --list');
+            [status, resultList] = system('git branch --list | tr -s "[:cntrl:]" "\n"');
 
             if status == 0 && contains(resultList, branches{k})
                 if gitConf.verbose

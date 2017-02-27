@@ -12,7 +12,7 @@ function initContribution(branchName)
 
     % request a name of the new feature
     if nargin < 1
-        branchName = input([gitCmd.lead, ' [', mfilename,'] -> Please enter a name of the feature that you want to work on (example: add-constraints): '], 's');
+        branchName = input([gitCmd.lead, ' [', mfilename,'] -> Please enter a name of the feature that you want to work on (example: add-constraints.): '], 's');
 
         if isempty(branchName)
             branchName = ['new-feature-', num2str(floor(floor(sum(clock))*randi(100)/100))];

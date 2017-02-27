@@ -20,7 +20,7 @@ function deleteContribution(branchName)
             % delete the local branch
 
             % retrieve a list of branches
-            [status, result] = system('git branch --list');
+            [status, result] = system('git branch --list | tr -s "[:cntrl:]" "\n"');
 
             if status == 0
                 arrResult = strsplit(result, '\n');
