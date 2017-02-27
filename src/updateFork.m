@@ -24,13 +24,7 @@ function updateFork(force)
     cd(gitConf.fullForkDir)
 
     % initialize and update the submodules
-    [status1, result1] = system(['git submodule update --init']);
-    if status1 == 0
-        fprintf([gitCmd.lead, ' [', mfilename,'] The submodules have been initialized.', gitCmd.success, gitCmd.trail]);
-    else
-        result1
-        error([gitCmd.lead, ' [', mfilename,'] The submodules could not be initialized.', gitCmd.fail]);
-    end
+    updateSubmodules();
 
     % retrieve a list of all the branches
     [status, resultList] = system('git branch --list');
