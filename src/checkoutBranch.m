@@ -22,7 +22,7 @@ function checkoutBranch(branchName)
     indexDevelop = strfind(resultList, 'develop');
     indexStar = strfind(resultList, '*');
 
-    if status == 0 && isempty(indexDevelop) %&& abs(indexDevelop-indexStar) > 10 % colors might be denoted as [32m etc.
+    if status == 0 && isempty(indexDevelop) % && abs(indexDevelop-indexStar) > 10 % colors might be denoted as [32m etc.
         if gitConf.verbose
             fprintf([gitCmd.lead, ' [', mfilename, '] The current branch is not the <develop> branch.', gitCmd.fail, gitCmd.trail]);
         end
@@ -56,8 +56,13 @@ function checkoutBranch(branchName)
     end
 
     % checkout a new branch if it doesn't exist
-    if status == 0 && ~contains(resultList, branchName)
-        checkoutFlag = '-b';
+    arrResult = strsplit(resultList, '\n');
+    arrResult(~cellfun(@isempty, arrResult));
+
+    for i = 1:length(arrResult)
+        if status == 0 && ~strcmp(arrResult{i}, branchName)  %~contains(resultList, branchName)
+            checkoutFlag = '-b';
+        end
     end
 
     % properly checkout the branch
