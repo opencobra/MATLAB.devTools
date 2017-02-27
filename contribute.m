@@ -15,7 +15,7 @@ function contribute(verbose)
 
     fprintf('\n\n      _____   _____   _____   _____     _____     |\n     /  ___| /  _  \\ |  _  \\ |  _  \\   / ___ \\    |   COnstraint-Based Reconstruction and Analysis\n     | |     | | | | | |_| | | |_| |  | |___| |   |   The COBRA Toolbox - 2017\n     | |     | | | | |  _  { |  _  /  |  ___  |   |\n     | |___  | |_| | | |_| | | | \\ \\  | |   | |   |   Documentation:\n     \\_____| \\_____/ |_____/ |_|  \\_\\ |_|   |_|   |   http://opencobra.github.io/cobratoolbox\n                                                  | \n\n');
 
-    choice = input('\n      [1] Initialize a contribution.\n      [2] Continue a contribution.\n      [3] Submit/publish a contribution.\n      [4] Delete a contribution.\n\n  -> Please select what you want to do (enter the number): ', 's');
+    choice = input('\n      [1] Initialize a contribution.\n      [2] Continue a contribution.\n      [3] Submit/publish a contribution.\n      [4] Delete a contribution.\n\n   -> Please select what you want to do (enter the number): ', 's');
 
     choice = str2num(choice);
 
@@ -25,7 +25,10 @@ function contribute(verbose)
         if ~isempty(choice) && length(choice) > 0
             % ask for a name of the feature/branch
             if choice == 1
-                reply = input('   -> Please enter a name of the new feature that you want to work on (example: add-constraints): ', 's');
+                reply = '';
+                while isempty(reply)
+                    reply = input('   -> Please enter a name of the new feature that you want to work on (example: add-constraints): ', 's');
+                end
                 exitFlag = false;
             else
                 % initialize the development tools
