@@ -7,6 +7,11 @@ function history(fileName)
     if isempty(fullPath)
         error('The file is not present in your MATLAB path. Please add The COBRA Toolbox to your PATH.');
     else
+
+        % change to the directory of the file
+        cd(fullPath(1:end-length(fileName)));
+
+        % output instructions
         fprintf(['You will be shown the history of \n\t', fullPath, '\n\n']);
         fprintf('You can get the specific commit details by attaching the commit hash at the end of:\n');
         fprintf('\thttps://github.com/opencobra/cobratoolbox/commit/\n\n');
