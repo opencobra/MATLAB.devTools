@@ -98,7 +98,7 @@ function initDevTools(repoURL)
         end
 
         if exist(gitConf.localDir, 'dir') ~= 7
-            reply = input([gitmd.lead, originCall, ' -> The specified directory (', gitConf.localDir, ') does not exist. Do you want to create it? Y/N [Y]:'], 's');
+            reply = input([gitCmd.lead, originCall, ' -> The specified directory (', gitConf.localDir, ') does not exist. Do you want to create it? Y/N [Y]:'], 's');
 
             % create the directory if requested
             if isempty(reply) || strcmpi(reply, 'y')
