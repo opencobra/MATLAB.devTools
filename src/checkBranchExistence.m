@@ -13,7 +13,7 @@ function branchExists = checkBranchExistence(branchName)
     % retrieve a list of all the branches
     [status_gitShowRef, result_gitShowRef] = system(['git show-ref refs/heads/', branchName]);
 
-    if status_gitShowRef == 0 && isempty(result_gitShowRef)
+    if status_gitShowRef == 1 && isempty(result_gitShowRef)
         branchExists = false;
     else
         branchExists = true;
