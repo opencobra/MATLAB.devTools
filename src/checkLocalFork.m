@@ -10,17 +10,18 @@ function checkLocalFork()
     checkSystem(mfilename);
 
     % retrieve the current directory
-    currentDir = strrep(pwd,'\','\\');
+    currentDir = strrep(pwd, '\', '\\');
 
     % check if the forked directory already exists
     if exist(gitConf.fullForkDir, 'dir') == 7
         cd(gitConf.fullForkDir);
 
         % check if the current directory is actually the fork, and not the main repository
-        [status, result] = system('git remote -v');
-        remoteFrags = strsplit(result);
+        [status_gitRemote, result_gitRemote] = system('git remote -v');
 
-        if status == 0 && strcmp(remoteFrags(1), 'origin') && strcmp(remoteFrags(2), gitConf.remoteRepoURL) && strcmp(remoteFrags(4), 'origin') && strcmp(remoteFrags(5), gitConf.remoteRepoURL)
+        remoteFrags = strsplit(result_gitRemote);
+
+        if status_gitRemote == 0 && strcmp(remoteFrags(1), 'origin') && strcmp(remoteFrags(2), gitConf.remoteRepoURL) && strcmp(remoteFrags(4), 'origin') && strcmp(remoteFrags(5), gitConf.remoteRepoURL)
             error([gitCmd.lead, ' [', mfilename, '] The current folder contains the public version. Contributions can only be made from your own fork.'])
         end
 

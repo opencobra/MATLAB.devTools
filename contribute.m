@@ -28,6 +28,10 @@ function contribute(verbose)
                 reply = '';
                 while isempty(reply)
                     reply = input('   -> Please enter a name of the new feature that you want to work on (example: add-constraints): ', 's');
+                    if contains(reply, 'develop') || contains(reply, 'master')
+                        reply = '';
+                        fprintf([gitCmd.lead, 'Please use a different name that does not contain <develop> or <master>.', gitCmd.fail, gitCmd.trail]);
+                    end
                 end
                 exitFlag = false;
             else

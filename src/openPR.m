@@ -10,16 +10,22 @@ function openPR(branchName)
     % change the directory to the local directory of the fork
     cd(gitConf.fullForkDir);
 
+    if gitConf.verbose
+        originCall = [' [', mfilename, '] '];
+    else
+        originCall  = '';
+    end
+
     % define the URL of the pull request
     prURL = [gitConf.remoteRepoURL(1:end-4), '/compare/develop...', gitConf.userName, ':', branchName];
 
     % check if this URL exists
-    [status, result] = system(['curl -s --head ', prURL]);
+    [status_curl, result_curl] = system(['curl -s --head ', prURL]);
 
-    if status == 0 && contains(result, '200 OK')
-        fprintf([gitCmd.lead, ' [', mfilename,'] You can open a pull request (PR) by clicking on \n\n\t', prURL, '?expand=1\n\n']);
+    if status_curl == 0 && contains(result_curl, '200 OK')
+        fprintf([gitCmd.lead, originCall, 'You can open a pull request (PR) by clicking on \n\n\t', prURL, '?expand=1\n\n']);
     else
-        result
+        result_curl
         error([gitCmd.lead, ' [', mfilename,'] The branch <', branchName, '> does not exist or has no commits.', gitCmd.fail])
     end
 end

@@ -11,9 +11,9 @@ function branchExists = checkBranchExistence(branchName)
     cd(gitConf.fullForkDir);
 
     % retrieve a list of all the branches
-    [status, result] = system(['git show-ref refs/heads/', branchName]);
+    [status_gitShowRef, result_gitShowRef] = system(['git show-ref refs/heads/', branchName]);
 
-    if isempty(result)
+    if status_gitShowRef == 0 && isempty(result_gitShowRef)
         branchExists = false;
     else
         branchExists = true;

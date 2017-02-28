@@ -20,20 +20,20 @@ function configureFork()
         cd(gitConf.fullForkDir);
 
         % retrieve a list of remotes
-        [status, result] = system('git remote -v');
+        [status_gitRemote, result_gitRemote] = system('git remote -v');
 
-        if status == 0 && contains(result, 'origin') && contains(result, 'upstream') && contains(result, gitConf.userName) && contains(result, gitConf.remoteUserName)
+        if status_gitRemote == 0 && contains(result_gitRemote, 'origin') && contains(result_gitRemote, 'upstream') && contains(result_gitRemote, gitConf.userName) && contains(result_gitRemote, gitConf.remoteUserName)
             if gitConf.verbose
                 fprintf([gitCmd.lead, ' [', mfilename,'] Your fork is properly configured. ', gitCmd.success, gitCmd.trail]);
             end
         else
-            [status, result] = system(['git remote add upstream ', gitConf.remoteRepoURL]);
-            if status == 0
+            [status_gitRemoteAdd, result_gitRemoteAdd] = system(['git remote add upstream ', gitConf.remoteRepoURL]);
+            if status_gitRemoteAdd == 0
                 if gitConf.verbose
                     fprintf([gitCmd.lead, ' [', mfilename,'] ', gitConf.remoteRepoURL, ' added with remote name "upstream".', gitCmd.success, gitCmd.trail]);
                 end
             else
-                result
+                result_gitRemoteAdd
                 error([gitCmd.lead, ' [', mfilename,'] ', gitConf.remoteRepoURL, ' could not be added as remote named "upstream".', gitCmd.fail]);
             end
         end

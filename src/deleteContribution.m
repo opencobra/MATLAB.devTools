@@ -26,42 +26,42 @@ function deleteContribution(branchName)
             % delete the local branch
 
             % retrieve a list of branches
-            [status, result] = system('git branch --list | tr -s "[:cntrl:]" "\n"');
+            [status_gitBranch, resultList] = system('git branch --list | tr -s "[:cntrl:]" "\n"');
 
-            if status == 0
-                arrResult = strsplit(result, '\n');
+            if status_gitBranch == 0
+                arrResult = strsplit(resultList, '\n');
                 arrResult(~cellfun(@isempty, arrResult));
 
-                if checkBranchExistence(branchName) % contains(result, branchName)
+                if checkBranchExistence(branchName)
                     % delete the branch locally
-                    [status, result2] = system(['git branch -D ', branchName]);
+                    [status_gitBranchDelete, result_gitBranchDelete] = system(['git branch -D ', branchName]);
 
-                    if status == 0
+                    if status_gitBranchDelete == 0
                         fprintf([gitCmd.lead, originCall, 'The local <', branchName, '> branch has been deleted.', gitCmd.success, gitCmd.trail]);
                     else
-                        result2
+                        result_gitBranchDelete
                         error([gitCmd.lead, ' [', mfilename,'] The local <', branchName,'> branch could not be deleted.', gitCmd.fail]);
                     end
                 else
                     fprintf([gitCmd.lead, originCall, 'The local <', branchName,'> does not exist.', gitCmd.fail, gitCmd.trail]);
                 end
             else
-                result
+                result_gitBranchDelete
                 error([gitCmd.lead, ' [', mfilename,'] The branch list could not be retrieved.', gitCmd.fail]);
             end
 
             % check if branch exists remotely
-            [status, result] = system(['curl -s --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName]);
+            [status_curl, result_curl] = system(['curl -s --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName]);
 
             % delete the remote branch
-            if status == 0 && contains(result, '200 OK')
+            if status_curl == 0 && contains(result_curl, '200 OK')
 
-                [status, result1] = system(['git push origin --delete ', branchName]);
+                [status_gitPush, result_gitPush] = system(['git push origin --delete ', branchName]);
 
-                if status == 0
+                if status_gitPush == 0
                     fprintf([gitCmd.lead, originCall, 'The remote <', branchName, '> branch has been deleted.', gitCmd.success, gitCmd.trail]);
                 else
-                    result1
+                    result_gitPush
                     error([gitCmd.lead, ' [', mfilename,'] The remote <', branchName,'> branch could not be deleted.', gitCmd.fail]);
                 end
             else

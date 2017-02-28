@@ -7,7 +7,7 @@ function freshClone = cloneFork()
     global gitConf
     global gitCmd
 
-    currentDir = strrep(pwd,'\','\\');
+    currentDir = strrep(pwd, '\', '\\');
 
     % check if the fork exists remotely and locally
     checkLocalFork();
@@ -28,9 +28,9 @@ function freshClone = cloneFork()
             fprintf([gitCmd.lead, ' [', mfilename,'] Cloning the fork ', gitConf.forkURL, gitCmd.trail]);
         end
 
-        [status, result] = system(['git clone ', gitConf.forkURL, ' ', gitConf.forkDirName]);
+        [status_gitClone, result_gitClone] = system(['git clone ', gitConf.forkURL, ' ', gitConf.forkDirName]);
 
-        if status == 0
+        if status_gitClone == 0
             if gitConf.verbose
                 fprintf([gitCmd.lead, ' [', mfilename,'] The fork ', gitConf.forkURL, ' has been cloned.', gitCmd.success, gitCmd.trail]);
             end
@@ -38,11 +38,12 @@ function freshClone = cloneFork()
             % change to the fork directory
             cd(gitConf.fullForkDir)
 
+            % update the submodules
             updateSubmodules();
 
             freshClone = true;
         else
-            result
+            result_gitClone
             error([gitCmd.lead, ' [', mfilename,'] The fork ', gitConf.forkURL, ' could not be cloned.', gitCmd.fail]);
         end
 
@@ -53,10 +54,10 @@ function freshClone = cloneFork()
         cd(gitConf.fullForkDir)
 
         % retrieve a short status from git
-        [status, result] = system('git status -s');
+        [status_gitStatus, result_gitStatus] = system('git status -s');
 
         % check if the fork is up-to-date
-        if status == 0 && isempty(result)
+        if status_gitStatus == 0 && isempty(result_gitStatus)
             if gitConf.verbose
                 fprintf([gitCmd.lead, ' [', mfilename,'] Your cobratoolbox fork (username: ', gitConf.userName, ') is already cloned and up-to-date. ', gitCmd.success, gitCmd.trail]);
             end
@@ -64,7 +65,7 @@ function freshClone = cloneFork()
         % proceed to update the fork
         else
             if gitConf.verbose
-                fprintf([gitCmd.lead, ' [', mfilename,'] Your fork is not up-to-date. Please update using "updateMyFork();".', gitCmd.fail, gitCmd.trail]);
+                fprintf([gitCmd.lead, ' [', mfilename,'] Your fork is not up-to-date. Please update using "updateFork();".', gitCmd.fail, gitCmd.trail]);
             end
         end
     end

@@ -7,13 +7,14 @@ function updateSubmodules()
     global gitConf
     global gitCmd
 
-    [status1, result1] = system(['git submodule update --init']);
-    if status1 == 0
+    [status_gitSubmodule, result_gitSubmodule] = system(['git submodule update --init']);
+
+    if status_gitSubmodule == 0
         if gitConf.verbose
             fprintf([gitCmd.lead, ' [', mfilename,'] The submodules have been initialized.', gitCmd.success, gitCmd.trail]);
         end
     else
-        result1
+        result_gitSubmodule
         error([gitCmd.lead, ' [', mfilename,'] The submodules could not be initialized.', gitCmd.fail]);
     end
 

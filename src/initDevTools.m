@@ -26,8 +26,8 @@ function initDevTools(repoURL)
     gitConf.remoteRepoName = gitConf.remoteRepoURL(sepIndices(4)+1:end-4);
     gitConf.remoteUserName = gitConf.remoteRepoURL(sepIndices(3)+1:sepIndices(4)-1);
 
-    [status, result] = system('git config --get user.name');
-    gitConf.userName = strtrim(result);
+    [status_gitConfUserGet, result_gitConfUserGet] = system('git config --get user.name');
+    gitConf.userName = strtrim(result_gitConfUserGet);
 
     if gitConf.verbose
         originCall = [' [', mfilename, '] '];
@@ -35,47 +35,49 @@ function initDevTools(repoURL)
         originCall  = '';
     end
 
-    %((gitConf.verbose == true) ? 'test' : '')
-    if status == 0
+    if status_gitConfUserGet == 0
         fprintf([gitCmd.lead, originCall, 'Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]); %
     else
-        fprintf([gitCmd.lead, originCall, 'The Github username could not be retrieved.', gitCmd.fail, gitCmd.trail]);
+        if gitConf.verbose
+            fprintf([gitCmd.lead, originCall, 'The Github username could not be retrieved.', gitCmd.fail, gitCmd.trail]);
+        end
 
         % request the Github username
         if isempty(gitConf.userName)
-            gitConf.userName = input([gitCmd.lead, ' [', mfilename,'] -> Please enter your Github username: '], 's');
-            [status, result1] = system(['git config --global user.name "', gitConf.userName, '"']);
-            if status == 0
+            gitConf.userName = input([gitCmd.lead, originCall, ' -> Please enter your Github username: '], 's');
+            [status_gitConfUserSet, result_gitConfUserSet] = system(['git config --global user.name "', gitConf.userName, '"']);
+            if status_gitConfUserSet == 0
                 fprintf([gitCmd.lead, originCall, 'Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]);
             else
-                result1
+                result_gitConfUserSet
                 error([gitCmd.lead, ' [', mfilename,'] Your Github username could not be set.', gitCmd.fail]);
             end
         end
     end
 
-    [status, result] = system('git config --get user.email');
-    gitConf.userEmail = strtrim(result);
+    [status_gitConfEmailGet, result_gitConfEmailGet] = system('git config --get user.email');
+    gitConf.userEmail = strtrim(result_gitConfEmailGet);
 
-    if status == 0
+    if status_gitConfEmailGet == 0
         fprintf([gitCmd.lead, originCall, 'Your Github email is: ', gitConf.userEmail, '. ', gitCmd.success, gitCmd.trail]);
     else
-        fprintf([gitCmd.lead, originCall, 'The Github email could not be retrieved.', gitCmd.fail, gitCmd.trail]);
+        if gitConf.verbose
+            fprintf([gitCmd.lead, originCall, 'The Github email could not be retrieved.', gitCmd.fail, gitCmd.trail]);
+        end
 
         % request the Github username
         if isempty(gitConf.userEmail)
-            gitConf.userEmail = input([gitCmd.lead, ' [', mfilename,'] -> Please enter your Github email: '], 's');
+            gitConf.userEmail = input([gitCmd.lead, originCall, ' -> Please enter your Github email: '], 's');
 
-            [status, result1] = system(['git config --global user.email "', gitConf.userEmail, '"']);
-            if status == 0
+            [status_gitConfEmailSet, result_gitConfEmailSet] = system(['git config --global user.email "', gitConf.userEmail, '"']);
+            if status_gitConfEmailSet == 0
                 fprintf([gitCmd.lead, originCall, 'Your Github email is: ', gitConf.userEmail, '. ', gitCmd.success, gitCmd.trail]);
             else
-                result1
+                result_gitConfEmailSet
                 error([gitCmd.lead, ' [', mfilename,'] Your Github email could not be set.', gitCmd.fail]);
             end
         end
     end
-
 
     % check if the fork exists remotely
     checkRemoteFork();
@@ -85,21 +87,21 @@ function initDevTools(repoURL)
         reply = input([gitCmd.lead, originCall, ' -> Please define the local path to your fork\n       current: ', strrep(pwd,'\','\\'),'\n       Enter the path (press ENTER to use the current path): '], 's');
 
         if isempty(reply)
-            gitConf.localDir = strrep(pwd,'\','\\');
+            gitConf.localDir = strrep(pwd, '\', '\\');
         else
             gitConf.localDir = reply;
         end
 
         % add a fileseparator if not included
         if ~strcmp(gitConf.localDir(end), filesep)
-            gitConf.localDir = strrep([gitConf.localDir, filesep],'\','\\');
+            gitConf.localDir = strrep([gitConf.localDir, filesep], '\', '\\');
         end
 
         if exist(gitConf.localDir, 'dir') ~= 7
-            reply = input([gitmd.lead, originCall, ' -> The specified directory (', gitConf.localDir,') does not exist. Do you want to create it? Y/N [Y]:'], 's');
+            reply = input([gitmd.lead, originCall, ' -> The specified directory (', gitConf.localDir, ') does not exist. Do you want to create it? Y/N [Y]:'], 's');
 
             % create the directory if requested
-            if isempty(reply) || strcmp(reply, 'Y')
+            if isempty(reply) || strcmpi(reply, 'y')
                 system(['mkdir ', gitConf.localDir]);
                 if gitConf.verbose
                     fprintf([gitCmd.lead, ' [', mfilename,'] The directory has been created.', gitCmd.success, gitCmd.trail]);
@@ -111,8 +113,8 @@ function initDevTools(repoURL)
     end
 
     % define the fork directory name
-    gitConf.forkDirName = strrep([gitConf.leadForkDirName, gitConf.remoteRepoName],'\','\\');
-    gitConf.fullForkDir = strrep([gitConf.localDir, gitConf.forkDirName],'\','\\');
+    gitConf.forkDirName = strrep([gitConf.leadForkDirName, gitConf.remoteRepoName], '\', '\\');
+    gitConf.fullForkDir = strrep([gitConf.localDir, gitConf.forkDirName], '\', '\\');
 
     % clone the fork
     freshClone = cloneFork();
@@ -123,12 +125,14 @@ function initDevTools(repoURL)
     % update the fork
     if ~freshClone
 
-      cd(gitConf.fullForkDir);
+        % change to the local fork directory
+        cd(gitConf.fullForkDir);
 
-      [status0, result0] = system('git status -s');
+        % retrieve the status of the git repository
+        [status_gitStatus, result_gitStatus] = system('git status -s');
 
-      % only update if there are no local changes
-        if status0 == 0 && isempty(result0)
+        % only update if there are no local changes
+        if status_gitStatus == 0 && isempty(result_gitStatus)
             updateFork(true);
         else
             if gitConf.verbose

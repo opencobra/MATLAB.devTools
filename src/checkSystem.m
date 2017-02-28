@@ -20,20 +20,21 @@ function checkSystem(callerName)
     end
 
     % check if git is properly installed
-    [status, result] = system('git --version');
+    [status_gitVersion, result_gitVersion] = system('git --version');
 
-    if status == 0 && contains(result, 'git version')
+    if status_gitVersion == 0 && contains(result_gitVersion, 'git version')
         if gitConf.verbose
             fprintf([gitCmd.lead, ' [', mfilename, ']', callerName, ' git is properly installed.', gitCmd.success, gitCmd.trail]);
         end
     else
+        result_gitVersion
         error([gitCmd.lead, ' [', mfilename, ']', callerName, ' git is not installed. Please follow the guidelines how to install git.']);
     end
 
     % check if curl is properly installed
-    [status, result] = system('curl --version');
+    [status_curl, result_curl] = system('curl --version');
 
-    if status == 0 && contains(result, 'curl') && contains(result, 'http')
+    if status_curl == 0 && contains(result_curl, 'curl') && contains(result_curl, 'http')
         if gitConf.verbose
             fprintf([gitCmd.lead, ' [', mfilename, ']', callerName, ' curl is properly installed.', gitCmd.success, gitCmd.trail]);
         end

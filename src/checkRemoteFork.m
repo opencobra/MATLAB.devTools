@@ -13,17 +13,17 @@ function checkRemoteFork()
     % check the URLs of the fork and the remote repository
     if ~isempty(gitConf.userName)
 
-        [status, result] = system(['curl -s --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName]);
+        [status_curl, result_curl] = system(['curl -s --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName]);
 
         % check if the URL exists
-        if status == 0 && contains(result, '200 OK')
+        if status_curl == 0 && contains(result_curl, '200 OK')
             gitConf.forkURL = [gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '.git'];
 
             if gitConf.verbose
                 fprintf([gitCmd.lead, ' [', mfilename, '] The original repository has already been forked on Github (', gitConf.forkURL,').', gitCmd.success, gitCmd.trail]);
             end
         else
-            result
+            result_curl
             tmpCmd = gitCmd;
             tmpConf = gitConf;
             resetDevTools();
