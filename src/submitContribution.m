@@ -20,10 +20,10 @@ function submitContribution(branchName)
     end
 
     % retrieve a list of remotes
-    [status, result] = system('git status -s');
+    [status_gitStatus, result_gitStatus] = system('git status -s');
 
     if status == 0
-        arrResult = strsplit(result, '\n');
+        arrResult = strsplit(result_gitStatus, '\n');
     else
         result
         error([gitCmd.lead, originCall, 'The status of the repository cannot be retrieved', gitCmd.fail]);
@@ -34,7 +34,7 @@ function submitContribution(branchName)
         addFileOrder = true;
     else
         addFileOrder = false;
-        fprintf([gitCmd.lead, originCall, 'There is nothing to contribute. Please make changes to ', strrep(pwd,'\','\\'), gitCmd.trail]);
+        fprintf([gitCmd.lead, originCall, 'There is nothing to contribute. Please make changes to ', strrep(pwd, '\', '\\'), gitCmd.trail]);
     end
 
     % provide a warning if there are more than 10 files to add (and less than 20 files)
@@ -55,12 +55,10 @@ function submitContribution(branchName)
         % initialize a counter variable
         countAddFiles = 0;
 
-        % push the file(s) to the repository
-        % there are changes - do not update the fork here
-        %updateFork(false);
+        % push the file(s) to the repository (there are changes) -> do not update the fork here with updateFork(false);
 
         % check out the branch to make sure to be on the correct branch
-        checkoutBranch(branchName);
+        checkoutBranch(branchName); % will only check out the branch if possible
 
         for i = 1:length(arrResult)
             tmpFileName = arrResult(i);
@@ -160,12 +158,12 @@ function submitContribution(branchName)
                     commitMsg = ['"', commitMsg, '"'];
                 end
 
-                [status, result] = system(['git commit -m', commitMsg]);
+                [status_gitCommit, result_gitCommit] = system(['git commit -m', commitMsg]);
                 fprintf([gitCmd.lead, originCall, 'Your commit message has been set.', gitCmd.success, gitCmd.trail]);
-                if status == 0
+                if status_gitCommit == 0
                     pushStatus = true;
                 else
-                    result
+                    result_gitCommit
                     error([gitCmd.lead, ' [', mfilename,'] Your commit message cannot be set.', gitCmd.fail]);
                 end
             else
@@ -176,18 +174,18 @@ function submitContribution(branchName)
         % push to the branch in the fork
         if pushStatus
             fprintf([gitCmd.lead, originCall, 'Pushing ', num2str(countAddFiles), ' change(s) to your branch <', branchName, '>', gitCmd.trail])
-            [status, result] = system(['git push origin ', branchName, ' --force']);
+            [status_gitPush, result_gitPush] = system(['git push origin ', branchName, ' --force']);
 
-            if status == 0
+            if status_gitPush == 0
                 reply = input([gitCmd.lead, originCall, ' -> Do you want to open a pull request (PR)? Y/N [N]: '], 's');
 
-                if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
+                if ~isempty(reply) && (strcmpi(reply, 'y'))
                     openPR(branchName);
                 else
                     fprintf([gitCmd.lead, originCall, 'You can open a pull request (PR) later using "openPR(\''', branchName,'\'')".', gitCmd.trail]);
                 end
             else
-                result
+                result_gitPush
                 error([gitCmd.lead, ' [', mfilename,'] Something went wrong when pushing. Please try again.', gitCmd.fail]);
             end
         end
