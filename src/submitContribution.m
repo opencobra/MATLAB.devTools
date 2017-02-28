@@ -1,5 +1,5 @@
 function submitContribution(branchName)
-% The COBRA Toolbox: Development tools
+% devTools
 %
 % PURPOSE: submit an existing contribution named <branchName>
 %
@@ -173,7 +173,7 @@ function submitContribution(branchName)
 
         % push to the branch in the fork
         if pushStatus
-            fprintf([gitCmd.lead, originCall, 'Pushing ', num2str(countAddFiles), ' change(s) to your branch <', branchName, '>', gitCmd.trail])
+            fprintf([gitCmd.lead, originCall, 'Pushing ', num2str(countAddFiles), ' change(s) to your feature (branch) <', branchName, '>', gitCmd.trail])
             [status_gitPush, result_gitPush] = system(['git push origin ', branchName, ' --force']);
 
             if status_gitPush == 0

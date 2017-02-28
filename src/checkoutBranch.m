@@ -1,5 +1,5 @@
 function checkoutBranch(branchName)
-% The COBRA Toolbox: Development tools
+% devTools
 %
 % PURPOSE: checks out a branch named <branchName> locally and remotely
 %
@@ -30,7 +30,7 @@ function checkoutBranch(branchName)
 
     if status_gitStatus == 0 && isempty(result_gitStatus) && status_gitBranch == 0 && isempty(indexDevelop)
         if gitConf.verbose
-            fprintf([gitCmd.lead, ' [', mfilename, '] The current branch is not the <develop> branch.', gitCmd.fail, gitCmd.trail]);
+            fprintf([gitCmd.lead, ' [', mfilename, '] The current feature (branch) is not the <develop> feature (branch).', gitCmd.fail, gitCmd.trail]);
         end
 
         % update the fork locally
@@ -41,22 +41,22 @@ function checkoutBranch(branchName)
 
         if status_gitCheckout == 0 && (contains(resultList, '* develop') || contains(result, 'Already on'))
             if gitConf.verbose
-                fprintf([gitCmd.lead, ' [', mfilename, '] The current branch is <develop>.', gitCmd.success, gitCmd.trail]);
+                fprintf([gitCmd.lead, ' [', mfilename, '] The current feature (branch) is <develop>.', gitCmd.success, gitCmd.trail]);
             end
         else
             result_gitCheckout
-            error([gitCmd.lead, 'An error occurred and the <develop> branch cannot be checked out']);
+            error([gitCmd.lead, 'An error occurred and the <develop> feature (branch) cannot be checked out']);
         end
 
         % reset the develop branch
         [status_gitReset, result_gitReset] = system('git reset --hard upstream/develop');
         if status_gitReset == 0
             if gitConf.verbose
-                fprintf([gitCmd.lead, ' [', mfilename, '] The current branch is <develop>.', gitCmd.success, gitCmd.trail]);
+                fprintf([gitCmd.lead, ' [', mfilename, '] The current feature (branch) is <develop>.', gitCmd.success, gitCmd.trail]);
             end
         else
             result_gitReset
-            error([gitCmd.lead, 'An error occurred and the <develop> branch cannot be checked out']);
+            error([gitCmd.lead, 'The <develop> feature (branch) cannot be checked out']);
         end
 
         % make sure that the develop branch is up to date
@@ -64,11 +64,11 @@ function checkoutBranch(branchName)
 
         if status_gitPull == 0
             if gitConf.verbose
-                fprintf([gitCmd.lead, ' [', mfilename, '] The changes of the <develop> branch of your fork have been pulled.', gitCmd.success, gitCmd.trail]);
+                fprintf([gitCmd.lead, ' [', mfilename, '] The changes on the <develop> feature (branch) of your fork have been pulled.', gitCmd.success, gitCmd.trail]);
             end
         else
             result_gitPull
-            error([gitCmd.lead, 'The changes of the <develop> branch could not be pulled.', gitCmd.fail]);
+            error([gitCmd.lead, 'The changes on the <develop> feature (branch) could not be pulled.', gitCmd.fail]);
         end
     end
 
@@ -84,7 +84,7 @@ function checkoutBranch(branchName)
 
     if status_gitCheckout == 0 && status_gitStatus == 0 && isempty(result_gitStatus)
         if gitConf.verbose
-            fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch has been checked out.', gitCmd.success, gitCmd.trail]);
+            fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> feature (branch) has been checked out.', gitCmd.success, gitCmd.trail]);
         end
 
         % rebase if the branch already existed
@@ -99,31 +99,31 @@ function checkoutBranch(branchName)
 
                 if status_gitRebase == 0 && ~contains(result_gitRebase, 'up to date')
                     if gitConf.verbose
-                        fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch has been rebased with <develop>.', gitCmd.success, gitCmd.trail]);
+                        fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> feature (branch) has been rebased with <develop>.', gitCmd.success, gitCmd.trail]);
                     end
 
                     % push by force the rebased branch
                     [status_gitPush, result_gitPush] = system(['git push origin ', branchName, ' --force']);
                     if status_gitPush == 0
                         if gitConf.verbose
-                            fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch has been pushed to your fork by force.', gitCmd.success, gitCmd.trail]);
+                            fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> feature (branch) has been pushed to your fork by force.', gitCmd.success, gitCmd.trail]);
                         end
                     else
                         result_gitPush
-                        error([gitCmd.lead, ' [', mfilename, '] The <', branchName ,'> branch could not be pushed to your fork.', gitCmd.fail]);
+                        error([gitCmd.lead, ' [', mfilename, '] The <', branchName ,'> feature (branch) could not be pushed to your fork.', gitCmd.fail]);
                     end
                 else
                     [status_gitRebaseAbort, results_gitRebaseAbort] = system(['git rebase --abort']);
 
                     if status_gitRebaseAbort == 0
-                        fprintf([gitCmd.lead, ' [', mfilename, '] The rebase process has been aborted.', gitCmd.fail, gitCmd.trail]);
+                        fprintf([gitCmd.lead, ' [', mfilename, '] The rebase process of <', branchName,'> with <develop> has been aborted.', gitCmd.fail, gitCmd.trail]);
                     end
 
                     % hard reset of an existing branch
                     [status_gitReset, result_gitReset] = system(['git reset --hard origin/', branchName]);
                     if status_gitReset == 0
                         if gitConf.verbose
-                            fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch has not been rebased and is up to date.', gitCmd.success, gitCmd.trail]);
+                            fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> feature (branch) has not been rebased with <develop> and is up to date.', gitCmd.success, gitCmd.trail]);
                         end
                     else
                         result_gitReset
@@ -137,17 +137,17 @@ function checkoutBranch(branchName)
 
             if status_gitPush == 0
                 if gitConf.verbose
-                    fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch has been pushed to your fork.', gitCmd.success, gitCmd.trail]);
+                    fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> feature (branch) has been pushed to your fork.', gitCmd.success, gitCmd.trail]);
                 end
             else
                 result_gitPush
-                error([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch could not be pushed to your fork.', gitCmd.fail]);
+                error([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> feature (branch) could not be pushed to your fork.', gitCmd.fail]);
             end
         end
     else
         if gitConf.verbose
             result_gitCheckout
-            fprintf([gitCmd.lead, ' [', mfilename, '] The branch <', branchName, '> has not be checked out.', gitCmd.fail, gitCmd.trail]);
+            fprintf([gitCmd.lead, ' [', mfilename, '] The feature (branch) <', branchName, '> has not be checked out.', gitCmd.fail, gitCmd.trail]);
         end
     end
 

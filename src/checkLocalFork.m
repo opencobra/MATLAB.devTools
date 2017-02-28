@@ -1,5 +1,5 @@
 function checkLocalFork()
-% The COBRA Toolbox: Development tools
+% devTools
 %
 % PURPOSE: checks the configuration of remotes in the local copy of the fork
 %

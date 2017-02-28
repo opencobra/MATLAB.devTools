@@ -1,5 +1,5 @@
 function initContribution(branchName)
-% The COBRA Toolbox: Development tools
+% devTools
 %
 % PURPOSE: initializes a contribution named <branchName>
 %
@@ -17,7 +17,7 @@ function initContribution(branchName)
     end
 
     % request a name of the new feature
-    if nargin < 1 || nargin == 1 && (strcmp(branchName, '') || strcmp(branchName, 'develop') || strcmp(branchName, 'master'))
+    if nargin < 1 || nargin == 1 && (strcmp(branchName, '') || contains(branchName, 'develop') || contains(branchName, 'master'))
         branchName = '';
         while isempty(branchName)
             branchName = input([gitCmd.lead, originCall, ' -> Please enter a name of the feature that you want to work on (example: add-constraints): '], 's');

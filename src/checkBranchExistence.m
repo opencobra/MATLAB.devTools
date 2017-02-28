@@ -1,5 +1,5 @@
 function branchExists = checkBranchExistence(branchName)
-% The COBRA Toolbox: Development tools
+% devTools
 %
 % PURPOSE: checks if a branch exists locally
 %

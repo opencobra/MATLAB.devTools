@@ -1,5 +1,5 @@
 function freshClone = cloneFork()
-% The COBRA Toolbox: Development tools
+% devTools
 %
 % PURPOSE: clones the fork and updates the submodules of the repository
 %
@@ -59,7 +59,7 @@ function freshClone = cloneFork()
         % check if the fork is up-to-date
         if status_gitStatus == 0 && isempty(result_gitStatus)
             if gitConf.verbose
-                fprintf([gitCmd.lead, ' [', mfilename,'] Your cobratoolbox fork (username: ', gitConf.userName, ') is already cloned and up-to-date. ', gitCmd.success, gitCmd.trail]);
+                fprintf([gitCmd.lead, ' [', mfilename,'] Your fork (username: ', gitConf.userName, ') is already cloned and up-to-date. ', gitCmd.success, gitCmd.trail]);
             end
 
         % proceed to update the fork

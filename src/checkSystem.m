@@ -1,5 +1,5 @@
 function checkSystem(callerName)
-% The COBRA Toolbox: Development tools
+% devTools
 %
 % PURPOSE: checks the configuration of the system (installation of git and curl)
 %
@@ -7,11 +7,7 @@ function checkSystem(callerName)
     global gitConf
     global gitCmd
 
-    gitConf.leadForkDirName = 'fork-';
-    gitCmd.lead = 'dev>  ';
-    gitCmd.success = ' (Success) ';
-    gitCmd.fail = ' (Error) ';
-    gitCmd.trail = '\n';
+    confDevTools;
 
     if nargin < 1
         callerName = '';

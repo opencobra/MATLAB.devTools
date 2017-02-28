@@ -1,5 +1,5 @@
 function contribute(verbose)
-% The COBRA Toolbox: Development tools
+% devTools
 %
 % PURPOSE: displays a menu and calls the respective subfunctions
 %
@@ -7,13 +7,13 @@ function contribute(verbose)
     global gitConf
     global gitCmd
 
-    if nargin < 1
-        gitConf.verbose = false;
-    else
+    confDevTools;
+
+    if nargin > 0
         gitConf.verbose = true;
     end
 
-    fprintf('\n\n      _____   _____   _____   _____     _____     |\n     /  ___| /  _  \\ |  _  \\ |  _  \\   / ___ \\    |   COnstraint-Based Reconstruction and Analysis\n     | |     | | | | | |_| | | |_| |  | |___| |   |   The COBRA Toolbox - 2017\n     | |     | | | | |  _  { |  _  /  |  ___  |   |\n     | |___  | |_| | | |_| | | | \\ \\  | |   | |   |   Documentation:\n     \\_____| \\_____/ |_____/ |_|  \\_\\ |_|   |_|   |   http://opencobra.github.io/cobratoolbox\n                                                  | \n\n');
+    fprintf(gitConf.launcher);
 
     choice = input('\n      [1] Initialize a contribution.\n      [2] Continue a contribution.\n      [3] Submit/publish a contribution.\n      [4] Delete a contribution.\n\n   -> Please select what you want to do (enter the number): ', 's');
 
@@ -61,7 +61,7 @@ function contribute(verbose)
                         end
                         fprintf('\n');
                     else
-                        reply = input('   -> You do not have any features. Do you want to start a new contribution? Y/N [Y]', 's');
+                        reply = input('   -> You do not have any features (branches). Do you want to start a new contribution? Y/N [Y]', 's');
                         if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                             initContribution;
                             exitFlag = true;

@@ -1,5 +1,5 @@
 function checkDevTools()
-% The COBRA Toolbox: Development tools
+% devTools
 %
 % PURPOSE: checks the configuration of the development tools
 %

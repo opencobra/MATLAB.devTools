@@ -1,5 +1,5 @@
 function checkRemoteFork()
-% The COBRA Toolbox: Development tools
+% devTools
 %
 % PURPOSE: checks whether the fork exists remotely
 %

@@ -1,5 +1,5 @@
 function resetDevTools()
-% The COBRA Toolbox: Development tools
+% devTools
 %
 % PURPOSE: reset the configuration of the development tools
 %

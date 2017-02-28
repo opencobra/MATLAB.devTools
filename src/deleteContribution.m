@@ -1,5 +1,5 @@
 function deleteContribution(branchName)
-% The COBRA Toolbox: Development tools
+% devTools
 %
 % PURPOSE: deletes and existing contribution named <branchName>
 %
@@ -17,13 +17,12 @@ function deleteContribution(branchName)
     end
 
     if ~contains(branchName, 'develop') && ~contains(branchName, 'master')
-        reply = input([gitCmd.lead, originCall, 'Are you sure that you want to delete the branch <', branchName, '>? Y/N [N]: '], 's');
+        reply = input([gitCmd.lead, originCall, 'Are you sure that you want to delete the feature (branch) <', branchName, '>? Y/N [N]: '], 's');
 
-        if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
+        if ~isempty(reply) && strcmpi(reply, 'y')
+
             % checkout the develop branch
             checkoutBranch('develop');
-
-            % delete the local branch
 
             % retrieve a list of all the branches
             if ispc
@@ -33,6 +32,7 @@ function deleteContribution(branchName)
             end
             [status_gitBranch, resultList] = system(['git branch --list ', filterColor]);
 
+            % delete the local branch
             if status_gitBranch == 0
                 arrResult = strsplit(resultList, '\n');
                 arrResult(~cellfun(@isempty, arrResult));
@@ -42,17 +42,17 @@ function deleteContribution(branchName)
                     [status_gitBranchDelete, result_gitBranchDelete] = system(['git branch -D ', branchName]);
 
                     if status_gitBranchDelete == 0
-                        fprintf([gitCmd.lead, originCall, 'The local <', branchName, '> feature has been deleted.', gitCmd.success, gitCmd.trail]);
+                        fprintf([gitCmd.lead, originCall, 'The local <', branchName, '> feature (branch) has been deleted.', gitCmd.success, gitCmd.trail]);
                     else
                         result_gitBranchDelete
-                        error([gitCmd.lead, ' [', mfilename,'] The local <', branchName,'> feature could not be deleted.', gitCmd.fail]);
+                        error([gitCmd.lead, ' [', mfilename,'] The local <', branchName,'> feature (branch) could not be deleted. You might have unpublished/uncommitted changes.', gitCmd.fail]);
                     end
                 else
-                    fprintf([gitCmd.lead, originCall, 'The local <', branchName,'> does not exist.', gitCmd.fail, gitCmd.trail]);
+                    fprintf([gitCmd.lead, originCall, 'The local <', branchName,'> feature (branch) does not exist.', gitCmd.fail, gitCmd.trail]);
                 end
             else
                 result_gitBranchDelete
-                error([gitCmd.lead, ' [', mfilename,'] The feature list could not be retrieved.', gitCmd.fail]);
+                error([gitCmd.lead, ' [', mfilename,'] The list of features (branches) could not be retrieved.', gitCmd.fail]);
             end
 
             % check if branch exists remotely
@@ -64,16 +64,16 @@ function deleteContribution(branchName)
                 [status_gitPush, result_gitPush] = system(['git push origin --delete ', branchName]);
 
                 if status_gitPush == 0
-                    fprintf([gitCmd.lead, originCall, 'The remote <', branchName, '> feature has been deleted.', gitCmd.success, gitCmd.trail]);
+                    fprintf([gitCmd.lead, originCall, 'The remote <', branchName, '> feature (branch) has been deleted.', gitCmd.success, gitCmd.trail]);
                 else
                     result_gitPush
-                    error([gitCmd.lead, ' [', mfilename,'] The remote <', branchName,'> feature could not be deleted.', gitCmd.fail]);
+                    error([gitCmd.lead, ' [', mfilename,'] The remote <', branchName,'> feature (branch) could not be deleted.', gitCmd.fail]);
                 end
             else
-                fprintf([gitCmd.lead, originCall, 'The remote <', branchName,'> does not exist.', gitCmd.fail, gitCmd.trail]);
+                fprintf([gitCmd.lead, originCall, 'The remote <', branchName,'> feature (branch) does not exist.', gitCmd.fail, gitCmd.trail]);
             end
         end
     else
-        error([gitCmd.lead, ' [', mfilename,'] You cannot delete the <master> or the <develop> feature.', gitCmd.fail]);
+        error([gitCmd.lead, ' [', mfilename,'] You cannot delete the <master> or the <develop> feature (branch).', gitCmd.fail]);
     end
 end

@@ -1,5 +1,5 @@
 function initDevTools(repoURL)
-% The COBRA Toolbox: Development tools
+% devTools
 %
 % PURPOSE: initializes the development tools (username and email are requested if not configured)
 %
@@ -11,9 +11,7 @@ function initDevTools(repoURL)
     checkSystem();
 
     % main public repository
-    if nargin < 1
-        gitConf.remoteRepoURL = 'https://github.com/opencobra/cobratoolbox.git';
-    else
+    if nargin > 0
         gitConf.remoteRepoURL = repoURL;
     end
 
@@ -145,18 +143,16 @@ function initDevTools(repoURL)
     if isunix
         system('git config --global credential.helper cache');
         system('git config --global credential.helper "cache --timeout=3600"'); % set the cache to timeout after 1 hour (setting is in seconds)
-    elseif ismac
-        system('git credential-osxkeychain');
     elseif ispc
         system('git config --global credential.helper wincred');
     end
 
     % print the current configuration
-    fprintf([gitCmd.lead, originCall, ' -- Configuration --      ', gitCmd.trail])
-    fprintf([gitCmd.lead, originCall, '    GitHub username:      ', gitConf.userName, gitCmd.trail]);
-    fprintf([gitCmd.lead, originCall, '    Local directory :     ', gitConf.fullForkDir, gitCmd.trail])
-    fprintf([gitCmd.lead, originCall, '    Remote fork URL:      ', gitConf.forkURL, gitCmd.trail]);
-    fprintf([gitCmd.lead, originCall, '    Remote opencobra URL: ', gitConf.remoteRepoURL, gitCmd.trail]);
+    fprintf([gitCmd.lead, originCall, ' -- Configuration -------- ', gitCmd.trail])
+    fprintf([gitCmd.lead, originCall, '    GitHub username:       ', gitConf.userName, gitCmd.trail]);
+    fprintf([gitCmd.lead, originCall, '    Local directory :      ', gitConf.fullForkDir, gitCmd.trail])
+    fprintf([gitCmd.lead, originCall, '    Remote fork URL:       ', gitConf.forkURL, gitCmd.trail]);
+    fprintf([gitCmd.lead, originCall, '    Remote repository URL: ', gitConf.remoteRepoURL, gitCmd.trail]);
 
 
 end

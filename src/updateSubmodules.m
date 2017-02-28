@@ -1,5 +1,5 @@
 function updateSubmodules()
-% The COBRA Toolbox: Development tools
+% devTools
 %
 % PURPOSE: clones the submodules and updates the repository
 %

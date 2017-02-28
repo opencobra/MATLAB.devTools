@@ -1,5 +1,5 @@
 function openPR(branchName)
-% The COBRA Toolbox: Development tools
+% devTools
 %
 % PURPOSE: provides a pull request URL from <branchName> to <develop> on the upstream
 %
@@ -26,6 +26,6 @@ function openPR(branchName)
         fprintf([gitCmd.lead, originCall, 'You can open a pull request (PR) by clicking on \n\n\t', prURL, '?expand=1\n\n']);
     else
         result_curl
-        error([gitCmd.lead, ' [', mfilename,'] The branch <', branchName, '> does not exist or has no commits.', gitCmd.fail])
+        error([gitCmd.lead, ' [', mfilename,'] The feature (branch) <', branchName, '> does not exist or has no commits.', gitCmd.fail])
     end
 end

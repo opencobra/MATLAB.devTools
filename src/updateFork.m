@@ -1,5 +1,5 @@
 function updateFork(force)
-% The COBRA Toolbox: Development tools
+% devTools
 %
 % PURPOSE: updates the fork and the submodules of the repository
 %
@@ -49,12 +49,12 @@ function updateFork(force)
 
                     if status_gitCheckout == 0
                         if gitConf.verbose
-                            fprintf([gitCmd.lead, ' [', mfilename, '] The branch <', branches{k}, '> was checked out.', gitCmd.success, gitCmd.trail]);
+                            fprintf([gitCmd.lead, ' [', mfilename, '] The feature (branch) <', branches{k}, '> was checked out.', gitCmd.success, gitCmd.trail]);
                         end
                     else
                         result_gitCheckout
                         if gitConf.verbose
-                            fprintf([gitCmd.lead, ' [', mfilename, '] The branch <', branches{k}, '> could not be checked out.', gitCmd.fail, gitCmd.trail]);
+                            fprintf([gitCmd.lead, ' [', mfilename, '] The feature (branch) <', branches{k}, '> could not be checked out.', gitCmd.fail, gitCmd.trail]);
                         end
                     end
                 else
@@ -62,12 +62,12 @@ function updateFork(force)
 
                     if status_gitCheckoutCreate == 0
                         if gitConf.verbose
-                            fprintf([gitCmd.lead, ' [', mfilename, '] The branch <', branches{k}, '> was checked out.', gitCmd.success, gitCmd.trail]);
+                            fprintf([gitCmd.lead, ' [', mfilename, '] The feature (branch) <', branches{k}, '> was checked out.', gitCmd.success, gitCmd.trail]);
                         end
                     else
                         result_gitCheckoutCreate
                         if gitConf.verbose
-                            fprintf([gitCmd.lead, ' [', mfilename, '] The branch <', branches{k}, '> could not be checked out.', gitCmd.fail]);
+                            fprintf([gitCmd.lead, ' [', mfilename, '] The feature (branch) <', branches{k}, '> could not be checked out.', gitCmd.fail]);
                         end
                     end
                 end
@@ -76,11 +76,11 @@ function updateFork(force)
                 [status_gitFetchOrigin, result_gitFetchOrigin] = system(['git fetch origin ', branches{k}]);  % no pull
                 if status_gitFetchOrigin == 0
                     if gitConf.verbose
-                        fprintf([gitCmd.lead, ' [', mfilename, '] Changes on ', branches{k},' branch of fork pulled.', gitCmd.success, gitCmd.trail]);
+                        fprintf([gitCmd.lead, ' [', mfilename, '] Changes on the <', branches{k},'> feature (branch) of fork pulled.', gitCmd.success, gitCmd.trail]);
                     end
                 else
                     result_gitFetchOrigin
-                    error([gitCmd.lead, ' [', mfilename, '] Impossible to pull changes from ', branches{k},' branch of fork.', gitCmd.fail]);
+                    error([gitCmd.lead, ' [', mfilename, '] Impossible to pull changes from <', branches{k},'> feature (branch) of fork.', gitCmd.fail]);
                 end
 
                 % fetch the changes from upstream
@@ -111,11 +111,11 @@ function updateFork(force)
                     [status_gitReset, result_gitReset] = system(['git reset --hard upstream/', branches{k}]);
                     if status_gitReset == 0
                         if gitConf.verbose
-                            fprintf([gitCmd.lead, ' [', mfilename,'] The ', branches{k}, ' branch of the fork has been reset.', gitCmd.success, gitCmd.trail]);
+                            fprintf([gitCmd.lead, ' [', mfilename,'] The <', branches{k}, '> feature (branch) of the fork has been reset.', gitCmd.success, gitCmd.trail]);
                         end
                     else
                         result_gitReset
-                        error([gitCmd.lead, ' [', mfilename,'] Impossible to reset the branch', branches{k}, ' of the fork.', gitCmd.fail]);
+                        error([gitCmd.lead, ' [', mfilename,'] Impossible to reset the <', branches{k}, '> feature (branch) of the fork.', gitCmd.fail]);
                     end
 
                     % set the flag for a force push
@@ -135,20 +135,20 @@ function updateFork(force)
 
                 if status_gitPush == 0
                     if gitConf.verbose
-                        fprintf([gitCmd.lead, ' [', mfilename,'] The <', branches{k}, '> branch has been updated on the fork', forceText, '.', gitCmd.success, gitCmd.trail]);
+                        fprintf([gitCmd.lead, ' [', mfilename,'] The <', branches{k}, '> feature (branch) has been updated on the fork', forceText, '.', gitCmd.success, gitCmd.trail]);
                     end
                 else
                     result_gitPush
-                    error([gitCmd.lead, ' [', mfilename,'] Impossible to update <', branches{k}, '> on your fork (', gitConf.forkURL, ').', gitCmd.fail]);
+                    error([gitCmd.lead, ' [', mfilename,'] Impossible to update the <', branches{k}, '> feature (branch) on your fork (', gitConf.forkURL, ').', gitCmd.fail]);
                 end
             end
         else
             resultList
-            error([gitCmd.lead, ' [', mfilename,'] Impossible to retrieve the branches of your local fork.', gitCmd.fail]);
+            error([gitCmd.lead, ' [', mfilename,'] Impossible to retrieve the features (branches) of your local fork.', gitCmd.fail]);
         end
     else
         if gitConf.verbose
-            fprintf([gitCmd.lead, ' [', mfilename,'] The local fork cannot be updated as you have uncommitted changes.', gitCmd.fail, gitCmd.trail]);
+            fprintf([gitCmd.lead, ' [', mfilename,'] The local fork cannot be updated as you have uncommitted changes. Please submit/publish them first.', gitCmd.fail, gitCmd.trail]);
         end
     end
 
