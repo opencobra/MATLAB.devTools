@@ -141,11 +141,22 @@ function initDevTools(repoURL)
         end
     end
 
+    % set the preferences for a password cache helper
+    if isunix
+        system('git config --global credential.helper cache');
+        system('git config --global credential.helper "cache --timeout=3600"'); % set the cache to timeout after 1 hour (setting is in seconds)
+    elseif ismac
+        system('git credential-osxkeychain');
+    elseif ispc
+        system('git config --global credential.helper wincred');
+    end
+
     % print the current configuration
     fprintf([gitCmd.lead, originCall, ' -- Configuration --      ', gitCmd.trail])
     fprintf([gitCmd.lead, originCall, '    GitHub username:      ', gitConf.userName, gitCmd.trail]);
     fprintf([gitCmd.lead, originCall, '    Local directory :     ', gitConf.fullForkDir, gitCmd.trail])
     fprintf([gitCmd.lead, originCall, '    Remote fork URL:      ', gitConf.forkURL, gitCmd.trail]);
     fprintf([gitCmd.lead, originCall, '    Remote opencobra URL: ', gitConf.remoteRepoURL, gitCmd.trail]);
+
 
 end
