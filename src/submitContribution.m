@@ -13,6 +13,12 @@ function submitContribution(branchName)
     % check if branch exists
     checkoutBranch(branchName);
 
+    if gitConf.verbose
+        originCall = [' [', mfilename, '] '];
+    else
+        originCall  = '';
+    end
+
     % retrieve a list of remotes
     [status, result] = system('git status -s');
 
@@ -20,7 +26,7 @@ function submitContribution(branchName)
         arrResult = strsplit(result, '\n');
     else
         result
-        error([gitCmd.lead, ' [', mfilename,'] The status of the repository cannot be retrieved', gitCmd.fail]);
+        error([gitCmd.lead, originCall, 'The status of the repository cannot be retrieved', gitCmd.fail]);
     end
 
     % initialize the array for storing the file names to be added
@@ -28,12 +34,12 @@ function submitContribution(branchName)
         addFileOrder = true;
     else
         addFileOrder = false;
-        fprintf([gitCmd.lead, ' [', mfilename,'] There is nothing to contribute. Please make changes to ', strrep(pwd,'\','\\'), gitCmd.trail]);
+        fprintf([gitCmd.lead, originCall, 'There is nothing to contribute. Please make changes to ', strrep(pwd,'\','\\'), gitCmd.trail]);
     end
 
     % provide a warning if there are more than 10 files to add (and less than 20 files)
     if length(arrResult) > 10
-        reply = input([gitCmd.lead, ' [', mfilename,'] -> You currently have more than 10 changed files. Are you sure that you want to continue? Y/N [N]: '], 's');
+        reply = input([gitCmd.lead, originCall, ' -> You currently have more than 10 changed files. Are you sure that you want to continue? Y/N [N]: '], 's');
 
         if isempty(reply) || contains(reply, 'n') || contains(reply, 'N')
             addFileOrder = false;
@@ -42,7 +48,7 @@ function submitContribution(branchName)
 
     % provide an error if more than 20 files to add
     if length(arrResult) > 20
-        error([gitCmd.lead, ' [', mfilename,'] You currently have more than 50 new files to add. Consider splitting them into multiple commits (typically only a few files per commit).'])
+        fprintf([gitCmd.lead, originCall, 'You currently have more than 50 new files to add. Consider splitting them into multiple commits (typically only a few files per commit).'])
     end
 
     if addFileOrder
@@ -50,9 +56,10 @@ function submitContribution(branchName)
         countAddFiles = 0;
 
         % push the file(s) to the repository
-        updateFork(false);
+        % there are changes - do not update the fork here
+        %updateFork(false);
 
-        % get the branch name
+        % check out the branch to make sure to be on the correct branch
         checkoutBranch(branchName);
 
         for i = 1:length(arrResult)
@@ -79,14 +86,14 @@ function submitContribution(branchName)
 
             % add deleted files
             if ~isempty(tmpFileName) && contains(fullFileStatus, 'D')
-                reply = input([gitCmd.lead, ' [', mfilename,'] -> You deleted ', fullFileName, '. Do you want to commit this deletion? Y/N [N]: '], 's');
+                reply = input([gitCmd.lead, originCall, ' -> You deleted ', fullFileName, '. Do you want to commit this deletion? Y/N [N]: '], 's');
 
                 if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                     countAddFiles = countAddFiles + 1;
                     [status, result] = system(['git add ', fullFileName]);
                     if status == 0
                         if gitConf.verbose
-                            fprintf([gitCmd.lead, ' [', mfilename,'] The file ', fullFileName, ' has been added to the stage.', gitCmd.success, gitCmd.trail]);
+                            fprintf([gitCmd.lead, originCall, 'The file ', fullFileName, ' has been added to the stage.', gitCmd.success, gitCmd.trail]);
                         end
                     else
                         result
@@ -97,14 +104,14 @@ function submitContribution(branchName)
 
             % add modified files
             if ~isempty(tmpFileName) && contains(fullFileStatus, 'M')
-                reply = input([gitCmd.lead, ' [', mfilename,'] -> You modified ', fullFileName, '. Do you want to commit the changes? Y/N [N]: '], 's');
+                reply = input([gitCmd.lead, originCall, ' -> You modified ', fullFileName, '. Do you want to commit the changes? Y/N [N]: '], 's');
 
                 if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                     countAddFiles = countAddFiles + 1;
                     [status, result] = system(['git add ', fullFileName]);
                     if status == 0
                         if gitConf.verbose
-                            fprintf([gitCmd.lead, ' [', mfilename,'] The file <', fullFileName, '> has been added to the stage.', gitCmd.success, gitCmd.trail]);
+                            fprintf([gitCmd.lead, originCall, 'The file <', fullFileName, '> has been added to the stage.', gitCmd.success, gitCmd.trail]);
                         end
                     else
                         result
@@ -115,13 +122,13 @@ function submitContribution(branchName)
 
             % add untracked files
             if ~isempty(tmpFileName) && contains(fullFileStatus, '??')
-                reply = input([gitCmd.lead, ' [', mfilename,'] -> Do you want to add the new file ', fullFileName, '? Y/N [N]: '], 's');
+                reply = input([gitCmd.lead, originCall, ' -> Do you want to add the new file ', fullFileName, '? Y/N [N]: '], 's');
                 if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                     countAddFiles = countAddFiles + 1;
                     [status, result] = system(['git add ', fullFileName]);
                     if status == 0
                         if gitConf.verbose
-                            fprintf([gitCmd.lead, ' [', mfilename,'] The file <', fullFileName, '> has been added to the stage.', gitCmd.success, gitCmd.trail]);
+                            fprintf([gitCmd.lead, originCall, 'The file <', fullFileName, '> has been added to the stage.', gitCmd.success, gitCmd.trail]);
                         end
                     else
                         result
@@ -133,7 +140,7 @@ function submitContribution(branchName)
             % already staged file
             if ~isempty(tmpFileName) && contains(fullFileStatus, 'A')
                 if gitConf.verbose
-                    fprintf([gitCmd.lead, ' [', mfilename,'] The file <', fullFileName, '> is already on stage.', gitCmd.success, gitCmd.trail]);
+                    fprintf([gitCmd.lead, originCall, 'The file <', fullFileName, '> is already on stage.', gitCmd.success, gitCmd.trail]);
                 end
                 countAddFiles = countAddFiles + 1
             end
@@ -143,9 +150,9 @@ function submitContribution(branchName)
 
         % set a commit message
         if countAddFiles > 0
-            fprintf([gitCmd.lead, ' [', mfilename,'] You have selected ', num2str(countAddFiles), ' files to be added in one commit.', gitCmd.trail]);
+            fprintf([gitCmd.lead, originCall, 'You have selected ', num2str(countAddFiles), ' files to be added in one commit.', gitCmd.trail]);
 
-            commitMsg = input([gitCmd.lead, ' [', mfilename,'] -> Please enter a commit message (example: "Fixing bug with input arguments"): '], 's');
+            commitMsg = input([gitCmd.lead, originCall, ' -> Please enter a commit message (example: "Fixing bug with input arguments"): '], 's');
 
             if ~isempty(commitMsg)
 
@@ -154,7 +161,7 @@ function submitContribution(branchName)
                 end
 
                 [status, result] = system(['git commit -m', commitMsg]);
-                fprintf([gitCmd.lead, ' [', mfilename,'] Your commit message has been set.', gitCmd.success, gitCmd.trail]);
+                fprintf([gitCmd.lead, originCall, 'Your commit message has been set.', gitCmd.success, gitCmd.trail]);
                 if status == 0
                     pushStatus = true;
                 else
@@ -168,16 +175,16 @@ function submitContribution(branchName)
 
         % push to the branch in the fork
         if pushStatus
-            fprintf([gitCmd.lead, ' [', mfilename,'] Pushing ', num2str(countAddFiles), ' change(s) to your branch <', branchName, '>', gitCmd.trail])
+            fprintf([gitCmd.lead, originCall, 'Pushing ', num2str(countAddFiles), ' change(s) to your branch <', branchName, '>', gitCmd.trail])
             [status, result] = system(['git push origin ', branchName, ' --force']);
 
             if status == 0
-                reply = input([gitCmd.lead, ' [', mfilename,'] -> Do you want to open a pull request (PR)? Y/N [N]: '], 's');
+                reply = input([gitCmd.lead, originCall, ' -> Do you want to open a pull request (PR)? Y/N [N]: '], 's');
 
                 if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                     openPR(branchName);
                 else
-                    fprintf([gitCmd.lead, ' [', mfilename,'] You can open a pull request (PR) later using "openPR(\''', branchName,'\'')".', gitCmd.trail]);
+                    fprintf([gitCmd.lead, originCall, 'You can open a pull request (PR) later using "openPR(\''', branchName,'\'')".', gitCmd.trail]);
                 end
             else
                 result

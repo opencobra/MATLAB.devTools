@@ -122,7 +122,19 @@ function initDevTools(repoURL)
 
     % update the fork
     if ~freshClone
-        updateFork(true);
+
+      cd(gitConf.fullForkDir);
+
+      [status0, result0] = system('git status -s');
+
+      % only update if there are no local changes
+        if status0 == 0 && isempty(result0)
+            updateFork(true);
+        else
+            if gitConf.verbose
+                fprintf([gitCmd.lead, ' [', mfilename,'] The local fork cannot be updated as you have uncommitted changes.', gitCmd.fail, gitCmd.trail]);
+            end
+        end
     end
 
     % print the current configuration

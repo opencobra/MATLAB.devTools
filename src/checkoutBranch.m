@@ -22,7 +22,9 @@ function checkoutBranch(branchName)
     indexDevelop = strfind(resultList, 'develop');
     indexStar = strfind(resultList, '*');
 
-    if status == 0 && isempty(indexDevelop) % && abs(indexDevelop-indexStar) > 10 % colors might be denoted as [32m etc.
+    [status0, result0] = system('git status -s');
+
+    if status0 == 0 && isempty(result0) && status == 0 && isempty(indexDevelop) % && abs(indexDevelop-indexStar) > 10 % colors might be denoted as [32m etc.
         if gitConf.verbose
             fprintf([gitCmd.lead, ' [', mfilename, '] The current branch is not the <develop> branch.', gitCmd.fail, gitCmd.trail]);
         end
@@ -32,6 +34,11 @@ function checkoutBranch(branchName)
 
         % checkout the develop branch
         [status1, result] = system('git checkout develop');
+
+        % reset the develop branch
+        [status1, result] = system('git reset --hard upstream/develop');
+
+
 
         if status1 == 0 && (contains(resultList, '* develop') || contains(result, 'Already on'))
             if gitConf.verbose
@@ -64,7 +71,7 @@ function checkoutBranch(branchName)
     % properly checkout the branch
     [status, result0] = system(['git checkout ', checkoutFlag, ' ', branchName]);
 
-    if status == 0
+    if status == 0 && status0 == 0 && isempty(result0)
         if gitConf.verbose
             fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch has been checked out.', gitCmd.success, gitCmd.trail]);
         end
@@ -75,6 +82,7 @@ function checkoutBranch(branchName)
             [status, result] = system('git status -s');
 
             if status == 0 && isempty(result)
+
                 [status, result1] = system(['git rebase develop']);
 
                 if status == 0 && ~contains(result, 'up to date')
@@ -92,6 +100,9 @@ function checkoutBranch(branchName)
                         error([gitCmd.lead, ' [', mfilename, '] The <', branchName ,'> branch could not be pushed to your fork.', gitCmd.fail]);
                     end
                 else
+                    [status, result1] = system(['git rebase --abort']);
+                    % hard reset of an existing branch
+                    [status, result] = system(['git reset --hard origin/', branchName]);
                     if gitConf.verbose
                         fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch has not been rebased and is up to date.', gitCmd.success, gitCmd.trail]);
                     end
@@ -111,8 +122,9 @@ function checkoutBranch(branchName)
             end
         end
     else
-        result0
-        error([gitCmd.lead, ' [', mfilename, '] The branch <', branchName, '> cannot be checked out.', gitCmd.fail]);
+        if gitConf.verbose
+            fprintf([gitCmd.lead, ' [', mfilename, '] The branch <', branchName, '> has not be checked out.', gitCmd.fail, gitCmd.trail]);
+        end
     end
 
     % change back to the current directory

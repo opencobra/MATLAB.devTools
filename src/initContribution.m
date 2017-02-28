@@ -24,6 +24,8 @@ function initContribution(branchName)
         end
     end
 
+    branchName = regexprep(branchName,'[^a-zA-Z0-9]','-');
+
     % checkout the branch of the feature
     checkoutBranch(branchName);
 

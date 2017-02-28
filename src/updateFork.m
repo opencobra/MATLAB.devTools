@@ -43,7 +43,7 @@ function updateFork(force)
                 else
                     result
                     if gitConf.verbose
-                        fprintf([gitCmd.lead, ' [', mfilename,'] The branch <', branches{k}, '> could not be checked out.', gitCmd.fail]);
+                        fprintf([gitCmd.lead, ' [', mfilename,'] The branch <', branches{k}, '> could not be checked out.', gitCmd.fail, gitCmd.trail]);
                     end
                 end
             else
@@ -143,8 +143,8 @@ function updateFork(force)
             end
         end
     else
-      resultList
-      error([gitCmd.lead, ' [', mfilename,'] Impossible to retrieve the branches of your local fork.', gitCmd.fail]);
+        resultList
+        error([gitCmd.lead, ' [', mfilename,'] Impossible to retrieve the branches of your local fork.', gitCmd.fail]);
     end
 
     % change back to the original directory
