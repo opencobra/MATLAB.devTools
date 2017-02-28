@@ -14,7 +14,12 @@ function checkoutBranch(branchName)
     cd(gitConf.fullForkDir);
 
     % retrieve a list of all the branches
-    [status_gitBranch, resultList] = system('git branch --list | tr -s "[:cntrl:]" "\n"');
+    if ispc
+        filterColor = '';
+    else
+        filterColor =  '| tr -s "[:cntrl:]" "\n"';
+    end
+    [status_gitBranch, resultList] = system(['git branch --list ', filterColor]);
 
     checkoutFlag = '';
 

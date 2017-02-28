@@ -33,7 +33,12 @@ function updateFork(force)
     if status_gitStatus == 0 && isempty(result_gitStatus)
 
         % retrieve a list of all the branches
-        [status_gitBranch, resultList] = system('git branch --list | tr -s "[:cntrl:]" "\n"');
+        if ispc
+            filterColor = '';
+        else
+            filterColor =  '| tr -s "[:cntrl:]" "\n"';
+        end
+        [status_gitBranch, resultList] = system(['git branch --list ', filterColor]);
 
         if status_gitBranch == 0
             % loop through the list of branches
