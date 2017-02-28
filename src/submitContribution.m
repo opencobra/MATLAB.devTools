@@ -22,15 +22,15 @@ function submitContribution(branchName)
     % retrieve a list of remotes
     [status_gitStatus, result_gitStatus] = system('git status -s');
 
-    if status == 0
+    if status_gitStatus == 0
         arrResult = strsplit(result_gitStatus, '\n');
     else
-        result
+        result_gitStatus
         error([gitCmd.lead, originCall, 'The status of the repository cannot be retrieved', gitCmd.fail]);
     end
 
     % initialize the array for storing the file names to be added
-    if ~isempty(result) > 0
+    if ~isempty(result_gitStatus) > 0
         addFileOrder = true;
     else
         addFileOrder = false;
