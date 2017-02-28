@@ -11,7 +11,7 @@ checkSystem();
 
 initDevTools('https://github.com/cobrabot/trial_wo_errors.git')
 
-%contribute
+%contribute(1)
 
 %matlab -r "testDevTools" < testInput_1.txt
 
