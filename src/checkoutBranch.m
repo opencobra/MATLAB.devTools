@@ -75,14 +75,15 @@ function checkoutBranch(branchName)
 
     % properly checkout the branch
     [status_gitCheckout, result_gitCheckout] = system(['git checkout ', checkoutFlag, ' ', branchName]);
+    [status_gitStatus, result_gitStatus] = system('git status -s');
 
-    if status_gitCheckout == 0 && status_gitStatus == 0 && isempty(status_gitStatus)
+    if status_gitCheckout == 0 && status_gitStatus == 0 && isempty(result_gitStatus)
         if gitConf.verbose
             fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch has been checked out.', gitCmd.success, gitCmd.trail]);
         end
 
         % rebase if the branch already existed
-        if ~strcmp(checkoutFlag, '-b') && ~strcmp(branchName, 'develop') && ~strcmp(branchName, 'master')
+        if ~strcmp(checkoutFlag, '-b') && ~contains(branchName, 'develop') && ~contains(branchName, 'master')
             %if there are no unstaged changes
             [status_gitStatus, result_gitStatus] = system('git status -s');
 
