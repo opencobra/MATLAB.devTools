@@ -18,7 +18,7 @@ function checkSystem(callerName)
     % check if git is properly installed
     [status_gitVersion, result_gitVersion] = system('git --version');
 
-    if status_gitVersion == 0 && contains(result_gitVersion, 'git version')
+    if status_gitVersion == 0 && strfind(result_gitVersion, 'git version')
         if gitConf.verbose
             fprintf([gitCmd.lead, ' [', mfilename, ']', callerName, ' git is properly installed.', gitCmd.success, gitCmd.trail]);
         end
@@ -30,7 +30,7 @@ function checkSystem(callerName)
     % check if curl is properly installed
     [status_curl, result_curl] = system('curl --version');
 
-    if status_curl == 0 && contains(result_curl, 'curl') && contains(result_curl, 'http')
+    if status_curl == 0 && strfind(result_curl, 'curl') && strfind(result_curl, 'http')
         if gitConf.verbose
             fprintf([gitCmd.lead, ' [', mfilename, ']', callerName, ' curl is properly installed.', gitCmd.success, gitCmd.trail]);
         end

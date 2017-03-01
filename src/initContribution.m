@@ -17,11 +17,11 @@ function initContribution(branchName)
     end
 
     % request a name of the new feature
-    if nargin < 1 || nargin == 1 && (strcmp(branchName, '') || contains(branchName, 'develop') || contains(branchName, 'master'))
+    if nargin < 1 || nargin == 1 && (strcmp(branchName, '') || strfind(branchName, 'develop') || strfind(branchName, 'master'))
         branchName = '';
         while isempty(branchName)
             branchName = input([gitCmd.lead, originCall, ' -> Please enter a name of the feature that you want to work on (example: add-constraints): '], 's');
-            if contains(branchName, 'develop') || contains(branchName, 'master')
+            if strfind(branchName, 'develop') || strfind(branchName, 'master')
                 branchName = '';
                 fprintf([gitCmd.lead, 'Please use a different name that does not contain <develop> or <master>.', gitCmd.fail, gitCmd.trail]);
             end

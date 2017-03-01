@@ -28,7 +28,7 @@ function contribute(verbose)
                 reply = '';
                 while isempty(reply)
                     reply = input('   -> Please enter a name of the new feature that you want to work on (example: add-constraints): ', 's');
-                    if contains(reply, 'develop') || contains(reply, 'master')
+                    if strfind(reply, 'develop') || strfind(reply, 'master')
                         reply = '';
                         fprintf([gitCmd.lead, 'Please use a different name that does not contain <develop> or <master>.', gitCmd.fail, gitCmd.trail]);
                     end
@@ -55,7 +55,7 @@ function contribute(verbose)
                         for i = 1:length(arrResult)
                             tmpName = arrResult(i);
                             tmpName = tmpName{1};
-                            if ~contains(tmpName, 'develop') && ~contains(tmpName, 'master') && ~isempty(tmpName)
+                            if ~strfind(tmpName, 'develop') && ~strfind(tmpName, 'master') && ~isempty(tmpName)
                                 fprintf(['      - ', tmpName, '\n']);
                             end
                         end

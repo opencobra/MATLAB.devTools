@@ -16,7 +16,7 @@ function deleteContribution(branchName)
         originCall  = '';
     end
 
-    if ~contains(branchName, 'develop') && ~contains(branchName, 'master')
+    if ~strfind(branchName, 'develop') && ~strfind(branchName, 'master')
         reply = input([gitCmd.lead, originCall, 'Are you sure that you want to delete the feature (branch) <', branchName, '>? Y/N [N]: '], 's');
 
         if ~isempty(reply) && strcmpi(reply, 'y')
@@ -59,7 +59,7 @@ function deleteContribution(branchName)
             [status_curl, result_curl] = system(['curl -s --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName]);
 
             % delete the remote branch
-            if status_curl == 0 && contains(result_curl, '200 OK')
+            if status_curl == 0 && strfind(result_curl, '200 OK')
 
                 [status_gitPush, result_gitPush] = system(['git push origin --delete ', branchName]);
 
