@@ -29,11 +29,10 @@ If you don't have a GitHub account, please sign up [here](https://github.com/joi
 
 On **Linux (Ubuntu)** or **macOS**, start the terminal (or any other shell). On **Windows**, start `GUI Bash`. Then type
 ```bash
-$ git config --global user.name "Firstname Lastname"
+$ git config --global user.name "yourGitHubUsername"
 $ git config --global user.email "first.last@server.com"
 ```
-
-Please replace `"Firstname Lastname"` and `"first.last@server.com"` with your respective credentials.
+Please replace `"yourGitHubUsername"` and `"first.last@server.com"` with your respective credentials.
 
 ## Can I check if everything is properly set up before I start?
 
