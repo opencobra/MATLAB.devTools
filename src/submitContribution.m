@@ -73,7 +73,7 @@ function submitContribution(branchName)
 
             % retrieve the file name and the status of the file
             for k = 1:length(tmpFileNameChunks)-1
-                if ~isempty(tmpFileNameChunks{k}) && ~~isempty(strfind(tmpFileNameChunks{k}, '.'))
+                if ~isempty(tmpFileNameChunks{k}) && isempty(strfind(tmpFileNameChunks{k}, '.'))
                     fullFileStatus = tmpFileNameChunks{k};
                     statusFlag = true;
                 end
