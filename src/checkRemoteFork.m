@@ -16,7 +16,7 @@ function checkRemoteFork()
         [status_curl, result_curl] = system(['curl -s --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName]);
 
         % check if the URL exists
-        if status_curl == 0 && strfind(result_curl, '200 OK')
+        if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
             gitConf.forkURL = [gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '.git'];
 
             if gitConf.verbose

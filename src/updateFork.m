@@ -44,7 +44,7 @@ function updateFork(force)
             % loop through the list of branches
             for k = 1:length(branches)
                 % checkout the branch k
-                if status_gitBranch == 0 && strfind(resultList, branches{k})
+                if status_gitBranch == 0 && ~isempty(strfind(resultList, branches{k}))
                     [status_gitCheckout, result_gitCheckout] = system(['git checkout ', branches{k}]);
 
                     if status_gitCheckout == 0

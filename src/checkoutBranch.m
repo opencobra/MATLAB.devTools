@@ -39,7 +39,7 @@ function checkoutBranch(branchName)
         % checkout the develop branch
         [status_gitCheckout, result_gitCheckout] = system('git checkout develop');
 
-        if status_gitCheckout == 0 && (strfind(resultList, '* develop') || strfind(result, 'Already on'))
+        if status_gitCheckout == 0 && (~isempty(strfind(resultList, '* develop')) || ~isempty(strfind(result, 'Already on')))
             if gitConf.verbose
                 fprintf([gitCmd.lead, ' [', mfilename, '] The current feature (branch) is <develop>.', gitCmd.success, gitCmd.trail]);
             end
@@ -88,7 +88,7 @@ function checkoutBranch(branchName)
         end
 
         % rebase if the branch already existed
-        if ~strcmp(checkoutFlag, '-b') && ~strfind(branchName, 'develop') && ~strfind(branchName, 'master')
+        if ~strcmp(checkoutFlag, '-b') && isempty(strfind(branchName, 'develop')) && isempty(strfind(branchName, 'master'))
             %if there are no unstaged changes
             [status_gitStatus, result_gitStatus] = system('git status -s');
 
@@ -97,7 +97,7 @@ function checkoutBranch(branchName)
                 % perform a rebase
                 [status_gitRebase, result_gitRebase] = system(['git rebase develop']);
 
-                if status_gitRebase == 0 && ~strfind(result_gitRebase, 'up to date')
+                if status_gitRebase == 0 && isempty(strfind(result_gitRebase, 'up to date'))
                     if gitConf.verbose
                         fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> feature (branch) has been rebased with <develop>.', gitCmd.success, gitCmd.trail]);
                     end

@@ -22,7 +22,7 @@ function openPR(branchName)
     % check if this URL exists
     [status_curl, result_curl] = system(['curl -s --head ', prURL]);
 
-    if status_curl == 0 && strfind(result_curl, '200 OK')
+    if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
         fprintf([gitCmd.lead, originCall, 'You can open a pull request (PR) by clicking on \n\n\t', prURL, '?expand=1\n\n']);
     else
         result_curl

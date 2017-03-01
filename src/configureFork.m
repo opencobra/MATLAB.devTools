@@ -22,7 +22,7 @@ function configureFork()
         % retrieve a list of remotes
         [status_gitRemote, result_gitRemote] = system('git remote -v');
 
-        if status_gitRemote == 0 && strfind(result_gitRemote, 'origin') && strfind(result_gitRemote, 'upstream') && strfind(result_gitRemote, gitConf.userName) && strfind(result_gitRemote, gitConf.remoteUserName)
+        if status_gitRemote == 0 && ~isempty(strfind(result_gitRemote, 'origin')) && ~isempty(strfind(result_gitRemote, 'upstream')) && ~isempty(strfind(result_gitRemote, gitConf.userName)) && ~isempty(strfind(result_gitRemote, gitConf.remoteUserName))
             if gitConf.verbose
                 fprintf([gitCmd.lead, ' [', mfilename,'] Your fork is properly configured. ', gitCmd.success, gitCmd.trail]);
             end

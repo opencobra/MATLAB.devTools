@@ -41,7 +41,7 @@ function submitContribution(branchName)
     if length(arrResult) > 10
         reply = input([gitCmd.lead, originCall, ' -> You currently have more than 10 changed files. Are you sure that you want to continue? Y/N [N]: '], 's');
 
-        if isempty(reply) || strfind(reply, 'n') || strfind(reply, 'N')
+        if isempty(reply) || ~isempty(strfind(reply, 'n')) || ~isempty(strfind(reply, 'N'))
             addFileOrder = false;
         end
     end
@@ -73,7 +73,7 @@ function submitContribution(branchName)
 
             % retrieve the file name and the status of the file
             for k = 1:length(tmpFileNameChunks)-1
-                if ~isempty(tmpFileNameChunks{k}) && ~strfind(tmpFileNameChunks{k}, '.')
+                if ~isempty(tmpFileNameChunks{k}) && ~~isempty(strfind(tmpFileNameChunks{k}, '.'))
                     fullFileStatus = tmpFileNameChunks{k};
                     statusFlag = true;
                 end
@@ -83,7 +83,7 @@ function submitContribution(branchName)
             end
 
             % add deleted files
-            if ~isempty(tmpFileName) && strfind(fullFileStatus, 'D')
+            if ~isempty(tmpFileName) && ~isempty(strfind(fullFileStatus, 'D'))
                 reply = input([gitCmd.lead, originCall, ' -> You deleted ', fullFileName, '. Do you want to commit this deletion? Y/N [N]: '], 's');
 
                 if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
@@ -101,7 +101,7 @@ function submitContribution(branchName)
             end
 
             % add modified files
-            if ~isempty(tmpFileName) && strfind(fullFileStatus, 'M')
+            if ~isempty(tmpFileName) && ~isempty(strfind(fullFileStatus, 'M'))
                 reply = input([gitCmd.lead, originCall, ' -> You modified ', fullFileName, '. Do you want to commit the changes? Y/N [N]: '], 's');
 
                 if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
@@ -119,7 +119,7 @@ function submitContribution(branchName)
             end
 
             % add untracked files
-            if ~isempty(tmpFileName) && strfind(fullFileStatus, '??')
+            if ~isempty(tmpFileName) && ~isempty(strfind(fullFileStatus, '??'))
                 reply = input([gitCmd.lead, originCall, ' -> Do you want to add the new file ', fullFileName, '? Y/N [N]: '], 's');
                 if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
                     countAddFiles = countAddFiles + 1;
@@ -136,7 +136,7 @@ function submitContribution(branchName)
             end
 
             % already staged file
-            if ~isempty(tmpFileName) && strfind(fullFileStatus, 'A')
+            if ~isempty(tmpFileName) && ~isempty(strfind(fullFileStatus, 'A'))
                 if gitConf.verbose
                     fprintf([gitCmd.lead, originCall, 'The file <', fullFileName, '> is already on stage.', gitCmd.success, gitCmd.trail]);
                 end
