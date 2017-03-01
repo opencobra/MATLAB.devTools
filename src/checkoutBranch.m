@@ -39,7 +39,7 @@ function checkoutBranch(branchName)
         % checkout the develop branch
         [status_gitCheckout, result_gitCheckout] = system('git checkout develop');
 
-        if status_gitCheckout == 0 && (~isempty(strfind(resultList, '* develop')) || ~isempty(strfind(result, 'Already on')))
+        if status_gitCheckout == 0 && (~isempty(strfind(resultList, '* develop')) || ~isempty(strfind(result_gitCheckout, 'Already on')))
             if gitConf.verbose
                 fprintf([gitCmd.lead, ' [', mfilename, '] The current feature (branch) is <develop>.', gitCmd.success, gitCmd.trail]);
             end
