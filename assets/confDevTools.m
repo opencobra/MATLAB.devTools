@@ -11,6 +11,7 @@ gitConf.leadForkDirName = 'fork-';
 gitConf.launcher = '\n\n      _____   _____   _____   _____     _____     |\n     /  ___| /  _  \\ |  _  \\ |  _  \\   / ___ \\    |   COnstraint-Based Reconstruction and Analysis\n     | |     | | | | | |_| | | |_| |  | |___| |   |   The COBRA Toolbox - 2017\n     | |     | | | | |  _  { |  _  /  |  ___  |   |\n     | |___  | |_| | | |_| | | | \\ \\  | |   | |   |   Documentation:\n     \\_____| \\_____/ |_____/ |_|  \\_\\ |_|   |_|   |   http://opencobra.github.io/cobratoolbox\n                                                  | \n\n';
 gitConf.remoteRepoURL = 'https://github.com/opencobra/cobratoolbox.git';
 gitConf.verbose = false;
+gitConf.nickName = 'cobratoolbox';
 
 % definition of commands
 gitCmd.lead = 'dev>  ';
