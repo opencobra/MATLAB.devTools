@@ -169,6 +169,14 @@ function submitContribution(branchName)
             else
                 error([gitCmd.lead, ' [', mfilename,'] Please enter a commit message that has more than 10 characters.', gitCmd.fail]);
             end
+        else
+            reply = input([gitCmd.lead, originCall, ' -> Do you want to open a pull request (PR) and submit your feature (branch) <', branchName, '>? Y/N [N]: '], 's');
+
+            if ~isempty(reply) && strcmpi(reply, 'y')
+                openPR(branchName);
+            else
+                fprintf([gitCmd.lead, originCall, 'You can open a pull request (PR) later using "openPR(\''', branchName,'\'')".', gitCmd.trail]);
+            end
         end
 
         % push to the branch in the fork
@@ -177,12 +185,12 @@ function submitContribution(branchName)
             [status_gitPush, result_gitPush] = system(['git push origin ', branchName, ' --force']);
 
             if status_gitPush == 0
-                reply = input([gitCmd.lead, originCall, ' -> Do you want to open a pull request (PR)? Y/N [N]: '], 's');
+                reply = input([gitCmd.lead, originCall, ' -> Do you want to open a pull request (PR) and submit your feature (branch) <', branchName, '>? Y/N [N]: '], 's');
 
-                if ~isempty(reply) && (strcmpi(reply, 'y'))
+                if ~isempty(reply) && strcmpi(reply, 'y')
                     openPR(branchName);
                 else
-                    fprintf([gitCmd.lead, originCall, 'You can open a pull request (PR) later using "openPR(\''', branchName,'\'')".', gitCmd.trail]);
+                    fprintf([gitCmd.lead, originCall, 'You can open a pull request (PR) at later stage by running "contribute" and selecting "3".', gitCmd.trail]);
                 end
             else
                 result_gitPush
