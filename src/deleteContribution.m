@@ -76,4 +76,7 @@ function deleteContribution(branchName)
     else
         error([gitCmd.lead, ' [', mfilename,'] You cannot delete the <master> or the <develop> feature (branch).', gitCmd.fail]);
     end
+
+    %list all available features
+    listFeatures();
 end
