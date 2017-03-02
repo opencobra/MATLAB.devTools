@@ -31,7 +31,9 @@ Please note that **only files that are in the `fork-cobratoolbox` folder** will 
 
 Once you submit your contribution (menu item 3), you will be presented with a link that leads you directly to the pull request (PR). You may then fill out the form and submit the PR.
 
-**Note:** In order to speed up the review process, please initiate a contribution per theme/topic/feature/bug fix that you work on. Please don't mix features and think of an explicit name for your contribution, i.e. `bug-fix-solveCobraLP` or `add-tests-FBA`. Avoid generic names, such as `my-great-feature` or `fix` or `contribution-myName`.
+**Note 1:** You can abort any process using CTRL-C.
+
+**Note 2:** In order to speed up the review process, please initiate a contribution per theme/topic/feature/bug fix that you work on. Please don't mix features and think of an explicit name for your contribution, i.e. `bug-fix-solveCobraLP` or `add-tests-FBA`. Avoid generic names, such as `my-great-feature` or `fix` or `contribution-myName`.
 
 ## I need more guidance
 
