@@ -33,15 +33,15 @@ function initDevTools(repoURL)
         originCall  = '';
     end
 
-    if status_gitConfUserGet == 0
+    if status_gitConfUserGet == 0 && isempty(strfind(gitConf.userName, ' '))
         fprintf([gitCmd.lead, originCall, 'Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]); %
     else
         if gitConf.verbose
-            fprintf([gitCmd.lead, originCall, 'The Github username could not be retrieved.', gitCmd.fail, gitCmd.trail]);
+            fprintf([gitCmd.lead, originCall, 'The Github username could not be retrieved or is not valid.', gitCmd.fail, gitCmd.trail]);
         end
 
-        % request the Github username
-        if isempty(gitConf.userName)
+        % request the Github username if it is not known or if the username contains whitespaces
+        if isempty(gitConf.userName) || ~isempty(strfind(gitConf.userName, ' '))
             gitConf.userName = input([gitCmd.lead, originCall, ' -> Please enter your Github username: '], 's');
             [status_gitConfUserSet, result_gitConfUserSet] = system(['git config --global user.name "', gitConf.userName, '"']);
             if status_gitConfUserSet == 0
@@ -82,24 +82,43 @@ function initDevTools(repoURL)
 
     % request the local directory
     if isempty(gitConf.localDir)
-        reply = input([gitCmd.lead, originCall, ' -> Please define the local path to your fork\n       current: ', strrep(pwd,'\','\\'),'\n       Enter the path (press ENTER to use the current path): '], 's');
 
-        if isempty(reply)
-            gitConf.localDir = strrep(pwd, '\', '\\');
-        else
-            gitConf.localDir = reply;
-        end
+        createDir = false;
 
-        % add a fileseparator if not included
-        if ~strcmp(gitConf.localDir(end), filesep)
-            gitConf.localDir = strrep([gitConf.localDir, filesep], '\', '\\');
+        while ~createDir
+            reply = input([gitCmd.lead, originCall, ' -> Please define the local path to your fork\n       current: ', strrep(pwd,'\','\\'),'\n       Enter the path (press ENTER to use the current path): '], 's');
+
+            if isempty(reply)
+                gitConf.localDir = strrep(pwd, '\', '\\');
+            else
+                gitConf.localDir = reply;
+            end
+
+            % add a fileseparator if not included
+            if ~strcmp(gitConf.localDir(end), filesep)
+                gitConf.localDir = strrep([gitConf.localDir, filesep], '\', '\\');
+            end
+
+            % warn the user of not using a fork-cobratoolbox or cobratoolbox directory as it will be cloned
+            if ~isempty(strfind(gitConf.localDir, gitConf.nickName)) || exist([gitConf.localDir, '/.git'], 'dir') == 7  % contains the nickname or a .git folder
+                reply = input([gitCmd.trail, gitCmd.lead, originCall, ' -> The specified directory already contains a ', gitConf.nickName, ' copy (clone) or is a git directory.', ...
+                               gitCmd.trail, gitCmd.lead, originCall, ' -> Please provide the directory into which your fork should be cloned. Do you want to continue? Y/N [Y]:'], 's');
+
+                if isempty(reply) || strcmpi(reply, 'y')
+                    createDir = true;
+                else
+                    createDir = false;
+                end
+            else
+                createDir = true;
+            end
         end
 
         if exist(gitConf.localDir, 'dir') ~= 7
             reply = input([gitCmd.lead, originCall, ' -> The specified directory (', gitConf.localDir, ') does not exist. Do you want to create it? Y/N [Y]:'], 's');
 
             % create the directory if requested
-            if isempty(reply) || strcmpi(reply, 'y')
+            if (isempty(reply) || strcmpi(reply, 'y')) && createDir
                 system(['mkdir ', gitConf.localDir]);
                 if gitConf.verbose
                     fprintf([gitCmd.lead, ' [', mfilename,'] The directory has been created.', gitCmd.success, gitCmd.trail]);
