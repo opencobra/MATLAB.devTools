@@ -7,6 +7,12 @@ function contribute(verbose)
     global gitConf
     global gitCmd
 
+    % define the main path of the devTools
+    pth = which('contribute.m');
+
+    % adding the src folder of the devTools
+    addpath(genpath(pth(1:end - (length('contribute.m') + 1))));
+
     confDevTools;
 
     if nargin > 0
@@ -15,7 +21,7 @@ function contribute(verbose)
 
     fprintf(gitConf.launcher);
 
-    choice = input('\n      [1] Initialize a contribution.\n      [2] Continue a contribution.\n      [3] Submit/publish a contribution.\n      [4] Delete a contribution.\n\n   -> Please select what you want to do (enter the number): ', 's');
+    choice = input('\n      (You can abort any process using CTRL-C)\n\n      [1] Initialize a contribution.\n      [2] Continue a contribution.\n      [3] Submit/publish a contribution.\n      [4] Delete a contribution.\n\n   -> Please select what you want to do (enter the number): ', 's');
 
     choice = str2num(choice);
 
@@ -25,6 +31,13 @@ function contribute(verbose)
         if ~isempty(choice) && length(choice) > 0
             % ask for a name of the feature/branch
             if choice == 1
+
+                % list the available features if the fork is already configured
+                if exist('gitConf.fullForkDir', 'var')
+                    %list all available features
+                    listFeatures();
+                end
+
                 reply = '';
                 while isempty(reply)
                     reply = input('   -> Please enter a name of the new feature that you want to work on (example: add-constraints): ', 's');
@@ -43,34 +56,8 @@ function contribute(verbose)
                 % change to the fork diretory
                 cd(gitConf.fullForkDir);
 
-                % retrieve a list of branches
-                [status, result] = system('git branch --list');
-
-                if status == 0
-                    arrResult = strsplit(result, '\n');
-                    arrResult(~cellfun(@isempty, arrResult));
-
-                    if length(arrResult) > 2
-                        fprintf('\n      Available features are:\n');
-                        for i = 1:length(arrResult)
-                            tmpName = arrResult(i);
-                            tmpName = tmpName{1};
-                            if isempty(strfind(tmpName, 'develop')) && isempty(strfind(tmpName, 'master')) && ~isempty(tmpName)
-                                fprintf(['      - ', tmpName, '\n']);
-                            end
-                        end
-                        fprintf('\n');
-                    else
-                        reply = input('   -> You do not have any features (branches). Do you want to start a new contribution? Y/N [Y]', 's');
-                        if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
-                            initContribution;
-                            exitFlag = true;
-                        else
-                            fprintf('   -> Please start again. Goodbye.\n')
-                            exitFlag = true;
-                        end
-                    end
-                end
+                %list all available features
+                listFeatures();
 
                 if ~exitFlag
                     reply = '';
@@ -83,6 +70,13 @@ function contribute(verbose)
                             reply = input('   -> Please enter the name of the feature that you want to submit/publish (example: add-constraints): ', 's');
                         end
                     elseif choice == 4
+
+                        % list the available features if the fork is already configured
+                        if exist('gitConf.fullForkDir', 'var')
+                            %list all available features
+                            listFeatures();
+                        end
+
                         while isempty(reply)
                             reply = input('   -> Please enter the name of the feature that you want to delete (example: add-constraints): ', 's');
                         end
