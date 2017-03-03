@@ -9,7 +9,7 @@ gitConf.verbose = true;
 
 checkSystem();
 
-initDevTools('https://github.com/cobrabot/trial_wo_errors.git')
+initDevTools('https://github.com/cobrabot/MATLAB.devTools.CI')
 
 %contribute(1)
 
