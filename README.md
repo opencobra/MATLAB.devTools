@@ -38,3 +38,19 @@ Once you submit your contribution (menu item 3), you will be presented with a li
 ## I need more guidance
 
 If you don't want to get your hands dirty right away, start-off by reading the [Contributing Guide](https://github.com/opencobra/cobratoolbox/blob/master/.github/CONTRIBUTING.md).
+
+## Check the history of a file
+
+At any time, you can check the history of a file by typing in MATLAB:
+```
+history('fileName.m')
+```
+You will then be shown a menu that will guide you.
+
+## Turn on the verbose mode
+
+If you encounter a problem, or suspect that something is not behaving properly, please run:
+```
+contribute(true)
+```
+and follow the process as normally. Alternatively, you can set `gitConf.verbose = true;` in `assets/confDevTools.m`.

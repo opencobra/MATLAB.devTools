@@ -3,6 +3,9 @@ function history(fileName)
 %
 % PURPOSE: displays the history of a file
 %
+    global gitConf
+    global gitCmd
+
     fullPath = which(fileName);
     if isempty(fullPath)
         error('The file is not present in your MATLAB path. Please add the local folder of your fork to your PATH.');
