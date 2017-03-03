@@ -86,7 +86,7 @@ function submitContribution(branchName)
             if ~isempty(tmpFileName) && ~isempty(strfind(fullFileStatus, 'D'))
                 reply = input([gitCmd.lead, originCall, ' -> You deleted ', fullFileName, '. Do you want to commit this deletion? Y/N [N]: '], 's');
 
-                if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
+                if ~isempty(reply) && strcmpi(reply, 'y')
                     countAddFiles = countAddFiles + 1;
                     [status, result] = system(['git add ', fullFileName]);
                     if status == 0
@@ -104,7 +104,7 @@ function submitContribution(branchName)
             if ~isempty(tmpFileName) && ~isempty(strfind(fullFileStatus, 'M'))
                 reply = input([gitCmd.lead, originCall, ' -> You modified ', fullFileName, '. Do you want to commit the changes? Y/N [N]: '], 's');
 
-                if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
+                if ~isempty(reply) && strcmpi(reply, 'y')
                     countAddFiles = countAddFiles + 1;
                     [status, result] = system(['git add ', fullFileName]);
                     if status == 0
@@ -121,7 +121,7 @@ function submitContribution(branchName)
             % add untracked files
             if ~isempty(tmpFileName) && ~isempty(strfind(fullFileStatus, '??'))
                 reply = input([gitCmd.lead, originCall, ' -> Do you want to add the new file ', fullFileName, '? Y/N [N]: '], 's');
-                if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
+                if ~isempty(reply) && strcmpi(reply, 'y')
                     countAddFiles = countAddFiles + 1;
                     [status, result] = system(['git add ', fullFileName]);
                     if status == 0

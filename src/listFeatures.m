@@ -29,7 +29,7 @@ function listFeatures()
             fprintf('\n');
         else
             reply = input('   -> You do not have any features (branches). Do you want to start a new contribution? Y/N [Y]', 's');
-            if ~isempty(reply) && (strcmp(reply, 'y') || strcmp(reply, 'Y'))
+            if ~isempty(reply) && strcmpi(reply, 'y')
                 initContribution;
                 exitFlag = true;
             else
