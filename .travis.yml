@@ -12,6 +12,6 @@ script:
     - cd $CURRENT_DIR
 
     # launch the tests
-    #- sh ./runtests.sh
+    - sh ./runtests.sh
 
 after_success:
