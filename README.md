@@ -7,14 +7,14 @@ Making a contribution to any `git` repository from `MATLAB` is straightforward.
 ## Pre-requisites
 
 Please follow the [configuration instructions](PREREQUISITES.md) for the first time. You may skip this if your system is already set up and you have `git` configured. Please ensure that
-```bash
+```
 $ git config --list
-```
-contains `user.name` and `user.email` set to `yourGitHubUsername` and `first.last@server.com` with your respective credentials.
+```
+contains `user.name` and `user.email` set to `yourGitHubUsername` and `first.last@server.com` with your respective credentials.
 
 ## How can I contribute?
 
-Type in `MATLAB` within the `devTools` folder:
+Type in `MATLAB` within the `devTools` folder:
 ```
 >> contribute
 ```
@@ -31,7 +31,7 @@ You will then be presented by a menu:
 
 The first time, the original repository will be downloaded (cloned), and you will be asked to specify a folder in which this copy will be downloaded to. The folder will be named `fork-gitRepoName`.
 
-Please note that **only files that are in the `fork-gitRepoName` folder** will be considered for contribution. Any changes made to a downloaded official `git` repository will be ignored by the system.
+Please note that **only files that are in the `fork-gitRepoName` folder** will be considered for contribution. Any changes made to a downloaded official `git` repository will be ignored by the system.
 
 Once you submit your contribution (menu item 3), you will be presented with a link that leads you directly to the pull request (PR). You may then fill out the form and submit the PR.
 
