@@ -151,6 +151,42 @@ function checkoutBranch(branchName)
         end
     end
 
+    % if a branch does not exist remotely but exists locally, push it after confirmation from the user
+
+    % check the system
+    checkSystem(mfilename);
+
+    [status_curl, result_curl] = system(['curl -s --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName]);
+
+    % check if the branch exists remotely
+    if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK')) && checkBranchExistence(branchName)
+        if gitConf.verbose
+            fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> feature (branch) exists locally and remotely on (', gitConf.forkURL,').', gitCmd.success, gitCmd.trail]);
+        end
+    else  % the branch exists locally but not remotely!
+
+        reply = input([gitCmd.lead, ' -> Your <', branchName, '> feature (branch) exists locally, but not remotely. Do you want to have your local <', branchName, '> published? Y/N [Y]:'], 's');
+
+        if isempty(reply) || strcmpi(reply, 'y')
+            % push the newly created branch to the fork
+            [status_gitPush, result_gitPush] = system(['git push origin ', branchName]);
+
+            if status_gitPush == 0
+                if gitConf.verbose
+                    fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> feature (branch) has been pushed to your fork.', gitCmd.success, gitCmd.trail]);
+                end
+            else
+                result_gitPush
+                error([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> feature (branch) could not be pushed to your fork.', gitCmd.fail]);
+            end
+        else
+            if gitConf.verbose
+                fprintf([gitCmd.lead, ' [', mfilename, '] Please note that your <', branchName, '> feature (branch) exists locally, but not remotely.', gitCmd.trail]);
+            end
+        end
+
+    end
+
     % change back to the current directory
     cd(currentDir);
 end
