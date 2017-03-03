@@ -9,8 +9,8 @@ Making a contribution to any `git` repository from `MATLAB` is straightforward.
 Please follow the [configuration instructions](PREREQUISITES.md) for the first time. You may skip this if your system is already set up and you have `git` configured. Please ensure that
 ```bash
 $ git config --list
-````
-contains `user.name` and `user.email` set to `"yourGitHubUsername"` and `"first.last@server.com"` with your respective credentials.
+```
+contains `user.name` and `user.email` set to `yourGitHubUsername` and `first.last@server.com` with your respective credentials.
 
 ## How can I contribute?
 
