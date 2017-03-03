@@ -56,7 +56,7 @@ function deleteContribution(branchName)
             end
 
             % check if branch exists remotely
-            [status_curl, result_curl] = system(['curl -s --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName]);
+            [status_curl, result_curl] = system(['curl -s -k --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName]);
 
             % delete the remote branch
             if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))

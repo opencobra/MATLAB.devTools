@@ -20,7 +20,7 @@ function openPR(branchName)
     prURL = [gitConf.remoteRepoURL(1:end-4), '/compare/develop...', gitConf.userName, ':', branchName];
 
     % check if this URL exists
-    [status_curl, result_curl] = system(['curl -s --head ', prURL]);
+    [status_curl, result_curl] = system(['curl -s -k --head ', prURL]);
 
     if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
         fprintf([gitCmd.lead, originCall, 'You can open a pull request (PR) by clicking on \n\n\t', prURL, '?expand=1\n\n']);

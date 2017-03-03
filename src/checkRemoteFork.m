@@ -11,9 +11,9 @@ function checkRemoteFork()
     checkSystem(mfilename);
 
     % check the URLs of the fork and the remote repository
-    if ~isempty(gitConf.userName)
+    if isfield(gitConf, 'userName') && ~isempty(gitConf.userName)
 
-        [status_curl, result_curl] = system(['curl -s --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName]);
+        [status_curl, result_curl] = system(['curl -s -k --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName]);
 
         % check if the URL exists
         if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
@@ -30,6 +30,6 @@ function checkRemoteFork()
             error([tmpCmd.lead, ' [', mfilename, '] The URL of the fork (', tmpConf.remoteServerName, tmpConf.userName, '/', tmpConf.remoteRepoName, ') is not reachable or does not exist.\n Please browse to ', tmpConf.remoteRepoURL, ' in order to fork the repository (click on the button FORK).', tmpCmd.fail, tmpCmd.trail]);
         end
     else
-        error([gitCmd.lead, ' [', mfilename, '] The entered Github username (', gitConf.userName, ') is not valid.']);
+        error([gitCmd.lead, ' [', mfilename, '] The entered Github username is not valid.']);
     end
 end
