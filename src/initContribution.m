@@ -50,7 +50,8 @@ function initContribution(branchName)
             else
                 checkoutFlag = false;
             end
-        % else checkoutFlag = true; % implicit
+        else
+            checkoutFlag = true; % implicit
         end
     end
 
