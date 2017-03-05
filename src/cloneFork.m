@@ -24,11 +24,9 @@ function freshClone = cloneFork()
         % change to the local directory
         cd(gitConf.localDir);
 
-        if gitConf.verbose
-            fprintf([gitCmd.lead, ' [', mfilename,'] Cloning the fork ', gitConf.forkURL, gitCmd.trail]);
-        end
+        fprintf([gitCmd.lead, ' [', mfilename,'] Cloning the fork ', gitConf.forkURL, gitCmd.trail]);
 
-        [status_gitClone, result_gitClone] = system(['git clone ', gitConf.forkURL, ' ', gitConf.forkDirName]);
+        [status_gitClone, result_gitClone] = system(['git clone -c http.sslVerify=false ', gitConf.forkURL, ' ', gitConf.forkDirName]);
 
         if status_gitClone == 0
             if gitConf.verbose
@@ -52,6 +50,9 @@ function freshClone = cloneFork()
 
         % change to the fork directory
         cd(gitConf.fullForkDir)
+
+        % update the submodules
+        updateSubmodules();
 
         % retrieve a short status from git
         [status_gitStatus, result_gitStatus] = system('git status -s');
