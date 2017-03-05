@@ -7,8 +7,14 @@ function checkSystem(callerName)
     global gitConf
     global gitCmd
 
-    confDevTools;
+    % if a configuration has already been set, configure the devTools accordingly
+    if ~isempty(gitConf.launcher) && ~isempty(gitConf.remoteRepoURL) && ~isempty(gitConf.nickName) && ~isempty(gitConf.verbose)
+        confDevTools(gitConf.launcher, gitConf.remoteRepoURL, gitConf.nickName, gitConf.verbose);
+    else
+        confDevTools();
+    end
 
+    % set the callerName
     if nargin < 1
         callerName = '';
     else

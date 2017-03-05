@@ -7,8 +7,8 @@ function checkRemoteFork()
     global gitConf
     global gitCmd
 
-    % check the system
-    checkSystem(mfilename);
+    % check the system and set the configuration
+    checkSystem();
 
     % check the URLs of the fork and the remote repository
     if isfield(gitConf, 'userName') && ~isempty(gitConf.userName)

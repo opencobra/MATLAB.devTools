@@ -1,4 +1,4 @@
-function initDevTools(repoURL)
+function initDevTools()
 % devTools
 %
 % PURPOSE: initializes the development tools (username and email are requested if not configured)
@@ -7,13 +7,8 @@ function initDevTools(repoURL)
     global gitConf
     global gitCmd
 
-    % check if the system is configured properly
+    % check the system and set the configuration
     checkSystem();
-
-    % main public repository
-    if nargin > 0
-        gitConf.remoteRepoURL = repoURL;
-    end
 
     if ~isfield(gitConf, 'username'), gitConf.userName = []; end
     if ~isfield(gitConf, 'localDir'), gitConf.localDir = []; end

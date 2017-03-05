@@ -13,7 +13,8 @@ function contribute(verbose)
     % adding the src folder of the devTools
     addpath(genpath(pth(1:end - (length('contribute.m') + 1))));
 
-    confDevTools;
+    % check the system and set the configuration
+    checkSystem();
 
     if nargin > 0
         gitConf.verbose = true;
