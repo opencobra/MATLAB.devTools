@@ -19,7 +19,7 @@ function initDevTools()
     gitConf.remoteRepoName = gitConf.remoteRepoURL(sepIndices(4)+1:end-4);
     gitConf.remoteUserName = gitConf.remoteRepoURL(sepIndices(3)+1:sepIndices(4)-1);
 
-    [status_gitConfUserGet, result_gitConfUserGet] = system('git config --get user.name');
+    [status_gitConfUserGet, result_gitConfUserGet] = system('git config --get user.github-username');
     gitConf.userName = strtrim(result_gitConfUserGet);
 
     if gitConf.verbose
@@ -38,7 +38,7 @@ function initDevTools()
         % request the Github username if it is not known or if the username contains whitespaces
         if isempty(gitConf.userName) || ~isempty(strfind(gitConf.userName, ' '))
             gitConf.userName = input([gitCmd.lead, originCall, ' -> Please enter your Github username: '], 's');
-            [status_gitConfUserSet, result_gitConfUserSet] = system(['git config --global user.name "', gitConf.userName, '"']);
+            [status_gitConfUserSet, result_gitConfUserSet] = system(['git config --global --add user.github-username "', gitConf.userName, '"']);
             if status_gitConfUserSet == 0
                 fprintf([gitCmd.lead, originCall, 'Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]);
             else
