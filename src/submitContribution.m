@@ -35,6 +35,14 @@ function submitContribution(branchName)
     else
         addFileOrder = false;
         fprintf([gitCmd.lead, originCall, 'There is nothing to contribute. Please make changes to ', strrep(pwd, '\', '\\'), gitCmd.trail]);
+
+        reply = input([gitCmd.lead, originCall, ' -> Do you want to open a pull request (PR) and submit your feature (branch) <', branchName, '>? Y/N [N]: '], 's');
+
+        if ~isempty(reply) && strcmpi(reply, 'y')
+            openPR(branchName);
+        else
+            fprintf([gitCmd.lead, originCall, 'You can open a pull request (PR) later using "openPR(\''', branchName,'\'')".', gitCmd.trail]);
+        end
     end
 
     % provide a warning if there are more than 10 files to add (and less than 20 files)
@@ -168,14 +176,6 @@ function submitContribution(branchName)
                 end
             else
                 error([gitCmd.lead, ' [', mfilename,'] Please enter a commit message that has more than 10 characters.', gitCmd.fail]);
-            end
-        else
-            reply = input([gitCmd.lead, originCall, ' -> Do you want to open a pull request (PR) and submit your feature (branch) <', branchName, '>? Y/N [N]: '], 's');
-
-            if ~isempty(reply) && strcmpi(reply, 'y')
-                openPR(branchName);
-            else
-                fprintf([gitCmd.lead, originCall, 'You can open a pull request (PR) later using "openPR(\''', branchName,'\'')".', gitCmd.trail]);
             end
         end
 
