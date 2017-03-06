@@ -16,7 +16,7 @@ function resetDevTools()
         end
     else
         result_gitConfUserGet
-        fprintf([gitCmd.lead, originCall, 'Your Github username could not be removed.', gitCmd.fail, gitCmd.trail]);
+        fprintf([gitCmd.lead, ' [', mfilename,'] Your Github username could not be removed.', gitCmd.fail, gitCmd.trail]);
     end
 
     clear global gitConf;
