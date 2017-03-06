@@ -15,7 +15,7 @@ function resetLocalFork()
         end
     else
         result_gitClean
-        fprintf([gitCmd.lead, originCall, 'There are no changes that could be cleaned', gitCmd.fail, gitCmd.trail]);
+        fprintf([gitCmd.lead, ' [', mfilename,'] There are no changes that could be cleaned', gitCmd.fail, gitCmd.trail]);
     end
 
     [status_gitStash, result_gitStash] = system('git stash');
@@ -26,7 +26,7 @@ function resetLocalFork()
         end
     else
         result_gitStash
-        fprintf([gitCmd.lead, originCall, 'There are no changes that could be stashed', gitCmd.fail, gitCmd.trail]);
+        fprintf([gitCmd.lead, ' [', mfilename,'] There are no changes that could be stashed', gitCmd.fail, gitCmd.trail]);
     end
 
     % update the local fork
