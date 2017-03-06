@@ -57,3 +57,15 @@ If you encounter a problem, or suspect that something is not behaving properly, 
 >> contribute(true)
 ```
 and follow the process as normally. Alternatively, you can set `gitConf.verbose = true;` in `assets/confDevTools.m`.
+
+## Resolve unexpected behavior - reset
+
+If you encounter unexpected behavior, please try to reset the `devTools` with:
+```
+>> resetDevTools
+```
+
+If you have files or changes that appear and would like to reset your local fork (without re-cloning) again, type:
+```
+>> resetLocalFork
+```
