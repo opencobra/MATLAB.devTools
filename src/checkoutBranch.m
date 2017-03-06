@@ -156,7 +156,7 @@ function checkoutBranch(branchName)
     % check the system
     checkSystem(mfilename);
 
-    [status_curl, result_curl] = system(['curl -s --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName]);
+    [status_curl, result_curl] = system(['curl -s -k --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName]);
 
     % check if the branch exists remotely
     if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK')) && checkBranchExistence(branchName)
