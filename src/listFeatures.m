@@ -7,6 +7,8 @@ function exitFlag = listFeatures()
     global gitConf
     global gitCmd
 
+    exitFlag = false;
+
     % change to the fork diretory
     cd(gitConf.fullForkDir);
 
