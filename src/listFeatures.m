@@ -1,4 +1,4 @@
-function listFeatures()
+function exitFlag = listFeatures()
 % devTools
 %
 % PURPOSE: lists all available branches/features
@@ -15,7 +15,8 @@ function listFeatures()
 
     if status == 0
         arrResult = strsplit(result, '\n');
-        arrResult(~cellfun(@isempty, arrResult));
+        arrResult = strtrim(arrResult);
+        arrResult = arrResult(~cellfun(@isempty, arrResult));
 
         if length(arrResult) > 2
             fprintf('\n      Available features are:\n');

@@ -58,12 +58,12 @@ function contribute(verbose)
                 cd(gitConf.fullForkDir);
 
                 %list all available features
-                listFeatures();
+                exitFlag = listFeatures();
 
                 if ~exitFlag
                     reply = '';
                     if choice == 2
-                        while isempty(reply)
+                        while isempty(reply) && ~exitFlag
                             reply = input('   -> Please enter the name of the feature that you want to continue working on (example: add-constraints): ', 's');
                         end
                     elseif choice == 3
