@@ -23,7 +23,7 @@ function history(fileName)
 
         reply = input([' -> You can exit the screen that will be displayed now by hitting `q` on your keyboard [press ENTER to continue]: '], 's');
 
-        if isempty(reply) || strcmpi(reply, 'y') || strcmpi(reply, 'enter')
+        if isempty(reply) || strcmpi(reply, 'y') || strcmpi(reply, 'yes') || strcmpi(reply, 'enter')
             system(['git log --follow --pretty=short ', fullPath]);
         else
             fprintf('You simply have to press `q` on your keyboard. Try again.');

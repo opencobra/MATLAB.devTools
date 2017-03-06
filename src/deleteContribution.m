@@ -19,7 +19,7 @@ function deleteContribution(branchName)
     if isempty(strfind(branchName, 'develop')) && isempty(strfind(branchName, 'master'))
         reply = input([gitCmd.lead, originCall, 'Are you sure that you want to delete the feature (branch) <', branchName, '>? Y/N [N]: '], 's');
 
-        if ~isempty(reply) && strcmpi(reply, 'y')
+        if ~isempty(reply) && (strcmpi(reply, 'y') || strcmpi(reply, 'yes'))
 
             % checkout the develop branch
             checkoutBranch('develop');

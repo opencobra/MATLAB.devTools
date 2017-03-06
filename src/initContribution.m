@@ -45,7 +45,7 @@ function initContribution(branchName)
 
             reply = input([gitCmd.lead, ' -> You already worked on a feature named <', branchName, '>. Do you want to continue working on <', branchName, '>? Y/N [Y]:'], 's');
 
-            if isempty(reply) || strcmpi(reply, 'y')
+            if isempty(reply) || strcmpi(reply, 'y') || strcmpi(reply, 'yes')
                 checkoutFlag = true;
             else
                 checkoutFlag = false;

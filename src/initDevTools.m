@@ -99,7 +99,7 @@ function initDevTools()
                 reply = input([gitCmd.trail, gitCmd.lead, originCall, ' -> The specified directory already contains a ', gitConf.nickName, ' copy (clone) or is a git directory.', ...
                                gitCmd.trail, gitCmd.lead, originCall, ' -> Please provide the directory into which your fork should be cloned. Do you want to continue? Y/N [Y]:'], 's');
 
-                if isempty(reply) || strcmpi(reply, 'y')
+                if isempty(reply) || strcmpi(reply, 'y') || strcmpi(reply, 'yes')
                     createDir = true;
                 else
                     createDir = false;
@@ -113,7 +113,7 @@ function initDevTools()
             reply = input([gitCmd.lead, originCall, ' -> The specified directory (', gitConf.localDir, ') does not exist. Do you want to create it? Y/N [Y]:'], 's');
 
             % create the directory if requested
-            if (isempty(reply) || strcmpi(reply, 'y')) && createDir
+            if (isempty(reply) || strcmpi(reply, 'y') || strcmpi(reply, 'yes')) && createDir
                 system(['mkdir ', gitConf.localDir]);
                 if gitConf.verbose
                     fprintf([gitCmd.lead, ' [', mfilename,'] The directory has been created.', gitCmd.success, gitCmd.trail]);

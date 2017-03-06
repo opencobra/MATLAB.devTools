@@ -38,7 +38,7 @@ function submitContribution(branchName)
 
         reply = input([gitCmd.lead, originCall, ' -> Do you want to open a pull request (PR) and submit your feature (branch) <', branchName, '>? Y/N [N]: '], 's');
 
-        if ~isempty(reply) && strcmpi(reply, 'y')
+        if ~isempty(reply) && (strcmpi(reply, 'y') || strcmpi(reply, 'yes'))
             openPR(branchName);
         else
             fprintf([gitCmd.lead, originCall, 'You can open a pull request (PR) later using "openPR(\''', branchName,'\'')".', gitCmd.trail]);
@@ -94,7 +94,7 @@ function submitContribution(branchName)
             if ~isempty(tmpFileName) && ~isempty(strfind(fullFileStatus, 'D'))
                 reply = input([gitCmd.lead, originCall, ' -> You deleted ', fullFileName, '. Do you want to commit this deletion? Y/N [N]: '], 's');
 
-                if ~isempty(reply) && strcmpi(reply, 'y')
+                if ~isempty(reply) && (strcmpi(reply, 'y') || strcmpi(reply, 'yes'))
                     countAddFiles = countAddFiles + 1;
                     [status, result] = system(['git add ', fullFileName]);
                     if status == 0
@@ -112,7 +112,7 @@ function submitContribution(branchName)
             if ~isempty(tmpFileName) && ~isempty(strfind(fullFileStatus, 'M'))
                 reply = input([gitCmd.lead, originCall, ' -> You modified ', fullFileName, '. Do you want to commit the changes? Y/N [N]: '], 's');
 
-                if ~isempty(reply) && strcmpi(reply, 'y')
+                if ~isempty(reply) && (strcmpi(reply, 'y') || strcmpi(reply, 'yes'))
                     countAddFiles = countAddFiles + 1;
                     [status, result] = system(['git add ', fullFileName]);
                     if status == 0
@@ -129,7 +129,7 @@ function submitContribution(branchName)
             % add untracked files
             if ~isempty(tmpFileName) && ~isempty(strfind(fullFileStatus, '??'))
                 reply = input([gitCmd.lead, originCall, ' -> Do you want to add the new file ', fullFileName, '? Y/N [N]: '], 's');
-                if ~isempty(reply) && strcmpi(reply, 'y')
+                if ~isempty(reply) && (strcmpi(reply, 'y') || strcmpi(reply, 'yes'))
                     countAddFiles = countAddFiles + 1;
                     [status, result] = system(['git add ', fullFileName]);
                     if status == 0
@@ -187,7 +187,7 @@ function submitContribution(branchName)
             if status_gitPush == 0
                 reply = input([gitCmd.lead, originCall, ' -> Do you want to open a pull request (PR) and submit your feature (branch) <', branchName, '>? Y/N [N]: '], 's');
 
-                if ~isempty(reply) && strcmpi(reply, 'y')
+                if ~isempty(reply) && (strcmpi(reply, 'y') || strcmpi(reply, 'yes'))
                     openPR(branchName);
                 else
                     fprintf([gitCmd.lead, originCall, 'You can open a pull request (PR) at later stage by running "contribute" and selecting "3".', gitCmd.trail]);

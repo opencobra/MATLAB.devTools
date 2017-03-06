@@ -167,7 +167,7 @@ function checkoutBranch(branchName)
 
         reply = input([gitCmd.lead, ' -> Your <', branchName, '> feature (branch) exists locally, but not remotely. Do you want to have your local <', branchName, '> published? Y/N [Y]:'], 's');
 
-        if isempty(reply) || strcmpi(reply, 'y')
+        if isempty(reply) || strcmpi(reply, 'y') || strcmpi(reply, 'yes')
             % push the newly created branch to the fork
             [status_gitPush, result_gitPush] = system(['git push origin ', branchName]);
 
