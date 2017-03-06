@@ -7,6 +7,9 @@ function resetDevTools()
     global gitConf
     global gitCmd
 
+    % call checkSystem to set default values for gitConf and gitCmd
+    checkSystem();
+
     % unset the user name
     [status_gitConfUserGet, result_gitConfUserGet] = system('git config --global --unset-all user.github-username');
 
