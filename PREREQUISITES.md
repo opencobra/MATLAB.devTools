@@ -4,19 +4,19 @@
 
 You have to register the SSH key of each computer that you are planning to use the `MATLAB.devTools` on.
 
-1. Check if you already have an SSH key:
+- **Check if you already have an SSH key:**
 ````
 ls -al ~/.ssh
 ````
 If there is a file with an extension `.pub`, you already have an SSH key and you can skip the next step. You can get more help [here](https://help.github.com/articles/checking-for-existing-ssh-keys/).
 
-2. Generate the SSH key on your computer:
+- **Generate the SSH key on your computer:**
 If you don't have yet an SSH key (see previous step), you have to generate one (more help is [here](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)):
 ````
 ssh-keygen -t rsa -C "first.last@server.com"
 ````
 
-3. Add the SSH to [your Github account](https://github.com/settings/keys) by following the steps [here](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/).
+- **Add the SSH** to [your Github account](https://github.com/settings/keys) by following the steps [here](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/).
 
 ## System configuration
 
