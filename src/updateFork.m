@@ -127,10 +127,10 @@ function updateFork(force)
                     forceText = '';
                 end
 
-                % push and asking the password
+                % try to push to master - dry run only should ask for credentials if necessary
                 system(['git push origin ', branches{k}, ' ', forceFlag, ' -q --dry-run']);
 
-                % second push is to retr
+                % second command is to actually push
                 [status_gitPush, result_gitPush] = system(['git push origin ', branches{k}, ' ', forceFlag]);
 
                 if status_gitPush == 0

@@ -25,6 +25,9 @@ function checkLocalFork()
             error([gitCmd.lead, ' [', mfilename, '] The current folder contains the public version. Contributions can only be made from your own fork.'])
         end
 
+        % try to push to master - dry run only should ask for credentials if necessary
+        system(['git push origin master -q --dry-run']);
+
         if gitConf.verbose
             fprintf([gitCmd.lead, ' [', mfilename, '] The local folder of the fork exists (', gitConf.fullForkDir,').', gitCmd.success, gitCmd.trail]);
         end

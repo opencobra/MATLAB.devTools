@@ -26,7 +26,7 @@ function freshClone = cloneFork()
 
         fprintf([gitCmd.lead, ' [', mfilename,'] Cloning the fork ', gitConf.forkURL, gitCmd.trail]);
 
-        [status_gitClone, result_gitClone] = system(['git clone -c http.sslVerify=false ', gitConf.forkURL, ' ', gitConf.forkDirName]);
+        [status_gitClone, result_gitClone] = system(['git clone -c http.sslVerify=false git@github.com:', gitConf.userName, '/', gitConf.nickName, '.git', ' ', gitConf.forkDirName]);
 
         if status_gitClone == 0
             if gitConf.verbose

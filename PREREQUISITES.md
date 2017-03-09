@@ -1,5 +1,23 @@
 # Pre-requisites
 
+## GitHub SSH configuration
+
+You have to register the SSH key of each computer that you are planning to use the `MATLAB.devTools` on.
+
+1. Check if you already have an SSH key:
+````
+ls -al ~/.ssh
+````
+If there is a file with an extension `.pub`, you already have an SSH key and you can skip the next step. You can get more help [here](https://help.github.com/articles/checking-for-existing-ssh-keys/).
+
+2. Generate the SSH key on your computer:
+If you don't have yet an SSH key (see previous step), you have to generate one (more help is [here](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)):
+````
+ssh-keygen -t rsa -C "first.last@server.com"
+````
+
+3. Add the SSH to [your Github account](https://github.com/settings/keys) by following the steps [here](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/).
+
 ## System configuration
 
 You must have `git` and `curl` installed. In addition, please ensure that you have `MATLAB` [installed](https://nl.mathworks.com/help/install/).
@@ -29,7 +47,7 @@ If you don't have a GitHub account, please sign up [here](https://github.com/joi
 
 On **Linux (Ubuntu)** or **macOS**, start the terminal (or any other shell). On **Windows**, start `GUI Bash`. Then type
 ```bash
-$ git config --global user.name "yourGitHubUsername"
+$ git config --global user.github-username "yourGitHubUsername"
 $ git config --global user.email "first.last@server.com"
 ```
 Please replace `"yourGitHubUsername"` and `"first.last@server.com"` with your respective credentials.
