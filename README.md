@@ -69,3 +69,15 @@ If you have files or changes that appear and would like to reset your local fork
 ```
 >> resetLocalFork
 ```
+
+## The clone fails. Mismatch of the version of openSSL (Linux)
+
+You might be in the situation that you receive the following error:
+````
+OpenSSL version mismatch. Built against 1000207f, you have 100010bf
+````
+In that case, you should run the following command:
+````
+sudo mv <MATLAB_INSTALLATION_PATH>/bin/glnxa64/libcrypto.so.1.0.0 <MATLAB_INSTALLATION_PATH>/bin/glnxa64/libcrypto.so.1.0.0_bk
+````
+where `<MATLAB_INSTALLATION_PATH>` corresponds to the installation of `MATLAB`, e.g., `/MATLAB/R2016b`
