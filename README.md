@@ -80,4 +80,4 @@ In that case, you should run the following command:
 ````
 sudo mv <MATLAB_INSTALLATION_PATH>/bin/glnxa64/libcrypto.so.1.0.0 <MATLAB_INSTALLATION_PATH>/bin/glnxa64/libcrypto.so.1.0.0_bk
 ````
-where `<MATLAB_INSTALLATION_PATH>` corresponds to the installation of `MATLAB`, e.g., `/MATLAB/R2016b`
+where `<MATLAB_INSTALLATION_PATH>` corresponds to the installation of `MATLAB`, e.g., `/usr/local/MATLAB/R2016b`
