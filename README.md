@@ -12,7 +12,7 @@ $ git config --list
 ```
 contains `user.name` and `user.email` set to `yourGitHubUsername` and `first.last@server.com` with your respective credentials.
 
-**IMPORTANT**: Please make sure that you have configured your `SSH` key in Github as explained [here](https://github.com/laurentheirendt/devTools/blob/master/PREREQUISITES.md).
+<span style="color:#EE7600">IMPORTANT</span>: Please make sure that you have configured your SSH key in Github as explained [here](https://github.com/laurentheirendt/devTools/blob/master/PREREQUISITES.md).
 
 ## How do I use `MATLAB.devTools`?
 
@@ -39,11 +39,11 @@ Once you submit your contribution (menu item 3), you will be presented with a li
 
 **Note 1:** You can abort any process using CTRL-C.
 
-**Note 2:** In order to speed up the review process, please initiate a contribution per theme/topic/feature/bug fix that you work on. Please don't mix features and think of an explicit name for your contribution, i.e. `bug-fix-solveCobraLP` or `add-tests-FBA`. Avoid generic names, such as `my-great-feature` or `fix` or `contribution-myName`.
+**Note 2:** Please initiate a contribution per theme/topic/feature/bug fix that you work on. Please don't mix features and think of an explicit name for your contribution, i.e. `bug-fix-function1` or `add-tests-function2`. Avoid generic names, such as `my-great-feature` or `fix` or `contribution-myName`.
 
 ## Contributing to The COBRA Toolbox
 
-In order to start contributing, follow the [installation instructions](https://github.com/opencobra/cobratoolbox/blob/master/README.md) of The COBRA Toolbox. If you don't want to get your hands dirty right away, start-off by reading the [Contributing Guide](https://github.com/opencobra/cobratoolbox/blob/master/.github/CONTRIBUTING.md).
+Follow the [installation instructions](https://github.com/opencobra/cobratoolbox/blob/master/README.md) of The COBRA Toolbox. If you don't want to get your hands dirty right away, start-off by reading the [Contributing Guide](https://github.com/opencobra/cobratoolbox/blob/master/.github/CONTRIBUTING.md).
 
 ## Check the history of a file
 
