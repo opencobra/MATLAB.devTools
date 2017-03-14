@@ -12,7 +12,9 @@ $ git config --list
 ```
 contains `user.name` and `user.email` set to `yourGitHubUsername` and `first.last@server.com` with your respective credentials.
 
-## How can I contribute?
+**IMPORTANT**: Please make sure that you have configured your `SSH` key in Github as explained [here](https://github.com/laurentheirendt/devTools/blob/master/PREREQUISITES.md).
+
+## How do I use `MATLAB.devTools`?
 
 Type in `MATLAB` within the `devTools` folder:
 ```

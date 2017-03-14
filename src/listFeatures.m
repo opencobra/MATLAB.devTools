@@ -31,7 +31,7 @@ function exitFlag = listFeatures()
             end
             fprintf('\n');
         else
-            reply = input('   -> You do not have any features (branches). Do you want to start a new contribution? Y/N [Y]', 's');
+            reply = input('   -> You do not have any features (branches). Do you want to start a new contribution? Y/N [Y]: ', 's');
             if ~isempty(reply) && (strcmpi(reply, 'y') || strcmpi(reply, 'yes'))
                 initContribution;
                 exitFlag = true;
