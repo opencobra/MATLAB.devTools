@@ -12,7 +12,7 @@ $ git config --list
 ```
 contains `user.name` and `user.email` set to `yourGitHubUsername` and `first.last@server.com` with your respective credentials.
 
-<span style="color:#EE7600">IMPORTANT</span>: Please make sure that you have configured your SSH key in Github as explained [here](https://github.com/laurentheirendt/devTools/blob/master/PREREQUISITES.md).
+![#ff0000](https://placehold.it/15/ff0000/000000?text=+) **IMPORTANT**: Please make sure that you have configured your SSH key in Github as explained [here](https://github.com/laurentheirendt/devTools/blob/master/PREREQUISITES.md).
 
 ## How do I use `MATLAB.devTools`?
 
