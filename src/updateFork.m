@@ -72,15 +72,23 @@ function updateFork(force)
                     end
                 end
 
-                % pull eventual changes from other contributors or administrators
-                [status_gitFetchOrigin, result_gitFetchOrigin] = system(['git fetch origin ', branches{k}]);  % no pull
-                if status_gitFetchOrigin == 0
-                    if gitConf.verbose
-                        fprintf([gitCmd.lead, ' [', mfilename, '] Changes on the <', branches{k},'> feature (branch) of fork pulled.', gitCmd.success, gitCmd.trail]);
+                [status_curl, result_curl] = system(['curl -s -k --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branches{k}]);
+
+                if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
+                    % pull eventual changes from other contributors or administrators
+                    [status_gitFetchOrigin, result_gitFetchOrigin] = system(['git fetch origin ', branches{k}]);  % no pull
+                    if status_gitFetchOrigin == 0
+                        if gitConf.verbose
+                            fprintf([gitCmd.lead, ' [', mfilename, '] Changes on the <', branches{k},'> feature (branch) of fork pulled.', gitCmd.success, gitCmd.trail]);
+                        end
+                    else
+                        result_gitFetchOrigin
+                        error([gitCmd.lead, ' [', mfilename, '] Impossible to pull changes from <', branches{k},'> feature (branch) of fork.', gitCmd.fail]);
                     end
                 else
-                    result_gitFetchOrigin
-                    error([gitCmd.lead, ' [', mfilename, '] Impossible to pull changes from <', branches{k},'> feature (branch) of fork.', gitCmd.fail]);
+                    if gitConf.verbose
+                        fprintf([gitCmd.lead, ' [', mfilename, '] The remote feature (branch) <', branches{k}, '> does not exist, but will be created.', gitCmd.fail, gitCmd.trail]);
+                    end
                 end
 
                 % fetch the changes from upstream
