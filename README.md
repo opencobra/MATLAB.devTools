@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/devTools_logo.png" height="160px"/>
+</p>
+
 # MATLAB.devTools - Contribute the smart way
 
 Making a contribution to any `git` repository from `MATLAB` is straightforward.
