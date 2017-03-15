@@ -64,7 +64,7 @@ This will return `git version 2.10.1 [...]` or similar with another version numb
 
 You can then check if your `git` is properly configured by typing in the terminal (or GUI Bash):
 ```bash
-$ git config --get user.name
+$ git config --get user.github-username
 ```
 which will return your Github username if everything is properly set up. Similarly, check the configured email by typing in the terminal (or GUI Bash):
 ```bash
