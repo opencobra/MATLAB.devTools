@@ -23,7 +23,7 @@ Type in `MATLAB` within the `devTools` folder:
 
 The original repository will be downloaded (cloned) the first time to a folder named `fork-gitRepoName`. **Only files in the `fork-gitRepoName` folder** will be considered for contribution (any changes made to a downloaded official `git` repository will be ignored).
 
-![#ff0000](https://placehold.it/15/ff0000/000000?text=+) If you get stuck or are faced with an system error message, please read the [FAQ](FAQ.md)
+![#ff0000](https://placehold.it/15/ff0000/000000?text=+) If you get stuck or are faced with an system error message, please read the [FAQ](FAQ.md).
 
 ## Contributing to The COBRA Toolbox
 

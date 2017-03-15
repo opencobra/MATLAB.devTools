@@ -1,7 +1,6 @@
-Frequently Asked Questions (FAQ)
---------------------------------
+# Frequently Asked Questions (FAQ)
 
-## Mismatch of the version of openSSL (Linux)
+## Mismatch of the version of `openSSL` (Linux)
 
 You might be in the situation that you receive the following error:
 ````
