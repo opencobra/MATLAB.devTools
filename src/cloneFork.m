@@ -51,6 +51,38 @@ function freshClone = cloneFork()
         % change to the fork directory
         cd(gitConf.fullForkDir)
 
+        % check if the origin is correctly configure as SSH, and not https
+        [status_gitRemote, result_gitRemote] = system('git remote -v');
+
+        remoteFrags = strsplit(result_gitRemote);
+
+        if status_gitRemote == 0 && strcmp(remoteFrags(1), 'origin') && isempty(strfind(char(remoteFrags(2)), 'git@github.com'))
+
+            % remove the origin
+            [status_gitRemoveOrigin, result_gitRemoveOrigin] = system('git remote remove origin');
+
+            if status_gitRemoveOrigin == 0
+                if gitConf.verbose
+                    fprintf([gitCmd.lead, ' [', mfilename,'] Origin in local copy of fork removed.', gitCmd.success, gitCmd.trail]);
+                end
+            else
+                result_gitRemoveOrigin
+                error([gitCmd.lead, ' [', mfilename,'] Origin in local copy of fork could not be removed.', gitCmd.success, gitCmd.trail]);
+            end
+
+            % set a new origin
+            [status_gitSetOrigin, result_gitSetOrigin] = system(['git remote add origin git@github.com:', gitConf.userName, '/', gitConf.nickName, '.git']);
+
+            if status_gitSetOrigin == 0
+                if gitConf.verbose
+                    fprintf([gitCmd.lead, ' [', mfilename,'] Origin in local copy of fork set properly.', gitCmd.success, gitCmd.trail]);
+                end
+            else
+                result_gitSetOrigin
+                error([gitCmd.lead, ' [', mfilename,'] Origin in local copy of fork could not be set.', gitCmd.success, gitCmd.trail]);
+            end
+        end
+
         % update the submodules
         updateSubmodules();
 

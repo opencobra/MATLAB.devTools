@@ -119,15 +119,23 @@ function checkoutBranch(branchName)
                         fprintf([gitCmd.lead, ' [', mfilename, '] The rebase process of <', branchName,'> with <develop> has been aborted.', gitCmd.fail, gitCmd.trail]);
                     end
 
-                    % hard reset of an existing branch
-                    [status_gitReset, result_gitReset] = system(['git reset --hard origin/', branchName]);
-                    if status_gitReset == 0
-                        if gitConf.verbose
-                            fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> feature (branch) has not been rebased with <develop> and is up to date.', gitCmd.success, gitCmd.trail]);
+                    [status_curl, result_curl] = system(['curl -s -k --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName]);
+
+                    if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
+                        % hard reset of an existing branch
+                        [status_gitReset, result_gitReset] = system(['git reset --hard origin/', branchName]);
+                        if status_gitReset == 0
+                            if gitConf.verbose
+                                fprintf([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> feature (branch) has not been rebased with <develop> and is up to date.', gitCmd.success, gitCmd.trail]);
+                            end
+                        else
+                            result_gitReset
+                            error([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> could not be reset.', gitCmd.fail]);
                         end
                     else
-                        result_gitReset
-                        error([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> could not be reset.', gitCmd.fail]);
+                        if gitConf.verbose
+                            fprintf([gitCmd.lead, ' [', mfilename, '] The remote feature (branch) <', branchName, '> does not exist and could not be reset.', gitCmd.fail, gitCmd.trail]);
+                        end
                     end
                 end
             end
