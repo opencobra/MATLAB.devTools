@@ -6,21 +6,21 @@ You have to register the SSH key of each computer that you are planning to use t
 
 - **Check if you already have an SSH key:**
 ````
-ls -al ~/.ssh
+$ ls -al ~/.ssh
 ````
-If there is a file with an extension `.pub`, you already have an SSH key and you can skip the next step. You can get more help [here](https://help.github.com/articles/checking-for-existing-ssh-keys/).
+If there is a file with an extension `.pub`, you already have an SSH key and you add your SSH key to Github. More help is [here](https://help.github.com/articles/checking-for-existing-ssh-keys/).
 
 - **Generate the SSH key on your computer:**
 If you don't have yet an SSH key (see previous step), you have to generate one (more help is [here](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)):
 ````
-ssh-keygen -t rsa -C "first.last@server.com"
+$ ssh-keygen -t rsa -C "first.last@server.com"
 ````
 
 - **Add the SSH** to [your Github account](https://github.com/settings/keys) by following the steps [here](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/).
 
 ## System configuration
 
-You must have `git` and `curl` installed. In addition, please ensure that you have `MATLAB` [installed](https://nl.mathworks.com/help/install/).
+You must have `git` and `curl` installed. Please also ensure that you have `MATLAB` [installed](https://nl.mathworks.com/help/install/).
 
 **Linux (Ubuntu or Debian)**
 
