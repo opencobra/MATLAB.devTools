@@ -2,12 +2,9 @@ language: bash
 
 before_install:
     - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+
     # set the environment variable CURRENT_DIR
     - CURRENT_DIR=`pwd`;
-
-    # change to a temporary folder to pull the devTools
-    - cd /tmp/devTools;
-    - git pull;
 
     # remove the cloned repository even after failure
     - rm -rf ~/MATLAB.devTools.CI;
@@ -59,4 +56,3 @@ after_success:
     - if [ "$MATLAB_VER" == "R2016b" ]; then
       bash <(curl -s https://codecov.io/bash) -f "!*.lst";
       fi
-    -  rm -rf ~/MATLAB.devTools.CI;

@@ -7,6 +7,9 @@ function contribute(verbose)
     global gitConf
     global gitCmd
 
+    % retrieve the current directory
+    currentDir = pwd;
+
     % define the main path of the devTools
     pth = which('contribute.m');
 
@@ -103,4 +106,7 @@ function contribute(verbose)
             end
         end
     end
+
+    % change back to the current directory
+    cd(currentDir);
 end

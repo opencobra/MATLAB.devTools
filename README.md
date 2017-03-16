@@ -1,6 +1,11 @@
 <p align="center">
   <img src="assets/devTools_logo.png" height="160px"/>
 </p>
+<br>
+
+|  MATLAB R2016b | MATLAB R2015b | Code Coverage | Code Grade |
+|--------|--------|--------|--------|
+| [![Build Status](https://prince.lcsb.uni.lu/jenkins/buildStatus/icon?job=devTools-branches-auto/MATLAB_VER=R2016b)](https://prince.lcsb.uni.lu/jenkins/job/devTools-branches-auto/MATLAB_VER=R2016b/) | [![Build Status](https://prince.lcsb.uni.lu/jenkins/buildStatus/icon?job=devTools-branches-auto/MATLAB_VER=R2015b)](https://prince.lcsb.uni.lu/jenkins/job/devTools-branches-auto/MATLAB_VER=R2015b/)| [![codecov](https://codecov.io/gh/opencobra/MATLAB.devTools/branch/master/graph/badge.svg)](https://codecov.io/gh/opencobra/MATLAB.devTools/branch/master) | ![Code grade](https://prince.lcsb.uni.lu/jenkins/userContent/codegrade-MATLABdevTools.svg "Ratio of the number of inefficient code lines and the total number of lines of code (in percent). A: 0-3%, B: 3-6%, C: 6-9%, D: 9-12%, E: 12-15%, F: > 15%.")
 
 # MATLAB.devTools - Contribute the smart way
 
