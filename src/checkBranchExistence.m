@@ -5,7 +5,6 @@ function branchExists = checkBranchExistence(branchName)
 %
 
     global gitConf
-    global gitCmd
 
     % change the directory to the local directory of the fork
     cd(gitConf.fullForkDir);

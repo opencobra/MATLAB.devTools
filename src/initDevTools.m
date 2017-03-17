@@ -42,7 +42,7 @@ function initDevTools()
             if status_gitConfUserSet == 0
                 fprintf([gitCmd.lead, originCall, 'Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]);
             else
-                result_gitConfUserSet
+                fprintf(result_gitConfUserSet);
                 error([gitCmd.lead, ' [', mfilename,'] Your Github username could not be set.', gitCmd.fail]);
             end
         end
@@ -66,7 +66,7 @@ function initDevTools()
             if status_gitConfEmailSet == 0
                 fprintf([gitCmd.lead, originCall, 'Your Github email is: ', gitConf.userEmail, '. ', gitCmd.success, gitCmd.trail]);
             else
-                result_gitConfEmailSet
+                fprintf(result_gitConfEmailSet);
                 error([gitCmd.lead, ' [', mfilename,'] Your Github email could not be set.', gitCmd.fail]);
             end
         end

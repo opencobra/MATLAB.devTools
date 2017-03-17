@@ -29,7 +29,7 @@ function checkSystem(callerName)
             fprintf([gitCmd.lead, ' [', mfilename, ']', callerName, ' git is properly installed.', gitCmd.success, gitCmd.trail]);
         end
     else
-        result_gitVersion
+        fprintf(result_gitVersion);
         error([gitCmd.lead, ' [', mfilename, ']', callerName, ' git is not installed. Please follow the guidelines how to install git.']);
     end
 

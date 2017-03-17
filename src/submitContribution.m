@@ -25,7 +25,7 @@ function submitContribution(branchName)
     if status_gitStatus == 0
         arrResult = strsplit(result_gitStatus, '\n');
     else
-        result_gitStatus
+        fprintf(result_gitStatus);
         error([gitCmd.lead, originCall, 'The status of the repository cannot be retrieved', gitCmd.fail]);
     end
 
@@ -102,7 +102,7 @@ function submitContribution(branchName)
                             fprintf([gitCmd.lead, originCall, 'The file ', fullFileName, ' has been added to the stage.', gitCmd.success, gitCmd.trail]);
                         end
                     else
-                        result
+                        fprintf(result);
                         error([gitCmd.lead, ' [', mfilename,'] The file ', fullFileName, ' could not be added to the stage.', gitCmd.fail]);
                     end
                 end
@@ -120,7 +120,7 @@ function submitContribution(branchName)
                             fprintf([gitCmd.lead, originCall, 'The file <', fullFileName, '> has been added to the stage.', gitCmd.success, gitCmd.trail]);
                         end
                     else
-                        result
+                        fprintf(result);
                         error([gitCmd.lead, ' [', mfilename,'] The file <', fullFileName, '> could not be added to the stage.', gitCmd.fail]);
                     end
                 end
@@ -137,7 +137,7 @@ function submitContribution(branchName)
                             fprintf([gitCmd.lead, originCall, 'The file <', fullFileName, '> has been added to the stage.', gitCmd.success, gitCmd.trail]);
                         end
                     else
-                        result
+                        fprintf(result);
                         error([gitCmd.lead, ' [', mfilename,'] The file <', fullFileName, '> could not be added to the stage.', gitCmd.fail]);
                     end
                 end
@@ -148,7 +148,7 @@ function submitContribution(branchName)
                 if gitConf.verbose
                     fprintf([gitCmd.lead, originCall, 'The file <', fullFileName, '> is already on stage.', gitCmd.success, gitCmd.trail]);
                 end
-                countAddFiles = countAddFiles + 1
+                countAddFiles = countAddFiles + 1;
             end
         end
 
@@ -171,7 +171,7 @@ function submitContribution(branchName)
                 if status_gitCommit == 0
                     pushStatus = true;
                 else
-                    result_gitCommit
+                    fprintf(result_gitCommit);
                     error([gitCmd.lead, ' [', mfilename,'] Your commit message cannot be set.', gitCmd.fail]);
                 end
             else
@@ -193,7 +193,7 @@ function submitContribution(branchName)
                     fprintf([gitCmd.lead, originCall, 'You can open a pull request (PR) at later stage by running "contribute" and selecting "3".', gitCmd.trail]);
                 end
             else
-                result_gitPush
+                fprintf(result_gitPush);
                 error([gitCmd.lead, ' [', mfilename,'] Something went wrong when pushing. Please try again.', gitCmd.fail]);
             end
         end

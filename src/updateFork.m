@@ -52,7 +52,7 @@ function updateFork(force)
                             fprintf([gitCmd.lead, ' [', mfilename, '] The feature (branch) <', branches{k}, '> was checked out.', gitCmd.success, gitCmd.trail]);
                         end
                     else
-                        result_gitCheckout
+                        fprintf(result_gitCheckout);
                         if gitConf.verbose
                             fprintf([gitCmd.lead, ' [', mfilename, '] The feature (branch) <', branches{k}, '> could not be checked out.', gitCmd.fail, gitCmd.trail]);
                         end
@@ -65,7 +65,7 @@ function updateFork(force)
                             fprintf([gitCmd.lead, ' [', mfilename, '] The feature (branch) <', branches{k}, '> was checked out.', gitCmd.success, gitCmd.trail]);
                         end
                     else
-                        result_gitCheckoutCreate
+                        fprintf(result_gitCheckoutCreate);
                         if gitConf.verbose
                             fprintf([gitCmd.lead, ' [', mfilename, '] The feature (branch) <', branches{k}, '> could not be checked out.', gitCmd.fail]);
                         end
@@ -82,7 +82,7 @@ function updateFork(force)
                             fprintf([gitCmd.lead, ' [', mfilename, '] Changes on the <', branches{k},'> feature (branch) of fork pulled.', gitCmd.success, gitCmd.trail]);
                         end
                     else
-                        result_gitFetchOrigin
+                        fprintf(result_gitFetchOrigin);
                         error([gitCmd.lead, ' [', mfilename, '] Impossible to pull changes from <', branches{k},'> feature (branch) of fork.', gitCmd.fail]);
                     end
                 else
@@ -98,7 +98,7 @@ function updateFork(force)
                         fprintf([gitCmd.lead, ' [', mfilename, '] Upstream fetched.', gitCmd.success, gitCmd.trail]);
                     end
                 else
-                    result_gitFetchUpstream
+                    fprintf(result_gitFetchUpstream);
                     error([gitCmd.lead, ' [', mfilename, '] Impossible to fetch upstream.', gitCmd.fail]);
                 end
 
@@ -110,7 +110,7 @@ function updateFork(force)
                             fprintf([gitCmd.lead, ' [', mfilename, '] Merged upstream/', branches{k}, ' into ', branches{k}, '.', gitCmd.success, gitCmd.trail]);
                         end
                     else
-                        result_gitMergeUpstream
+                        fprintf(result_gitMergeUpstream);
                         error([gitCmd.lead, ' [', mfilename,'] Impossible to merge upstream/', branches{k}, gitCmd.fail]);
                     end
                 end
@@ -122,7 +122,7 @@ function updateFork(force)
                             fprintf([gitCmd.lead, ' [', mfilename,'] The <', branches{k}, '> feature (branch) of the fork has been reset.', gitCmd.success, gitCmd.trail]);
                         end
                     else
-                        result_gitReset
+                        fprintf(result_gitReset);
                         error([gitCmd.lead, ' [', mfilename,'] Impossible to reset the <', branches{k}, '> feature (branch) of the fork.', gitCmd.fail]);
                     end
 
@@ -146,12 +146,12 @@ function updateFork(force)
                         fprintf([gitCmd.lead, ' [', mfilename,'] The <', branches{k}, '> feature (branch) has been updated on the fork', forceText, '.', gitCmd.success, gitCmd.trail]);
                     end
                 else
-                    result_gitPush
+                    fprintf(result_gitPush);
                     error([gitCmd.lead, ' [', mfilename,'] Impossible to update the <', branches{k}, '> feature (branch) on your fork (', gitConf.forkURL, ').', gitCmd.fail]);
                 end
             end
         else
-            resultList
+            fprintf(resultList);
             error([gitCmd.lead, ' [', mfilename,'] Impossible to retrieve the features (branches) of your local fork.', gitCmd.fail]);
         end
     else

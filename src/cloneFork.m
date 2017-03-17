@@ -41,7 +41,7 @@ function freshClone = cloneFork()
 
             freshClone = true;
         else
-            result_gitClone
+            fprintf(result_gitClone);
             error([gitCmd.lead, ' [', mfilename,'] The fork ', gitConf.forkURL, ' could not be cloned.', gitCmd.fail]);
         end
 
@@ -66,7 +66,7 @@ function freshClone = cloneFork()
                     fprintf([gitCmd.lead, ' [', mfilename,'] Origin in local copy of fork removed.', gitCmd.success, gitCmd.trail]);
                 end
             else
-                result_gitRemoveOrigin
+                fprintf(result_gitRemoveOrigin);
                 error([gitCmd.lead, ' [', mfilename,'] Origin in local copy of fork could not be removed.', gitCmd.success, gitCmd.trail]);
             end
 
@@ -78,7 +78,7 @@ function freshClone = cloneFork()
                     fprintf([gitCmd.lead, ' [', mfilename,'] Origin in local copy of fork set properly.', gitCmd.success, gitCmd.trail]);
                 end
             else
-                result_gitSetOrigin
+                fprintf(result_gitSetOrigin);
                 error([gitCmd.lead, ' [', mfilename,'] Origin in local copy of fork could not be set.', gitCmd.success, gitCmd.trail]);
             end
         end

@@ -5,7 +5,6 @@ function exitFlag = listFeatures()
 %
 
     global gitConf
-    global gitCmd
 
     exitFlag = false;
 

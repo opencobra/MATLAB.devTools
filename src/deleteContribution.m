@@ -44,14 +44,13 @@ function deleteContribution(branchName)
                     if status_gitBranchDelete == 0
                         fprintf([gitCmd.lead, originCall, 'The local <', branchName, '> feature (branch) has been deleted.', gitCmd.success, gitCmd.trail]);
                     else
-                        result_gitBranchDelete
+                        fprintf(result_gitBranchDelete);
                         error([gitCmd.lead, ' [', mfilename,'] The local <', branchName,'> feature (branch) could not be deleted. You might have unpublished/uncommitted changes.', gitCmd.fail]);
                     end
                 else
                     fprintf([gitCmd.lead, originCall, 'The local <', branchName,'> feature (branch) does not exist.', gitCmd.fail, gitCmd.trail]);
                 end
             else
-                result_gitBranchDelete
                 error([gitCmd.lead, ' [', mfilename,'] The list of features (branches) could not be retrieved.', gitCmd.fail]);
             end
 
@@ -66,7 +65,7 @@ function deleteContribution(branchName)
                 if status_gitPush == 0
                     fprintf([gitCmd.lead, originCall, 'The remote <', branchName, '> feature (branch) has been deleted.', gitCmd.success, gitCmd.trail]);
                 else
-                    result_gitPush
+                    fprintf(result_gitPush);
                     error([gitCmd.lead, ' [', mfilename,'] The remote <', branchName,'> feature (branch) could not be deleted.', gitCmd.fail]);
                 end
             else

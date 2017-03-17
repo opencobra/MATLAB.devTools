@@ -14,7 +14,7 @@ function resetLocalFork()
             fprintf([gitCmd.lead, ' [', mfilename,'] All files have been cleaned. ', gitCmd.success, gitCmd.trail]);
         end
     else
-        result_gitClean
+        fprintf(result_gitClean);
         fprintf([gitCmd.lead, ' [', mfilename,'] There are no changes that could be cleaned', gitCmd.fail, gitCmd.trail]);
     end
 
@@ -25,7 +25,7 @@ function resetLocalFork()
             fprintf([gitCmd.lead, ' [', mfilename,'] All local changes have been stashed. ', gitCmd.success, gitCmd.trail]);
         end
     else
-        result_gitStash
+        fprintf(result_gitStash);
         fprintf([gitCmd.lead, ' [', mfilename,'] There are no changes that could be stashed', gitCmd.fail, gitCmd.trail]);
     end
 

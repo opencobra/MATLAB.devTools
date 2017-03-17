@@ -23,7 +23,7 @@ function checkRemoteFork()
                 fprintf([gitCmd.lead, ' [', mfilename, '] The original repository has already been forked on Github (', gitConf.forkURL,').', gitCmd.success, gitCmd.trail]);
             end
         else
-            result_curl
+            fprintf(result_curl);
             tmpCmd = gitCmd;
             tmpConf = gitConf;
             resetDevTools();

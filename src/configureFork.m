@@ -11,7 +11,7 @@ function configureFork()
     currentDir = strrep(pwd,'\','\\');
 
     % if the fork does not exist, clone it
-    if exist(gitConf.fullForkDir) ~= 7
+    if exist(gitConf.fullForkDir, 'dir') ~= 7
         cloneFork();
 
     % if the local fork directory exists
@@ -33,7 +33,7 @@ function configureFork()
                     fprintf([gitCmd.lead, ' [', mfilename,'] ', gitConf.remoteRepoURL, ' added with remote name "upstream".', gitCmd.success, gitCmd.trail]);
                 end
             else
-                result_gitRemoteAdd
+                fprintf(result_gitRemoteAdd);
                 error([gitCmd.lead, ' [', mfilename,'] ', gitConf.remoteRepoURL, ' could not be added as remote named "upstream".', gitCmd.fail]);
             end
         end

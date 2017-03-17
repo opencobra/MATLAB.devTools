@@ -25,7 +25,7 @@ function openPR(branchName)
     if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
         fprintf([gitCmd.lead, originCall, 'You can open a pull request (PR) by clicking on \n\n\t', prURL, '?expand=1\n\n']);
     else
-        result_curl
+        fprintf(result_curl);
         error([gitCmd.lead, ' [', mfilename,'] The feature (branch) <', branchName, '> does not exist or has no commits.', gitCmd.fail])
     end
 end

@@ -18,7 +18,7 @@ function resetDevTools()
             fprintf([gitCmd.lead, ' [', mfilename,'] Your Github username has been removed. ', gitCmd.success, gitCmd.trail]);
         end
     else
-        result_gitConfUserGet
+        fprintf(result_gitConfUserGet);
         fprintf([gitCmd.lead, ' [', mfilename,'] Your Github username could not be removed.', gitCmd.fail, gitCmd.trail]);
     end
 
