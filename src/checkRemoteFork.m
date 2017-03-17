@@ -19,9 +19,7 @@ function checkRemoteFork()
         if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
             gitConf.forkURL = [gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '.git'];
 
-            if gitConf.verbose
-                fprintf([gitCmd.lead, ' [', mfilename, '] The original repository has already been forked on Github (', gitConf.forkURL,').', gitCmd.success, gitCmd.trail]);
-            end
+            printMsg(mfilename, ['The original repository has already been forked on Github (', gitConf.forkURL,').']);
         else
             fprintf(result_curl);
             tmpCmd = gitCmd;

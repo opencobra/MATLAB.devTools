@@ -10,7 +10,7 @@ function initDevTools()
     % check the system and set the configuration
     checkSystem();
 
-    if ~isfield(gitConf, 'username'), gitConf.userName = []; end
+    if ~isfield(gitConf, 'userName'), gitConf.userName = []; end
     if ~isfield(gitConf, 'localDir'), gitConf.localDir = []; end
 
     % parse the remoteRepoURL
@@ -31,9 +31,7 @@ function initDevTools()
     if status_gitConfUserGet == 0 && isempty(strfind(gitConf.userName, ' '))
         fprintf([gitCmd.lead, originCall, 'Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]); %
     else
-        if gitConf.verbose
-            fprintf([gitCmd.lead, originCall, 'The Github username could not be retrieved or is not valid.', gitCmd.fail, gitCmd.trail]);
-        end
+        printMsg(mfilename, 'The Github username could not be retrieved or is not valid.', [gitCmd.fail, gitCmd.trail]);
 
         % request the Github username if it is not known or if the username contains whitespaces
         if isempty(gitConf.userName) || ~isempty(strfind(gitConf.userName, ' '))
@@ -48,15 +46,14 @@ function initDevTools()
         end
     end
 
+    % retrieve the user's email address
     [status_gitConfEmailGet, result_gitConfEmailGet] = system('git config --get user.email');
     gitConf.userEmail = strtrim(result_gitConfEmailGet);
 
     if status_gitConfEmailGet == 0
         fprintf([gitCmd.lead, originCall, 'Your Github email is: ', gitConf.userEmail, '. ', gitCmd.success, gitCmd.trail]);
     else
-        if gitConf.verbose
-            fprintf([gitCmd.lead, originCall, 'The Github email could not be retrieved.', gitCmd.fail, gitCmd.trail]);
-        end
+        printMsg(mfilename, 'The Github email could not be retrieved.', [gitCmd.fail, gitCmd.trail]);
 
         % request the Github username
         if isempty(gitConf.userEmail)
@@ -115,9 +112,7 @@ function initDevTools()
             % create the directory if requested
             if (isempty(reply) || strcmpi(reply, 'y') || strcmpi(reply, 'yes')) && createDir
                 system(['mkdir ', gitConf.localDir]);
-                if gitConf.verbose
-                    fprintf([gitCmd.lead, ' [', mfilename,'] The directory has been created.', gitCmd.success, gitCmd.trail]);
-                end
+                printMsg(mfilename, 'The directory has been created.');
             else
                 error([gitCmd.lead, ' [', mfilename,'] The specified directory does not exist.', gitCmd.fail]);
             end
@@ -147,18 +142,8 @@ function initDevTools()
         if status_gitStatus == 0 && isempty(result_gitStatus)
             updateFork(true);
         else
-            if gitConf.verbose
-                fprintf([gitCmd.lead, ' [', mfilename,'] The local fork cannot be updated as you have uncommitted changes.', gitCmd.fail, gitCmd.trail]);
-            end
+            printMsg(mfilename, 'The local fork cannot be updated as you have uncommitted changes.', [gitCmd.fail, gitCmd.trail]);
         end
-    end
-
-    % set the preferences for a password cache helper
-    if isunix
-        system('git config --global credential.helper cache');
-        system('git config --global credential.helper "cache --timeout=3600"'); % set the cache to timeout after 1 hour (setting is in seconds)
-    elseif ispc
-        system('git config --global credential.helper wincred');
     end
 
     % print the current configuration
@@ -167,5 +152,4 @@ function initDevTools()
     fprintf([gitCmd.lead, originCall, '    Local directory :      ', gitConf.fullForkDir, gitCmd.trail])
     fprintf([gitCmd.lead, originCall, '    Remote fork URL:       ', gitConf.forkURL, gitCmd.trail]);
     fprintf([gitCmd.lead, originCall, '    Remote repository URL: ', gitConf.remoteRepoURL, gitCmd.trail]);
-
 end

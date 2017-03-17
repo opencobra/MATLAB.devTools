@@ -24,14 +24,12 @@ function freshClone = cloneFork()
         % change to the local directory
         cd(gitConf.localDir);
 
-        fprintf([gitCmd.lead, ' [', mfilename,'] Cloning the fork ', gitConf.forkURL, gitCmd.trail]);
+        fprintf([gitCmd.lead, ' [', mfilename,'] Cloning the fork ', gitConf.forkURL, ' (might take some time)', gitCmd.trail]);
 
         [status_gitClone, result_gitClone] = system(['git clone -c http.sslVerify=false git@github.com:', gitConf.userName, '/', gitConf.nickName, '.git', ' ', gitConf.forkDirName]);
 
         if status_gitClone == 0
-            if gitConf.verbose
-                fprintf([gitCmd.lead, ' [', mfilename,'] The fork ', gitConf.forkURL, ' has been cloned.', gitCmd.success, gitCmd.trail]);
-            end
+            printMsg(mfilename, ['The fork ', gitConf.forkURL, ' has been cloned.']);
 
             % change to the fork directory
             cd(gitConf.fullForkDir)
@@ -62,9 +60,7 @@ function freshClone = cloneFork()
             [status_gitRemoveOrigin, result_gitRemoveOrigin] = system('git remote remove origin');
 
             if status_gitRemoveOrigin == 0
-                if gitConf.verbose
-                    fprintf([gitCmd.lead, ' [', mfilename,'] Origin in local copy of fork removed.', gitCmd.success, gitCmd.trail]);
-                end
+                printMsg(mfilename, 'Origin in local copy of fork removed.');
             else
                 fprintf(result_gitRemoveOrigin);
                 error([gitCmd.lead, ' [', mfilename,'] Origin in local copy of fork could not be removed.', gitCmd.success, gitCmd.trail]);
@@ -74,9 +70,7 @@ function freshClone = cloneFork()
             [status_gitSetOrigin, result_gitSetOrigin] = system(['git remote add origin git@github.com:', gitConf.userName, '/', gitConf.nickName, '.git']);
 
             if status_gitSetOrigin == 0
-                if gitConf.verbose
-                    fprintf([gitCmd.lead, ' [', mfilename,'] Origin in local copy of fork set properly.', gitCmd.success, gitCmd.trail]);
-                end
+                printMsg(mfilename, 'Origin in local copy of fork set properly.');
             else
                 fprintf(result_gitSetOrigin);
                 error([gitCmd.lead, ' [', mfilename,'] Origin in local copy of fork could not be set.', gitCmd.success, gitCmd.trail]);
@@ -91,15 +85,10 @@ function freshClone = cloneFork()
 
         % check if the fork is up-to-date
         if status_gitStatus == 0 && isempty(result_gitStatus)
-            if gitConf.verbose
-                fprintf([gitCmd.lead, ' [', mfilename,'] Your fork (username: ', gitConf.userName, ') is already cloned and up-to-date. ', gitCmd.success, gitCmd.trail]);
-            end
-
+            printMsg(mfilename, ['Your fork (username: ', gitConf.userName, ') is already cloned and up-to-date.']);
         % proceed to update the fork
         else
-            if gitConf.verbose
-                fprintf([gitCmd.lead, ' [', mfilename,'] Your fork is not up-to-date. Please update using "updateFork();".', gitCmd.fail, gitCmd.trail]);
-            end
+            printMsg(mfilename, 'Your fork is not up-to-date. Please update using >> updateFork();', [gitCmd.fail, gitCmd.trail]);
         end
     end
 

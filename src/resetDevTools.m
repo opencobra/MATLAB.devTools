@@ -14,9 +14,7 @@ function resetDevTools()
     [status_gitConfUserGet, result_gitConfUserGet] = system('git config --global --unset-all user.github-username');
 
     if status_gitConfUserGet == 0
-        if gitConf.verbose
-            fprintf([gitCmd.lead, ' [', mfilename,'] Your Github username has been removed. ', gitCmd.success, gitCmd.trail]);
-        end
+        printMsg(mfilename, 'Your Github username has been removed.');
     else
         fprintf(result_gitConfUserGet);
         fprintf([gitCmd.lead, ' [', mfilename,'] Your Github username could not be removed.', gitCmd.fail, gitCmd.trail]);

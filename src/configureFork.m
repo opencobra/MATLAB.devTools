@@ -8,7 +8,7 @@ function configureFork()
     global gitCmd
 
     % save the currentDir
-    currentDir = strrep(pwd,'\','\\');
+    currentDir = strrep(pwd, '\', '\\');
 
     % if the fork does not exist, clone it
     if exist(gitConf.fullForkDir, 'dir') ~= 7
@@ -23,15 +23,11 @@ function configureFork()
         [status_gitRemote, result_gitRemote] = system('git remote -v');
 
         if status_gitRemote == 0 && ~isempty(strfind(result_gitRemote, 'origin')) && ~isempty(strfind(result_gitRemote, 'upstream')) && ~isempty(strfind(result_gitRemote, gitConf.userName)) && ~isempty(strfind(result_gitRemote, gitConf.remoteUserName))
-            if gitConf.verbose
-                fprintf([gitCmd.lead, ' [', mfilename,'] Your fork is properly configured. ', gitCmd.success, gitCmd.trail]);
-            end
+            printMsg(mfilename, 'Your fork is properly configured.');
         else
             [status_gitRemoteAdd, result_gitRemoteAdd] = system(['git remote add upstream ', gitConf.remoteRepoURL]);
             if status_gitRemoteAdd == 0
-                if gitConf.verbose
-                    fprintf([gitCmd.lead, ' [', mfilename,'] ', gitConf.remoteRepoURL, ' added with remote name "upstream".', gitCmd.success, gitCmd.trail]);
-                end
+                printMsg(mfilename, [gitConf.remoteRepoURL, ' added with remote name <upstream>.']);
             else
                 fprintf(result_gitRemoteAdd);
                 error([gitCmd.lead, ' [', mfilename,'] ', gitConf.remoteRepoURL, ' could not be added as remote named "upstream".', gitCmd.fail]);

@@ -21,6 +21,8 @@ function exitFlag = listFeatures()
 
         if length(arrResult) > 2
             fprintf('\n      Available features are:\n');
+
+            % list the number of available features
             for i = 1:length(arrResult)
                 tmpName = arrResult(i);
                 tmpName = tmpName{1};
@@ -31,6 +33,8 @@ function exitFlag = listFeatures()
             fprintf('\n');
         else
             reply = input('   -> You do not have any features (branches). Do you want to start a new contribution? Y/N [Y]: ', 's');
+
+            % decide whether to start a new contribution or not
             if ~isempty(reply) && (strcmpi(reply, 'y') || strcmpi(reply, 'yes'))
                 initContribution;
                 exitFlag = true;

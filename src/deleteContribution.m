@@ -30,6 +30,7 @@ function deleteContribution(branchName)
             else
                 filterColor =  '| tr -s "[:cntrl:]" "\n"';
             end
+
             [status_gitBranch, resultList] = system(['git branch --list ', filterColor]);
 
             % delete the local branch

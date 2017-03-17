@@ -98,9 +98,7 @@ function submitContribution(branchName)
                     countAddFiles = countAddFiles + 1;
                     [status, result] = system(['git add ', fullFileName]);
                     if status == 0
-                        if gitConf.verbose
-                            fprintf([gitCmd.lead, originCall, 'The file ', fullFileName, ' has been added to the stage.', gitCmd.success, gitCmd.trail]);
-                        end
+                        printMsg(mfilename, ['The file ', fullFileName, ' has been added to the stage.']);
                     else
                         fprintf(result);
                         error([gitCmd.lead, ' [', mfilename,'] The file ', fullFileName, ' could not be added to the stage.', gitCmd.fail]);
@@ -116,9 +114,7 @@ function submitContribution(branchName)
                     countAddFiles = countAddFiles + 1;
                     [status, result] = system(['git add ', fullFileName]);
                     if status == 0
-                        if gitConf.verbose
-                            fprintf([gitCmd.lead, originCall, 'The file <', fullFileName, '> has been added to the stage.', gitCmd.success, gitCmd.trail]);
-                        end
+                        printMsg(mfilename, ['The file <', fullFileName, '> has been added to the stage.']);
                     else
                         fprintf(result);
                         error([gitCmd.lead, ' [', mfilename,'] The file <', fullFileName, '> could not be added to the stage.', gitCmd.fail]);
@@ -133,9 +129,7 @@ function submitContribution(branchName)
                     countAddFiles = countAddFiles + 1;
                     [status, result] = system(['git add ', fullFileName]);
                     if status == 0
-                        if gitConf.verbose
-                            fprintf([gitCmd.lead, originCall, 'The file <', fullFileName, '> has been added to the stage.', gitCmd.success, gitCmd.trail]);
-                        end
+                        printMsg(mfilename, [originCall, 'The file <', fullFileName, '> has been added to the stage.']);
                     else
                         fprintf(result);
                         error([gitCmd.lead, ' [', mfilename,'] The file <', fullFileName, '> could not be added to the stage.', gitCmd.fail]);
@@ -145,9 +139,7 @@ function submitContribution(branchName)
 
             % already staged file
             if ~isempty(tmpFileName) && ~isempty(strfind(fullFileStatus, 'A'))
-                if gitConf.verbose
-                    fprintf([gitCmd.lead, originCall, 'The file <', fullFileName, '> is already on stage.', gitCmd.success, gitCmd.trail]);
-                end
+                printMsg(mfilename, [originCall, 'The file <', fullFileName, '> is already on stage.']);
                 countAddFiles = countAddFiles + 1;
             end
         end

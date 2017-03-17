@@ -28,13 +28,9 @@ function checkLocalFork()
         % try to push to master - dry run only should ask for credentials if necessary
         system('git push origin master -q --dry-run');
 
-        if gitConf.verbose
-            fprintf([gitCmd.lead, ' [', mfilename, '] The local folder of the fork exists (', gitConf.fullForkDir,').', gitCmd.success, gitCmd.trail]);
-        end
+        printMsg(mfilename, ['The local folder of the fork exists (', gitConf.fullForkDir, ').']);
     else
-        if gitConf.verbose
-            fprintf([gitCmd.lead, ' [', mfilename, '] The fork is not yet cloned in the folder ', gitConf.fullForkDir, '.', gitCmd.trail]);
-        end
+        printMsg(mfilename, ['The fork is not yet cloned in the folder ', gitConf.fullForkDir, '.'], gitCmd.trail);
     end
 
     % change back to the current directory
