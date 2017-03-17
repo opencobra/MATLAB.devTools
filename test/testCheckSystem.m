@@ -45,5 +45,8 @@ openPR('add-test-CI');
 % delete the newly created branch
 %deleteContribution('add-test-CI');
 
+% list available features
+listFeatures();
+
 % reset the development tools
 resetDevTools();
