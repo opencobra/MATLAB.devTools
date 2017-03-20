@@ -19,6 +19,9 @@ checkSystem();
 % initialize the devTools
 initDevTools();
 
+% check the devTools
+checkDevTools()
+
 % remove the local fork
 %system('rm -rf ~/fork-MATLAB.devTools.CI')
 
