@@ -48,5 +48,8 @@ openPR('add-test-CI');
 % list available features
 listFeatures();
 
+% reset the local fork
+resetLocalFork();
+
 % reset the development tools
 resetDevTools();
