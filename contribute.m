@@ -21,7 +21,11 @@ function contribute(verbose)
     checkSystem();
 
     if nargin > 0
-        gitConf.verbose = true;
+        if verbose
+            gitConf.verbose = verbose;
+        else
+            gitConf.verbose = false;
+        end
     end
 
     fprintf(gitConf.launcher);
@@ -41,11 +45,12 @@ function contribute(verbose)
                 if exist('gitConf.fullForkDir', 'var')
                     %list all available features
                     listFeatures();
+                    exampleBranch = 'add-constraints';
                 end
 
                 reply = '';
                 while isempty(reply)
-                    reply = input('   -> Please enter a name of the new feature (branch) that you want to work on (example: add-constraints): ', 's');
+                    reply = input(['   -> Please enter a name of the new feature (branch) that you want to work on (example: ', exampleBranch, '): '], 's');
                     if ~isempty(strfind(reply, 'develop')) || ~isempty(strfind(reply, 'master'))
                         reply = '';
                         fprintf([gitCmd.lead, 'Please use a different name that does not contain <develop> or <master>.', gitCmd.fail, gitCmd.trail]);
@@ -56,23 +61,21 @@ function contribute(verbose)
                 % initialize the development tools
                 initDevTools();
 
-                exitFlag = false;
-
                 % change to the fork diretory
                 cd(gitConf.fullForkDir);
 
                 %list all available features
-                exitFlag = listFeatures();
+                [exitFlag, ~, ~, exampleBranch] = listFeatures();
 
                 if ~exitFlag
                     reply = '';
                     if choice == 2
                         while isempty(reply) && ~exitFlag
-                            reply = input('   -> Please enter the name of the existing feature (branch) that you want to work on (example: add-constraints): ', 's');
+                            reply = input(['   -> Please enter the name of the existing feature (branch) that you want to work on (example: ', exampleBranch, '): '], 's');
                         end
                     elseif choice == 3
                         while isempty(reply)
-                            reply = input('   -> Please enter the name of the feature (branch) that you want to publish (example: add-constraints): ', 's');
+                            reply = input(['   -> Please enter the name of the feature (branch) that you want to publish (example: ', exampleBranch, '): '], 's');
                         end
                     elseif choice == 4
 
@@ -83,7 +86,7 @@ function contribute(verbose)
                         end
 
                         while isempty(reply)
-                            reply = input('   -> Please enter the name of the feature (branch) that you want to delete (example: add-constraints): ', 's');
+                            reply = input(['   -> Please enter the name of the feature (branch) that you want to delete (example: ', exampleBranch, '): '], 's');
                         end
                     end
                 end

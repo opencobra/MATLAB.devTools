@@ -1,4 +1,4 @@
-function exitFlag = listFeatures()
+function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
 % devTools
 %
 % PURPOSE: lists all available branches/features
@@ -14,6 +14,12 @@ function exitFlag = listFeatures()
     % retrieve a list of branches
     [status, result] = system('git branch --list');
 
+    % initialize the default value of the currentBranch
+    currentBranch = 'develop';
+
+    % give an example name
+    exampleBranch = 'add-constraints';
+
     if status == 0
         arrResult = strsplit(result, '\n');
         arrResult = strtrim(arrResult);
@@ -28,8 +34,17 @@ function exitFlag = listFeatures()
                 tmpName = tmpName{1};
                 if isempty(strfind(tmpName, 'develop')) && isempty(strfind(tmpName, 'master')) && ~isempty(tmpName)
                     fprintf(['      - ', tmpName, '\n']);
+
+                    % define the currentBranch
+                    if ~isempty(strfind(tmpName, '*'))
+                        currentBranch = tmpName;
+                    end
+
+                    % define an example branch name
+                    exampleBranch = tmpName;
                 end
             end
+
             fprintf('\n');
         else
             reply = input('   -> You do not have any features (branches). Do you want to start a new feature (branch)? Y/N [Y]: ', 's');
