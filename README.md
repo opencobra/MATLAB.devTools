@@ -28,10 +28,10 @@ Type in `MATLAB` within the `devTools` folder:
 
 You will then be presented by a menu:
 ```
-   [1] Initialize a contribution.
-   [2] Continue a contribution.
-   [3] Submit/publish a contribution.
-   [4] Delete a contribution.
+   [1] Start a new feature (branch).
+   [2] Select an existing feature (branch) to work on.
+   [3] Publish a feature (branch).
+   [4] Delete a feature (branch).
 
 -> Please select what you want to do (enter the number):
 ```

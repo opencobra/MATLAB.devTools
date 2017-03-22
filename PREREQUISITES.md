@@ -8,7 +8,7 @@ You have to register the SSH key of each computer that you are planning to use t
 ````
 $ ls -al ~/.ssh
 ````
-If there is a file with an extension `.pub`, you already have an SSH key and you add your SSH key to Github. More help is [here](https://help.github.com/articles/checking-for-existing-ssh-keys/).
+If there is a file with an extension `.pub`, you already have an SSH key. Now, you have to **add your SSH key to Github**. More help is [here](https://help.github.com/articles/checking-for-existing-ssh-keys/).
 
 - **Generate the SSH key on your computer:**
 If you don't have yet an SSH key (see previous step), you have to generate one (more help is [here](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)):
@@ -17,6 +17,31 @@ $ ssh-keygen -t rsa -C "first.last@server.com"
 ````
 
 - **Add the SSH** to [your Github account](https://github.com/settings/keys) by following the steps [here](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/).
+
+## Can I check if everything is properly set up before I start?
+
+Please ensure that you have a working `MATLAB` installation.
+
+You can check if you have a working installation of `git` by typing in the terminal (or GUI Bash):
+```bash
+$ git --version
+```
+This will return `git version 2.10.1 [...]` or similar with another version number.
+
+You can then check if your `git` is properly configured by typing in the terminal (or GUI Bash):
+```bash
+$ git config --get user.github-username
+```
+which will return your Github username if everything is properly set up. Similarly, check the configured email by typing in the terminal (or GUI Bash):
+```bash
+$ git config --get user.email
+```
+
+You can check if you have a working installation of `curl` by typing in the terminal (or GUI Bash):
+```bash
+$ curl --version
+```
+which will return `curl 7.51.0 [...]` or similar with another version number.
 
 ## System configuration
 
@@ -51,28 +76,3 @@ $ git config --global user.github-username "yourGitHubUsername"
 $ git config --global user.email "first.last@server.com"
 ```
 Please replace `"yourGitHubUsername"` and `"first.last@server.com"` with your respective credentials.
-
-## Can I check if everything is properly set up before I start?
-
-Please ensure that you have a working `MATLAB` installation.
-
-You can check if you have a working installation of `git` by typing in the terminal (or GUI Bash):
-```bash
-$ git --version
-```
-This will return `git version 2.10.1 [...]` or similar with another version number.
-
-You can then check if your `git` is properly configured by typing in the terminal (or GUI Bash):
-```bash
-$ git config --get user.github-username
-```
-which will return your Github username if everything is properly set up. Similarly, check the configured email by typing in the terminal (or GUI Bash):
-```bash
-$ git config --get user.email
-```
-
-You can check if you have a working installation of `curl` by typing in the terminal (or GUI Bash):
-```bash
-$ curl --version
-```
-which will return `curl 7.51.0 [...]` or similar with another version number.

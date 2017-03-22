@@ -3,6 +3,10 @@ function contribute(verbose)
 %
 % PURPOSE: displays a menu and calls the respective subfunctions
 %
+%       1. Start a new feature (branch):
+%       2. Select an existing feature (branch) to work on.
+%       3. Publish a feature (branch).
+%       4. Delete a feature (branch).
 
     global gitConf
     global gitCmd
@@ -10,11 +14,8 @@ function contribute(verbose)
     % retrieve the current directory
     currentDir = pwd;
 
-    % define the main path of the devTools
-    pth = which('contribute.m');
-
     % adding the src folder of the devTools
-    addpath(genpath(pth(1:end - (length('contribute.m') + 1))));
+    addpath(genpath(fileparts(which(mfilename))));
 
     % check the system and set the configuration
     checkSystem();
@@ -25,7 +26,7 @@ function contribute(verbose)
 
     fprintf(gitConf.launcher);
 
-    choice = input('\n      (You can abort any process using CTRL-C)\n\n      [1] Initialize a contribution.\n      [2] Continue a contribution.\n      [3] Submit/publish a contribution.\n      [4] Delete a contribution.\n\n   -> Please select what you want to do (enter the number): ', 's');
+    choice = input('\n      (You can abort any process using CTRL-C)\n\n      [1] Start a new feature (branch).\n      [2] Select an existing feature (branch) to work on.\n      [3] Publish a feature (branch).\n      [4] Delete a feature (branch).\n\n   -> Please select what you want to do (enter the number): ', 's');
 
     choice = str2num(choice);
 
@@ -44,7 +45,7 @@ function contribute(verbose)
 
                 reply = '';
                 while isempty(reply)
-                    reply = input('   -> Please enter a name of the new feature that you want to work on (example: add-constraints): ', 's');
+                    reply = input('   -> Please enter a name of the new feature (branch) that you want to work on (example: add-constraints): ', 's');
                     if ~isempty(strfind(reply, 'develop')) || ~isempty(strfind(reply, 'master'))
                         reply = '';
                         fprintf([gitCmd.lead, 'Please use a different name that does not contain <develop> or <master>.', gitCmd.fail, gitCmd.trail]);
@@ -67,11 +68,11 @@ function contribute(verbose)
                     reply = '';
                     if choice == 2
                         while isempty(reply) && ~exitFlag
-                            reply = input('   -> Please enter the name of the feature that you want to continue working on (example: add-constraints): ', 's');
+                            reply = input('   -> Please enter the name of the existing feature (branch) that you want to work on (example: add-constraints): ', 's');
                         end
                     elseif choice == 3
                         while isempty(reply)
-                            reply = input('   -> Please enter the name of the feature that you want to submit/publish (example: add-constraints): ', 's');
+                            reply = input('   -> Please enter the name of the feature (branch) that you want to publish (example: add-constraints): ', 's');
                         end
                     elseif choice == 4
 
@@ -82,7 +83,7 @@ function contribute(verbose)
                         end
 
                         while isempty(reply)
-                            reply = input('   -> Please enter the name of the feature that you want to delete (example: add-constraints): ', 's');
+                            reply = input('   -> Please enter the name of the feature (branch) that you want to delete (example: add-constraints): ', 's');
                         end
                     end
                 end

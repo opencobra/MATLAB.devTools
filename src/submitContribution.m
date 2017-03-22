@@ -1,7 +1,7 @@
 function submitContribution(branchName)
 % devTools
 %
-% PURPOSE: submit an existing contribution named <branchName>
+% PURPOSE: submit an existing feature (branch) named <branchName>
 %
 
     global gitConf

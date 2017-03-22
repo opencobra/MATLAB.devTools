@@ -1,7 +1,7 @@
 function initContribution(branchName)
 % devTools
 %
-% PURPOSE: initializes a contribution named <branchName>
+% PURPOSE: initializes a new feature (branch) named <branchName>
 %
 
     global gitConf
@@ -43,7 +43,7 @@ function initContribution(branchName)
                 listFeatures();
             end
 
-            reply = input([gitCmd.lead, ' -> You already worked on a feature named <', branchName, '>. Do you want to continue working on <', branchName, '>? Y/N [Y]:'], 's');
+            reply = input([gitCmd.lead, ' -> You already worked on a feature (branch) named <', branchName, '>. Do you want to continue working on <', branchName, '>? Y/N [Y]:'], 's');
 
             if isempty(reply) || strcmpi(reply, 'y') || strcmpi(reply, 'yes')
                 checkoutFlag = true;
@@ -60,11 +60,14 @@ function initContribution(branchName)
         checkoutBranch(branchName);
 
         % provide a success message
-        fprintf([gitCmd.lead, ' -> You may now start working on your new feature <', branchName, '>.', gitCmd.trail]);
+        fprintf([gitCmd.lead, gitCmd.trail]);
+        fprintf([gitCmd.lead, ' -> You may now start working on your new feature (branch) <', branchName, '>.', gitCmd.trail]);
     end
 
     % provide instructions
-    fprintf([gitCmd.lead, ' -> Run "contribute" and select "2" to continue working on your feature named <', branchName, '>.', gitCmd.trail]);
-    fprintf([gitCmd.lead, ' -> Run "contribute" and select "3" to publish your feature named <', branchName, '>.', gitCmd.trail]);
-    fprintf([gitCmd.lead, ' -> Run "contribute" and select "4" to delete your feature named <', branchName, '>.', gitCmd.trail]);
+    fprintf([gitCmd.lead, gitCmd.trail]);
+    fprintf([gitCmd.lead, '    For future reference:', gitCmd.trail]);
+    fprintf([gitCmd.lead, ' -> Run "contribute" and select "2" to choose the feature (branch) to work on.', gitCmd.trail]);
+    fprintf([gitCmd.lead, ' -> Run "contribute" and select "3" to publish your feature (branch) named <', branchName, '>.', gitCmd.trail]);
+    fprintf([gitCmd.lead, ' -> Run "contribute" and select "4" to delete your feature (branch) named <', branchName, '>.', gitCmd.trail]);
 end

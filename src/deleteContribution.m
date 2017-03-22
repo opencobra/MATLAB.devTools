@@ -1,7 +1,7 @@
 function deleteContribution(branchName)
 % devTools
 %
-% PURPOSE: deletes and existing contribution named <branchName>
+% PURPOSE: deletes and existing feature (branch) named <branchName>
 %
 
     global gitConf
@@ -17,9 +17,9 @@ function deleteContribution(branchName)
     end
 
     if isempty(strfind(branchName, 'develop')) && isempty(strfind(branchName, 'master'))
-        reply = input([gitCmd.lead, originCall, 'Are you sure that you want to delete the feature (branch) <', branchName, '>? Y/N [N]: '], 's');
+        reply = input([gitCmd.lead, originCall, 'Are you sure that you want to delete the feature (branch) <', branchName, '>? YES/NO [NO]: '], 's');
 
-        if ~isempty(reply) && (strcmpi(reply, 'y') || strcmpi(reply, 'yes'))
+        if ~isempty(reply) && strcmpi(reply, 'yes') % users MUST enter 'yes', not only 'y'
 
             % checkout the develop branch
             checkoutBranch('develop');
