@@ -45,8 +45,9 @@ function contribute(verbose)
                 if exist('gitConf.fullForkDir', 'var')
                     %list all available features
                     listFeatures();
-                    exampleBranch = 'add-constraints';
                 end
+
+                exampleBranch = 'add-constraints';
 
                 reply = '';
                 while isempty(reply)
