@@ -9,9 +9,9 @@
 
 # Pre-requisites
 
-Please follow the [configuration instructions](https://github.com/laurentheirendt/devTools/blob/master/PREREQUISITES.md) carefully. You may skip this if your system is already set up and you have `git` configured.
+Please follow the [configuration instructions](https://github.com/opencobra/MATLAB.devTools/blob/master/PREREQUISITES.md) carefully. You may skip this if your system is already set up and you have `git` configured.
 
-![#ff0000](https://placehold.it/15/ff0000/000000?text=+) **IMPORTANT**: Please make sure that you have configured your SSH key in Github as explained [here](https://github.com/laurentheirendt/devTools/blob/master/PREREQUISITES.md).
+![#ff0000](https://placehold.it/15/ff0000/000000?text=+) **IMPORTANT**: Please make sure that you have configured your SSH key in Github as explained [here](https://github.com/opencobra/MATLAB.devTools/blob/master/PREREQUISITES.md).
 
 # Installation
 
