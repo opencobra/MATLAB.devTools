@@ -73,7 +73,7 @@ function freshClone = cloneFork()
                 printMsg(mfilename, 'Origin in local copy of fork set properly.');
             else
                 fprintf(result_gitSetOrigin);
-                error([gitCmd.lead, ' [', mfilename,'] Origin in local copy of fork could not be set.', gitCmd.success, gitCmd.trail]);
+                error([gitCmd.lead, ' [', mfilename,'] Origin in local copy of fork could not be set.', gitCmd.fail]);
             end
         end
 

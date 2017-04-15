@@ -23,6 +23,11 @@ function confDevTools(launcher, remoteRepoURL, nickName, verbose)
         gitConf.nickName = nickName;
     end
 
+    % define the URL of the devTools
+    gitConf.devToolsURL_SSH = 'git@github.com:opencobra/MATLAB.devTools.git';
+    gitConf.devToolsURL_HTTPS = 'https://github.com/opencobra/MATLAB.devTools.git';
+    gitConf.devTools_name = 'MATLAB.devTools';
+
     % definition of commands
     gitCmd.lead = 'dev>  ';
     gitCmd.success = ' (Success) ';
