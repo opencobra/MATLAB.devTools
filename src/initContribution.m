@@ -34,7 +34,7 @@ function initContribution(branchName)
         end
 
         % replace non-literal characters or non-numbers with a dash
-        branchName = regexprep(branchName, '[^a-zA-Z0-9]', '-');
+        branchName = regexprep(branchName, '[^a-zA-Z0-9_-]', '-');
 
         % check if the branch already exists, and if, ask if the user wants to continue
         if checkBranchExistence(branchName) && checkoutFlag
