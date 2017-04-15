@@ -9,6 +9,7 @@ function confDevTools(launcher, remoteRepoURL, nickName, verbose)
 
     % definition of parameters
     gitConf.leadForkDirName = 'fork-';
+    gitConf.exampleBranch = 'add-constraints';
 
     if nargin < 4  % default values
         gitConf.verbose = false;

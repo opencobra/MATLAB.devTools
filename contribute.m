@@ -47,7 +47,8 @@ function contribute(verbose)
                     listFeatures();
                 end
 
-                exampleBranch = 'add-constraints';
+                % define a name of an example branch
+                exampleBranch = gitConf.exampleBranch;
 
                 reply = '';
                 while isempty(reply)
@@ -66,7 +67,11 @@ function contribute(verbose)
                 cd(gitConf.fullForkDir);
 
                 %list all available features
-                [exitFlag, ~, ~, exampleBranch] = listFeatures();
+                [exitFlag, currentBranch, ~, exampleBranch] = listFeatures();
+
+                if ~strcmpi('develop', currentBranch) && ~strcmpi('master', currentBranch)
+                    exampleBranch = currentBranch;
+                end
 
                 if ~exitFlag
                     reply = '';

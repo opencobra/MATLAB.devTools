@@ -14,11 +14,11 @@ function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
     % retrieve a list of branches
     [status, result] = system('git branch --list');
 
-    % initialize the default value of the currentBranch
-    currentBranch = 'develop';
+    % determine name of the current branch
+    currentBranch = getCurrentBranchName();
 
     % give an example name
-    exampleBranch = 'add-constraints';
+    exampleBranch = gitConf.exampleBranch;
 
     if status == 0
         arrResult = strsplit(result, '\n');
@@ -34,11 +34,6 @@ function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
                 tmpName = tmpName{1};
                 if isempty(strfind(tmpName, 'develop')) && isempty(strfind(tmpName, 'master')) && ~isempty(tmpName)
                     fprintf(['      - ', tmpName, '\n']);
-
-                    % define the currentBranch
-                    if ~isempty(strfind(tmpName, '*'))
-                        currentBranch = tmpName;
-                    end
 
                     % define an example branch name
                     exampleBranch = tmpName;

@@ -27,6 +27,15 @@ function updateSubmodules()
         error([gitCmd.lead, ' [', mfilename,'] The submodules could not be initialized.', gitCmd.fail]);
     end
 
+    % reset each submodule
+    [status_gitReset result_gitReset] = system('git submodule foreach --recursive git reset --hard');
+    if status_gitReset == 0
+        printMsg(mfilename, 'The submodules have been reset.');
+    else
+        fprintf(result_gitReset);
+        error([gitCmd.lead, ' [', mfilename,'] The submodules could not be reset.', gitCmd.fail]);
+    end
+
     % restore global configuration by unsetting http.sslVerify
     [status_setSSLVerify, result_setSSLVerify] = system('git config --global --unset http.sslVerify');
 
