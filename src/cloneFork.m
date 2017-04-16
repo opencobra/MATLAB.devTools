@@ -54,7 +54,10 @@ function freshClone = cloneFork()
 
         remoteFrags = strsplit(result_gitRemote);
 
-        if status_gitRemote == 0 && strcmp(remoteFrags(1), 'origin') && isempty(strfind(char(remoteFrags(2)), 'git@github.com'))
+        indexOrigin_cell = strfind(remoteFrags, 'origin');
+        indexOrigin = find(not(cellfun('isempty', indexOrigin_cell)));
+
+        if status_gitRemote == 0 && strcmp(remoteFrags(indexOrigin(1)), 'origin') && isempty(strfind(char(remoteFrags(indexOrigin(1) + 1)), 'git@github.com'))
 
             % remove the origin
             [status_gitRemoveOrigin, result_gitRemoveOrigin] = system('git remote remove origin');

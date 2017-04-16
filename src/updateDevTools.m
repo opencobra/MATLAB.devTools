@@ -12,7 +12,10 @@ function updateDevTools()
 
     remoteFrags = strsplit(result_gitRemote);
 
-    if status_gitRemote == 0 && strcmp(remoteFrags(1), 'origin') && strcmp(remoteFrags(2), gitConf.devToolsURL_HTTPS)
+    indexOrigin_cell = strfind(remoteFrags, 'origin');
+    indexOrigin = find(not(cellfun('isempty', indexOrigin_cell)));
+
+    if status_gitRemote == 0 && strcmpi(remoteFrags(indexOrigin(1)), 'origin') && strcmpi(remoteFrags(indexOrigin(1) + 1), gitConf.devToolsURL_HTTPS)
         reply = input(['   -> The URL of the devTools is not set properly. Did you set the SSH key in GitHub? Y/N [N]: '], 's');
         if ~isempty(reply) && (strcmpi(reply, 'y') || strcmpi(reply, 'yes'))
             % set a new origin
@@ -25,9 +28,8 @@ function updateDevTools()
                 error([gitCmd.lead, ' [', mfilename,'] Origin in local copy of ', gitConf.devTools_name, ' could not be set.', gitCmd.error]);
             end
         else
-            error(['Please set the SSH key in Github before using the ', devTools_name, '.']);
+            error(['Please set the SSH key in Github before using the ', devTools_name, '.', gitCmd.error]);
         end
-
     end
 
     % checkout the master branch of the devTools
@@ -40,7 +42,7 @@ function updateDevTools()
     end
 
     % fetch all content from remote
-    [status_gitFetch, result_gitFetch] = system('git fetch');
+    [status_gitFetch, result_gitFetch] = system('git fetch origin');
     if status_gitFetch == 0
         printMsg(mfilename, ['All changes of ', gitConf.devTools_name, 'have been fetched']);
     else

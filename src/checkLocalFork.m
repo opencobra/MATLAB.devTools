@@ -21,7 +21,10 @@ function checkLocalFork()
 
         remoteFrags = strsplit(result_gitRemote);
 
-        if status_gitRemote == 0 && strcmp(remoteFrags(1), 'origin') && strcmp(remoteFrags(2), gitConf.remoteRepoURL) && strcmp(remoteFrags(4), 'origin') && strcmp(remoteFrags(5), gitConf.remoteRepoURL)
+        indexOrigin_cell = strfind(remoteFrags, 'origin');
+        indexOrigin = find(not(cellfun('isempty', indexOrigin_cell)));
+
+        if status_gitRemote == 0 && strcmpi(remoteFrags(indexOrigin(1)), 'origin') && strcmpi(remoteFrags(indexOrigin(1) + 1), gitConf.remoteRepoURL) && strcmpi(remoteFrags(indexOrigin(2)), 'origin') && strcmpi(remoteFrags(indexOrigin(2) + 1), gitConf.remoteRepoURL)
             error([gitCmd.lead, ' [', mfilename, '] The current folder contains the public version. Contributions can only be made from your own fork.'])
         end
 
