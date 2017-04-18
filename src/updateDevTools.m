@@ -32,50 +32,64 @@ function updateDevTools()
         end
     end
 
-    % fetch all content from remote
-    [status_gitFetch, result_gitFetch] = system('git fetch origin');
-    if status_gitFetch == 0
-        printMsg(mfilename, ['All changes of ', gitConf.devTools_name, 'have been fetched']);
-    else
-        fprintf(result_gitFetch);
-        error([gitCmd.lead, ' [', mfilename,'] The changes of ', gitConf.devTools_name, ' could not be fetched.', gitCmd.error]);
-    end
+    % retrieve the status
+    [status_gitStatus, result_gitStatus] = system('git status -s');
 
-    % determine the number of commits that the local master branch is behind
-    [status_gitCount, result_gitCount] = system('git rev-list --count origin/master...HEAD');
-    result_gitCount = char(result_gitCount);
-    result_gitCount = result_gitCount(1:end-1);
+    if status_gitStatus == 0 && isempty(result_gitStatus)
 
-    if status_gitCount == 0
-        printMsg(mfilename, ['There are ', result_gitCount, ' new commit(s).']);
+        % fetch all content from remote
+        [status_gitFetch, result_gitFetch] = system('git fetch origin');
+        if status_gitFetch == 0
+            printMsg(mfilename, ['All changes of ', gitConf.devTools_name, 'have been fetched']);
+        else
+            fprintf(result_gitFetch);
+            error([gitCmd.lead, ' [', mfilename,'] The changes of ', gitConf.devTools_name, ' could not be fetched.', gitCmd.error]);
+        end
 
-        if str2num(result_gitCount) > 0
-            reply = input(['   -> Do you want to update the ', gitConf.devTools_name,'? Y/N [Y]: '], 's');
+        % determine the number of commits that the local master branch is behind
+        [status_gitCount, result_gitCount] = system('git rev-list --count origin/master...HEAD');
+        result_gitCount = char(result_gitCount);
+        result_gitCount = result_gitCount(1:end-1);
 
-            if ~isempty(reply) && (strcmpi(reply, 'y') || strcmpi(reply, 'yes'))
-                % checkout the master branch of the devTools
-                [status_gitCheckoutMaster, result_gitCheckoutMaster] = system('git checkout master');
-                if status_gitCheckoutMaster == 0
-                    printMsg(mfilename, ['The <master> branch of the ', gitConf.devTools_name, ' has been checked out.']);
-                else
-                    fprintf(result_gitCheckoutMaster);
-                    error([gitCmd.lead, ' [', mfilename,'] The <master> branch of the ', gitConf.devTools_name, ' could not be checked out.', gitCmd.error]);
+        if status_gitCount == 0
+            printMsg(mfilename, ['There are ', result_gitCount, ' new commit(s).']);
+
+            if str2num(result_gitCount) > 0
+                reply = input(['   -> Do you want to update the ', gitConf.devTools_name,'? Y/N [Y]: '], 's');
+
+                if ~isempty(reply) && (strcmpi(reply, 'y') || strcmpi(reply, 'yes'))
+
+                    branches = {'develop', 'master'};
+
+                    % loop over develop and master
+                    for k = 1:length(branches)
+                        % checkout the master branch of the devTools
+                        [status_gitCheckoutMaster, result_gitCheckoutMaster] = system(['git checkout ', branches{k}]);
+                        if status_gitCheckoutMaster == 0
+                            printMsg(mfilename, ['The ', branches{k},' branch of the ', gitConf.devTools_name, ' has been checked out.']);
+                        else
+                            fprintf(result_gitCheckoutMaster);
+                            error([gitCmd.lead, ' [', mfilename,'] The ', branches{k},' branch of the ', gitConf.devTools_name, ' could not be checked out.', gitCmd.error]);
+                        end
+
+                        % pull the latest changes from the master branch
+                        [status_gitPull, result_gitPull] = system(['git pull origin ', branches{k}]);
+                        if status_gitPull == 0
+                            printMsg(mfilename, ['The ', gitConf.devTools_name, 'have been updated.']);
+                        else
+                            fprintf(result_gitPull);
+                            error([gitCmd.lead, ' [', mfilename,'] The ', gitConf.devTools_name, ' could not be updated.', gitCmd.error]);
+                        end
+                    end
                 end
-
-                % pull the latest changes from the master branch
-                [status_gitPull, result_gitPull] = system('git pull origin master');
-                if status_gitPull == 0
-                    printMsg(mfilename, ['The ', gitConf.devTools_name, 'have been updated.']);
-                else
-                    fprintf(result_gitPull);
-                    error([gitCmd.lead, ' [', mfilename,'] The ', gitConf.devTools_name, ' could not be updated.', gitCmd.error]);
-                end
+            else
+                printMsg(mfilename, ['The ', gitConf.devTools_name, ' are up-to-date.']);
             end
         else
-            printMsg(mfilename, ['The ', gitConf.devTools_name, ' are up-to-date.']);
+            fprintf(result_gitCount);
+            error([gitCmd.lead, ' [', mfilename,'] Eventual changes of the <master> branch of the ', gitConf.devTools_name, ' could not be counted.', gitCmd.error]);
         end
     else
-        fprintf(result_gitCount);
-        error([gitCmd.lead, ' [', mfilename,'] Eventual changes of the <master> branch of the ', gitConf.devTools_name, ' could not be counted.', gitCmd.error]);
+        printMsg(mfilename, ['The ', gitConf.devTools_name, ' could not be updated as you have unstaged files.']);
     end
 end
