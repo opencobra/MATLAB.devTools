@@ -32,15 +32,6 @@ function updateDevTools()
         end
     end
 
-    % checkout the master branch of the devTools
-    [status_gitCheckoutMaster, result_gitCheckoutMaster] = system('git checkout master');
-    if status_gitCheckoutMaster == 0
-        printMsg(mfilename, ['The <master> branch of the ', gitConf.devTools_name, ' has been checked out.']);
-    else
-        fprintf(result_gitCheckoutMaster);
-        error([gitCmd.lead, ' [', mfilename,'] The <master> branch of the ', gitConf.devTools_name, ' could not be checked out.', gitCmd.error]);
-    end
-
     % fetch all content from remote
     [status_gitFetch, result_gitFetch] = system('git fetch origin');
     if status_gitFetch == 0
@@ -51,7 +42,7 @@ function updateDevTools()
     end
 
     % determine the number of commits that the local master branch is behind
-    [status_gitCount, result_gitCount] = system('git rev-list --count origin/master...@');
+    [status_gitCount, result_gitCount] = system('git rev-list --count origin/master...HEAD');
     result_gitCount = char(result_gitCount);
     result_gitCount = result_gitCount(1:end-1);
 
@@ -62,8 +53,17 @@ function updateDevTools()
             reply = input(['   -> Do you want to update the ', gitConf.devTools_name,'? Y/N [Y]: '], 's');
 
             if ~isempty(reply) && (strcmpi(reply, 'y') || strcmpi(reply, 'yes'))
-                [status_gitPull, result_gitPull] = system('git pull origin master');
+                % checkout the master branch of the devTools
+                [status_gitCheckoutMaster, result_gitCheckoutMaster] = system('git checkout master');
+                if status_gitCheckoutMaster == 0
+                    printMsg(mfilename, ['The <master> branch of the ', gitConf.devTools_name, ' has been checked out.']);
+                else
+                    fprintf(result_gitCheckoutMaster);
+                    error([gitCmd.lead, ' [', mfilename,'] The <master> branch of the ', gitConf.devTools_name, ' could not be checked out.', gitCmd.error]);
+                end
 
+                % pull the latest changes from the master branch
+                [status_gitPull, result_gitPull] = system('git pull origin master');
                 if status_gitPull == 0
                     printMsg(mfilename, ['The ', gitConf.devTools_name, 'have been updated.']);
                 else
