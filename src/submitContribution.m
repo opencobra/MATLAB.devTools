@@ -56,7 +56,7 @@ function submitContribution(branchName)
 
     % provide an error if more than 20 files to add
     if length(arrResult) > 20
-        fprintf([gitCmd.lead, originCall, 'You currently have more than 50 new files to add. Consider splitting them into multiple commits (typically only a few files per commit).'])
+        fprintf([gitCmd.lead, originCall, 'You currently have ', num2str(length(arrResult)), ' new files to add. Consider splitting them into multiple commits (typically only a few files per commit).'])
     end
 
     if addFileOrder
