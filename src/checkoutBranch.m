@@ -31,7 +31,7 @@ function checkoutBranch(branchName, update_fork)
     % retrieve the status
     [status_gitStatus, result_gitStatus] = system('git status -s');
 
-    if status_gitBranch == 0 && ~strcmpi('develop', currentBranch)
+    if status_gitBranch == 0 && ~strcmpi('develop', currentBranch) && isempty(result_gitStatus) && status_gitStatus == 0
 
         printMsg(mfilename, ['The current feature (branch) ', currentBranch, ' is not the <develop> feature (branch).'], [gitCmd.fail, gitCmd.trail]);
 
@@ -122,19 +122,28 @@ function checkoutBranch(branchName, update_fork)
                             printMsg(mfilename, ['The rebase process of <', branchName,'> with <develop> has been aborted.'], [gitCmd.fail, gitCmd.trail]);
                         end
 
-                        [status_curl, result_curl] = system(['curl -s -k --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName]);
+                        if isempty(strfind(result_gitRebase, 'Cannot rebase'))
+                            % ask the user first to reset
+                            reply = input([gitCmd.lead, ' -> Do you want to reset your feature (branch) <', branchName, '>. Y/N [N]: '], 's');
 
-                        if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
-                            % hard reset of an existing branch
-                            [status_gitReset, result_gitReset] = system(['git reset --hard origin/', branchName]);
-                            if status_gitReset == 0
-                                printMsg(mfilename, ['The <', branchName, '> feature (branch) has not been rebased with <develop> and is up to date.']);
+                            if ~isempty(reply) || strcmpi(reply, 'y') || strcmpi(reply, 'yes')
+                                [status_curl, result_curl] = system(['curl -s -k --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName]);
+
+                                if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
+                                    % hard reset of an existing branch
+                                    [status_gitReset, result_gitReset] = system(['git reset --hard origin/', branchName]);
+                                    if status_gitReset == 0
+                                        printMsg(mfilename, ['The <', branchName, '> feature (branch) has not been rebased with <develop> and is up to date.']);
+                                    else
+                                        fprintf(result_gitReset);
+                                        error([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> could not be reset.', gitCmd.fail]);
+                                    end
+                                else
+                                    printMsg(mfilename, ['The remote feature (branch) <', branchName, '> does not exist and could not be reset.'], [gitCmd.fail, gitCmd.trail]);
+                                end
                             else
-                                fprintf(result_gitReset);
-                                error([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> could not be reset.', gitCmd.fail]);
+                                printMsg(mfilename, ['The <', branchName, '> feature (branch) has not been reset.']);
                             end
-                        else
-                            printMsg(mfilename, ['The remote feature (branch) <', branchName, '> does not exist and could not be reset.'], [gitCmd.fail, gitCmd.trail]);
                         end
                     end
                 end
