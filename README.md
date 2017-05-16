@@ -52,4 +52,30 @@ The original repository will be downloaded (cloned) the first time to a folder n
 
 <img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" alt="warning"> If you get stuck or are faced with an system error message, please read the [FAQ](https://github.com/opencobra/MATLAB.devTools/blob/master/FAQ.md).
 
+## How can I update my fork without contributing?
+
+In order to only update your fork, run `>> contribute` and select menu item `[5]` in order to update the fork.
+
 ## Configure the `MATLAB.devTools` for another repository
+
+<img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" alt="warning"> The `MATLAB.devTools` can only be used with publicly accessible repositories.
+
+If you want to use the `MATLAB.devTools` with a repository other than the default repository, you must set the following variables:
+
+```Matlab
+  launcher = '\n\n       ~~~ MATLAB.devTools ~~~\n\n'; % a message for the repository (any string)
+  remoteRepoURL = 'https://server.com/repositoryName.git'; % the remote url
+  nickName = 'repoNickName'; % a nickName of the repository (any string)
+  verbose = false;  % turn the verbose mode on (true) or off (false)
+```
+and run:
+```Matlab
+% set the configuration
+confDevTools(launcher, remoteRepoURL, nickName, verbose);
+```
+
+If you want to reset the configuration, you can type:
+```Matlab
+>> resetDevTools();
+```
+If you want your changes to permanent, you can set the above mentioned variables in `./assets/confDevTools.m`.
