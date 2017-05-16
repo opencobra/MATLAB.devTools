@@ -73,8 +73,8 @@ and run:
 >> confDevTools(launcher, remoteRepoURL, nickName, verbose);  % sets the configuration
 ```
 
-If you want to reset the configuration, you can type:
+In order to reset the configuration, type:
 ```Matlab
 >> resetDevTools();
 ```
-If you want your changes to permanent, you can set the above mentioned variables in `./assets/confDevTools.m`.
+If you want your changes to be permanent, you can set the above mentioned variables in `./assets/confDevTools.m`.
