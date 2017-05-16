@@ -50,6 +50,13 @@ script:
     # launch the tests
     - sh ./runtests.sh;
 
+    - cd ~/fork-MATLAB.devTools.CI;
+    - git reset --hard origin/develop;
+    - git branch -D branch-test-1;
+    - git branch -D branch-test-2;
+    - git push origin --delete branch-test-1;
+    - git push origin --delete branch-test-2;
+
 after_success:
 
     # remove the cloned fork-repo

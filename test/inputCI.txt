@@ -1,14 +1,10 @@
 cobrabot
 ~/
 y
-y
-y
-y
-n
 n
 testFile1
 n
 y
-n
 testFile2
+n
 n
