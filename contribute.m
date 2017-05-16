@@ -38,12 +38,12 @@ function contribute(verbose)
 
     fprintf(gitConf.launcher);
 
-    choice = input('\n      (You can abort any process using CTRL-C)\n\n      [1] Start a new feature (branch).\n      [2] Select an existing feature (branch) to work on.\n      [3] Publish a feature (branch).\n      [4] Delete a feature (branch).\n\n   -> Please select what you want to do (enter the number): ', 's');
+    choice = input('\n      (You can abort any process using CTRL-C)\n\n      [1] Start a new feature (branch).\n      [2] Select an existing feature (branch) to work on.\n      [3] Publish a feature (branch).\n      [4] Delete a feature (branch).\n      [5] Update the fork.\n\n   -> Please select what you want to do (enter the number): ', 's');
 
     choice = str2num(choice);
 
-    if length(choice) == 0 || choice > 4 || choice < 1
-        error('Please enter a number between 1 and 4.')
+    if length(choice) == 0 || choice > 5 || choice < 0
+        error('Please enter a number between 1 and 5.')
     else
         if ~isempty(choice) && length(choice) > 0
             % ask for a name of the feature/branch
@@ -118,8 +118,11 @@ function contribute(verbose)
                     % call submitContribution
                     submitContribution(reply);
                 elseif choice == 4
-                    % call submitContribution
+                    % call deleteContribution
                     deleteContribution(reply);
+                elseif choice == 5
+                    % call updateFork
+                    updateFork();
                 end
             end
         end

@@ -50,6 +50,9 @@ script:
     # launch the tests
     - sh ./runtests.sh;
 
+    - cd ~/fork-MATLAB.devTools.CI;
+    - git reset --hard origin/develop;
+
 after_success:
 
     # remove the cloned fork-repo

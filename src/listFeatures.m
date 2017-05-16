@@ -11,8 +11,12 @@ function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
     % change to the fork diretory
     cd(gitConf.fullForkDir);
 
-    % retrieve a list of branches
-    [status, result] = system('git branch --list');
+    % retrieve a list of all the branches
+    filterColor = '';
+    if ~ispc
+        filterColor =  '| tr -s "[:cntrl:]" "\n"';
+    end
+    [status, result] = system(['git branch --list ', filterColor]);
 
     % determine name of the current branch
     currentBranch = getCurrentBranchName();
@@ -21,7 +25,7 @@ function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
     exampleBranch = gitConf.exampleBranch;
 
     if status == 0
-        arrResult = strsplit(result, '\n');
+        arrResult = regexp(result,'\s+','split'); %strsplit is not compatible with older versions of MATLAB
         arrResult = strtrim(arrResult);
         arrResult = arrResult(~cellfun(@isempty, arrResult));
 
@@ -32,7 +36,7 @@ function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
             for i = 1:length(arrResult)
                 tmpName = arrResult(i);
                 tmpName = tmpName{1};
-                if isempty(strfind(tmpName, 'develop')) && isempty(strfind(tmpName, 'master')) && ~isempty(tmpName)
+                if isempty(strfind(tmpName, '*')) && isempty(strfind(tmpName, 'develop')) && isempty(strfind(tmpName, 'master')) && ~isempty(tmpName)
                     fprintf(['      - ', tmpName, '\n']);
 
                     % define an example branch name
