@@ -40,6 +40,7 @@ You will then be presented by a menu:
    [2] Select an existing feature (branch) to work on.
    [3] Publish a feature (branch).
    [4] Delete a feature (branch).
+   [5] Update the fork.
 
 -> Please select what you want to do (enter the number):
 ```
