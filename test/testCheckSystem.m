@@ -48,6 +48,19 @@ openPR('add-test-CI');
 % delete the newly created branch
 %deleteContribution('add-test-CI');
 
+% test scenario
+% create 3 files at the root
+system('touch testFile1.txt;')
+system('touch testFile2.txt;')
+system('touch testFile3.txt;')
+
+initContribution('branch-test-1');
+submitContribution('branch-test-1');
+
+initContribution('branch-test-2');
+submitContribution('branch-test-2');
+
+
 % list available features
 listFeatures();
 
