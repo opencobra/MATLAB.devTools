@@ -45,6 +45,12 @@ submitContribution('branch-test-1'); % <-- input 4: y, input 5: n, input 6: test
 initContribution('branch-test-2');
 submitContribution('branch-test-2'); % < -- input 8: y, input 9: testFile2, input 10: n
 
+% delete the branches
+system('git branch -D branch-test-1');
+system('git branch -D branch-test-2');
+system('git push origin --delete branch-test-1');
+system('git push origin --delete branch-test-2');
+
 % create a test branch
 initContribution('add-test-CI');
 
