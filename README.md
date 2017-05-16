@@ -38,7 +38,7 @@ Making a contribution to any `git` repository from <img src="https://prince.lcsb
 ```
 
 You will then be presented by a menu:
-```Matlab
+```
    [1] Start a new feature (branch).
    [2] Select an existing feature (branch) to work on.
    [3] Publish a feature (branch).
