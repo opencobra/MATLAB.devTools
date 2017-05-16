@@ -170,6 +170,32 @@ function checkoutBranch(branchName, update_fork)
             fprintf([gitCmd.lead, ' [', mfilename, '] Uncommited changes of the current feature (branch) <', currentBranch, '> have been migrated to the new feature <', branchName, '>.', gitCmd.success, gitCmd.trail]);
         end
 
+        % checkout the develop branch (soft checkout without merg)
+        [status_gitCheckout, result_gitCheckout] = system('git checkout develop');
+
+        % retrieve the name of the current branch
+        currentBranch = getCurrentBranchName();
+
+        if status_gitCheckout == 0 && strcmpi('develop', currentBranch)
+            printMsg(mfilename, 'The current feature (branch) is <develop>.');
+        else
+            fprintf(result_gitCheckout);
+            error([gitCmd.lead, 'An error occurred and the <develop> feature (branch) cannot be checked out']);
+        end
+
+        % update all submodules
+        updateSubmodules();
+
+        % make sure that the develop branch is up to date
+        [status_gitPull, result_gitPull] = system('git pull origin develop');
+
+        if status_gitPull == 0
+            printMsg(mfilename, 'The changes on the <develop> feature (branch) of your fork have been pulled.');
+        else
+            fprintf(result_gitPull);
+            error([gitCmd.lead, 'The changes on the <develop> feature (branch) could not be pulled.', gitCmd.fail]);
+        end
+
         % checkout the branch but do not update the fork
         checkoutBranch(branchName, false);
     end
