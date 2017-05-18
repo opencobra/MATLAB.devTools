@@ -104,7 +104,8 @@ function checkoutBranch(branchName, update_fork)
                     % perform a rebase
                     [status_gitRebase, result_gitRebase] = system('git rebase develop');
 
-                    if status_gitRebase == 0 && isempty(strfind(result_gitRebase, 'up to date'))
+                    % if the message after rebase does not contain up to data and not cannot rebase
+                    if status_gitRebase == 0 && isempty(strfind(result_gitRebase, 'up to date')) && isempty(strfind(result_gitRebase, 'Cannot rebase'))
                         printMsg(mfilename, ['The <', branchName, '> feature (branch) has been rebased with <develop>.']);
 
                         % push by force the rebased branch
@@ -122,7 +123,8 @@ function checkoutBranch(branchName, update_fork)
                             printMsg(mfilename, ['The rebase process of <', branchName,'> with <develop> has been aborted.'], [gitCmd.fail, gitCmd.trail]);
                         end
 
-                        if isempty(strfind(result_gitRebase, 'Cannot rebase'))
+                        % if the message after rebase contains : cannot rebase
+                        if ~isempty(strfind(result_gitRebase, 'Cannot rebase'))
                             % ask the user first to reset
                             reply = input([gitCmd.lead, ' -> Do you want to reset your feature (branch) <', branchName, '>. Y/N [N]: '], 's');
 
