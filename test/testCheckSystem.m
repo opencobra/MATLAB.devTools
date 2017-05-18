@@ -67,6 +67,9 @@ delete('test-CI.txt');
 % list available features
 listFeatures();
 
+% check the status of the repository
+checkStatus();
+
 % reset the local fork
 resetLocalFork();
 
