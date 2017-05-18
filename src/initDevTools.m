@@ -8,7 +8,7 @@ function initDevTools()
     global gitCmd
 
     % check the system and set the configuration
-    checkSystem();
+    checkSystem(mfilename);
 
     if ~isfield(gitConf, 'userName'), gitConf.userName = []; end
     if ~isfield(gitConf, 'localDir'), gitConf.localDir = []; end

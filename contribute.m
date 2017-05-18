@@ -18,7 +18,7 @@ function contribute(verbose)
     addpath(genpath(fileparts(which(mfilename))));
 
     % check the system and set the configuration
-    checkSystem();
+    checkSystem(mfilename);
 
     if nargin > 0
         if verbose
