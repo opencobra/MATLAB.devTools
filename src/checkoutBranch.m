@@ -104,7 +104,7 @@ function checkoutBranch(branchName, update_fork)
                     % perform a rebase
                     [status_gitRebase, result_gitRebase] = system('git rebase develop');
 
-                    if status_gitRebase == 0 && isempty(strfind(result_gitRebase, 'up to date'))
+                    if status_gitRebase == 0 && ~isempty(strfind(result_gitRebase, 'up to date'))
                         printMsg(mfilename, ['The <', branchName, '> feature (branch) has been rebased with <develop>.']);
 
                         % push by force the rebased branch
