@@ -17,8 +17,15 @@ function checkSystem(callerName)
     % set the callerName
     if nargin < 1
         callerName = '';
+        verbose = true;
     else
+        verbose = false;
         callerName = ['(caller: ', callerName, ')'];
+    end
+
+    if verbose
+        gitConfVerbose = gitConf.verbose;
+        gitConf.verbose = true;
     end
 
     % check if git is properly installed
@@ -38,5 +45,9 @@ function checkSystem(callerName)
         printMsg(mfilename, [callerName, ' curl is properly installed.']);
     else
         error([gitCmd.lead, ' [', mfilename, ']', callerName, ' curl is not installed. Please follow the guidelines how to install curl.']);
+    end
+
+    if verbose
+        gitConf.verbose = gitConfVerbose;
     end
 end
