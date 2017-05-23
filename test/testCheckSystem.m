@@ -5,13 +5,13 @@ global gitCmd
 launcher = '\n\n       ~~~ MATLAB.devTools ~~~\n\n';
 remoteRepoURL = 'https://github.com/uni-lu/MATLAB.devTools.CI.git';
 nickName = 'MATLAB.devTools.CI';
-verbose = true;
+printLevel = 1;
 
 % reset the development tools
 resetDevTools();
 
 % set the configuration
-confDevTools(launcher, remoteRepoURL, nickName, verbose);
+confDevTools(launcher, remoteRepoURL, nickName, printLevel);
 
 % check the system
 checkSystem();

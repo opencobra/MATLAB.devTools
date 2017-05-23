@@ -16,13 +16,13 @@ where `<MATLAB_INSTALLATION_PATH>` corresponds to the installation of `MATLAB`, 
 
 Once you submit your contribution (menu item 3), you will be presented with a link that leads you directly to the pull request (PR).
 
-## Turn on the verbose mode
+## Print more detailed debugging information (verbose)
 
 If you encounter a problem, or suspect that something is not behaving properly, please run:
 ```
->> contribute(true)
+>> contribute(1)
 ```
-and follow the process as normally. You can also set `gitConf.verbose = true;` in `assets/confDevTools.m`.
+and follow the process as normally. This will set `printLevel = 1`. You can also set permanently `gitConf.printLevel = 1;` in `assets/confDevTools.m`.
 
 ## Resolve unexpected behavior - reset
 

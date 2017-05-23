@@ -10,7 +10,7 @@ function initContribution(branchName)
     % initialize the development tools
     initDevTools();
 
-    if gitConf.verbose
+    if gitConf.printLevel > 0
         originCall = [' [', mfilename, '] '];
     else
         originCall  = '';

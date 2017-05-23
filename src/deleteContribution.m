@@ -10,7 +10,7 @@ function deleteContribution(branchName)
     % change the directory to the local directory of the fork
     cd(gitConf.fullForkDir);
 
-    if gitConf.verbose
+    if gitConf.printLevel > 0
         originCall = [' [', mfilename, '] '];
     else
         originCall  = '';

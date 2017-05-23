@@ -13,7 +13,7 @@ function submitContribution(branchName)
     % check if branch exists
     checkoutBranch(branchName);
 
-    if gitConf.verbose
+    if gitConf.printLevel > 0
         originCall = [' [', mfilename, '] '];
     else
         originCall  = '';

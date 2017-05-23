@@ -22,7 +22,7 @@ function initDevTools()
     [status_gitConfUserGet, result_gitConfUserGet] = system('git config --get user.github-username');
     gitConf.userName = strtrim(result_gitConfUserGet);
 
-    if gitConf.verbose
+    if gitConf.printLevel > 0
         originCall = [' [', mfilename, '] '];
     else
         originCall  = '';

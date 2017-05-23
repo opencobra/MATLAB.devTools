@@ -11,7 +11,7 @@ function printMsg(fileName, msg, endMsg)
         endMsg = [gitCmd.success, gitCmd.trail];
     end
 
-    if gitConf.verbose
+    if gitConf.printLevel > 0
         fprintf([gitCmd.lead, ' [', fileName, '] ', msg, endMsg]);
     end
 end

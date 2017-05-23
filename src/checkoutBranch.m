@@ -56,7 +56,7 @@ function checkoutBranch(branchName, update_fork)
         % reset the develop branch
         [status_gitReset, result_gitReset] = system('git reset --hard upstream/develop');
         if status_gitReset == 0
-            if gitConf.verbose
+            if gitConf.printLevel > 0
                 fprintf([gitCmd.lead, ' [', mfilename, '] The current feature (branch) is <develop>.', gitCmd.success, gitCmd.trail]);
             end
         else
@@ -161,13 +161,13 @@ function checkoutBranch(branchName, update_fork)
                 end
             end
         else
-            if gitConf.verbose
+            if gitConf.printLevel > 0
                 fprintf(result_gitCheckout);
                 fprintf([gitCmd.lead, ' [', mfilename, '] The feature (branch) <', branchName, '> could not be checked out.', gitCmd.fail, gitCmd.trail]);
             end
         end
     else
-        if gitConf.verbose && ~strcmp(branchName, currentBranch)
+        if gitConf.printLevel > 0 && ~strcmp(branchName, currentBranch)
             fprintf(result_gitStatus);
             fprintf([gitCmd.lead, ' [', mfilename, '] Uncommited changes of the current feature (branch) <', currentBranch, '> have been migrated to the new feature <', branchName, '>.', gitCmd.success, gitCmd.trail]);
         end

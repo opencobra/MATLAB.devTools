@@ -11,21 +11,21 @@ function checkSystem(callerName)
     if isempty(gitConf)
         confDevTools();
     else
-        confDevTools(gitConf.launcher, gitConf.remoteRepoURL, gitConf.nickName, gitConf.verbose);
+        confDevTools(gitConf.launcher, gitConf.remoteRepoURL, gitConf.nickName, gitConf.printLevel);
     end
 
     % set the callerName
     if nargin < 1
         callerName = '';
-        verbose = true;
+        printLevel = 1;
     else
-        verbose = false;
+        printLevel = 0;
         callerName = ['(caller: ', callerName, ')'];
     end
 
-    if verbose
-        gitConfVerbose = gitConf.verbose;
-        gitConf.verbose = true;
+    if printLevel > 0
+        gitConfprintLevel = gitConf.printLevel;
+        gitConf.printLevel = 1;
     end
 
     % check if git is properly installed
@@ -47,7 +47,7 @@ function checkSystem(callerName)
         error([gitCmd.lead, ' [', mfilename, ']', callerName, ' curl is not installed. Please follow the guidelines how to install curl.']);
     end
 
-    if verbose
-        gitConf.verbose = gitConfVerbose;
+    if printLevel > 0
+        gitConf.printLevel = gitConfprintLevel;
     end
 end

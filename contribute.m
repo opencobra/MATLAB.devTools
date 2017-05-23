@@ -1,4 +1,4 @@
-function contribute(verbose)
+function contribute(printLevel)
 % devTools
 %
 % PURPOSE: displays a menu and calls the respective subfunctions
@@ -7,6 +7,11 @@ function contribute(verbose)
 %       2. Select an existing feature (branch) to work on.
 %       3. Publish a feature (branch).
 %       4. Delete a feature (branch).
+%
+% INPUT:
+%
+%     printLevel:     0: minimal printout (default)
+%                     1: detailed printout (debug mode)
 
     global gitConf
     global gitCmd
@@ -21,10 +26,10 @@ function contribute(verbose)
     checkSystem(mfilename);
 
     if nargin > 0
-        if verbose
-            gitConf.verbose = verbose;
+        if printLevel > 0
+            gitConf.printLevel = printLevel;
         else
-            gitConf.verbose = false;
+            gitConf.printLevel = 0;
         end
     end
 

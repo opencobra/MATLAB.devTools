@@ -1,4 +1,4 @@
-function confDevTools(launcher, remoteRepoURL, nickName, verbose)
+function confDevTools(launcher, remoteRepoURL, nickName, printLevel)
 % devTools
 %
 % PURPOSE: define the configuration of the devTools
@@ -12,12 +12,12 @@ function confDevTools(launcher, remoteRepoURL, nickName, verbose)
     gitConf.exampleBranch = 'add-constraints';
 
     if nargin < 4  % default values
-        gitConf.verbose = false;
+        gitConf.printLevel = 0;
         gitConf.launcher = '\n\n      _____   _____   _____   _____     _____     |\n     /  ___| /  _  \\ |  _  \\ |  _  \\   / ___ \\    |   COnstraint-Based Reconstruction and Analysis\n     | |     | | | | | |_| | | |_| |  | |___| |   |   The COBRA Toolbox - 2017\n     | |     | | | | |  _  { |  _  /  |  ___  |   |\n     | |___  | |_| | | |_| | | | \\ \\  | |   | |   |   Documentation:\n     \\_____| \\_____/ |_____/ |_|  \\_\\ |_|   |_|   |   http://opencobra.github.io/cobratoolbox\n                                                  | \n\n';
         gitConf.remoteRepoURL = 'https://github.com/opencobra/cobratoolbox.git';
         gitConf.nickName = 'cobratoolbox';
     else
-        gitConf.verbose = verbose;
+        gitConf.printLevel = printLevel;
         gitConf.launcher = launcher;
         gitConf.remoteRepoURL = remoteRepoURL;
         gitConf.nickName = nickName;

@@ -66,11 +66,11 @@ If you want to use the `MATLAB.devTools` with a repository other than the defaul
 launcher = '\n\n       ~~~ MATLAB.devTools ~~~\n\n'; % a message for the repository (any string)
 remoteRepoURL = 'https://server.com/repositoryName.git'; % the remote url
 nickName = 'repoNickName'; % a nickName of the repository (any string)
-verbose = false;  % turn the verbose mode on (true) or off (false)
+printLevel = 0;  % set the printLevel mode
 ```
 and run:
 ```Matlab
->> confDevTools(launcher, remoteRepoURL, nickName, verbose);  % sets the configuration
+>> confDevTools(launcher, remoteRepoURL, nickName, printLevel);  % sets the configuration
 ```
 
 In order to reset the configuration, type:
