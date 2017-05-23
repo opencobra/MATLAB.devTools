@@ -97,6 +97,14 @@ function updateFork(force)
 
                     if length(commitsAheadBehind) > 0 && commitsAheadBehind(2) > 0
 
+                        [status_gitPull, result_gitPull] = system(['git pull origin ', branches{k}]);
+                        if status_gitPull == 0
+                            printMsg(mfilename, ['The <', branches{k}, '> feature (branch) of the fork could not be pulled.']);
+                        else
+                            fprintf(result_gitPull);
+                            error([gitCmd.lead, ' [', mfilename,'] Impossible to pull changes from the <', branches{k}, '> feature (branch) of the fork.', gitCmd.fail]);
+                        end
+
                         if ~force
                             % merge the changes from upstream to the branch
                             [status_gitMergeUpstream, result_gitMergeUpstream] = system(['git merge upstream/', branches{k}]);
