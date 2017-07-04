@@ -90,12 +90,15 @@ function updateFork(force)
                 end
 
                 % determine the number of commits that the local master branch is behind
-                [status_gitCount, result_gitCount] = system(['git rev-list --left-right --count ', branches{k}, '...upstream/', branches{k}]);
+                [status_gitCountUpstream, result_gitCountUpstream] = system(['git rev-list --left-right --count ', branches{k}, '...upstream/', branches{k}]);
 
-                if status_gitCount == 0
-                    commitsAheadBehind = str2num(char(strsplit(result_gitCount)));
+                [status_gitCountOrigin, result_gitCountOrigin] = system(['git rev-list --left-right --count ', branches{k}, '...origin/', branches{k}]);
 
-                    if length(commitsAheadBehind) > 0 && commitsAheadBehind(2) > 0
+                if status_gitCountUpstream == 0 && status_gitCountOrigin == 0
+                    commitsAheadBehindUpstream = str2num(char(strsplit(result_gitCountUpstream)));
+                    commitsAheadBehindOrigin = str2num(char(strsplit(result_gitCountOrigin)));
+
+                    if (length(commitsAheadBehindUpstream) > 0 && commitsAheadBehindUpstream(2) > 0) || (length(commitsAheadBehindOrigin) > 0 && commitsAheadBehindOrigin(1) > 0)
 
                         [status_gitPull, result_gitPull] = system(['git pull origin ', branches{k}]);
                         if status_gitPull == 0
