@@ -157,6 +157,7 @@ function updateFork(force)
             error([gitCmd.lead, ' [', mfilename,'] Impossible to retrieve the features (branches) of your local fork.', gitCmd.fail]);
         end
     else
+        fprintf(result_gitStatus);
         printMsg(mfilename, ['The local fork cannot be updated as you have uncommitted changes. Please submit/publish them first.']);
     end
 
