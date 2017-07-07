@@ -69,6 +69,9 @@ function initDevTools()
         end
     end
 
+    % define the name of the local fork directory
+    gitConf.forkDirName = strrep([gitConf.leadForkDirName, gitConf.remoteRepoName], '\', '\\');
+
     % retrieve the directory of the fork from the local git configuration
     [~, result_gitConfForkDirGet] = system(['git config --get user.', gitConf.leadForkDirName, gitConf.nickName, '.path']);
     gitConf.fullForkDir = strtrim(result_gitConfForkDirGet);
@@ -129,7 +132,6 @@ function initDevTools()
     end
 
     % define the fork directory name
-    gitConf.forkDirName = strrep([gitConf.leadForkDirName, gitConf.remoteRepoName], '\', '\\');
     gitConf.fullForkDir = strrep([gitConf.localDir, gitConf.forkDirName], '\', '\\');
 
     % permanently store the fork directory in the git configuration (ask the user explicitly)
