@@ -19,6 +19,10 @@ function initDevTools()
     gitConf.remoteRepoName = gitConf.remoteRepoURL(sepIndices(4)+1:end-4);
     gitConf.remoteUserName = gitConf.remoteRepoURL(sepIndices(3)+1:sepIndices(4)-1);
 
+    % ignore case for the current fork (avoids problems for untracked files with case conflicts)
+    [status_gitIgnoreCase, result_gitIgnoreCase] = system('git config core.ignorecase true');
+
+    % retrieve the user name
     [status_gitConfUserGet, result_gitConfUserGet] = system('git config --get user.github-username');
     gitConf.userName = strtrim(result_gitConfUserGet);
 
@@ -87,6 +91,8 @@ function initDevTools()
         while ~createDir
             reply = input([gitCmd.lead, originCall, ' -> Please define the local path to your fork\n       current: ', strrep(pwd,'\','\\'),'\n       Enter the path (press ENTER to use the current path): '], 's');
 
+            reply
+
             if isempty(reply)
                 gitConf.localDir = strrep(pwd, '\', '\\');
             else
@@ -99,8 +105,10 @@ function initDevTools()
             end
 
             % strip the fork-nickName folder from the localDir if present
-            if strcmp(gitConf.localDir(end-length(gitConf.forkDirName)+1:end), gitConf.forkDirName)
-                gitConf.localDir = gitConf.localDir(1:end-length(gitConf.forkDirName));
+            if ~isempty(gitConf.localDir) && length(gitConf.forkDirName) <= length(gitConf.localDir)
+                if strcmp(gitConf.localDir(end-length(gitConf.forkDirName)+1:end), gitConf.forkDirName)
+                    gitConf.localDir = gitConf.localDir(1:end-length(gitConf.forkDirName));
+                end
             end
 
             % warn the user of not using a fork-nickName directory or a git cloned directory as it will be cloned

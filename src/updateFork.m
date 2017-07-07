@@ -46,7 +46,7 @@ function updateFork(force)
 
             if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
                 % pull eventual changes from other contributors or administrators
-                [status_gitFetchOrigin, result_gitFetchOrigin] = system('git fetch origin ');  % no pull
+                [status_gitFetchOrigin, result_gitFetchOrigin] = system('git fetch origin');  % no pull
                 if status_gitFetchOrigin == 0
                     printMsg(mfilename, 'Changes of fork (origin) fetched.');
                 else
@@ -78,6 +78,7 @@ function updateFork(force)
                         fprintf(result_gitCheckout);
                         printMsg(mfilename, ['The feature (branch) <', branches{k}, '> could not be checked out.']);
                     end
+
                 else
                     [status_gitCheckoutCreate, result_gitCheckoutCreate] = system(['git checkout -b ', branches{k}]);
 
@@ -152,6 +153,9 @@ function updateFork(force)
                     end
                 end
             end
+
+            % initialize and update the submodules
+            updateSubmodules();
         else
             fprintf(resultList);
             error([gitCmd.lead, ' [', mfilename,'] Impossible to retrieve the features (branches) of your local fork.', gitCmd.fail]);

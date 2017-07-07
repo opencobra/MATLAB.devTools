@@ -7,6 +7,11 @@ function updateSubmodules()
     global gitConf
     global gitCmd
 
+    currentDir = strrep(pwd, '\', '\\');
+
+    % change to the directory of the fork
+    cd(gitConf.fullForkDir)
+
     % temporary disable ssl verification
     [status_setSSLVerify, result_setSSLVerify] = system('git config --global http.sslVerify false');
 
@@ -44,18 +49,18 @@ function updateSubmodules()
         sumChanges  = sumChanges + str2num(arrResult{2*k});
     end
 
+    % update submodules
+    [status_gitSubmodule, result_gitSubmodule] = system('git submodule update');
+
+    if status_gitSubmodule == 0
+        printMsg(mfilename, 'The submodules have been initialized.');
+    else
+        fprintf(result_gitSubmodule);
+        error([gitCmd.lead, ' [', mfilename,'] The submodules could not be initialized.', gitCmd.fail]);
+    end
+
     % update the submodules
     if sumChanges > 0
-        % update submodules
-        [status_gitSubmodule, result_gitSubmodule] = system('git submodule update');
-
-        if status_gitSubmodule == 0
-            printMsg(mfilename, 'The submodules have been initialized.');
-        else
-            fprintf(result_gitSubmodule);
-            error([gitCmd.lead, ' [', mfilename,'] The submodules could not be initialized.', gitCmd.fail]);
-        end
-
         % reset each submodule
         [status_gitReset result_gitReset] = system('git submodule foreach --recursive git reset --hard');
         if status_gitReset == 0
@@ -75,4 +80,7 @@ function updateSubmodules()
         fprintf(result_setSSLVerify);
         error([gitCmd.lead, ' [', mfilename,'] Your global git configuration could not be restored.', gitCmd.fail]);
     end
+
+    % change back to the original directory
+    cd(currentDir);
 end
