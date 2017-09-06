@@ -1,5 +1,5 @@
 cobrabot
-~/
+/home/sbg-jenkins/
 y
 n
 testFile1

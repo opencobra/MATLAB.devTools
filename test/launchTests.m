@@ -1,7 +1,7 @@
 if ~isempty(strfind(getenv('HOME'), 'jenkins'))
     % do not change the paths below
-    addpath(genpath('/var/lib/jenkins/MOcov'));
-    addpath(genpath('/var/lib/jenkins/jsonlab'));
+    addpath(genpath('/home/sbg-jenkins/MOcov'));
+    addpath(genpath('/home/sbg-jenkins/jsonlab'));
 
     % change the directory on the CI server
     cd([pwd, '/../'])
@@ -69,11 +69,12 @@ if ~isempty(strfind(getenv('HOME'), 'jenkins'))
         end
     end
 
-    % remove the old badge
-    system('rm /var/lib/jenkins/userContent/codegrade-MATLABdevTools.svg');
-
     % set the new badge
-    system(['cp /var/lib/jenkins/userContent/codegrade-', grade, '.svg /var/lib/jenkins/userContent/codegrade-MATLABdevTools.svg']);
+    system(['cp /mnt/prince-data/jenkins/userContent/codegrade-', grade, '.svg /mnt/prince-data/jenkins/userContent/codegrade-MATLABdevTools.svg']);
+
+    % secure copy the badge from the slave
+    system('scp -P 8022 /mnt/prince-data/jenkins/userContent/codegrade-MATLABdevTools.svg jenkins@prince-server.lcsb.uni.lux:/var/lib/jenkins/userContent');
+
 end
 
 try

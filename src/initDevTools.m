@@ -91,8 +91,6 @@ function initDevTools()
         while ~createDir
             reply = input([gitCmd.lead, originCall, ' -> Please define the local path to your fork\n       current: ', strrep(pwd,'\','\\'),'\n       Enter the path (press ENTER to use the current path): '], 's');
 
-            reply
-
             if isempty(reply)
                 gitConf.localDir = strrep(pwd, '\', '\\');
             else
