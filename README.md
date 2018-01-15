@@ -23,10 +23,11 @@ $ git clone git@github.com:opencobra/MATLAB.devTools.git MATLAB.devTools
 ````
 <img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" alt="warning"> Run this command in `Terminal` (on <img src="https://prince.lcsb.uni.lu/jenkins/userContent/apple.png" height="20px" alt="macOS"> and <img src="https://prince.lcsb.uni.lu/jenkins/userContent/linux.png" height="20px" alt="Linux">) or in `Git Bash` (on <img src="https://prince.lcsb.uni.lu/jenkins/userContent/windows.png" height="20px" alt="Windows">) - **not** in <img src="https://prince.lcsb.uni.lu/jenkins/userContent/matlab.png" height="20px" alt="Matlab">.
 
+Some issues that can arise during installation are addressed in the [FAQ](https://github.com/opencobra/MATLAB.devTools/blob/master/FAQ.md).
 
 ## Do you want to contribute to The COBRA Toolbox?
 
-Please follow the [installation and contributing instructions](https://github.com/opencobra/cobratoolbox/blob/master/README.md).
+Please follow the [installation and contributing instructions](https://github.com/opencobra/cobratoolbox/blob/master/README.rst).
 
 [![asciicast](https://asciinema.org/a/7zg2ce5gfth7ruywptgc3i3yy.png)](https://asciinema.org/a/7zg2ce5gfth7ruywptgc3i3yy)
 
