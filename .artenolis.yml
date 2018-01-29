@@ -48,7 +48,7 @@ script:
     - cd $CURRENT_DIR;
 
     # launch the tests
-    - sh ./runtests.sh;
+    - sh ./.artenolis/runtests.sh;
 
     - cd ~/fork-MATLAB.devTools.CI;
     - git reset --hard origin/develop;
