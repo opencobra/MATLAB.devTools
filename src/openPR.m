@@ -1,8 +1,15 @@
-function openPR(branchName)
-% devTools
+function [] = openPR(branchName)
+% Provides a pull request URL from <branchName> to <develop> on the upstream
 %
-% PURPOSE: provides a pull request URL from <branchName> to <develop> on the upstream
+% USAGE:
 %
+%    [] = openPR(branchName)
+%
+% INPUT:
+%   branchName:     Name of the branch for which a pull request (PR) shall be opened
+%
+% .. Author:
+%      - Laurent Heirendt
 
     global gitConf
     global gitCmd
