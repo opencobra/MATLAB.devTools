@@ -1,8 +1,12 @@
-function resetDevTools()
-% devTools
+function [] = resetDevTools()
+% Reset the configuration of the development tools
 %
-% PURPOSE: reset the configuration of the development tools
+% USAGE:
 %
+%    [] = resetDevTools()
+%
+% .. Author:
+%      - Laurent Heirendt
 
     global gitConf
     global gitCmd
