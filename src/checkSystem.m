@@ -1,8 +1,16 @@
-function checkSystem(callerName)
-% devTools
+function [] = checkSystem(callerName)
+% Checks the configuration of the system (installation of git and curl)
 %
-% PURPOSE: checks the configuration of the system (installation of git and curl)
+% USAGE:
 %
+%    [] = checkSystem(callerName)
+%
+% INPUT:
+%   callerName:     Name of the function calling `checkSystem()`
+%
+% .. Author:
+%      - Laurent Heirendt
+
 
     global gitConf
     global gitCmd
