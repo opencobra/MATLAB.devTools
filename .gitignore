@@ -37,3 +37,4 @@ Temporary Items
 
 # Documentation related files
 docs/source/_static/json/functions.json
+*.pyc
