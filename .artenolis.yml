@@ -59,6 +59,7 @@ after_success:
     - if [ "$MATLAB_VER" == "R2016b" ]; then
       bash <(curl -s https://codecov.io/bash) -f "!*.lst";
       export PATH="/home/sbg-jenkins/.local/bin":$PATH;
+      cd $CURRENT_DIR;
       pip install --upgrade --user -r docs/requirements.txt;
       python -c "from documenter.deploy import Documentation; doc = Documentation('github.com/opencobra/MATLAB.devTools', ci='jenkins'); doc.deploy()";
       fi
