@@ -1,8 +1,20 @@
 function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
-% devTools
+% Lists all available branches/features
 %
-% PURPOSE: lists all available branches/features
+% USAGE:
 %
+%    [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
+%
+% OUTPUT:
+%   exitFlag:         Boolean (true if proper exit of function)
+%   currentBranch:    Name of current branch
+%   arrResult:        Cell with all names of branches
+%   exampleBranch:    Name of a branch given as an example
+%
+% .. Author:
+%      - Laurent Heirendt
+
+
 
     global gitConf
 
