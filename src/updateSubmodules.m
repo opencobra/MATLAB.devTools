@@ -1,8 +1,12 @@
-function updateSubmodules()
-% devTools
+function [] = updateSubmodules()
+% Clones the submodules and updates the repository
 %
-% PURPOSE: clones the submodules and updates the repository
+% USAGE:
 %
+%   [] = updateSubmodules()
+%
+% .. Author:
+%      - Laurent Heirendt
 
     global gitConf
     global gitCmd

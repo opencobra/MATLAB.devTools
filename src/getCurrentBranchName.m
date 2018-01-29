@@ -1,8 +1,17 @@
 function currentBranch = getCurrentBranchName()
-% devTools
+% Retrieve the name of the current branch
 %
-% PURPOSE: retrieve the name of the current branch
+% USAGE:
 %
+%    currentBranch = getCurrentBranchName()
+%
+% OUTPUT:
+%   currentBranch:   Name of the current branch
+%
+% .. Author:
+%      - Laurent Heirendt
+
+
 
     global gitConf
     global gitCmd

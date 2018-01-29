@@ -1,14 +1,22 @@
-function checkoutBranch(branchName, update_fork)
-% devTools
+function [] = checkoutBranch(branchName, updateForkFlag)
+% checks out a branch named <branchName> locally and remotely
 %
-% PURPOSE: checks out a branch named <branchName> locally and remotely
+% USAGE:
 %
+%    [] = checkoutBranch(branchName, updateForkFlag)
+%
+% INPUT:
+%   branchName:       Name of the local branch to be checked out
+%   updateForkFlag:   Boolean to update the fork before checking out the branch
+%
+% .. Author:
+%      - Laurent Heirendt
 
     global gitConf
     global gitCmd
 
     if nargin < 2
-        update_fork = true;
+        updateForkFlag = true;
     end
 
     % save the currentDir
@@ -36,7 +44,7 @@ function checkoutBranch(branchName, update_fork)
         printMsg(mfilename, ['The current feature (branch) ', currentBranch, ' is not the <develop> feature (branch).'], [gitCmd.fail, gitCmd.trail]);
 
         % update the fork locally
-        if update_fork
+        if updateForkFlag
             updateFork(true);
         end
 
@@ -87,7 +95,7 @@ function checkoutBranch(branchName, update_fork)
     % retrieve the status
     [status_gitStatus, result_gitStatus] = system('git status -s');
 
-    if (status_gitStatus == 0 && isempty(result_gitStatus)) || ~update_fork
+    if (status_gitStatus == 0 && isempty(result_gitStatus)) || ~updateForkFlag
         % properly checkout the branch
         [status_gitCheckout, result_gitCheckout] = system(['git checkout ', checkoutFlag, ' ', branchName]);
 

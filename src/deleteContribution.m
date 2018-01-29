@@ -1,8 +1,15 @@
-function deleteContribution(branchName)
-% devTools
+function [] = deleteContribution(branchName)
+% Deletes and existing feature (branch) named <branchName>
 %
-% PURPOSE: deletes and existing feature (branch) named <branchName>
+% USAGE:
 %
+%     [] = deleteContribution(branchName)
+%
+% INPUT:
+%   branchName:     Name of the local branch to be deleted
+%
+% .. Author:
+%      - Laurent Heirendt
 
     global gitConf
     global gitCmd

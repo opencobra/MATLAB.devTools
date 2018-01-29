@@ -1,8 +1,16 @@
-function printMsg(fileName, msg, endMsg)
-% devTools
+function [] = printMsg(fileName, msg, endMsg)
+% Print a message
 %
-% PURPOSE: print a message
+% USAGE:
 %
+%    [] = printMsg(fileName, msg, endMsg)
+%
+% INPUT:
+%   fileName:       Name of the file from which the message is issued
+%   msg:            Message as string
+%   endMsg:         End of message, generally a new line character
+%
+% .. Author:
 
     global gitConf
     global gitCmd

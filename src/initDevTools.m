@@ -1,8 +1,14 @@
-function initDevTools()
-% devTools
+function [] = initDevTools()
+% Initializes the development tools (username and email are requested if not configured)
 %
-% PURPOSE: initializes the development tools (username and email are requested if not configured)
+% USAGE:
 %
+%    [] = initDevTools()
+%
+% .. Author:
+%      - Laurent Heirendt
+
+
 
     global gitConf
     global gitCmd

@@ -1,8 +1,16 @@
 function freshClone = cloneFork()
-% devTools
+% Clones the fork and updates the submodules of the repository
 %
-% PURPOSE: clones the fork and updates the submodules of the repository
+% USAGE:
 %
+%    freshClone = cloneFork()
+%
+% OUTPUT:
+%   freshClone:   Boolean (true if a new clone has been made)
+%
+% .. Author:
+%      - Laurent Heirendt
+
 
     global gitConf
     global gitCmd
