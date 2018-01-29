@@ -1,8 +1,15 @@
-function submitContribution(branchName)
-% devTools
+function [] = submitContribution(branchName)
+% Submit an existing feature (branch) named `branchName`
 %
-% PURPOSE: submit an existing feature (branch) named <branchName>
+% USAGE:
 %
+%    [] = submitContribution(branchName)
+%
+% INPUT:
+%   branchName:     Name of the local branch to be pushed to the git server
+%
+% .. Author:
+%      - Laurent Heirendt
 
     global gitConf
     global gitCmd
