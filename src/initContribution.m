@@ -1,8 +1,15 @@
-function initContribution(branchName)
-% devTools
+function [] = initContribution(branchName)
+% Initializes a new feature (branch) named `branchName`
 %
-% PURPOSE: initializes a new feature (branch) named <branchName>
+% USAGE:
 %
+%    [] = initContribution(branchName)
+%
+% INPUT:
+%   branchName:     Name of the local branch to be initialized
+%
+% .. Author:
+%      - Laurent Heirendt
 
     global gitConf
     global gitCmd
