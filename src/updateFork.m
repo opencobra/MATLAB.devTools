@@ -1,8 +1,15 @@
-function updateFork(force)
-% devTools
+function [] = updateFork(force)
+% Updates the fork and the submodules of the repository
 %
-% PURPOSE: updates the fork and the submodules of the repository
+% USAGE:
 %
+%    [] = updateFork(force)
+%
+% INPUT:
+%   force:          Boolean flag to use force for updating the fork
+%
+% .. Author:
+%      - Laurent Heirendt
 
     global gitConf
     global gitCmd
