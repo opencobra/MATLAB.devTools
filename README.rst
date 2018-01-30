@@ -25,7 +25,7 @@ instructions <https://github.com/opencobra/MATLAB.devTools/blob/master/docs/sour
 carefully. You may skip this if your system is already set up and you
 have ``git`` configured.
 
-**IMPORTANT**: Please make sure that you have configured your SSH key
+|important| **IMPORTANT**: Please make sure that you have configured your SSH key
 in Github as explained
 `here <https://github.com/opencobra/MATLAB.devTools/blob/master/docs/source/prerequisites.rst>`__.
 
@@ -43,8 +43,8 @@ created). You can clone the repository using:
 
     $ git clone git@github.com:opencobra/MATLAB.devTools.git MATLAB.devTools
 
-Run this command in ``Terminal`` (on and ) or in ``Git Bash`` (on ) -
-**not** in .
+|important| Run this command in ``Terminal`` (on |macOS| and |linux|) or in ``Git Bash`` (on |windows|) -
+**not** in |matlab|.
 
 Some issues that can arise during installation are addressed in the
 `FAQ <https://github.com/opencobra/MATLAB.devTools/blob/master/docs/source/faq.rst>`__.
@@ -64,8 +64,8 @@ How do I use the ``MATLAB.devTools``?
 
 .. begin-getstarted-marker
 
-Making a contribution to any ``git`` repository from is straightforward.
-Type in within the ``MATLAB.devTools`` folder:
+Making a contribution to any ``git`` repository from |matlab| is straightforward.
+Type in |matlab| within the ``MATLAB.devTools`` folder:
 
 .. code:: matlab
 
@@ -89,7 +89,7 @@ fork-gitRepoName folder** will be considered for contribution (any
 changes made to a downloaded official ``git`` repository will be
 ignored).
 
-If you get stuck or are faced with an system error message, please read
+|important| If you get stuck or are faced with an system error message, please read
 the
 `FAQ <https://github.com/opencobra/MATLAB.devTools/blob/master/docs/source/faq.rst>`__.
 
@@ -104,7 +104,9 @@ item ``[5]``.
 Configure the ``MATLAB.devTools`` for another repository
 --------------------------------------------------------
 
-The ``MATLAB.devTools`` can only be used with **publicly accessible**
+.. begin-contribute-other-repo-marker
+
+|important| The ``MATLAB.devTools`` can only be used with **publicly accessible**
 repositories.
 
 If you want to use the ``MATLAB.devTools`` with a repository other than
@@ -130,7 +132,41 @@ In order to reset the configuration, type:
     >> resetDevTools();
 
 If you want your changes to be permanent, you can set the above
-mentioned variables in ``./assets/confDevTools.m``.
+mentioned variables in ``./src/confDevTools.m``.
+
+.. end-contribute-other-repo-marker
+
+
+How to cite the ``MATLAB.devTools``
+-----------------------------------
+
+.. begin-how-to-cite-marker
+
+The  ``MATLAB.devTools`` has been developped first for the COBRA Toolbox and
+thus when citing the ``MATLAB.devTools``, one should refer to the following
+paper:
+
+    Laurent Heirendt & Sylvain Arreckx, Thomas Pfau, Sebastian N.
+    Mendoza, Anne Richelle, Almut Heinken, Hulda S. Haraldsdottir, Jacek
+    Wachowiak, Sarah M. Keating, Vanja Vlasov, Stefania Magnusdottir,
+    Chiam Yu Ng, German Preciat, Alise Zagare, Siu H.J. Chan, Maike K.
+    Aurich, Catherine M. Clancy, Jennifer Modamio, John T. Sauls,
+    Alberto Noronha, Aarash Bordbar, Benjamin Cousins, Diana C. El
+    Assal, Luis V. Valcarcel, Inigo Apaolaza, Susan Ghaderi, Masoud
+    Ahookhosh, Marouen Ben Guebila, Andrejs Kostromins, Nicolas
+    Sompairac, Hoai M. Le, Ding Ma, Yuekai Sun, Lin Wang, James T.
+    Yurkovich, Miguel A.P. Oliveira, Phan T. Vuong, Lemmer P. El Assal,
+    Inna Kuperstein, Andrei Zinovyev, H. Scott Hinton, William A.
+    Bryant, Francisco J. Aragon Artacho, Francisco J. Planes, Egils
+    Stalidzans, Alejandro Maass, Santosh Vempala, Michael Hucka, Michael
+    A. Saunders, Costas D. Maranas, Nathan E. Lewis, Thomas Sauter,
+    Bernhard Ø. Palsson, Ines Thiele, Ronan M.T. Fleming, **Creation and
+    analysis of biochemical constraint-based models: the COBRA Toolbox
+    v3.0** (submitted), 2017,
+    `arXiv:1710.04038 <https://arxiv.org/abs/1710.04038>`__.
+
+.. end-how-to-cite-marker
+
 
 .. |Build Status| image:: https://prince.lcsb.uni.lu/jenkins/buildStatus/icon?job=devTools-branches-auto/MATLAB_VER=R2016b
    :target: https://prince.lcsb.uni.lu/jenkins/job/devTools-branches-auto/MATLAB_VER=R2016b/
@@ -139,5 +175,35 @@ mentioned variables in ``./assets/confDevTools.m``.
 .. |codecov| image:: https://codecov.io/gh/opencobra/MATLAB.devTools/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/opencobra/MATLAB.devTools/branch/master
 .. |Code grade| image:: https://prince.lcsb.uni.lu/jenkins/userContent/codegrade-MATLABdevTools.svg?maxAge=0
+
+
+.. begin-screencast-marker
+
 .. |asciicast| image:: https://asciinema.org/a/7zg2ce5gfth7ruywptgc3i3yy.png
    :target: https://asciinema.org/a/7zg2ce5gfth7ruywptgc3i3yy
+
+.. end-screencast-marker
+
+
+.. begin-icon-marker
+.. |macos| raw:: html
+
+   <img src="https://prince.lcsb.uni.lu/jenkins/userContent/apple.png" height="20px" width="20px" alt="macOS">
+
+.. |linux| raw:: html
+
+   <img src="https://prince.lcsb.uni.lu/jenkins/userContent/linux.png" height="20px" width="20px" alt="linux">
+
+.. |windows| raw:: html
+
+   <img src="https://prince.lcsb.uni.lu/jenkins/userContent/windows.png" height="20px" width="20px" alt="windows">
+
+.. |matlab| raw:: html
+
+   <img src="https://prince.lcsb.uni.lu/jenkins/userContent/matlab.png" height="20px" width="20px" alt="matlab">
+
+.. |important| raw:: html
+
+   <img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="bulb">
+
+.. end-icon-marker
