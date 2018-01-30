@@ -178,6 +178,7 @@ html_context = {'conf_py_path': os.path.join(os.sep, 'docs', 'source', ''),
                 'favicon16x16': 'img/favicon-16x16.png',
                 'favicon-safari-pinned-tab': 'img/safari-pinned-tab.svg',
                 'manifest': 'json/manifest.json',
+                'browserconfig': 'browserconfig.xml',
                 'theme_logo_only': False,
                 'show_source': False}
 #                'display_github': True}
