@@ -1,9 +1,9 @@
-function [] = updateSubmodules()
+function updateSubmodules()
 % Clones the submodules and updates the repository
 %
 % USAGE:
 %
-%   [] = updateSubmodules()
+%   updateSubmodules()
 %
 % .. Author:
 %      - Laurent Heirendt

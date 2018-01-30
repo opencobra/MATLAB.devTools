@@ -1,9 +1,9 @@
-function [] = openPR(branchName)
+function openPR(branchName)
 % Provides a pull request URL from <branchName> to <develop> on the upstream
 %
 % USAGE:
 %
-%    [] = openPR(branchName)
+%    openPR(branchName)
 %
 % INPUT:
 %   branchName:     Name of the branch for which a pull request (PR) shall be opened

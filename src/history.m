@@ -1,9 +1,9 @@
-function [] = history(fileName)
+function history(fileName)
 % Displays the history of a file
 %
 % USAGE:
 %
-%    [] = history(fileName)
+%    history(fileName)
 %
 % INPUT:
 %   fileName:     Name of the file for which the history shall be displayed

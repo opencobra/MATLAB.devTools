@@ -1,9 +1,9 @@
-function [] = initContribution(branchName)
+function initContribution(branchName)
 % Initializes a new feature (branch) named `branchName`
 %
 % USAGE:
 %
-%    [] = initContribution(branchName)
+%    initContribution(branchName)
 %
 % INPUT:
 %   branchName:     Name of the local branch to be initialized

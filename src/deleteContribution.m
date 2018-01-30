@@ -1,9 +1,9 @@
-function [] = deleteContribution(branchName)
+function deleteContribution(branchName)
 % Deletes and existing feature (branch) named <branchName>
 %
 % USAGE:
 %
-%     [] = deleteContribution(branchName)
+%     deleteContribution(branchName)
 %
 % INPUT:
 %   branchName:     Name of the local branch to be deleted

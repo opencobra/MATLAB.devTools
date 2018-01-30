@@ -1,9 +1,9 @@
-function [] = printMsg(fileName, msg, endMsg)
+function printMsg(fileName, msg, endMsg)
 % Print a message
 %
 % USAGE:
 %
-%    [] = printMsg(fileName, msg, endMsg)
+%    printMsg(fileName, msg, endMsg)
 %
 % INPUT:
 %   fileName:       Name of the file from which the message is issued

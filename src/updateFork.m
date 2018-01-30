@@ -1,9 +1,9 @@
-function [] = updateFork(force)
+function updateFork(force)
 % Updates the fork and the submodules of the repository
 %
 % USAGE:
 %
-%    [] = updateFork(force)
+%    updateFork(force)
 %
 % INPUT:
 %   force:          Boolean flag to use force for updating the fork

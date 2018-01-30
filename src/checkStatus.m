@@ -1,9 +1,9 @@
-function [] = checkStatus()
+function checkStatus()
 % Checks the status of the repository
 %
 % USAGE:
 %
-%    [] = checkStatus()
+%    checkStatus()
 %
 % .. Author:
 %      - Laurent Heirendt

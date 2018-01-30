@@ -1,9 +1,9 @@
-function [] = resetDevTools()
+function resetDevTools()
 % Reset the configuration of the development tools
 %
 % USAGE:
 %
-%    [] = resetDevTools()
+%    resetDevTools()
 %
 % .. Author:
 %      - Laurent Heirendt

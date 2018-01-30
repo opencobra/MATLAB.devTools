@@ -1,9 +1,9 @@
-function [] = checkRemoteFork()
+function checkRemoteFork()
 % Checks whether the fork exists remotely
 %
 % USAGE:
 %
-%    [] = checkRemoteFork()
+%    checkRemoteFork()
 %
 % .. Author:
 %      - Laurent Heirendt

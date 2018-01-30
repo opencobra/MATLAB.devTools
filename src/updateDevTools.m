@@ -1,9 +1,9 @@
-function [] = updateDevTools()
+function updateDevTools()
 % Update the devTools and set the SSH origin if necessary
 %
 % USAGE:
 %
-%    [] = updateDevTools()
+%    updateDevTools()
 %
 % .. Author:
 %      - Laurent Heirendt

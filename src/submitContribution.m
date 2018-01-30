@@ -1,9 +1,9 @@
-function [] = submitContribution(branchName)
+function submitContribution(branchName)
 % Submit an existing feature (branch) named `branchName`
 %
 % USAGE:
 %
-%    [] = submitContribution(branchName)
+%    submitContribution(branchName)
 %
 % INPUT:
 %   branchName:     Name of the local branch to be pushed to the git server

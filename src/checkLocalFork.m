@@ -1,9 +1,9 @@
-function [] = checkLocalFork()
+function checkLocalFork()
 % Checks the configuration of remotes in the local copy of the fork
 %
 % USAGE:
 %
-%    [] = checkLocalFork()
+%    checkLocalFork()
 %
 % .. Author:
 %      - Laurent Heirendt

@@ -1,9 +1,9 @@
-function [] = resetLocalFork()
+function resetLocalFork()
 % Clean all files in the working directory and reset the fork
 %
 % USAGE:
 %
-%    [] = resetLocalFork()
+%    resetLocalFork()
 %
 % .. Author:
 %      - Laurent Heirendt

@@ -1,9 +1,9 @@
-function [] = checkDevTools()
+function checkDevTools()
 % Checks the configuration of the development tools
 %
 % USAGE:
 %
-%    [] = checkDevTools()
+%    checkDevTools()
 %
 % .. Author:
 %      - Laurent Heirendt

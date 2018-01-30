@@ -1,9 +1,9 @@
-function [] = checkoutBranch(branchName, updateForkFlag)
+function checkoutBranch(branchName, updateForkFlag)
 % checks out a branch named <branchName> locally and remotely
 %
 % USAGE:
 %
-%    [] = checkoutBranch(branchName, updateForkFlag)
+%    checkoutBranch(branchName, updateForkFlag)
 %
 % INPUT:
 %   branchName:       Name of the local branch to be checked out

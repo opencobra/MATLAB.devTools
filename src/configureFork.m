@@ -1,9 +1,9 @@
-function [] = configureFork()
+function configureFork()
 % Configures the remotes of the local fork (upstream)
 %
 % USAGE:
 %
-%    [] = configureFork()
+%    configureFork()
 %
 % .. Author:
 %      - Laurent Heirendt

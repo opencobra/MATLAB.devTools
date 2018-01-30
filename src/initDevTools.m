@@ -1,9 +1,9 @@
-function [] = initDevTools()
+function initDevTools()
 % Initializes the development tools (username and email are requested if not configured)
 %
 % USAGE:
 %
-%    [] = initDevTools()
+%    initDevTools()
 %
 % .. Author:
 %      - Laurent Heirendt

@@ -1,9 +1,9 @@
-function [] = checkSystem(callerName)
+function checkSystem(callerName)
 % Checks the configuration of the system (installation of git and curl)
 %
 % USAGE:
 %
-%    [] = checkSystem(callerName)
+%    checkSystem(callerName)
 %
 % INPUT:
 %   callerName:     Name of the function calling `checkSystem()`
