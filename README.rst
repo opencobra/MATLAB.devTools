@@ -25,7 +25,7 @@ instructions <https://github.com/opencobra/MATLAB.devTools/blob/master/docs/sour
 carefully. You may skip this if your system is already set up and you
 have ``git`` configured.
 
- **IMPORTANT**: Please make sure that you have configured your SSH key
+**IMPORTANT**: Please make sure that you have configured your SSH key
 in Github as explained
 `here <https://github.com/opencobra/MATLAB.devTools/blob/master/docs/source/prerequisites.rst>`__.
 
@@ -43,7 +43,7 @@ created). You can clone the repository using:
 
     $ git clone git@github.com:opencobra/MATLAB.devTools.git MATLAB.devTools
 
- Run this command in ``Terminal`` (on and ) or in ``Git Bash`` (on ) -
+Run this command in ``Terminal`` (on and ) or in ``Git Bash`` (on ) -
 **not** in .
 
 Some issues that can arise during installation are addressed in the
@@ -89,7 +89,7 @@ folder named ``fork-gitRepoName``. **Only files in the
 changes made to a downloaded official ``git`` repository will be
 ignored).
 
- If you get stuck or are faced with an system error message, please read
+If you get stuck or are faced with an system error message, please read
 the
 `FAQ <https://github.com/opencobra/MATLAB.devTools/blob/master/docs/source/faq.rst>`__.
 
@@ -104,7 +104,7 @@ item ``[5]``.
 Configure the ``MATLAB.devTools`` for another repository
 --------------------------------------------------------
 
- The ``MATLAB.devTools`` can only be used with **publicly accessible**
+The ``MATLAB.devTools`` can only be used with **publicly accessible**
 repositories.
 
 If you want to use the ``MATLAB.devTools`` with a repository other than
