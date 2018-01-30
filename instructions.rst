@@ -14,9 +14,9 @@ Fork and checkout your branch
 
 3. Change to the directory:
   
-  .. code-block:: console
+   .. code-block:: console
 
-     $ cd fork-COBRA.tutorials.git/
+      $ cd fork-COBRA.tutorials.git/
 
 4. Set the upstream to the ``opencobra/COBRA.tutorials`` repository:
   
@@ -56,12 +56,12 @@ Submit your changes and open a pull request
 
       $ git push origin <yourBranch>
 
-9. Browse to your fork on ``https://www.github.com/<yourUserName>/COBRA.tutorials``, where ``<yourUserName>`` is your Github username.
+10. Browse to your fork on ``https://www.github.com/<yourUserName>/COBRA.tutorials``, where ``<yourUserName>`` is your Github username.
 
-10. Click on ``Compare & Pull Request``.
+11. Click on ``Compare & Pull Request``.
 
-11. Change the target branch ``develop``.
+12. Change the target branch ``develop``.
 
-11. Submit your pull request.
+13. Submit your pull request.
 
-12. Wait until your pull request is accepted.
+14. Wait until your pull request is accepted.
