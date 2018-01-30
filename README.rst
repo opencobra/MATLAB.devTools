@@ -14,6 +14,27 @@
 | |Build Status| | |Build Status| | |codecov|     | |Code grade| |
 +----------------+----------------+---------------+--------------+
 
+.. begin-description-marker
+
+All repositories on Github are version controlled using `git
+<https://git-scm.com>`__, a free and open-source distributed, version control
+system, which tracks changes in computer files and is used for coordinating
+work on those files by multiple people. 
+
+In order to lower the technological barrier to the use of the popular software
+development tool `git <https://git-scm.com>`__, we have developed
+`MATLAB.devTools`, a new user-friendly software extension that enables
+submission of new COBRA software and tutorials, in particular for `The COBRA
+Toolbox <https://www.github.com/opencobra/cobratoolbox>`__ and the
+`COBRA.tutorials <https://www.github.com/opencobra/COBRA.tutorials>`__.
+
+The `MATLAB.devTools <https://github.com/opencobra/MATLAB.devTools>`__ are
+highly recommended for contributing code (in particular `MATLAB` code) to
+existing repositories in a user-friendly and convenient way, even for those
+without basic knowledge of `git`.
+
+.. end-description-marker
+
 
 Pre-requisites
 --------------
