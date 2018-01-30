@@ -15,7 +15,7 @@ function [] = resetDevTools()
     checkSystem(mfilename);
 
     % unset the path to the local fork
-    [status_gitConfForkDirGet, result_gitConfForkDirGet] = system(['git config --global --unset-all user.', gitConf.leadForkDirName, gitConf.nickName, '.path']);
+    [status_gitConfForkDirGet, result_gitConfForkDirGet] = system(['git config --global --unset user.', gitConf.leadForkDirName, gitConf.nickName, '.path']);
 
     if status_gitConfForkDirGet == 0
         printMsg(mfilename, 'Your fork directory has been removed from your local git configuration.');
