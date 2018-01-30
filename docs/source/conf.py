@@ -173,7 +173,12 @@ html_context = {'conf_py_path': os.path.join(os.sep, 'docs', 'source', ''),
                 'github_repo': 'MATLAB.devTools',
                 'github_version': 'master',
                 'logo': 'img/logo_devTools.png',
-                'theme_logo_only': True,
+                'favicon-apple-touch': 'img/apple-touch-icon.png',
+                'favicon32x32': 'favicon-32x32.png',
+                'favicon16x16': 'favicon-16x16.png',
+                'favicon-safari-pinned-tab': 'safari-pinned-tab.svg',
+                'manifest': 'json/manifest.json',
+                'theme_logo_only': False,
                 'show_source': False}
 #                'display_github': True}
 # Add any paths that contain custom themes here, relative to this directory.
@@ -197,7 +202,7 @@ html_logo = '_static/img/logo_devTools.png'
 # the docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
 #
-html_favicon = '_static/img/logo_devTools.ico'
+html_favicon = '_static/img/favicon.ico'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
