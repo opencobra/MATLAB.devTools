@@ -85,7 +85,7 @@ You will then be presented by a menu:
 
 The original repository will be downloaded (cloned) the first time to a
 folder named ``fork-gitRepoName``. **Only files in the
-``fork-gitRepoName`` folder** will be considered for contribution (any
+fork-gitRepoName folder** will be considered for contribution (any
 changes made to a downloaded official ``git`` repository will be
 ignored).
 
