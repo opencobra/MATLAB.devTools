@@ -4,10 +4,11 @@ MATLAB.devTools
 .. toctree::
    :maxdepth: 2
 
-   index
+   Home <index>
    installation
    getstarted
+   contribute
    modules/index
-   support
    faq
+   cite
    funding
