@@ -1,7 +1,7 @@
 .. _contribute:
 
-Contribute to projects
-======================
+How to configure and use
+========================
 
 
 The COBRA Toolbox
