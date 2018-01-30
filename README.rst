@@ -21,13 +21,13 @@ Pre-requisites
 .. begin-prerequisites-marker
 
 Please follow the `configuration
-instructions <https://github.com/opencobra/MATLAB.devTools/blob/master/PREREQUISITES.md>`__
+instructions <https://github.com/opencobra/MATLAB.devTools/blob/master/docs/source/prerequisites.rst>`__
 carefully. You may skip this if your system is already set up and you
 have ``git`` configured.
 
  **IMPORTANT**: Please make sure that you have configured your SSH key
 in Github as explained
-`here <https://github.com/opencobra/MATLAB.devTools/blob/master/PREREQUISITES.md>`__.
+`here <https://github.com/opencobra/MATLAB.devTools/blob/master/docs/source/prerequisites.rst>`__.
 
 .. end-prerequisites-marker
 
@@ -47,7 +47,7 @@ created). You can clone the repository using:
 **not** in .
 
 Some issues that can arise during installation are addressed in the
-`FAQ <https://github.com/opencobra/MATLAB.devTools/blob/master/FAQ.md>`__.
+`FAQ <https://github.com/opencobra/MATLAB.devTools/blob/master/docs/source/faq.rst>`__.
 
 .. end-installation-marker
 
@@ -91,7 +91,7 @@ ignored).
 
  If you get stuck or are faced with an system error message, please read
 the
-`FAQ <https://github.com/opencobra/MATLAB.devTools/blob/master/FAQ.md>`__.
+`FAQ <https://github.com/opencobra/MATLAB.devTools/blob/master/docs/source/faq.rst>`__.
 
 .. end-getstarted-marker
 
