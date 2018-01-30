@@ -1073,3 +1073,7 @@ blockquote {
 .highlight, div[class^="highlight-"] {
     border: none;
 }
+
+.toctree-l3 {
+    text-align: left;
+}
