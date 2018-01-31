@@ -10,5 +10,6 @@ MATLAB.devTools
    contribute
    modules/index
    faq
+   troubleshooting
    cite
    funding
