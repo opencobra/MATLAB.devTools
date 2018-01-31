@@ -163,9 +163,8 @@ How to cite the ``MATLAB.devTools``
 
 .. begin-how-to-cite-marker
 
-The  ``MATLAB.devTools`` has been developped first for the COBRA Toolbox and
-thus when citing the ``MATLAB.devTools``, one should refer to the following
-paper:
+As the  ``MATLAB.devTools`` have first been developed for the COBRA Toolbox, the
+paper of The COBRA Toolbox shall we cited when referring to the ``MATLAB.devTools``.
 
     Laurent Heirendt & Sylvain Arreckx, Thomas Pfau, Sebastian N.
     Mendoza, Anne Richelle, Almut Heinken, Hulda S. Haraldsdottir, Jacek
