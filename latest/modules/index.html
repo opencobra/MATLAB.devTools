@@ -1,0 +1,621 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Functions &mdash; MATLAB.devTools</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="../_static/img/apple-touch-icon.png">
+  
+  
+    <link rel="icon" type="image/png" sizes="32x32" href="../_static/img/favicon-32x32.png">
+  
+  
+    <link rel="icon" type="image/png" sizes="16x16" href="../_static/img/favicon-16x16.png">
+  
+  
+    <link rel="mask-icon" href="../_static/img/safari-pinned-tab.svg" color="#5bbad5">
+  
+  
+    <link rel="manifest" href="../_static/json/manifest.json">
+  
+  
+    <meta name="msapplication-config" content="../_static/browserconfig.xml">
+  
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="../_static/js/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href="../_static/css/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/julia.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="MATLAB.devTools" href="../index.html"/>
+        <link rel="next" title="Frequently Asked Questions (FAQ)" href="../faq.html"/>
+        <link rel="prev" title="How to configure and use" href="../contribute.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          <a href="../contents.html">
+
+          
+            
+            
+              <img src="../_static/img/logo_devTools.png" class="logo"/>
+            
+          
+          </a>
+          
+            <h1>MATLAB.devTools</h1>
+          
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" id="simple"/>
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <script>
+    	var options = {
+
+		url: "../_static/json/functions.json",
+
+		getValue: "name",
+
+		list: {
+            onKeyEnterEvent: function(item) {
+                    return "_static/../" + item.website_url
+            },
+            maxNumberOfElements: 25,
+			match: {
+					enabled: true,
+			},
+            sort: {
+			    enabled: true
+		    }
+		},
+
+    	template: {
+	    	type: "custom",
+		    method: function(value, item) {
+                return "<span><a href='../search.html?q=" + item.name + "&check_keywords=yes&area=default'>" + value + "</a>" + "<a href='../_static/../" + item.website_url + "' ><img src='../_static/img/link.svg'/></a></span>";
+		    }
+	    },
+
+		theme: "square"
+
+	};
+
+	$("#simple").easyAutocomplete(options);
+
+
+    </script>
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getstarted.html">How to get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute.html">How to configure and use</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cite.html">How to cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../funding.html">Funding</a></li>
+</ul>
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../contents.html">MATLAB.devTools</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../contents.html">Docs</a> &raquo;</li>
+        
+      <li>Functions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-src">
+<span id="functions"></span><span id="modules-functions"></span><h1>Functions<a class="headerlink" href="#module-src" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="src.checkBranchExistence">
+<code class="descname">checkBranchExistence</code><span class="sig-paren">(</span><em>branchName</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/checkBranchExistence.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.checkBranchExistence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if a branch exists locally</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>branchExists = checkBranchExistence(branchName)</div></blockquote>
+<p><strong>Input</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>branchName</strong> &#8211;
+Name of the local branch to be checked for existence</li>
+</ul>
+</div></blockquote>
+<p><strong>Output</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>branchExists</strong> &#8211;
+Boolean (true if <cite>branchName</cite> esists)</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.checkDevTools">
+<code class="descname">checkDevTools</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/checkDevTools.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.checkDevTools" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks the configuration of the development tools</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>checkDevTools()</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.checkLocalFork">
+<code class="descname">checkLocalFork</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/checkLocalFork.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.checkLocalFork" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks the configuration of remotes in the local copy of the fork</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>checkLocalFork()</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.checkRemoteFork">
+<code class="descname">checkRemoteFork</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/checkRemoteFork.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.checkRemoteFork" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the fork exists remotely</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>checkRemoteFork()</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.checkStatus">
+<code class="descname">checkStatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/checkStatus.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.checkStatus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks the status of the repository</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>checkStatus()</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.checkSystem">
+<code class="descname">checkSystem</code><span class="sig-paren">(</span><em>callerName</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/checkSystem.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.checkSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks the configuration of the system (installation of git and curl)</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>checkSystem(callerName)</div></blockquote>
+<p><strong>Input</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>callerName</strong> &#8211;
+Name of the function calling <cite>checkSystem()</cite></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.checkoutBranch">
+<code class="descname">checkoutBranch</code><span class="sig-paren">(</span><em>branchName</em>, <em>updateForkFlag</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/checkoutBranch.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.checkoutBranch" title="Permalink to this definition">¶</a></dt>
+<dd><p>checks out a branch named &lt;branchName&gt; locally and remotely</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>checkoutBranch(branchName, updateForkFlag)</div></blockquote>
+<p><strong>Inputs</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>branchName</strong> &#8211;
+Name of the local branch to be checked out</li>
+<li><strong>updateForkFlag</strong> &#8211;
+Boolean to update the fork before checking out the branch</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.cloneFork">
+<code class="descname">cloneFork</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/cloneFork.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.cloneFork" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clones the fork and updates the submodules of the repository</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>freshClone = cloneFork()</div></blockquote>
+<p><strong>Output</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>freshClone</strong> &#8211;
+Boolean (true if a new clone has been made)</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.confDevTools">
+<code class="descname">confDevTools</code><span class="sig-paren">(</span><em>launcher</em>, <em>remoteRepoURL</em>, <em>nickName</em>, <em>printLevel</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/confDevTools.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.confDevTools" title="Permalink to this definition">¶</a></dt>
+<dd><p>devTools</p>
+<p>PURPOSE: define the configuration of the devTools</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.configureFork">
+<code class="descname">configureFork</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/configureFork.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.configureFork" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configures the remotes of the local fork (upstream)</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>configureFork()</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.deleteContribution">
+<code class="descname">deleteContribution</code><span class="sig-paren">(</span><em>branchName</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/deleteContribution.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.deleteContribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes and existing feature (branch) named &lt;branchName&gt;</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>deleteContribution(branchName)</div></blockquote>
+<p><strong>Input</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>branchName</strong> &#8211;
+Name of the local branch to be deleted</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.getCurrentBranchName">
+<code class="descname">getCurrentBranchName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/getCurrentBranchName.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.getCurrentBranchName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the name of the current branch</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>currentBranch = getCurrentBranchName()</div></blockquote>
+<p><strong>Output</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>currentBranch</strong> &#8211;
+Name of the current branch</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.history">
+<code class="descname">history</code><span class="sig-paren">(</span><em>fileName</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/history.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.history" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays the history of a file</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>history(fileName)</div></blockquote>
+<p><strong>Input</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>fileName</strong> &#8211;
+Name of the file for which the history shall be displayed</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.initContribution">
+<code class="descname">initContribution</code><span class="sig-paren">(</span><em>branchName</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/initContribution.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.initContribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes a new feature (branch) named <cite>branchName</cite></p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>initContribution(branchName)</div></blockquote>
+<p><strong>Input</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>branchName</strong> &#8211;
+Name of the local branch to be initialized</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.initDevTools">
+<code class="descname">initDevTools</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/initDevTools.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.initDevTools" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes the development tools (username and email are requested if not configured)</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>initDevTools()</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.listFeatures">
+<code class="descname">listFeatures</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/listFeatures.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.listFeatures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lists all available branches/features</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>[exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()</div></blockquote>
+<p><strong>Outputs</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>exitFlag</strong> &#8211;
+Boolean (true if proper exit of function)</li>
+<li><strong>currentBranch</strong> &#8211;
+Name of current branch</li>
+<li><strong>arrResult</strong> &#8211;
+Cell with all names of branches</li>
+<li><strong>exampleBranch</strong> &#8211;
+Name of a branch given as an example</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.openPR">
+<code class="descname">openPR</code><span class="sig-paren">(</span><em>branchName</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/openPR.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.openPR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides a pull request URL from &lt;branchName&gt; to &lt;develop&gt; on the upstream</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>openPR(branchName)</div></blockquote>
+<p><strong>Input</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>branchName</strong> &#8211;
+Name of the branch for which a pull request (PR) shall be opened</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.printMsg">
+<code class="descname">printMsg</code><span class="sig-paren">(</span><em>fileName</em>, <em>msg</em>, <em>endMsg</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/printMsg.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.printMsg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a message</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>printMsg(fileName, msg, endMsg)</div></blockquote>
+<p><strong>Inputs</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>fileName</strong> &#8211;
+Name of the file from which the message is issued</li>
+<li><strong>msg</strong> &#8211;
+Message as string</li>
+<li><strong>endMsg</strong> &#8211;
+End of message, generally a new line character</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.resetDevTools">
+<code class="descname">resetDevTools</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/resetDevTools.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.resetDevTools" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the configuration of the development tools</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>resetDevTools()</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.resetLocalFork">
+<code class="descname">resetLocalFork</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/resetLocalFork.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.resetLocalFork" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clean all files in the working directory and reset the fork</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>resetLocalFork()</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.submitContribution">
+<code class="descname">submitContribution</code><span class="sig-paren">(</span><em>branchName</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/submitContribution.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.submitContribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit an existing feature (branch) named <cite>branchName</cite></p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>submitContribution(branchName)</div></blockquote>
+<p><strong>Input</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>branchName</strong> &#8211;
+Name of the local branch to be pushed to the git server</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.updateDevTools">
+<code class="descname">updateDevTools</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/updateDevTools.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.updateDevTools" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the devTools and set the SSH origin if necessary</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>updateDevTools()</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.updateFork">
+<code class="descname">updateFork</code><span class="sig-paren">(</span><em>force</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/updateFork.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.updateFork" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the fork and the submodules of the repository</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>updateFork(force)</div></blockquote>
+<p><strong>Input</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>force</strong> &#8211;
+Boolean flag to use force for updating the fork</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.updateSubmodules">
+<code class="descname">updateSubmodules</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/updateSubmodules.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.updateSubmodules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clones the submodules and updates the repository</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>updateSubmodules()</div></blockquote>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../faq.html" class="btn btn-neutral float-right" title="Frequently Asked Questions (FAQ)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../contribute.html" class="btn btn-neutral" title="How to configure and use" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018, the MATLAB.devTools developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
