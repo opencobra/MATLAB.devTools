@@ -150,9 +150,10 @@
 <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getstarted.html">How to get started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribute to projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">How to configure and use</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules/index.html">Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cite.html">How to cite</a></li>
 <li class="toctree-l1"><a class="reference internal" href="funding.html">Funding</a></li>
 </ul>
@@ -216,7 +217,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="pre-requisites">
-<span id="prerequisites"></span><h1>Pre-requisites<a class="headerlink" href="#pre-requisites" title="Permalink to this headline">¶</a></h1>
+<h1>Pre-requisites<a class="headerlink" href="#pre-requisites" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="github-ssh-configuration">
 <h2>GitHub SSH configuration<a class="headerlink" href="#github-ssh-configuration" title="Permalink to this headline">¶</a></h2>
 <p>You have to register the SSH key of each computer that you are planning
@@ -224,7 +225,7 @@ to use the <code class="docutils literal"><span class="pre">MATLAB.devTools</spa
 <ul class="simple">
 <li><strong>Check if you already have an SSH key:</strong></li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ ls -al ~/.ssh
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ ls -al ~/.ssh
 </pre></div>
 </div>
 <p>If there is a file with an extension <code class="docutils literal"><span class="pre">.pub</span></code>, you already have an SSH
@@ -235,7 +236,7 @@ key. Now, you have to <strong>add your SSH key to Github</strong>. More help is
 SSH key (see previous step), you have to generate one (more help is
 <a class="reference external" href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/">here</a>):</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span>   $ ssh-keygen -t rsa -C &quot;first.last@server.com&quot;
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>   $ ssh-keygen -t rsa -C &quot;first.last@server.com&quot;
 
 Leave the passphrase empty when generating the SSH key.
 </pre></div>
