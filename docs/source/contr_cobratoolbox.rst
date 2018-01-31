@@ -85,6 +85,9 @@ of the MATLAB.devTools. A valid passphrase-less SSH key must be set in the
 Github account settings in order to contribute without entering a password
 while securely communicating with the Github server.
 
+Start a new contribution
+------------------------
+
 The MATLAB.devTools are configured on the fly or whenever the configuration
 details are not present. The first time a user runs contribute, the personal
 repository (fork) is downloaded (cloned) into a new folder named
@@ -97,6 +100,110 @@ straightforward. In MATLAB, type:
 .. code:: matlab
 
     >> contribute % then select procedure [1]
+
+If the MATLAB.devTools are already configured, procedure [1] updates the fork
+(if necessary) and initialises a new branch with a name requested during the
+process. Once the contribution is initialised, files can be added, modified or
+deleted in the `fork-cobratoolbox` folder. A contribution is successfully
+initialised when the user is presented with a brief summary of configuration
+details. Instructions on how to proceed are also provided.
+
+|warning| The location of the fork must be specified as the root directory.
+There will be a warning issued if the path already contains another git-tracked
+repository.
+
+Continue an existing contribution
+---------------------------------
+
+An existing contribution can be continued after a while. This step is
+particularly important in order to retrieve all changes that have been made to
+the opencobra repository in the meantime.
+
+.. code:: matlab
+    
+    >> contribute % then select procedure [2]
+
+Procedure ``[2]`` pulls all changes from the opencobra repository, and rebases the
+existing contribution. In other words, existing commits are shifted forward and
+placed after all commits made on the develop branch of the opencobra
+repository. 
+
+|warning| Before attempting to continue working on an existing
+feature, make sure that you published your commits.
+
+Publish a contribution
+-----------------------
+
+Publishing a contribution means uploading the incremental code changes to the
+fork. The changes are available in public, but not yet available in the
+opencobra repository. A contribution may only be accepted in the official
+repository once a pull request has been submitted. It is not necessary to open
+a pull request if you want to simply upload your contribution to your fork.
+
+.. code:: matlab
+    
+    >> contribute % then select procedure [3]
+
+When running procedure ``[3]``, you have two options:
+
+- **Option A** Simple contribution without opening a pull request: All changes
+  to the code are individually listed and the user is asked explicitly which
+  changes shall be added to the commit. Once all changes have been added, a
+  commit message must be entered. Upon confirmation, the changes are pushed to
+  the online fork automatically.
+
+- **Option B** Publishing and opening a pull request: The procedure for
+  submitting a pull request is the same as option (A) with the difference that
+  when selecting to open a pull request, a link is provided that leads to a
+  pre-configured website according to the contributing guidelines. The pull
+  request is then one click away.
+
+|warning| After following procedures ``[1]`` and ``[2]``, all changes should be
+published using procedure ``[3]`` before stopping to work on that contribution.
+When following procedure ``[3]``, the incremental changes are uploaded to the
+remote server. It is advised to publish often, and make small incremental
+changes to the code. There is no need for opening a pull request immediately
+(option **A**) if there are more changes to be made. A pull request may be opened
+at any time, even manually directly from the Github website.
+
+Deleting a contribution
+-----------------------
+
+If a contribution has been merged into the develop branch of the opencobra
+repository (accepted pull request), the contribution (feature or branch) can be
+safely deleted both locally and remotely on the fork by running contribute and
+selecting procedure ``[4]``.
+
+Note that deleting a contribution deletes all the changes that have been made
+on that feature (branch). It is not possible to selectively delete a commit
+using the MATLAB.devTools. Instead, create a new branch by following procedure
+``[1]``, and follow the instructions to cherry-pick (see
+:ref:`troubleshooting`).
+
+|warning| Make sure that your changes are either merged or saved locally if you
+need them. Once procedure ``[4]`` is concluded, all changes on the deleted
+branch are removed, both locally and remotely. No commits can be recovered. 
+
+Update your fork
+----------------
+
+It is sometimes useful to simply update the fork without starting a new
+contribution. The local fork can be updated using procedure ``[5]`` of the
+contribute menu.
+
+.. code:: matlab
+    
+    >> contribute % then select procedure [5]
+
+Before updating your fork, make sure that no changes are present in the local
+directory `fork-cobratoolbox`. You can do so by typing:
+
+.. code:: matlab
+    
+    >> checkStatus
+
+If there are changes listed, publish them by selecting procedure ``[3]`` of the
+contribute menu.
 
 .. |branchModel| image:: https://prince.lcsb.uni.lu/img/figure6.png
 
