@@ -58,6 +58,12 @@ opencobra repository (option B).
     `fork-cobratoolbox` folder, other user specific branches may exist in addition to
     the ``master`` and ``develop`` branches.
 
-.. |branchModel| image:: https://prince.lcsb.uni.lu/img/figure6.png
+After initialisation of the MATLAB.devTools, the user and developer may have two
+folders: a ``cobratoolbox`` folder with the stable ``master`` branch checked out, and a
+``fork-cobratoolbox`` folder with the ``develop`` branch checked out. Detailed
+instructions for troubleshooting and/or contributing to the COBRA Toolbox using
+the terminal (or shell) are provided :ref:`here <troubleshooting>`.
 
+
+.. |branchModel| image:: https://prince.lcsb.uni.lu/img/figure6.png
 

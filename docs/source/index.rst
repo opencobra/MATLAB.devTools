@@ -25,7 +25,3 @@ MATLAB.devTools - Contribute the smart way
     :start-after: begin-description-marker
     :end-before: end-description-marker
 
-.. include:: ../../README.rst
-    :start-after: begin-intro-marker
-    :end-before: end-intro-marker
-
