@@ -1,18 +1,29 @@
-Contribute a new tutorial
-=========================
+COBRA.tutorials
+^^^^^^^^^^^^^^^
+
+.. |warning| raw:: html
+
+   <img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning">
+
+|warning| This section is tailored to users who feel comfortable using
+the terminal (or shell). It is recommended for other users
+to follow :ref:`these instructions <contribute>`.
+
+|warning| A Github account is required and `git` must be installed. An SSH key
+must be set as explained in :ref:`prerequisites`.
 
 Fork and checkout your branch
 -----------------------------
 
-1. Fork the repository ``https://www.github.com/opencobra/COBRA.tutorials`` on Github.
+1. Fork the `COBRA.tutorials repository <https://www.github.com/opencobra/COBRA.tutorials>`__ on Github.
 
-2. Clone the forked repository to a directory of your choice:
+2. Clone the forked repository to ``fork-COBRA.tutorials`` located in a directory of your choice:
   
    .. code-block:: console
 
       $ git clone git@github.com:<userName>/COBRA.tutorials.git fork-COBRA.tutorials.git
 
-3. Change to the directory:
+3. Change to the directory ``fork-COBRA.tutorials``:
   
    .. code-block:: console
 
