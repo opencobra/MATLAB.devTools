@@ -11,7 +11,7 @@ to use the ``MATLAB.devTools`` on.
 
 -  **Check if you already have an SSH key:**
 
-::
+.. code:: console
 
     $ ls -al ~/.ssh
 
@@ -23,7 +23,7 @@ key. Now, you have to **add your SSH key to Github**. More help is
    SSH key (see previous step), you have to generate one (more help is
    `here <https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/>`__):
 
-::
+.. code:: console
 
     $ ssh-keygen -t rsa -C "first.last@server.com"
 
