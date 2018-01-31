@@ -36,4 +36,7 @@ repository and enjoy stability (option A), whereas more advanced users might
 want to develop their own features and actively make contributions to the
 opencobra repository (option B).
 
+|branchModel|
+
+.. |branchModel| image:: https://prince.lcsb.uni.lu/img/figure6.png
 
