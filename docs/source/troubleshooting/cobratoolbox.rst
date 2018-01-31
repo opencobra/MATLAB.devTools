@@ -1,10 +1,6 @@
 The COBRA Toolbox
 ^^^^^^^^^^^^^^^^^
 
-.. |warning| raw:: html
-
-   <img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning">
-
 |warning| This section is tailored to users who feel comfortable using
 the terminal (or shell). It is recommended for other users
 to follow :ref:`these instructions <contribute>`.

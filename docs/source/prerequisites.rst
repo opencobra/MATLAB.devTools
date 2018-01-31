@@ -128,4 +128,7 @@ with your respective credentials.
 .. |windows1| image:: https://prince.lcsb.uni.lu/img/installation_git_windows_1.png
    :width: 280px
 
+.. include:: ../../README.rst
+   :start-after: begin-icon-marker
+   :end-before: end-icon-marker
 

@@ -226,4 +226,8 @@ paper of The COBRA Toolbox shall we cited when referring to the ``MATLAB.devTool
 
    <img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="bulb">
 
+.. |warning| raw:: html
+
+   <img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning">
+
 .. end-icon-marker

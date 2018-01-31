@@ -79,5 +79,28 @@ from the terminal (or shell):
 
     $ git clone git@github.com:openCOBRA/MATLAB.devTools
 
+|warning| A working internet connection is required and git and curl must be
+installed. Installation instructions are provided on the main repository page
+of the MATLAB.devTools. A valid passphrase-less SSH key must be set in the
+Github account settings in order to contribute without entering a password
+while securely communicating with the Github server.
+
+The MATLAB.devTools are configured on the fly or whenever the configuration
+details are not present. The first time a user runs contribute, the personal
+repository (fork) is downloaded (cloned) into a new folder named
+`fork-cobratoolbox` at the location specified by the user. In this local folder,
+both ``master`` and ``develop`` branches exist, but it is the ``develop`` branch that is
+automatically selected (checked out). Any new contributions are derived from
+the develop branch.  Initialising a contribution using the MATLAB.devTools is
+straightforward. In MATLAB, type:
+
+.. code:: matlab
+
+    >> contribute % then select procedure [1]
+
 .. |branchModel| image:: https://prince.lcsb.uni.lu/img/figure6.png
+
+.. include:: ../../README.rst
+   :start-after: begin-icon-marker
+   :end-before: end-icon-marker
 
