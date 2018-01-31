@@ -38,5 +38,26 @@ opencobra repository (option B).
 
 |branchModel|
 
+  - **Option A** The `opencobra/cobratoolbox <https://github.com/opencobra/cobratoolbox>`_ repository is a
+    public repository that is read-only. Once the opencobra repository has been
+    installed in the folder `cobratoolbox`, all branches
+    (including ``master`` and ``develop``) are available locally. In the local directory
+    `cobratoolbox` folder, the user has read and write access, but cannot push eventual
+    changes back to the opencobra repository. It is the default and stable ``master``
+    branch only that should be used. The local copy located in the cobratoolbox
+    directory can be updated (both branches).  
+
+  - **Option B** In order to make changes to the
+    opencobra repository, or, in other words, contribute, you must obtain your own
+    personal copy first. You must register on the `Github website <https://github.com>`_ in order to obtain a username. First, click on the button FORK at the top
+    right corner of the official `opencobra/cobratoolbox <https://github.com/opencobra/cobratoolbox>`_ repository website
+    in order to create a personal copy
+    (or fork) with write and read access of the opencobra repository. This copy is
+    accessible under `https://github.com/<username>/cobratoolbox`, where `<username>` is 
+    your Github username. In the
+    `fork-cobratoolbox` folder, other user specific branches may exist in addition to
+    the ``master`` and ``develop`` branches.
+
 .. |branchModel| image:: https://prince.lcsb.uni.lu/img/figure6.png
+
 
