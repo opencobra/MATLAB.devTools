@@ -64,6 +64,20 @@ folders: a ``cobratoolbox`` folder with the stable ``master`` branch checked out
 instructions for troubleshooting and/or contributing to the COBRA Toolbox using
 the terminal (or shell) are provided :ref:`here <troubleshooting>`.
 
+After the official opencobra version of the COBRA Toolbox has been installed,
+it is possible to install the MATLAB.devTools from within MATLAB:
+
+.. code:: console
+
+    >> installDevTools
+
+With this command, the directory MATLAB.devTools is created next to the
+cobratoolbox installation directory. The MATLAB.devTools can also be installed
+from the terminal (or shell):
+
+.. code:: console
+
+    $ git clone git@github.com:openCOBRA/MATLAB.devTools
 
 .. |branchModel| image:: https://prince.lcsb.uni.lu/img/figure6.png
 
