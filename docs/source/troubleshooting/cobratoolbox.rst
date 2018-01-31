@@ -7,7 +7,7 @@ The COBRA Toolbox
 
 |warning| This section is tailored to users who feel comfortable using
 the terminal (or shell). It is recommended for other users
-to follow `these instructions`__.
+to follow :ref:`these instructions <contribute>`.
 
 |warning| A Github account is required and `git` must be installed. You also
 must already have forked the `opencobra/cobratoolbox
@@ -19,7 +19,7 @@ Development scheme
 ------------------
 
 The repository of the COBRA Toolbox is version controlled with the open-source
-standard `git` on the public code development site `github.com
+standard ``git`` on the public code development site `github.com
 <https://github.com>`__. Any incremental change to the code is wrapped in a
 commit, tagged with a specific tag (called SHA1), a commit message, and author
 information, such as the email address and the user name. Contributions to the
@@ -43,7 +43,8 @@ starting to contribute using `git`.
 Clone the fork and update the submodules
 ----------------------------------------
 
-|warning|
+|warning| Please note the following:
+
  - The following commands should only be run from the terminal (or the shell).
  - An SSH key must be set in your Github account settings.
 
@@ -183,7 +184,8 @@ any uncommitted or local changes (git status).
  
     $ git checkout develop
     $ git fetch upstream
-    $ git merge upstream/develop $ git submodule update
+    $ git merge upstream/develop
+    $ git submodule update
     $ git checkout <myBranch>
     $ git rebase develop
 
@@ -213,7 +215,8 @@ cherry-pick the commit from `<myBranch-1>` to `<myBranch-2>` by typing:
 
 .. code:: console
  
-    $ git checkout myBranch-2 $ git cherry-pick SHA1
+    $ git checkout myBranch-2
+    $ git cherry-pick SHA1
 
 If there are no conflicts, the displayed message should contain the commit
 message and author information. In order to have the commit listed online,
