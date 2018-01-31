@@ -21,8 +21,7 @@ MATLAB.devTools - Contribute the smart way
         View MATLAB.devTools <strong>source code</strong> on <a href="https://github.com/opencobra/MATLAB.devTools/"><img src="https://prince.lcsb.uni.lu/img/logos/github.png" style="height: 40px !important;"></a>.
     </div>
 
-
 .. include:: ../../README.rst
-    :start-after: begin-intro-marker
-    :end-before: end-intro-marker
+    :start-after: begin-description-marker
+    :end-before: end-description-marker
 

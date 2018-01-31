@@ -14,6 +14,27 @@
 | |Build Status| | |Build Status| | |codecov|     | |Code grade| |
 +----------------+----------------+---------------+--------------+
 
+.. begin-description-marker
+
+All repositories on Github are version controlled using `git
+<https://git-scm.com>`__, a free and open-source distributed, version control
+system, which tracks changes in computer files and is used for coordinating
+work on those files by multiple people. 
+
+In order to lower the technological barrier to the use of the popular software
+development tool `git <https://git-scm.com>`__, we have developed
+`MATLAB.devTools`, a new user-friendly software extension that enables
+submission of new COBRA software and tutorials, in particular for `The COBRA
+Toolbox <https://www.github.com/opencobra/cobratoolbox>`__ and the
+`COBRA.tutorials <https://www.github.com/opencobra/COBRA.tutorials>`__.
+
+The `MATLAB.devTools <https://github.com/opencobra/MATLAB.devTools>`__ are
+highly recommended for contributing code (in particular `MATLAB` code) to
+existing repositories in a user-friendly and convenient way, even for those
+without basic knowledge of `git`.
+
+.. end-description-marker
+
 
 Pre-requisites
 --------------
@@ -142,9 +163,8 @@ How to cite the ``MATLAB.devTools``
 
 .. begin-how-to-cite-marker
 
-The  ``MATLAB.devTools`` has been developped first for the COBRA Toolbox and
-thus when citing the ``MATLAB.devTools``, one should refer to the following
-paper:
+As the  ``MATLAB.devTools`` have first been developed for the COBRA Toolbox, the
+paper of The COBRA Toolbox shall we cited when referring to the ``MATLAB.devTools``.
 
     Laurent Heirendt & Sylvain Arreckx, Thomas Pfau, Sebastian N.
     Mendoza, Anne Richelle, Almut Heinken, Hulda S. Haraldsdottir, Jacek
@@ -205,5 +225,9 @@ paper:
 .. |important| raw:: html
 
    <img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="bulb">
+
+.. |warning| raw:: html
+
+   <img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning">
 
 .. end-icon-marker
