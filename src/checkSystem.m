@@ -68,6 +68,10 @@ function checkSystem(callerName)
 
     if status_keyscan == 1 && ~isempty(strfind(result_keyscan, 'usage:'))
 
+        % touch the file first
+        system(['touch ', homeDir, filesep, '.ssh', filesep, 'known_hosts']);
+
+        % read the known hosts file
         [~, result_grep] = system(['grep "^github.com " ', homeDir, filesep, '.ssh', filesep, 'known_hosts']);
 
         if strcmp(result_grep, '')
