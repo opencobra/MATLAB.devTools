@@ -68,9 +68,9 @@ function checkSystem(callerName)
 
     if status_keyscan == 1 && ~isempty(strfind(result_keyscan, 'usage:'))
 
-        [status_grep, result_grep] = system(['grep "^github.com " ', homeDir, filesep, '.ssh', filesep, 'known_hosts']);
+        [~, result_grep] = system(['grep "^github.com " ', homeDir, filesep, '.ssh', filesep, 'known_hosts']);
 
-        if status_grep == 1 && length(result_grep) == 0
+        if strcmp(result_grep, '')
             [status_kh, result_kh] = system(['ssh-keyscan github.com >> ', homeDir, filesep, '.ssh', filesep, 'known_hosts']);
 
             if status_kh == 0
@@ -79,10 +79,9 @@ function checkSystem(callerName)
                 fprintf(result_kh);
                 error([gitCmd.lead, ' [', mfilename, ']', callerName, ' github.com could not be added to the known hosts file in ~/.ssh/known_hosts']);
             end
-       else
-           fprintf(result_grep);
-           error([gitCmd.lead, ' [', mfilename, ']', callerName, ' Known hosts cannot be determined.']);
-       end
+        else
+            printMsg(mfilename, [callerName, ' github.com is already a known host.']);
+        end
     else
         fprintf(result_keyscan);
         error([gitCmd.lead, ' [', mfilename, ']', callerName, ' ssh-keyscan is not installed.']);
