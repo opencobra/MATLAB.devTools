@@ -52,7 +52,40 @@ function checkSystem(callerName)
     if status_curl == 0 && ~isempty(strfind(result_curl, 'curl')) && ~isempty(strfind(result_curl, 'http'))
         printMsg(mfilename, [callerName, ' curl is properly installed.']);
     else
+        fprintf(result_curl);
         error([gitCmd.lead, ' [', mfilename, ']', callerName, ' curl is not installed. Please follow the guidelines how to install curl.']);
+    end
+
+    % add github.com as a known host
+    [status_keyscan, result_keyscan] = system('ssh-keyscan');
+
+    % user directory
+    if ispc
+        homeDir = getenv('userprofile');
+    else
+        homeDir = getenv('HOME');
+    end
+
+    if status_keyscan == 1 && ~isempty(strfind(result_keyscan, 'usage:'))
+
+        [status_grep, result_grep] = system(['grep "^github.com " ', homeDir, filesep, '.ssh', filesep, 'known_hosts']);
+
+        if status_grep == 1 && length(result_grep) == 0
+            [status_kh, result_kh] = system(['ssh-keyscan github.com >> ', homeDir, filesep, '.ssh', filesep, 'known_hosts']);
+
+            if status_kh == 0
+                printMsg(mfilename, [callerName, ' github.com has been added to the known hosts']);
+            else
+                fprintf(result_kh);
+                error([gitCmd.lead, ' [', mfilename, ']', callerName, ' github.com could not be added to the known hosts file in ~/.ssh/known_hosts']);
+            end
+       else
+           fprintf(result_grep);
+           error([gitCmd.lead, ' [', mfilename, ']', callerName, ' Known hosts cannot be determined.']);
+       end
+    else
+        fprintf(result_keyscan);
+        error([gitCmd.lead, ' [', mfilename, ']', callerName, ' ssh-keyscan is not installed.']);
     end
 
     if printLevel > 0
