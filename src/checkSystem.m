@@ -15,6 +15,9 @@ function checkSystem(callerName)
     global gitConf
     global gitCmd
 
+    % add the public key from github.com to the known hosts
+    addKeyToKnownHosts();
+
     % if a configuration has already been set, configure the devTools accordingly
     if isempty(gitConf)
         confDevTools();
