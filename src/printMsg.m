@@ -23,12 +23,9 @@ function printMsg(fileName, msg, endMsg)
         end
 
         if gitConf.printLevel > 0
-            message = [gitCmd.lead, ' [', fileName, '] ', msg, endMsg];
+            fprintf([gitCmd.lead, ' [', fileName, '] ', msg, endMsg]);
         end
     else
-        message = [' [', fileName, '] ', msg];
+        fprintf([' [', fileName, '] ', msg]);
     end
-
-    % print the message properly speaking
-    fprintf(message);
 end
