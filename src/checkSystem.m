@@ -15,6 +15,9 @@ function checkSystem(callerName)
     global gitConf
     global gitCmd
 
+    % add the public key from github.com to the known hosts
+    addKeyToKnownHosts();
+
     % if a configuration has already been set, configure the devTools accordingly
     if isempty(gitConf)
         confDevTools();
@@ -52,6 +55,7 @@ function checkSystem(callerName)
     if status_curl == 0 && ~isempty(strfind(result_curl, 'curl')) && ~isempty(strfind(result_curl, 'http'))
         printMsg(mfilename, [callerName, ' curl is properly installed.']);
     else
+        fprintf(result_curl);
         error([gitCmd.lead, ' [', mfilename, ']', callerName, ' curl is not installed. Please follow the guidelines how to install curl.']);
     end
 

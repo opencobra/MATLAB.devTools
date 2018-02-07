@@ -15,11 +15,17 @@ function printMsg(fileName, msg, endMsg)
     global gitConf
     global gitCmd
 
-    if nargin < 3
-        endMsg = [gitCmd.success, gitCmd.trail];
-    end
+    % define the message
+    if ~isempty(gitConf) && ~isempty(gitCmd)
+        % define the end of the message
+        if nargin < 3
+            endMsg = [gitCmd.success, gitCmd.trail];
+        end
 
-    if gitConf.printLevel > 0
-        fprintf([gitCmd.lead, ' [', fileName, '] ', msg, endMsg]);
+        if gitConf.printLevel > 0
+            fprintf([gitCmd.lead, ' [', fileName, '] ', msg, endMsg]);
+        end
+    else
+        fprintf([' [', fileName, '] ', msg]);
     end
 end
