@@ -221,6 +221,31 @@
   <div class="section" id="module-src">
 <span id="functions"></span><span id="modules-functions"></span><h1>Functions<a class="headerlink" href="#module-src" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
+<dt id="src.addKeyToKnownHosts">
+<code class="descname">addKeyToKnownHosts</code><span class="sig-paren">(</span><em>callerName</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/addKeyToKnownHosts.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.addKeyToKnownHosts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the public key to <cite>site.ext</cite> exists
+If the public key of the <cite>site.ext</cite> does not exist,
+adds the public key to the known hosts</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>keyAdded = addKeyToKnownHosts(callerName)</div></blockquote>
+<p><strong>Input</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>callerName</strong> &#8211;
+Name of the function calling (default: empty string)</li>
+</ul>
+</div></blockquote>
+<p><strong>Output</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>keyAdded</strong> &#8211;
+Boolean (true if key has been added successfully or exists)</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
 <dt id="src.checkBranchExistence">
 <code class="descname">checkBranchExistence</code><span class="sig-paren">(</span><em>branchName</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/checkBranchExistence.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.checkBranchExistence" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if a branch exists locally</p>
