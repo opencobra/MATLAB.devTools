@@ -11,17 +11,22 @@ function confDevTools(launcher, remoteRepoURL, nickName, printLevel)
     gitConf.leadForkDirName = 'fork-';
     gitConf.exampleBranch = 'add-constraints';
 
-    if nargin < 4  % default values
-        gitConf.printLevel = 0;
+    if ~exist('printLevel', 'var')
+        printLevel = 1;
+    end
+
+    if nargin < 3  % default values
         gitConf.launcher = '\n\n      _____   _____   _____   _____     _____     |\n     /  ___| /  _  \\ |  _  \\ |  _  \\   / ___ \\    |   COnstraint-Based Reconstruction and Analysis\n     | |     | | | | | |_| | | |_| |  | |___| |   |   The COBRA Toolbox - 2017\n     | |     | | | | |  _  { |  _  /  |  ___  |   |\n     | |___  | |_| | | |_| | | | \\ \\  | |   | |   |   Documentation:\n     \\_____| \\_____/ |_____/ |_|  \\_\\ |_|   |_|   |   http://opencobra.github.io/cobratoolbox\n                                                  | \n\n';
         gitConf.remoteRepoURL = 'https://github.com/opencobra/cobratoolbox.git';
         gitConf.nickName = 'cobratoolbox';
     else
-        gitConf.printLevel = printLevel;
         gitConf.launcher = launcher;
         gitConf.remoteRepoURL = remoteRepoURL;
         gitConf.nickName = nickName;
     end
+
+    % define the printLevel
+    gitConf.printLevel = printLevel;
 
     % define the URL of the devTools
     gitConf.devToolsURL_SSH = 'git@github.com:opencobra/MATLAB.devTools.git';

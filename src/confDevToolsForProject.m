@@ -28,6 +28,15 @@ function confDevToolsForProject(projectName)
         printMsg(mfilename, [' The devTools have been configured for ', projectName, '.']);
 
     elseif strcmp(projectName, 'COBRA.tutorials') % configure the devTools for https://www.github.com/opencobra/COBRA.tutorials
+
+        % configure the repository
+        launcher = '\n\n       ~~~ COBRA.tutorials ~~~\n\n';
+        remoteRepoURL = 'https://github.com/opencobra/COBRA.tutorials.git';
+        nickName = 'COBRA.tutorials';
+
+        % sets the configuration
+        confDevTools(launcher, remoteRepoURL, nickName);
+
         % print out a success message
         printMsg(mfilename, [' The devTools have been configured for ', projectName, '.']);
 
