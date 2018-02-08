@@ -19,7 +19,8 @@ function checkSystem(callerName)
     if isempty(gitConf)
         confDevTools();
     else
-        confDevTools(gitConf.launcher, gitConf.remoteRepoURL, gitConf.nickName, gitConf.printLevel);
+        confDevTools('launcher', gitConf.launcher, 'remoteRepoURL', ...
+                     gitConf.remoteRepoURL, 'nickName', gitConf.nickName, 'printLevel', gitConf.printLevel);
     end
 
     % set the callerName
