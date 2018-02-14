@@ -356,9 +356,42 @@ Boolean (true if a new clone has been made)</li>
 
 <dl class="function">
 <dt id="src.confDevTools">
-<code class="descname">confDevTools</code><span class="sig-paren">(</span><em>launcher</em>, <em>remoteRepoURL</em>, <em>nickName</em>, <em>printLevel</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/confDevTools.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.confDevTools" title="Permalink to this definition">¶</a></dt>
-<dd><p>devTools</p>
-<p>PURPOSE: define the configuration of the devTools</p>
+<code class="descname">confDevTools</code><span class="sig-paren">(</span><em>repoName</em>, <em>varargin</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/confDevTools.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.confDevTools" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure the devTools by defining the <cite>gitConf</cite> object</p>
+<p><strong>Usage</strong></p>
+<blockquote>
+<div>confDevTools(repoName, remoteRepoURL, varargin)</div></blockquote>
+<p><strong>Input</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>repoName</strong> &#8211;
+Name of the repository (default: &#8216;cobratoolbox&#8217;)</li>
+</ul>
+</div></blockquote>
+<p><strong>Optional inputs</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>remoteRepoURL</strong> &#8211;
+URL of the repository</li>
+<li><strong>launcher</strong> &#8211;
+String with a header to be displayed when starting</li>
+<li><strong>nickName</strong> &#8211;
+Short name of the repository</li>
+<li><strong>printLevel</strong> &#8211;
+Verbose level (default: 1)</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<dl class="last docutils">
+<dt>Currently, only 2 projects are defined:</dt>
+<dd><ul class="first last simple">
+<li>cobratoolbox: <a class="reference external" href="https://www.github.com/opencobra/cobratoolbox">https://www.github.com/opencobra/cobratoolbox</a></li>
+<li>COBRA.tutorials: <a class="reference external" href="https://www.github.com/opencobra/COBRA.tutorials">https://www.github.com/opencobra/COBRA.tutorials</a></li>
+</ul>
+</dd>
+</dl>
+</div>
 </dd></dl>
 
 <dl class="function">
