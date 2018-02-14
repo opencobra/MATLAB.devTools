@@ -51,6 +51,7 @@ function confDevTools(repoName, varargin)
     repoName = parser.Results.repoName;
     nickName = parser.Results.nickName;
     printLevel = parser.Results.printLevel;
+    remoteRepoURL = parser.Results.remoteRepoURL;
 
     % define the configuration of other projects here
     if strcmpi(repoName, 'opencobra/COBRA.tutorials')
@@ -58,7 +59,6 @@ function confDevTools(repoName, varargin)
         nickName = 'COBRA.tutorials';
     else
         launcher = parser.Results.launcher;
-        remoteRepoURL = parser.Results.remoteRepoURL;
         if printLevel > 0
             fprintf([' -- Assuming the default configuration (', nickName, ' repository)\n']);
         end
