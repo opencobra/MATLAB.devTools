@@ -44,7 +44,7 @@ function confDevTools(repoName, varargin)
     if ~isempty(varargin)
         parser.parse(repoName, varargin{:});
     else
-        parser.parse();
+        parser.parse(repoName);
     end
 
     % retrieve the variables
