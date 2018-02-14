@@ -1,12 +1,18 @@
-function confDevTools(varargin)
+function confDevTools(repoName, varargin)
 % Configure the devTools by defining the `gitConf` object
 %
-% INPUT:
+% USAGE:
+%
+%    confDevTools(repoName, remoteRepoURL, varargin)
+%
+% INPUTS:
 %     repoName:       Name of the repository (default: 'cobratoolbox')
+%
+% OPTIONAL INPUTS:
+%     remoteRepoURL:  URL of the repository
 %     launcher:       String with a header to be displayed when starting
 %     nickName:       Short name of the repository
 %     printLevel:     Verbose level (default: 1)
-%     remoteRepoURL:  URL of the repository
 %
 % Note:
 %    Currently, only 2 projects are defined:
@@ -21,7 +27,6 @@ function confDevTools(varargin)
     global gitCmd
 
     % define default values
-    defaultRepoName = 'cobratoolbox';
     defaultLauncher = '\n\n      _____   _____   _____   _____     _____     |\n     /  ___| /  _  \\ |  _  \\ |  _  \\   / ___ \\    |   COnstraint-Based Reconstruction and Analysis\n     | |     | | | | | |_| | | |_| |  | |___| |   |   The COBRA Toolbox - 2017\n     | |     | | | | |  _  { |  _  /  |  ___  |   |\n     | |___  | |_| | | |_| | | | \\ \\  | |   | |   |   Documentation:\n     \\_____| \\_____/ |_____/ |_|  \\_\\ |_|   |_|   |   http://opencobra.github.io/cobratoolbox\n                                                  | \n\n';
     defaultRemoteRepoURL = 'https://github.com/opencobra/cobratoolbox.git';
     defaultNickName = 'cobratoolbox';
@@ -29,15 +34,15 @@ function confDevTools(varargin)
 
     % setup the parser
     parser = inputParser();
-    parser.addParamValue('repoName', defaultRepoName, @(x) ischar(x) && ~isempty(x));
+    parser.addRequired('repoName', @ischar);
+    parser.addOptional('remoteRepoURL', ['https://github.com/' repoName '.git'], @ischar);
     parser.addParamValue('launcher', defaultLauncher, @ischar);
-    parser.addParamValue('nickName', defaultNickName, @(x) ischar(x) && ~isempty(x));
+    parser.addParamValue('nickName', repoName, @ischar);
     parser.addParamValue('printLevel', defaultPrintLevel, @(x) isnumeric(x));
-    parser.addParamValue('remoteRepoURL', defaultRemoteRepoURL, @(x) ischar(x) && ~isempty(x));
 
     % parse the input arguments
     if ~isempty(varargin)
-        parser.parse(varargin{:});
+        parser.parse(repoName, varargin{:});
     else
         parser.parse();
     end
@@ -46,7 +51,7 @@ function confDevTools(varargin)
     repoName = parser.Results.repoName;
 
     % define the configuration of other projects here
-    if strcmpi(repoName, 'COBRA.tutorials')
+    if strcmpi(repoName, 'opencobra/COBRA.tutorials')
         launcher = '\n\n       ~~~ COBRA.tutorials ~~~\n\n';
         remoteRepoURL = 'https://github.com/opencobra/COBRA.tutorials.git';
         nickName = 'COBRA.tutorials';
