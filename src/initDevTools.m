@@ -8,8 +8,6 @@ function initDevTools()
 % .. Author:
 %      - Laurent Heirendt
 
-
-
     global gitConf
     global gitCmd
 
@@ -185,4 +183,7 @@ function initDevTools()
     fprintf([gitCmd.lead, originCall, '    Local directory :      ', gitConf.fullForkDir, gitCmd.trail])
     fprintf([gitCmd.lead, originCall, '    Remote fork URL:       ', gitConf.forkURL, gitCmd.trail]);
     fprintf([gitCmd.lead, originCall, '    Remote repository URL: ', gitConf.remoteRepoURL, gitCmd.trail]);
+
+    finishup = onCleanup(@() resetDevTools());
+
 end

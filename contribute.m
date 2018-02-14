@@ -45,6 +45,8 @@ function contribute(printLevel)
 
     choice = input('\n      (You can abort any process using CTRL-C)\n\n      [1] Start a new feature (branch).\n      [2] Select an existing feature (branch) to work on.\n      [3] Publish a feature (branch).\n      [4] Delete a feature (branch).\n      [5] Update the fork.\n\n   -> Please select what you want to do (enter the number): ', 's');
 
+    finishup = onCleanup(@() resetDevTools());
+
     choice = str2num(choice);
 
     if length(choice) == 0 || choice > 5 || choice < 0
@@ -135,4 +137,6 @@ function contribute(printLevel)
 
     % change back to the current directory
     cd(currentDir);
+
+    finishup = onCleanup(@() resetDevTools());
 end
