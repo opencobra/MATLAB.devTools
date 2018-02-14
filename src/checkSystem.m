@@ -20,9 +20,11 @@ function checkSystem(callerName)
 
     % if a configuration has already been set, configure the devTools accordingly
     if isempty(gitConf)
-        confDevTools();
+        % default configuration of the devTools is the opencobra/cobratoolbox repository
+        confDevTools('opencobra/cobratoolbox');
     else
-        confDevTools(gitConf.launcher, gitConf.remoteRepoURL, gitConf.nickName, gitConf.printLevel);
+        confDevTools(gitConf.nickName, gitConf.remoteRepoURL, 'launcher', gitConf.launcher, ...
+                     'printLevel', gitConf.printLevel);
     end
 
     % set the callerName
