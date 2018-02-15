@@ -15,12 +15,17 @@ function contribute(printLevel)
 
     global gitConf
     global gitCmd
+    global resetDevToolsFlag
+
+    resetDevToolsFlag = true;
 
     % retrieve the current directory
     currentDir = pwd;
 
     % adding the src folder of the devTools
     addpath(genpath(fileparts(which(mfilename))));
+
+    finishup = onCleanup(@() resetDevTools())
 
     % check the system and set the configuration
     checkSystem(mfilename);
@@ -133,6 +138,9 @@ function contribute(printLevel)
         end
     end
 
+    resetDevToolsFlag = false;
+
     % change back to the current directory
     cd(currentDir);
+
 end

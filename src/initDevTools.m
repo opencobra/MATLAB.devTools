@@ -8,10 +8,13 @@ function initDevTools()
 % .. Author:
 %      - Laurent Heirendt
 
-
-
     global gitConf
     global gitCmd
+    global resetDevToolsFlag
+
+    resetDevToolsFlag = true;
+
+    finishup = onCleanup(@() resetDevTools());
 
     % check the system and set the configuration
     checkSystem(mfilename);
@@ -143,6 +146,8 @@ function initDevTools()
         end
     end
 
+    resetDevToolsFlag = false;
+
     % define the fork directory name
     gitConf.fullForkDir = strrep([gitConf.localDir, gitConf.forkDirName], '\', '\\');
 
@@ -185,4 +190,5 @@ function initDevTools()
     fprintf([gitCmd.lead, originCall, '    Local directory :      ', gitConf.fullForkDir, gitCmd.trail])
     fprintf([gitCmd.lead, originCall, '    Remote fork URL:       ', gitConf.forkURL, gitCmd.trail]);
     fprintf([gitCmd.lead, originCall, '    Remote repository URL: ', gitConf.remoteRepoURL, gitCmd.trail]);
+
 end
