@@ -55,7 +55,7 @@ function keyAdded = addKeyToKnownHosts(callerName)
                 error([gitCmd.lead, ' [', mfilename, ']', callerName, ' github.com could not be added to the known hosts file in ~/.ssh/known_hosts']);
             end
         else
-            printMsg(mfilename, [callerName, ' github.com is already a known host.\n']);
+            printMsg(mfilename, [callerName, ' github.com is already a known host.']);
             keyAdded = true;
         end
     else

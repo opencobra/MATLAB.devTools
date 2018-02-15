@@ -12,9 +12,9 @@ function initDevTools()
     global gitCmd
     global resetDevToolsFlag
 
-    %resetDevToolsFlag = true;
+    resetDevToolsFlag = true;
 
-    %finishup = onCleanup(@() resetDevTools());
+    finishup = onCleanup(@() resetDevTools());
 
     % check the system and set the configuration
     checkSystem(mfilename);
@@ -189,6 +189,6 @@ function initDevTools()
     fprintf([gitCmd.lead, originCall, '    Remote fork URL:       ', gitConf.forkURL, gitCmd.trail]);
     fprintf([gitCmd.lead, originCall, '    Remote repository URL: ', gitConf.remoteRepoURL, gitCmd.trail]);
 
-    %resetDevToolsFlag = false;
+    resetDevToolsFlag = false;
 
 end

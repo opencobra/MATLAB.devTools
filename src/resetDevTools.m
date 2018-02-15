@@ -41,5 +41,7 @@ function resetDevTools()
         clear global resetDevToolsFlag;
 
         fprintf([' [', mfilename, '] The development tools have been reset.\n']);
+    else
+        resetDevToolsFlag = true;
     end
 end
