@@ -11,6 +11,8 @@ function initDevTools()
     global gitConf
     global gitCmd
 
+    finishup = onCleanup(@() resetDevTools());
+
     % check the system and set the configuration
     checkSystem(mfilename);
 
@@ -183,7 +185,4 @@ function initDevTools()
     fprintf([gitCmd.lead, originCall, '    Local directory :      ', gitConf.fullForkDir, gitCmd.trail])
     fprintf([gitCmd.lead, originCall, '    Remote fork URL:       ', gitConf.forkURL, gitCmd.trail]);
     fprintf([gitCmd.lead, originCall, '    Remote repository URL: ', gitConf.remoteRepoURL, gitCmd.trail]);
-
-    finishup = onCleanup(@() resetDevTools());
-
 end
