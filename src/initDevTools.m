@@ -146,6 +146,8 @@ function initDevTools()
         end
     end
 
+    resetDevToolsFlag = false;
+
     % define the fork directory name
     gitConf.fullForkDir = strrep([gitConf.localDir, gitConf.forkDirName], '\', '\\');
 
@@ -188,7 +190,5 @@ function initDevTools()
     fprintf([gitCmd.lead, originCall, '    Local directory :      ', gitConf.fullForkDir, gitCmd.trail])
     fprintf([gitCmd.lead, originCall, '    Remote fork URL:       ', gitConf.forkURL, gitCmd.trail]);
     fprintf([gitCmd.lead, originCall, '    Remote repository URL: ', gitConf.remoteRepoURL, gitCmd.trail]);
-
-    resetDevToolsFlag = false;
 
 end
