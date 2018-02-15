@@ -37,7 +37,7 @@ function confDevTools(repoName, varargin)
     parser.addRequired('repoName', @ischar);
     parser.addOptional('remoteRepoURL', ['https://github.com/' repoName '.git'], @ischar);
     parser.addParamValue('launcher', defaultLauncher, @ischar);
-    parser.addParamValue('nickName', regexprep(repoName,'[^a-zA-Z0-9]',''), @ischar);
+    parser.addParamValue('nickName', defaultNickName, @ischar);
     parser.addParamValue('printLevel', defaultPrintLevel, @(x) isnumeric(x));
 
     % parse the input arguments
@@ -49,9 +49,13 @@ function confDevTools(repoName, varargin)
 
     % retrieve the variables
     repoName = parser.Results.repoName;
-    nickName = parser.Results.nickName;
-    printLevel = parser.Results.printLevel;
     remoteRepoURL = parser.Results.remoteRepoURL;
+    printLevel = parser.Results.printLevel;
+
+    % set the default nickName
+    urlSplit = strsplit(remoteRepoURL, '/');
+    tmpNickName = strsplit(urlSplit{end}, '.git');
+    nickName = tmpNickName{1};
 
     % define the configuration of other projects here
     if strcmpi(repoName, 'opencobra/COBRA.tutorials')
