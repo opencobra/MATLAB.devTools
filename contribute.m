@@ -138,4 +138,7 @@ function contribute(printLevel)
     % change back to the current directory
     cd(currentDir);
 
+    % reset the onCleanup action
+    finishup = onCleanup();
+
 end
