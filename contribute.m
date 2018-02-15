@@ -139,6 +139,6 @@ function contribute(printLevel)
     cd(currentDir);
 
     % reset the onCleanup action
-    finishup = onCleanup();
+    finishup = onCleanup(@() fprintf(''));
 
 end

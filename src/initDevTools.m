@@ -187,6 +187,6 @@ function initDevTools()
     fprintf([gitCmd.lead, originCall, '    Remote repository URL: ', gitConf.remoteRepoURL, gitCmd.trail]);
 
     % reset the onCleanup action
-    finishup = onCleanup();
+    finishup = onCleanup(@() fprintf(''));
 
 end
