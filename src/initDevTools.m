@@ -126,9 +126,11 @@ function initDevTools()
                 if ~isempty(strfind(gitConf.localDir, gitConf.nickName))
                     gitConf.localDir = gitConf.localDir(1:end-length(gitConf.nickName)-1-length(gitConf.leadForkDirName));
                 end
-            else if exist([gitConf.localDir, '/.git'], 'dir') == 7 % contains a .git folder
+
+            elseif exist([gitConf.localDir, '/.git'], 'dir') == 7 % contains a .git folder
                 printMsg(mfilename, ['The specified directory already is a git repository (git-tracked).'], gitCmd.trail);
                 createDir = false;
+
             else
                 createDir = true;
             end
