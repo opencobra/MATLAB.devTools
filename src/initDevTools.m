@@ -98,8 +98,9 @@ function initDevTools()
         createDir = false;
 
         while ~createDir
-            reply = input([gitCmd.lead, originCall, ' -> Please define the local path to your fork\n       current: ', strrep(pwd,'\','\\'),'\n       Enter the path (press ENTER to use the current path): '], 's');
+            reply = input([gitCmd.lead, originCall, ' -> Please define the location of your fork\n       current: ', strrep(pwd,'\','\\'),'\n       Enter the path (press ENTER to use the current path): '], 's');
 
+            % define the local directory as the current directory if the reply is empty
             if isempty(reply)
                 gitConf.localDir = strrep(pwd, '\', '\\');
             else
@@ -119,15 +120,15 @@ function initDevTools()
             end
 
             % warn the user of not using a fork-nickName directory or a git cloned directory as it will be cloned
-            if ~isempty(strfind(gitConf.localDir, gitConf.nickName)) || exist([gitConf.localDir, '/.git'], 'dir') == 7  % contains the nickname or a .git folder
-                reply = input([gitCmd.trail, gitCmd.lead, originCall, ' -> The specified directory already contains a ', gitConf.nickName, ' copy (clone) or is a git directory.', ...
-                               gitCmd.trail, gitCmd.lead, originCall, ' -> Please provide the directory into which your fork should be cloned. Do you want to continue? Y/N [Y]:'], 's');
-
-                if isempty(reply) || strcmpi(reply, 'y') || strcmpi(reply, 'yes')
-                    createDir = true;
-                else
-                    createDir = false;
+            if ~isempty(strfind(gitConf.localDir, gitConf.nickName)) % contains the nickname
+                printMsg(mfilename, ['The specified directory already contains a ', gitConf.nickName, ' copy (clone).'], gitCmd.trail);
+                createDir = true;
+                if ~isempty(strfind(gitConf.localDir, gitConf.nickName))
+                    gitConf.localDir = gitConf.localDir(1:end-length(gitConf.nickName)-1-length(gitConf.leadForkDirName));
                 end
+            else if exist([gitConf.localDir, '/.git'], 'dir') == 7 % contains a .git folder
+                printMsg(mfilename, ['The specified directory already is a git repository (git-tracked).'], gitCmd.trail);
+                createDir = false;
             else
                 createDir = true;
             end
