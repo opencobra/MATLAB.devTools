@@ -25,7 +25,7 @@ function contribute(printLevel)
     % adding the src folder of the devTools
     addpath(genpath(fileparts(which(mfilename))));
 
-    finishup = onCleanup(@() resetDevTools())
+    finishup = onCleanup(@() resetDevTools());
 
     % check the system and set the configuration
     checkSystem(mfilename);
