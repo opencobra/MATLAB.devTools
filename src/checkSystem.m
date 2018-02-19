@@ -1,12 +1,14 @@
-function checkSystem(callerName)
+function checkSystem(callerName, repoName)
 % Checks the configuration of the system (installation of git and curl)
 %
 % USAGE:
 %
-%    checkSystem(callerName)
+%    checkSystem(callerName, repoName)
 %
 % INPUT:
 %   callerName:     Name of the function calling `checkSystem()`
+%   repoName:       Name of the repository for which the devTools shall
+%                   be configured (default: `opencobra/cobratoolbox`)
 %
 % .. Author:
 %      - Laurent Heirendt
@@ -14,14 +16,20 @@ function checkSystem(callerName)
 
     global gitConf
     global gitCmd
+    global DEFAULTREPONAME
 
     % add the public key from github.com to the known hosts
     addKeyToKnownHosts();
 
+    % set the repoName if not given
+    if ~exist('repoName', 'var')
+        repoName = DEFAULTREPONAME;
+    end
+
     % if a configuration has already been set, configure the devTools accordingly
     if isempty(gitConf)
         % default configuration of the devTools is the opencobra/cobratoolbox repository
-        confDevTools('opencobra/cobratoolbox');
+        confDevTools(repoName);
     else
         confDevTools(gitConf.nickName, gitConf.remoteRepoURL, 'launcher', gitConf.launcher, ...
                      'printLevel', gitConf.printLevel);
