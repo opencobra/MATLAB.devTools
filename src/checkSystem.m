@@ -26,6 +26,13 @@ function checkSystem(callerName, repoName)
         repoName = DEFAULTREPONAME;
     end
 
+    % reset the devTools if the repoName is different from the already configured repository
+    if ~isempty(gitConf)
+        if ~strcmpi(gitConf.remoteRepoURL, ['https://github.com/' repoName '.git'])
+            gitConf = []; % do not reset the devTools
+        end
+    end
+
     % if a configuration has already been set, configure the devTools accordingly
     if isempty(gitConf)
         % default configuration of the devTools is the opencobra/cobratoolbox repository
