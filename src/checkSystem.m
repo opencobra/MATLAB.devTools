@@ -18,6 +18,13 @@ function checkSystem(callerName, repoName, printLevel)
     global gitConf
     global gitCmd
 
+    % set the callerName
+    if nargin < 3
+        callerName = '';
+    else
+        callerName = ['(caller: ', callerName, ')'];
+    end
+
     % set the repoName if not given
     if nargin < 2 || ~exist('repoName', 'var') || isempty(gitConf)
         repoName = 'opencobra/cobratoolbox';
@@ -45,13 +52,6 @@ function checkSystem(callerName, repoName, printLevel)
                          'launcher', gitConf.launcher, ...
                          'printLevel', gitConf.printLevel);
         end
-    end
-
-    % set the callerName
-    if nargin < 3
-        callerName = '';
-    else
-        callerName = ['(caller: ', callerName, ')'];
     end
 
     % only check whether git and curl are installed if the gitConf object is empty
