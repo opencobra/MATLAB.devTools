@@ -42,7 +42,7 @@ function checkSystem(callerName, repoName, printLevel)
             printMsg(mfilename, [gitCmd.lead, ' Please use >> resetDevTools() if you want to change the current configuration.']);
             gitConf.printLevel = tmpPrintLevel;
 
-            confDevTools(gitConf.nickName, 'remoteRepoURL', gitConf.remoteRepoURL,
+            confDevTools(gitConf.nickName, 'remoteRepoURL', gitConf.remoteRepoURL, ...
                          'launcher', gitConf.launcher, ...
                          'printLevel', gitConf.printLevel);
         end
