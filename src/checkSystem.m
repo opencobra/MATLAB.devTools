@@ -30,7 +30,7 @@ function checkSystem(callerName, repoName, printLevel)
 
     % if a configuration has already been set, configure the devTools accordingly
     if isempty(gitConf)
-        % default configuration of the devTools is the opencobra/cobratoolbox repository
+        % default configuration of the devTools is the DEFAULTREPONAME repository
         confDevTools(repoName, 'printLevel', printLevel);
     else
         confDevTools(gitConf.nickName, 'remoteRepoURL', gitConf.remoteRepoURL, 'launcher', gitConf.launcher, ...
@@ -44,26 +44,29 @@ function checkSystem(callerName, repoName, printLevel)
         callerName = ['(caller: ', callerName, ')'];
     end
 
-    % add the public key from github.com to the known hosts
-    addKeyToKnownHosts();
+    % only check whether git and curl are installed if the gitConf object is empty
+    if isempty(gitConf)
+        % add the public key from github.com to the known hosts
+        addKeyToKnownHosts();
 
-    % check if git is properly installed
-    [status_gitVersion, result_gitVersion] = system('git --version');
+        % check if git is properly installed
+        [status_gitVersion, result_gitVersion] = system('git --version');
 
-    if status_gitVersion == 0 && ~isempty(strfind(result_gitVersion, 'git version'))
-        printMsg(mfilename, [callerName, ' git is properly installed.']);
-    else
-        fprintf(result_gitVersion);
-        error([gitCmd.lead, ' [', mfilename, ']', callerName, ' git is not installed. Please follow the guidelines how to install git.']);
-    end
+        if status_gitVersion == 0 && ~isempty(strfind(result_gitVersion, 'git version'))
+            printMsg(mfilename, [callerName, ' git is properly installed.']);
+        else
+            fprintf(result_gitVersion);
+            error([gitCmd.lead, ' [', mfilename, ']', callerName, ' git is not installed. Please follow the guidelines how to install git.']);
+        end
 
-    % check if curl is properly installed
-    [status_curl, result_curl] = system('curl --version');
+        % check if curl is properly installed
+        [status_curl, result_curl] = system('curl --version');
 
-    if status_curl == 0 && ~isempty(strfind(result_curl, 'curl')) && ~isempty(strfind(result_curl, 'http'))
-        printMsg(mfilename, [callerName, ' curl is properly installed.']);
-    else
-        fprintf(result_curl);
-        error([gitCmd.lead, ' [', mfilename, ']', callerName, ' curl is not installed. Please follow the guidelines how to install curl.']);
+        if status_curl == 0 && ~isempty(strfind(result_curl, 'curl')) && ~isempty(strfind(result_curl, 'http'))
+            printMsg(mfilename, [callerName, ' curl is properly installed.']);
+        else
+            fprintf(result_curl);
+            error([gitCmd.lead, ' [', mfilename, ']', callerName, ' curl is not installed. Please follow the guidelines how to install curl.']);
+        end
     end
 end
