@@ -35,14 +35,10 @@ function contribute(repoName, printLevel)
     end
 
     % check the system and set the configuration
-    checkSystem(mfilename, repoName);
-
-    if nargin > 1
-        if printLevel > 0
-            gitConf.printLevel = printLevel;
-        else
-            gitConf.printLevel = 0;
-        end
+    if exist('printLevel', 'var')
+        checkSystem(mfilename, repoName, printLevel);
+    else
+        checkSystem(mfilename, repoName);
     end
 
     devToolsDir = fileparts(which(mfilename));

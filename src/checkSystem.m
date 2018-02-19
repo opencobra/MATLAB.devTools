@@ -1,4 +1,4 @@
-function checkSystem(callerName, repoName)
+function checkSystem(callerName, repoName, printLevel)
 % Checks the configuration of the system (installation of git and curl)
 %
 % USAGE:
@@ -9,6 +9,7 @@ function checkSystem(callerName, repoName)
 %   callerName:     Name of the function calling `checkSystem()`
 %   repoName:       Name of the repository for which the devTools shall
 %                   be configured (default: `opencobra/cobratoolbox`)
+%   printLevel:     Level of verbose
 %
 % .. Author:
 %      - Laurent Heirendt
@@ -18,43 +19,33 @@ function checkSystem(callerName, repoName)
     global gitCmd
     global DEFAULTREPONAME
 
-    % add the public key from github.com to the known hosts
-    addKeyToKnownHosts();
-
     % set the repoName if not given
     if ~exist('repoName', 'var')
         repoName = DEFAULTREPONAME;
     end
 
-    % reset the devTools if the repoName is different from the already configured repository
-    if ~isempty(gitConf)
-        if ~strcmpi(gitConf.remoteRepoURL, ['https://github.com/' repoName '.git'])
-            gitConf = []; % do not reset the devTools
-        end
+    if ~exist('printLevel', 'var') && isempty(gitConf)
+        printLevel = 0;
     end
 
     % if a configuration has already been set, configure the devTools accordingly
     if isempty(gitConf)
         % default configuration of the devTools is the opencobra/cobratoolbox repository
-        confDevTools(repoName);
+        confDevTools(repoName, 'printLevel', printLevel);
     else
-        confDevTools(gitConf.nickName, gitConf.remoteRepoURL, 'launcher', gitConf.launcher, ...
+        confDevTools(gitConf.nickName, 'remoteRepoURL', gitConf.remoteRepoURL, 'launcher', gitConf.launcher, ...
                      'printLevel', gitConf.printLevel);
     end
 
     % set the callerName
-    if nargin < 1
+    if nargin < 3
         callerName = '';
-        printLevel = 1;
     else
-        printLevel = 0;
         callerName = ['(caller: ', callerName, ')'];
     end
 
-    if printLevel > 0
-        gitConfprintLevel = gitConf.printLevel;
-        gitConf.printLevel = 1;
-    end
+    % add the public key from github.com to the known hosts
+    addKeyToKnownHosts();
 
     % check if git is properly installed
     [status_gitVersion, result_gitVersion] = system('git --version');
@@ -74,9 +65,5 @@ function checkSystem(callerName, repoName)
     else
         fprintf(result_curl);
         error([gitCmd.lead, ' [', mfilename, ']', callerName, ' curl is not installed. Please follow the guidelines how to install curl.']);
-    end
-
-    if printLevel > 0
-        gitConf.printLevel = gitConfprintLevel;
     end
 end

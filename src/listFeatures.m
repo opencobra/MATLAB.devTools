@@ -41,7 +41,7 @@ function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
         arrResult = strtrim(arrResult);
         arrResult = arrResult(~cellfun(@isempty, arrResult));
 
-        if length(arrResult) > 2
+        if length(arrResult) > 3
             fprintf('\n      Available features are:\n');
 
             % list the number of available features
