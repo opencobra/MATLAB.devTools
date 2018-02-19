@@ -17,11 +17,10 @@ function checkSystem(callerName, repoName, printLevel)
 
     global gitConf
     global gitCmd
-    global DEFAULTREPONAME
 
     % set the repoName if not given
-    if ~exist('repoName', 'var')
-        repoName = DEFAULTREPONAME;
+    if nargin < 2 || ~exist('repoName', 'var') || isempty(gitConf)
+        repoName = 'opencobra/cobratoolbox';
     end
 
     if ~exist('printLevel', 'var') && isempty(gitConf)
