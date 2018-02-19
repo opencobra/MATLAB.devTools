@@ -19,7 +19,7 @@
 All repositories on Github are version controlled using `git
 <https://git-scm.com>`__, a free and open-source distributed, version control
 system, which tracks changes in computer files and is used for coordinating
-work on those files by multiple people. 
+work on those files by multiple people.
 
 In order to lower the technological barrier to the use of the popular software
 development tool `git <https://git-scm.com>`__, we have developed
@@ -111,8 +111,7 @@ changes made to a downloaded official ``git`` repository will be
 ignored).
 
 |important| If you get stuck or are faced with an system error message, please read
-the
-`FAQ <https://github.com/opencobra/MATLAB.devTools/blob/master/docs/source/faq.rst>`__.
+the `FAQ <https://opencobra.github.io/MATLAB.devTools/stable/faq.html>`__.
 
 .. end-getstarted-marker
 
@@ -127,33 +126,30 @@ Configure the ``MATLAB.devTools`` for another repository
 
 .. begin-contribute-other-repo-marker
 
-|important| The ``MATLAB.devTools`` can only be used with **publicly accessible**
-repositories.
+|important| The ``MATLAB.devTools`` can only be used with **publicly accessible** repositories.
+
+If you want to use the ``MATLAB.devTools`` when contributing to the
+`COBRA.tutorials <https://github.com/opencobra/COBRA.tutorials>`__, you can simply configure
+the ``MATLAB.devTools`` on-the-fly by typing:
+
+.. code:: matlab
+
+    >> contribute('opencobra/COBRA.tutorials')
 
 If you want to use the ``MATLAB.devTools`` with a repository other than
-the default repository, you must set the following variables:
+the default repository, you may run:
 
 .. code:: matlab
 
-    launcher = '\n\n       ~~~ MATLAB.devTools ~~~\n\n'; % a message for the repository (any string)
-    remoteRepoURL = 'https://server.com/repositoryName.git'; % the remote url
-    nickName = 'repoNickName'; % a nickName of the repository (any string)
-    printLevel = 0;  % set the printLevel mode
+    >> contribute('userName/repositoryName')
 
-and run:
-
-.. code:: matlab
-
-    >> confDevTools(launcher, remoteRepoURL, nickName, printLevel);  % sets the configuration
+Please note that this command looks for a repository on `github.com <https://www.github.com>`__.
 
 In order to reset the configuration, type:
 
 .. code:: matlab
 
     >> resetDevTools();
-
-If you want your changes to be permanent, you can set the above
-mentioned variables in ``./src/confDevTools.m``.
 
 .. end-contribute-other-repo-marker
 
