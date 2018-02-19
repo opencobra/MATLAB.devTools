@@ -129,7 +129,6 @@ function initDevTools()
 
             elseif exist([gitConf.localDir, '/.git'], 'dir') == 7 % contains a .git folder
                 printMsg(mfilename, ['The specified directory already is a git repository (git-tracked).'], gitCmd.trail);
-                createDir = false;
 
             else
                 createDir = true;
