@@ -6,7 +6,7 @@ function openPR(branchName)
 %    openPR(branchName)
 %
 % INPUT:
-%   branchName:     Name of the branch for which a pull request (PR) shall be opened
+%    branchName:     Name of the branch for which a pull request (PR) shall be opened
 %
 % .. Author:
 %      - Laurent Heirendt

@@ -6,7 +6,7 @@ function history(fileName)
 %    history(fileName)
 %
 % INPUT:
-%   fileName:     Name of the file for which the history shall be displayed
+%    fileName:     Name of the file for which the history shall be displayed
 %
 % .. Author:
 %      - Laurent Heirendt

@@ -6,7 +6,7 @@ function initContribution(branchName)
 %    initContribution(branchName)
 %
 % INPUT:
-%   branchName:     Name of the local branch to be initialized
+%    branchName:     Name of the local branch to be initialized
 %
 % .. Author:
 %      - Laurent Heirendt

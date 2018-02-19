@@ -6,7 +6,7 @@ function deleteContribution(branchName)
 %     deleteContribution(branchName)
 %
 % INPUT:
-%   branchName:     Name of the local branch to be deleted
+%     branchName:     Name of the local branch to be deleted
 %
 % .. Author:
 %      - Laurent Heirendt

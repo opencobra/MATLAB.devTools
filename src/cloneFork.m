@@ -6,7 +6,7 @@ function freshClone = cloneFork()
 %    freshClone = cloneFork()
 %
 % OUTPUT:
-%   freshClone:   Boolean (true if a new clone has been made)
+%    freshClone:   Boolean (true if a new clone has been made)
 %
 % .. Author:
 %      - Laurent Heirendt

@@ -6,10 +6,10 @@ function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
 %    [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
 %
 % OUTPUT:
-%   exitFlag:         Boolean (true if proper exit of function)
-%   currentBranch:    Name of current branch
-%   arrResult:        Cell with all names of branches
-%   exampleBranch:    Name of a branch given as an example
+%    exitFlag:         Boolean (true if proper exit of function)
+%    currentBranch:    Name of current branch
+%    arrResult:        Cell with all names of branches
+%    exampleBranch:    Name of a branch given as an example
 %
 % .. Author:
 %      - Laurent Heirendt
