@@ -33,8 +33,19 @@ function checkSystem(callerName, repoName, printLevel)
         % default configuration of the devTools is the DEFAULTREPONAME repository
         confDevTools(repoName, 'printLevel', printLevel);
     else
-        confDevTools(gitConf.nickName, 'remoteRepoURL', gitConf.remoteRepoURL, 'launcher', gitConf.launcher, ...
-                     'printLevel', gitConf.printLevel);
+        % write instructions how to reset the devTools when they already configured
+        if strcmpi(callerName, 'contribute')
+            fprintf('\n');
+            tmpPrintLevel = gitConf.printLevel;
+            gitConf.printLevel = 1;
+            printMsg(mfilename, [gitCmd.lead, ' The devTools are configured for the repository <', gitConf.nickName, '>']);
+            printMsg(mfilename, [gitCmd.lead, ' Please use >> resetDevTools() if you want to change the current configuration.']);
+            gitConf.printLevel = tmpPrintLevel;
+
+            confDevTools(gitConf.nickName, 'remoteRepoURL', gitConf.remoteRepoURL,
+                         'launcher', gitConf.launcher, ...
+                         'printLevel', gitConf.printLevel);
+        end
     end
 
     % set the callerName
