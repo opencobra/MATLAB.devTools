@@ -6,7 +6,7 @@ function currentBranch = getCurrentBranchName()
 %    currentBranch = getCurrentBranchName()
 %
 % OUTPUT:
-%   currentBranch:   Name of the current branch
+%    currentBranch:   Name of the current branch
 %
 % .. Author:
 %      - Laurent Heirendt

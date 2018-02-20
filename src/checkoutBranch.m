@@ -6,8 +6,8 @@ function checkoutBranch(branchName, updateForkFlag)
 %    checkoutBranch(branchName, updateForkFlag)
 %
 % INPUT:
-%   branchName:       Name of the local branch to be checked out
-%   updateForkFlag:   Boolean to update the fork before checking out the branch
+%    branchName:       Name of the local branch to be checked out
+%    updateForkFlag:   Boolean to update the fork before checking out the branch
 %
 % .. Author:
 %      - Laurent Heirendt

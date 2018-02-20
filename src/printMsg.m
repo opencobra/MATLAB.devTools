@@ -6,9 +6,9 @@ function printMsg(fileName, msg, endMsg)
 %    printMsg(fileName, msg, endMsg)
 %
 % INPUT:
-%   fileName:       Name of the file from which the message is issued
-%   msg:            Message as string
-%   endMsg:         End of message, generally a new line character
+%    fileName:       Name of the file from which the message is issued
+%    msg:            Message as string
+%    endMsg:         End of message, generally a new line character
 %
 % .. Author:
 

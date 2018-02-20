@@ -45,7 +45,7 @@ opencobra repository (option B).
     `cobratoolbox` folder, the user has read and write access, but cannot push eventual
     changes back to the opencobra repository. It is the default and stable ``master``
     branch only that should be used. The local copy located in the cobratoolbox
-    directory can be updated (both branches).  
+    directory can be updated (both branches).
 
   - **Option B** In order to make changes to the
     opencobra repository, or, in other words, contribute, you must obtain your own
@@ -53,7 +53,7 @@ opencobra repository (option B).
     right corner of the official `opencobra/cobratoolbox <https://github.com/opencobra/cobratoolbox>`_ repository website
     in order to create a personal copy
     (or fork) with write and read access of the opencobra repository. This copy is
-    accessible under `https://github.com/<username>/cobratoolbox`, where `<username>` is 
+    accessible under `https://github.com/<username>/cobratoolbox`, where `<username>` is
     your Github username. In the
     `fork-cobratoolbox` folder, other user specific branches may exist in addition to
     the ``master`` and ``develop`` branches.
@@ -77,7 +77,7 @@ from the terminal (or shell):
 
 .. code:: console
 
-    $ git clone git@github.com:openCOBRA/MATLAB.devTools
+    $ git clone git@github.com:opencobra/MATLAB.devTools
 
 |warning| A working internet connection is required and git and curl must be
 installed. Installation instructions are provided on the main repository page
@@ -120,13 +120,13 @@ particularly important in order to retrieve all changes that have been made to
 the opencobra repository in the meantime.
 
 .. code:: matlab
-    
+
     >> contribute % then select procedure [2]
 
 Procedure ``[2]`` pulls all changes from the opencobra repository, and rebases the
 existing contribution. In other words, existing commits are shifted forward and
 placed after all commits made on the develop branch of the opencobra
-repository. 
+repository.
 
 |warning| Before attempting to continue working on an existing
 feature, make sure that you published your commits.
@@ -141,7 +141,7 @@ repository once a pull request has been submitted. It is not necessary to open
 a pull request if you want to simply upload your contribution to your fork.
 
 .. code:: matlab
-    
+
     >> contribute % then select procedure [3]
 
 When running procedure ``[3]``, you have two options:
@@ -182,7 +182,7 @@ using the MATLAB.devTools. Instead, create a new branch by following procedure
 
 |warning| Make sure that your changes are either merged or saved locally if you
 need them. Once procedure ``[4]`` is concluded, all changes on the deleted
-branch are removed, both locally and remotely. No commits can be recovered. 
+branch are removed, both locally and remotely. No commits can be recovered.
 
 Update your fork
 ----------------
@@ -192,14 +192,14 @@ contribution. The local fork can be updated using procedure ``[5]`` of the
 contribute menu.
 
 .. code:: matlab
-    
+
     >> contribute % then select procedure [5]
 
 Before updating your fork, make sure that no changes are present in the local
 directory `fork-cobratoolbox`. You can do so by typing:
 
 .. code:: matlab
-    
+
     >> checkStatus
 
 If there are changes listed, publish them by selecting procedure ``[3]`` of the

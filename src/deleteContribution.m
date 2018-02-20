@@ -1,12 +1,12 @@
 function deleteContribution(branchName)
-% Deletes and existing feature (branch) named <branchName>
+% Delete an existing feature (branch) named `branchName`
 %
 % USAGE:
 %
 %     deleteContribution(branchName)
 %
 % INPUT:
-%   branchName:     Name of the local branch to be deleted
+%     branchName:     Name of the local branch to be deleted
 %
 % .. Author:
 %      - Laurent Heirendt

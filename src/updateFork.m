@@ -6,7 +6,7 @@ function updateFork(force)
 %    updateFork(force)
 %
 % INPUT:
-%   force:          Boolean flag to use force for updating the fork
+%    force:          Boolean flag to use force for updating the fork
 %
 % .. Author:
 %      - Laurent Heirendt
