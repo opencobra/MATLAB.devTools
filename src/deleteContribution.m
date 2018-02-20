@@ -1,5 +1,5 @@
 function deleteContribution(branchName)
-% Deletes and existing feature (branch) named <branchName>
+% Delete an existing feature (branch) named `branchName`
 %
 % USAGE:
 %

@@ -1,12 +1,12 @@
 function freshClone = cloneFork()
-% Clones the fork and updates the submodules of the repository
+% Clone the fork and update the submodules of the repository
 %
 % USAGE:
 %
 %    freshClone = cloneFork()
 %
 % OUTPUT:
-%    freshClone:   Boolean (true if a new clone has been made)
+%    freshClone:   Boolean (`true` if a new clone has been made)
 %
 % .. Author:
 %      - Laurent Heirendt
