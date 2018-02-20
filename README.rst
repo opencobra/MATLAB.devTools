@@ -121,12 +121,10 @@ How can I update my fork without contributing?
 In order to only update your fork, run ``>> contribute`` and select menu
 item ``[5]``.
 
-Configure the ``MATLAB.devTools`` for another repository
---------------------------------------------------------
+Configure the ``MATLAB.devTools`` for ``COBRA.tutorials``
+---------------------------------------------------------
 
-.. begin-contribute-other-repo-marker
-
-|important| The ``MATLAB.devTools`` can only be used with **publicly accessible** repositories.
+.. begin-contribute-cobratutorials-marker
 
 If you want to use the ``MATLAB.devTools`` when contributing to the
 `COBRA.tutorials <https://github.com/opencobra/COBRA.tutorials>`__, you can simply configure
@@ -136,6 +134,16 @@ the ``MATLAB.devTools`` on-the-fly by typing:
 
     >> contribute('opencobra/COBRA.tutorials')
 
+.. end-contribute-cobratutorials-marker
+
+
+Configure the ``MATLAB.devTools`` for another repository
+--------------------------------------------------------
+
+.. begin-contribute-other-repo-marker
+
+|important| The ``MATLAB.devTools`` can only be used with **publicly accessible** repositories.
+
 If you want to use the ``MATLAB.devTools`` with a repository other than
 the default repository, you may run:
 
@@ -143,16 +151,21 @@ the default repository, you may run:
 
     >> contribute('userName/repositoryName')
 
-Please note that this command looks for a repository on `github.com <https://www.github.com>`__.
+where ``userName`` is the name on Github of the organization or the user, and
+``repositoryName`` is the name of the repository. The URL of the repository
+would be `https://github.com/userName/repositoryName`.  Please note that this
+command looks for a repository on `github.com <https://www.github.com>`__.
 
-In order to reset the configuration, type:
+.. end-contribute-other-repo-marker
+
+Reset the ``MATLAB.devTools``
+-----------------------------
+
+In order to reset the configuration of the ``MATLAB.devTools``, type:
 
 .. code:: matlab
 
     >> resetDevTools();
-
-.. end-contribute-other-repo-marker
-
 
 How to cite the ``MATLAB.devTools``
 -----------------------------------
@@ -225,5 +238,9 @@ paper of The COBRA Toolbox shall we cited when referring to the ``MATLAB.devTool
 .. |warning| raw:: html
 
    <img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning">
+
+.. |bulb| raw:: html
+
+   <img src="https://prince.lcsb.uni.lu/jenkins/userContent/bulb.png" height="20px" width="20px" alt="bulb">
 
 .. end-icon-marker
