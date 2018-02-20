@@ -1,23 +1,32 @@
-function initDevTools()
+function initDevTools(repoName)
 % Initializes the development tools (username and email are requested if not configured)
 %
 % USAGE:
 %
-%    initDevTools()
+%    initDevTools(repoName)
 %
+% INPUT:
+%   repoName:       Name of the repository for which the devTools shall
+%                   be configured (default: `opencobra/cobratoolbox`)
 % .. Author:
 %      - Laurent Heirendt
 
     global gitConf
     global gitCmd
     global resetDevToolsFlag
+    global DEFAULTREPONAME
+
+    % set the repoName if not given
+    if ~exist('repoName', 'var')
+        repoName = DEFAULTREPONAME;
+    end
 
     resetDevToolsFlag = true;
 
     finishup = onCleanup(@() resetDevTools());
 
     % check the system and set the configuration
-    checkSystem(mfilename);
+    checkSystem(mfilename, repoName);
 
     if ~isfield(gitConf, 'userName'), gitConf.userName = []; end
     if ~isfield(gitConf, 'localDir'), gitConf.localDir = []; end

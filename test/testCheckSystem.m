@@ -11,7 +11,7 @@ printLevel = 1;
 resetDevTools();
 
 % set the configuration
-confDevTools(nickName, remoteRepoURL, 'launcher', launcher, ...
+confDevTools(nickName, 'remoteRepoURL', remoteRepoURL, 'launcher', launcher, ...
              'nickName', nickName, 'printLevel', printLevel);
 
 % check the system

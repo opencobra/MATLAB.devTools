@@ -27,15 +27,22 @@ function confDevTools(repoName, varargin)
     global gitCmd
 
     % define default values
-    defaultLauncher = '\n\n      _____   _____   _____   _____     _____     |\n     /  ___| /  _  \\ |  _  \\ |  _  \\   / ___ \\    |   COnstraint-Based Reconstruction and Analysis\n     | |     | | | | | |_| | | |_| |  | |___| |   |   The COBRA Toolbox - 2017\n     | |     | | | | |  _  { |  _  /  |  ___  |   |\n     | |___  | |_| | | |_| | | | \\ \\  | |   | |   |   Documentation:\n     \\_____| \\_____/ |_____/ |_|  \\_\\ |_|   |_|   |   http://opencobra.github.io/cobratoolbox\n                                                  | \n\n';
     defaultRemoteRepoURL = 'https://github.com/opencobra/cobratoolbox.git';
     defaultNickName = 'cobratoolbox';
-    defaultPrintLevel = 1;
+    defaultPrintLevel = 0;
 
     % setup the parser
     parser = inputParser();
     parser.addRequired('repoName', @ischar);
-    parser.addOptional('remoteRepoURL', ['https://github.com/' repoName '.git'], @ischar);
+    parser.addParamValue('remoteRepoURL', ['https://github.com/' repoName '.git'], @ischar);
+
+    % set the defaultLauncher
+    if strcmpi(repoName, 'opencobra/cobratoolbox')
+        c = clock;
+        defaultLauncher = ['\n\n      _____   _____   _____   _____     _____     |\n     /  ___| /  _  \\ |  _  \\ |  _  \\   / ___ \\    |   COnstraint-Based Reconstruction and Analysis\n     | |     | | | | | |_| | | |_| |  | |___| |   |   The COBRA Toolbox - ', num2str(c(1)) , '\n     | |     | | | | |  _  { |  _  /  |  ___  |   |\n     | |___  | |_| | | |_| | | | \\ \\  | |   | |   |   Documentation:\n     \\_____| \\_____/ |_____/ |_|  \\_\\ |_|   |_|   |   http://opencobra.github.io/cobratoolbox\n                                                  | \n\n'];
+    else
+        defaultLauncher = ['\n\n      ~~~ ' repoName ' ~~~\n\n'];
+    end
     parser.addParamValue('launcher', defaultLauncher, @ischar);
     parser.addParamValue('nickName', defaultNickName, @ischar);
     parser.addParamValue('printLevel', defaultPrintLevel, @(x) isnumeric(x));

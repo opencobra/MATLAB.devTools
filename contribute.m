@@ -1,4 +1,4 @@
-function contribute(printLevel)
+function contribute(repoName, printLevel)
 % devTools
 %
 % PURPOSE: displays a menu and calls the respective subfunctions
@@ -16,6 +16,7 @@ function contribute(printLevel)
     global gitConf
     global gitCmd
     global resetDevToolsFlag
+    global DEFAULTREPONAME
 
     resetDevToolsFlag = true;
 
@@ -27,18 +28,20 @@ function contribute(printLevel)
 
     finishup = onCleanup(@() resetDevTools());
 
-    % check the system and set the configuration
-    checkSystem(mfilename);
-
-    if nargin > 0
-        if printLevel > 0
-            gitConf.printLevel = printLevel;
-        else
-            gitConf.printLevel = 0;
-        end
+    % treatment of input arguments
+    if ~exist('repoName', 'var')
+        DEFAULTREPONAME = 'opencobra/cobratoolbox';  % set the default repository
+        repoName = DEFAULTREPONAME;
     end
 
-    devToolsDir = fileparts(which('contribute.m'));
+    % check the system and set the configuration
+    if exist('printLevel', 'var')
+        checkSystem(mfilename, repoName, printLevel);
+    else
+        checkSystem(mfilename, repoName);
+    end
+
+    devToolsDir = fileparts(which(mfilename));
 
     % change to the directory of the devTools
     cd(devToolsDir);
@@ -79,7 +82,7 @@ function contribute(printLevel)
                 exitFlag = false;
             else
                 % initialize the development tools
-                initDevTools();
+                initDevTools(repoName);
 
                 % change to the fork diretory
                 cd(gitConf.fullForkDir);
