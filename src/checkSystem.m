@@ -19,7 +19,7 @@ function checkSystem(callerName, repoName, printLevel)
     global gitCmd
 
     % set the callerName
-    if nargin < 3
+    if ~exist('printLevel', 'var')
         callerName = '';
     else
         callerName = ['(caller: ', callerName, ')'];
