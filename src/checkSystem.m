@@ -26,7 +26,7 @@ function checkSystem(callerName, repoName, printLevel)
     end
 
     % set the repoName if not given
-    if nargin < 2 || ~exist('repoName', 'var') || isempty(gitConf)
+    if nargin < 2 || ~exist('repoName', 'var')
         repoName = 'opencobra/cobratoolbox';
     end
 

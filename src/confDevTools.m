@@ -27,8 +27,6 @@ function confDevTools(repoName, varargin)
     global gitCmd
 
     % define default values
-    defaultRemoteRepoURL = 'https://github.com/opencobra/cobratoolbox.git';
-    defaultNickName = 'cobratoolbox';
     defaultPrintLevel = 0;
 
     % setup the parser
@@ -40,8 +38,13 @@ function confDevTools(repoName, varargin)
     if strcmpi(repoName, 'opencobra/cobratoolbox')
         c = clock;
         defaultLauncher = ['\n\n      _____   _____   _____   _____     _____     |\n     /  ___| /  _  \\ |  _  \\ |  _  \\   / ___ \\    |   COnstraint-Based Reconstruction and Analysis\n     | |     | | | | | |_| | | |_| |  | |___| |   |   The COBRA Toolbox - ', num2str(c(1)) , '\n     | |     | | | | |  _  { |  _  /  |  ___  |   |\n     | |___  | |_| | | |_| | | | \\ \\  | |   | |   |   Documentation:\n     \\_____| \\_____/ |_____/ |_|  \\_\\ |_|   |_|   |   http://opencobra.github.io/cobratoolbox\n                                                  | \n\n'];
+        defaultNickName = 'cobratoolbox';
+    elseif strcmpi(repoName, 'opencobra/COBRA.tutorials')
+        defaultLauncher = '\n\n       ~~~ COBRA.tutorials ~~~\n\n';
+        defaultNickName = 'COBRA.tutorials';
     else
         defaultLauncher = ['\n\n      ~~~ ' repoName ' ~~~\n\n'];
+        defaultNickName = repoName;
     end
     parser.addParamValue('launcher', defaultLauncher, @ischar);
     parser.addParamValue('nickName', defaultNickName, @ischar);
@@ -65,14 +68,8 @@ function confDevTools(repoName, varargin)
     nickName = tmpNickName{1};
 
     % define the configuration of other projects here
-    if strcmpi(repoName, 'opencobra/COBRA.tutorials')
-        launcher = '\n\n       ~~~ COBRA.tutorials ~~~\n\n';
-        nickName = 'COBRA.tutorials';
-    else
-        launcher = parser.Results.launcher;
-        if printLevel > 0
-            fprintf([' -- Assuming the default configuration (', nickName, ' repository)\n']);
-        end
+    if printLevel > 0
+        fprintf([' -- Assuming the default configuration (', nickName, ' repository)\n']);
     end
 
     % definition of parameters
@@ -81,7 +78,7 @@ function confDevTools(repoName, varargin)
 
     % define the printLevel
     gitConf.printLevel = printLevel;
-    gitConf.launcher = launcher;
+    gitConf.launcher = parser.Results.launcher;
     gitConf.remoteRepoURL = remoteRepoURL;
     gitConf.nickName = nickName;
 
