@@ -6,7 +6,7 @@ function confDevTools(repoName, varargin)
 %    confDevTools(repoName, remoteRepoURL, varargin)
 %
 % INPUTS:
-%     repoName:       Name of the repository (default: 'cobratoolbox')
+%     repoName:       Name of the repository (default: `'cobratoolbox'`)
 %
 % OPTIONAL INPUTS:
 %     remoteRepoURL:  URL of the repository
@@ -15,9 +15,9 @@ function confDevTools(repoName, varargin)
 %     printLevel:     Verbose level (default: 1)
 %
 % Note:
-%    Currently, only 2 projects are defined:
-%      - cobratoolbox: https://www.github.com/opencobra/cobratoolbox
-%      - COBRA.tutorials: https://www.github.com/opencobra/COBRA.tutorials
+%      Currently, only 2 projects are defined:
+%      `The COBRA Toolbox <https://www.github.com/opencobra/cobratoolbox>`__
+%      and `COBRA.tutorials <https://www.github.com/opencobra/COBRA.tutorials>`__
 %
 % .. Author:
 %      - Laurent Heirendt, January 2018
