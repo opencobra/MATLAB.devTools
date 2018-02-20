@@ -306,16 +306,21 @@ Boolean (true if <cite>branchName</cite> esists)</li>
 
 <dl class="function">
 <dt id="src.checkSystem">
-<code class="descname">checkSystem</code><span class="sig-paren">(</span><em>callerName</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/checkSystem.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.checkSystem" title="Permalink to this definition">¶</a></dt>
+<code class="descname">checkSystem</code><span class="sig-paren">(</span><em>callerName</em>, <em>repoName</em>, <em>printLevel</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/checkSystem.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.checkSystem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks the configuration of the system (installation of git and curl)</p>
 <p><strong>Usage</strong></p>
 <blockquote>
-<div>checkSystem(callerName)</div></blockquote>
-<p><strong>Input</strong></p>
+<div>checkSystem(callerName, repoName)</div></blockquote>
+<p><strong>Inputs</strong></p>
 <blockquote>
 <div><ul class="simple">
 <li><strong>callerName</strong> &#8211;
 Name of the function calling <cite>checkSystem()</cite></li>
+<li><strong>repoName</strong> &#8211;
+Name of the repository for which the devTools shall
+be configured (default: <cite>opencobra/cobratoolbox</cite>)</li>
+<li><strong>printLevel</strong> &#8211;
+Level of verbose</li>
 </ul>
 </div></blockquote>
 </dd></dl>
@@ -341,7 +346,7 @@ Boolean to update the fork before checking out the branch</li>
 <dl class="function">
 <dt id="src.cloneFork">
 <code class="descname">cloneFork</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/cloneFork.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.cloneFork" title="Permalink to this definition">¶</a></dt>
-<dd><p>Clones the fork and updates the submodules of the repository</p>
+<dd><p>Clone the fork and update the submodules of the repository</p>
 <p><strong>Usage</strong></p>
 <blockquote>
 <div>freshClone = cloneFork()</div></blockquote>
@@ -349,7 +354,7 @@ Boolean to update the fork before checking out the branch</li>
 <blockquote>
 <div><ul class="simple">
 <li><strong>freshClone</strong> &#8211;
-Boolean (true if a new clone has been made)</li>
+Boolean (<cite>true</cite> if a new clone has been made)</li>
 </ul>
 </div></blockquote>
 </dd></dl>
@@ -365,7 +370,7 @@ Boolean (true if a new clone has been made)</li>
 <blockquote>
 <div><ul class="simple">
 <li><strong>repoName</strong> &#8211;
-Name of the repository (default: &#8216;cobratoolbox&#8217;)</li>
+Name of the repository (default: <cite>&#8216;cobratoolbox&#8217;</cite>)</li>
 </ul>
 </div></blockquote>
 <p><strong>Optional inputs</strong></p>
@@ -383,14 +388,9 @@ Verbose level (default: 1)</li>
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<dl class="last docutils">
-<dt>Currently, only 2 projects are defined:</dt>
-<dd><ul class="first last simple">
-<li>cobratoolbox: <a class="reference external" href="https://www.github.com/opencobra/cobratoolbox">https://www.github.com/opencobra/cobratoolbox</a></li>
-<li>COBRA.tutorials: <a class="reference external" href="https://www.github.com/opencobra/COBRA.tutorials">https://www.github.com/opencobra/COBRA.tutorials</a></li>
-</ul>
-</dd>
-</dl>
+<p class="last">Currently, only 2 projects are defined:
+<a class="reference external" href="https://www.github.com/opencobra/cobratoolbox">The COBRA Toolbox</a>
+and <a class="reference external" href="https://www.github.com/opencobra/COBRA.tutorials">COBRA.tutorials</a></p>
 </div>
 </dd></dl>
 
@@ -406,7 +406,7 @@ Verbose level (default: 1)</li>
 <dl class="function">
 <dt id="src.deleteContribution">
 <code class="descname">deleteContribution</code><span class="sig-paren">(</span><em>branchName</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/deleteContribution.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.deleteContribution" title="Permalink to this definition">¶</a></dt>
-<dd><p>Deletes and existing feature (branch) named &lt;branchName&gt;</p>
+<dd><p>Delete an existing feature (branch) named <cite>branchName</cite></p>
 <p><strong>Usage</strong></p>
 <blockquote>
 <div>deleteContribution(branchName)</div></blockquote>
@@ -469,11 +469,19 @@ Name of the local branch to be initialized</li>
 
 <dl class="function">
 <dt id="src.initDevTools">
-<code class="descname">initDevTools</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/initDevTools.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.initDevTools" title="Permalink to this definition">¶</a></dt>
+<code class="descname">initDevTools</code><span class="sig-paren">(</span><em>repoName</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/opencobra/MATLAB.devTools/blob/21a2724fb1a72f8479249c034d67e9fc6836b8bd/src/initDevTools.m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.initDevTools" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes the development tools (username and email are requested if not configured)</p>
 <p><strong>Usage</strong></p>
 <blockquote>
-<div>initDevTools()</div></blockquote>
+<div>initDevTools(repoName)</div></blockquote>
+<p><strong>Input</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>repoName</strong> &#8211;
+Name of the repository for which the devTools shall
+be configured (default: <cite>opencobra/cobratoolbox</cite>)</li>
+</ul>
+</div></blockquote>
 </dd></dl>
 
 <dl class="function">
