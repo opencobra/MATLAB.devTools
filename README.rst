@@ -168,6 +168,17 @@ In order to reset the configuration of the ``MATLAB.devTools``, type:
 
     >> resetDevTools();
 
+This performs a so-called `soft` reset (clears the local configuration). In
+order to perform a hard reset (clears and resets the local ``git``
+configuration), run:
+
+.. code:: matlab
+
+    >> resetDevTools(true);
+
+Once the devTools have been ``hard`` reset, all details for the configuration
+have to be set again next time ``contribute`` is run.
+
 How to cite the ``MATLAB.devTools``
 -----------------------------------
 
