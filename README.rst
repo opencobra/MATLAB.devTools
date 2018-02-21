@@ -159,8 +159,10 @@ command looks for a repository on `github.com <https://www.github.com>`__.
 
 .. end-contribute-other-repo-marker
 
-Reset the ``MATLAB.devTools``
------------------------------
+How to reset the ``MATLAB.devTools``
+------------------------------------
+
+.. begin-reset-marker
 
 In order to reset the configuration of the ``MATLAB.devTools``, type:
 
@@ -176,8 +178,10 @@ configuration), run:
 
     >> resetDevTools(true);
 
-Once the devTools have been ``hard`` reset, all details for the configuration
+Once the devTools have been `hard` reset, all details for the configuration
 have to be set again next time ``contribute`` is run.
+
+.. end-reset-marker
 
 How to cite the ``MATLAB.devTools``
 -----------------------------------
