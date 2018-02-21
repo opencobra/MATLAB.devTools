@@ -97,6 +97,7 @@ function initDevTools(repoName)
     % retrieve the directory of the fork from the local git configuration
     [~, result_gitConfForkDirGet] = system(['git config --get user.', gitConf.leadForkDirName, gitConf.nickName, '.path']);
     gitConf.fullForkDir = strtrim(result_gitConfForkDirGet);
+    gitConf.localDir = gitConf.fullForkDir;
 
     % check if the fork exists remotely
     checkRemoteFork();
@@ -142,6 +143,9 @@ function initDevTools(repoName)
             end
         end
 
+        % define the fork directory name
+        gitConf.fullForkDir = strrep([gitConf.localDir, gitConf.forkDirName], '\', '\\');
+
         if exist(gitConf.localDir, 'dir') ~= 7
             reply = input([gitCmd.lead, originCall, ' -> The specified directory (', gitConf.localDir, ') does not exist. Do you want to create it? Y/N [Y]:'], 's');
 
@@ -156,9 +160,6 @@ function initDevTools(repoName)
     end
 
     resetDevToolsFlag = false;
-
-    % define the fork directory name
-    gitConf.fullForkDir = strrep([gitConf.localDir, gitConf.forkDirName], '\', '\\');
 
     % permanently store the fork directory in the git configuration (ask the user explicitly)
     [status_gitConfForkDirSet, result_gitConfForkDirSet] = system(['git config --global user.', gitConf.leadForkDirName, gitConf.nickName, '.path "', gitConf.fullForkDir, '"']);
