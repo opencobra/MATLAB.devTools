@@ -75,10 +75,11 @@ Some issues that can arise during installation are addressed in the
 Do you want to contribute to The COBRA Toolbox?
 -----------------------------------------------
 
-Please follow the `installation and contributing
-instructions <https://github.com/opencobra/cobratoolbox/blob/master/README.rst>`__.
-
 |asciicast|
+
+More information about `the COBRA Toolbox
+<https://github.com/opencobra/cobratoolbox>`__ is given `here
+<https://opencobra.github.io/cobratoolbox>`__.
 
 How do I use the ``MATLAB.devTools``?
 -------------------------------------
