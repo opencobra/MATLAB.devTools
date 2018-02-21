@@ -91,11 +91,11 @@ Resolve unexpected behavior - reset
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you encounter unexpected behavior, please try to reset the
-``MATLAB.devTools`` with:
+``MATLAB.devTools`` using the ``resetDevTools`` functionality.
 
-.. code:: matlab
-
-    >> resetDevTools
+.. include:: ../../README.rst
+   :start-after: begin-reset-marker
+   :end-before: end-reset-marker
 
 If you have files or changes that appear and would like to reset your
 local fork (without re-cloning) again, type:
@@ -107,7 +107,5 @@ local fork (without re-cloning) again, type:
 How can I abort a process?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can abort any process using ``CTRL-C`` (hit ``CTRL`` and ``C`` on
+You can abort any process using ``CTRL+C`` (hit ``CTRL`` and ``C`` on
 your keyboard).
-
-
