@@ -174,7 +174,7 @@ function submitContribution(branchName)
                 commitMsg = regexprep(commitMsg, '[^a-zA-Z0-9_-?! ]', '');
 
                 % trim the commitMsg
-                commitMsg = strtrim(commitMsg)
+                commitMsg = strtrim(commitMsg);
 
                 % add double quotes to the commit message if not set
                 if isempty(commitMsg)
