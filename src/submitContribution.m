@@ -198,6 +198,10 @@ function submitContribution(branchName)
                     end
                 end
 
+                if incorrectCommitMsg
+                    warning([gitCmd.lead, 'The commit message must be at least 5 characters long and not contain the word `commit`.');
+                end
+
                 % increment the loop counter
                 loopCounter = loopCounter + 1;
             end

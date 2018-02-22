@@ -6,5 +6,4 @@ testFile1
 n
 y
 testFile2
-N
 message-test
