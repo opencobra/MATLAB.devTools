@@ -26,8 +26,6 @@ function contribute(repoName, printLevel)
     % adding the src folder of the devTools
     addpath(genpath(fileparts(which(mfilename))));
 
-    finishup = onCleanup(@() resetDevTools());
-
     % treatment of input arguments
     if ~exist('repoName', 'var')
         DEFAULTREPONAME = 'opencobra/cobratoolbox';  % set the default repository
@@ -47,6 +45,8 @@ function contribute(repoName, printLevel)
     else
         checkSystem(mfilename, repoName);
     end
+
+    finishup = onCleanup(@() resetDevTools());
 
     devToolsDir = fileparts(which(mfilename));
 

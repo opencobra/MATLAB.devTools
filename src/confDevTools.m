@@ -62,6 +62,15 @@ function confDevTools(repoName, varargin)
     remoteRepoURL = parser.Results.remoteRepoURL;
     printLevel = parser.Results.printLevel;
 
+    % strip the .git at the end
+    tmpRemoteRepoURL = remoteRepoURL(1:end-4);
+
+    % check if the remoteRepoURL exists before proceeding
+    [status_curl, result_curl] = system(['curl -s -k --head ', tmpRemoteRepoURL]);
+    if ~(status_curl == 0 && ~isempty(strfind(result_curl, '200 OK')))
+         error([' [', mfilename, '] The URL (' remoteRepoURL ') is not reachable or does not exist.']);
+    end
+
     % set the default nickName
     urlSplit = strsplit(remoteRepoURL, '/');
     tmpNickName = strsplit(urlSplit{end}, '.git');
