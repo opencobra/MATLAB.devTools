@@ -163,8 +163,10 @@ function submitContribution(branchName)
             % initialize loop flag
             incorrectCommitMsg = true;
 
+            loopCounter = 0;
+
             % loop as long as the commit message is not correct
-            while incorrectCommitMsg
+            while incorrectCommitMsg && loopCounter < 10
                 % ask the user for a commit message
                 commitMsg = input([gitCmd.lead, originCall, ' -> Please enter a commit message (example: "Fixing bug with input arguments"): '], 's');
 
@@ -172,7 +174,7 @@ function submitContribution(branchName)
                 commitMsg = regexprep(commitMsg, '[^a-zA-Z0-9_-?! ]', '');
 
                 % trim the commitMsg
-                commitMsg = strtrim(commitMsg);
+                commitMsg = strtrim(commitMsg)
 
                 % add double quotes to the commit message if not set
                 if isempty(commitMsg)
@@ -195,6 +197,9 @@ function submitContribution(branchName)
                         break;
                     end
                 end
+
+                % increment the loop counter
+                loopCounter = loopCounter + 1;
             end
 
             % set the commit message
