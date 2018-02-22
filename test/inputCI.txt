@@ -7,4 +7,4 @@ n
 y
 testFile2
 n
-n
+commitMsg-test
