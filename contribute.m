@@ -34,6 +34,13 @@ function contribute(repoName, printLevel)
         repoName = DEFAULTREPONAME;
     end
 
+    % soft reset if the repository name is different
+    if ~isempty(gitConf)
+        if ~strcmpi(repoName, [gitConf.remoteUserName '/' gitConf.remoteRepoName])
+            resetDevTools();
+        end
+    end
+
     % check the system and set the configuration
     if exist('printLevel', 'var')
         checkSystem(mfilename, repoName, printLevel);
