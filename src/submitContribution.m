@@ -187,7 +187,7 @@ function submitContribution(branchName)
 
                 % if the commit message is not empty and minimum 5 characters (+2 quotes)
                 for k = 1:length(dictFlags)
-                    if length(commitMsg) >= 5+2 && isempty(strfind(commitMsg, dictFlags{k}))
+                    if length(commitMsg) >= 4+2 && isempty(strfind(commitMsg, dictFlags{k}))
                         incorrectCommitMsg = false;
                         continue;
                     else
