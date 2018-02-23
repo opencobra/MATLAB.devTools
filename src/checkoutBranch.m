@@ -215,11 +215,12 @@ function checkoutBranch(branchName, updateForkFlag)
     % check the system
     checkSystem(mfilename);
 
-    % if a branch does not exist remotely but exists locally, push it after confirmation from the user
-    [status_curl, result_curl] = system(['curl -s -k --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName]);
+    % check of the branch exists locally and remotely
+    branchExistsLocally = checkBranchExistence(branchName);
+    branchExistsRemotely = checkRemoteBranchExistence(branchName);
 
     % check if the branch exists remotely
-    if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK')) && checkBranchExistence(branchName)
+    if branchExistsRemotely && branchExistsLocally
         printMsg(mfilename, ['The <', branchName, '> feature (branch) exists locally and remotely on <', gitConf.forkURL, '>.']);
     else  % the branch exists locally but not remotely!
 
