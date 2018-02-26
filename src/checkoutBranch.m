@@ -39,9 +39,16 @@ function checkoutBranch(branchName, updateForkFlag)
     % retrieve the status
     [status_gitStatus, result_gitStatus] = system('git status -s');
 
-    if status_gitBranch == 0 && ~strcmpi('develop', currentBranch) && isempty(result_gitStatus) && status_gitStatus == 0
+    % check if the develop branch exists remotely
+    if checkRemoteBranchExistence('develop')
+        mainBranch = 'develop';
+    else
+        mainBranch = 'master';  % fall back to master, which always exists
+    end
 
-        printMsg(mfilename, ['The current feature (branch) ', currentBranch, ' is not the <develop> feature (branch).'], [gitCmd.fail, gitCmd.trail]);
+    if status_gitBranch == 0 && ~strcmpi(mainBranch, currentBranch) && isempty(result_gitStatus) && status_gitStatus == 0
+
+        printMsg(mfilename, ['The current feature (branch) ', currentBranch, ' is not the <' mainBranch '> feature (branch).'], [gitCmd.fail, gitCmd.trail]);
 
         % update the fork locally
         if updateForkFlag
@@ -49,40 +56,40 @@ function checkoutBranch(branchName, updateForkFlag)
         end
 
         % checkout the develop branch (after update of the fork)
-        [status_gitCheckout, result_gitCheckout] = system('git checkout develop');
+        [status_gitCheckout, result_gitCheckout] = system(['git checkout ' mainBranch]);
 
         % retrieve the name of the current branch
         currentBranch = getCurrentBranchName();
 
-        if status_gitCheckout == 0 && strcmpi('develop', currentBranch)
-            printMsg(mfilename, 'The current feature (branch) is <develop>.');
+        if status_gitCheckout == 0 && strcmpi(mainBranch, currentBranch)
+            printMsg(mfilename, ['The current feature (branch) is <' mainBranch '>.']);
         else
             fprintf(result_gitCheckout);
-            error([gitCmd.lead, 'An error occurred and the <develop> feature (branch) cannot be checked out']);
+            error([gitCmd.lead, 'An error occurred and the <' mainBranch '> feature (branch) cannot be checked out']);
         end
 
         % reset the develop branch
-        [status_gitReset, result_gitReset] = system('git reset --hard upstream/develop');
+        [status_gitReset, result_gitReset] = system(['git reset --hard upstream/' mainBranch]);
         if status_gitReset == 0
             if gitConf.printLevel > 0
-                fprintf([gitCmd.lead, ' [', mfilename, '] The current feature (branch) is <develop>.', gitCmd.success, gitCmd.trail]);
+                fprintf([gitCmd.lead, ' [', mfilename, '] The current feature (branch) is <' mainBranch '>.', gitCmd.success, gitCmd.trail]);
             end
         else
             fprintf(result_gitReset);
-            error([gitCmd.lead, 'The <develop> feature (branch) cannot be checked out']);
+            error([gitCmd.lead, 'The <' mainBranch '> feature (branch) cannot be checked out']);
         end
 
         % update all submodules
         updateSubmodules();
 
         % make sure that the develop branch is up to date
-        [status_gitPull, result_gitPull] = system('git pull origin develop');
+        [status_gitPull, result_gitPull] = system(['git pull origin ' mainBranch]);
 
         if status_gitPull == 0
-            printMsg(mfilename, 'The changes on the <develop> feature (branch) of your fork have been pulled.');
+            printMsg(mfilename, ['The changes on the <' mainBranch '> feature (branch) of your fork have been pulled.']);
         else
             fprintf(result_gitPull);
-            error([gitCmd.lead, 'The changes on the <develop> feature (branch) could not be pulled.', gitCmd.fail]);
+            error([gitCmd.lead, 'The changes on the <' mainBranch '> feature (branch) could not be pulled.', gitCmd.fail]);
         end
     end
 
@@ -110,11 +117,11 @@ function checkoutBranch(branchName, updateForkFlag)
                 if status_gitStatus == 0 && isempty(result_gitStatus)
 
                     % perform a rebase
-                    [status_gitRebase, result_gitRebase] = system('git rebase develop');
+                    [status_gitRebase, result_gitRebase] = system(['git rebase ' mainBranch]);
 
                     % if the message after rebase does not contain up to data and not cannot rebase
                     if status_gitRebase == 0 && isempty(strfind(result_gitRebase, 'up to date')) && isempty(strfind(result_gitRebase, 'Cannot rebase'))
-                        printMsg(mfilename, ['The <', branchName, '> feature (branch) has been rebased with <develop>.']);
+                        printMsg(mfilename, ['The <', branchName, '> feature (branch) has been rebased with <' mainBranch '>.']);
 
                         % push by force the rebased branch
                         [status_gitPush, result_gitPush] = system(['git push origin ', branchName, ' --force']);
@@ -128,7 +135,7 @@ function checkoutBranch(branchName, updateForkFlag)
                         [status_gitRebaseAbort, ~] = system('git rebase --abort');
 
                         if status_gitRebaseAbort == 0
-                            printMsg(mfilename, ['The rebase process of <', branchName,'> with <develop> has been aborted.'], [gitCmd.fail, gitCmd.trail]);
+                            printMsg(mfilename, ['The rebase process of <', branchName, '> with <' mainBranch '> has been aborted.'], [gitCmd.fail, gitCmd.trail]);
                         end
 
                         % if the message after rebase contains : cannot rebase
@@ -137,13 +144,14 @@ function checkoutBranch(branchName, updateForkFlag)
                             reply = input([gitCmd.lead, ' -> Do you want to reset your feature (branch) <', branchName, '>. Y/N [N]: '], 's');
 
                             if ~isempty(reply) || strcmpi(reply, 'y') || strcmpi(reply, 'yes')
-                                [status_curl, result_curl] = system(['curl -s -k --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName]);
 
-                                if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
+                                branchNameExistsRemotely = checkRemoteBranchExistence(branchName);
+
+                                if branchNameExistsRemotely
                                     % hard reset of an existing branch
                                     [status_gitReset, result_gitReset] = system(['git reset --hard origin/', branchName]);
                                     if status_gitReset == 0
-                                        printMsg(mfilename, ['The <', branchName, '> feature (branch) has not been rebased with <develop> and is up to date.']);
+                                        printMsg(mfilename, ['The <', branchName, '> feature (branch) has not been rebased with <' mainBranch '> and is up to date.']);
                                     else
                                         fprintf(result_gitReset);
                                         error([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> could not be reset.', gitCmd.fail]);
@@ -182,32 +190,32 @@ function checkoutBranch(branchName, updateForkFlag)
 
         if ~strcmp(branchName, currentBranch)
             % checkout the develop branch (soft checkout without merg)
-            [status_gitCheckout, result_gitCheckout] = system('git checkout develop');
+            [status_gitCheckout, result_gitCheckout] = system(['git checkout ' mainBranch]);
 
             % retrieve the name of the current branch
             currentBranch = getCurrentBranchName();
 
-            if status_gitCheckout == 0 && strcmpi('develop', currentBranch)
-                printMsg(mfilename, 'The current feature (branch) is <develop>.');
+            if status_gitCheckout == 0 && strcmpi(mainBranch, currentBranch)
+                printMsg(mfilename, ['The current feature (branch) is <' mainBranch '>.']);
 
                 % update all submodules
                 updateSubmodules();
 
                 % make sure that the develop branch is up to date
-                [status_gitPull, result_gitPull] = system('git pull origin develop');
+                [status_gitPull, result_gitPull] = system(['git pull origin ' mainBranch]);
 
                 if status_gitPull == 0
-                    printMsg(mfilename, 'The changes on the <develop> feature (branch) of your fork have been pulled.');
+                    printMsg(mfilename, ['The changes on the <' mainBranch '> feature (branch) of your fork have been pulled.']);
                 else
                     fprintf(result_gitPull);
-                    error([gitCmd.lead, 'The changes on the <develop> feature (branch) could not be pulled.', gitCmd.fail]);
+                    error([gitCmd.lead, 'The changes on the <' mainBranch '> feature (branch) could not be pulled.', gitCmd.fail]);
                 end
 
                 % checkout the branch but do not update the fork
                 checkoutBranch(branchName, false);
             else
                 fprintf(result_gitCheckout);
-                fprintf([gitCmd.lead, 'The <develop> feature (branch) cannot be checked out']);
+                fprintf([gitCmd.lead 'The <' mainBranch '> feature (branch) cannot be checked out']);
             end
         end
     end
@@ -215,11 +223,12 @@ function checkoutBranch(branchName, updateForkFlag)
     % check the system
     checkSystem(mfilename);
 
-    % if a branch does not exist remotely but exists locally, push it after confirmation from the user
-    [status_curl, result_curl] = system(['curl -s -k --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName]);
+    % check of the branch exists locally and remotely
+    branchExistsLocally = checkBranchExistence(branchName);
+    branchExistsRemotely = checkRemoteBranchExistence(branchName);
 
     % check if the branch exists remotely
-    if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK')) && checkBranchExistence(branchName)
+    if branchExistsRemotely && branchExistsLocally
         printMsg(mfilename, ['The <', branchName, '> feature (branch) exists locally and remotely on <', gitConf.forkURL, '>.']);
     else  % the branch exists locally but not remotely!
 
