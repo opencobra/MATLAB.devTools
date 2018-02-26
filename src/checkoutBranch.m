@@ -89,7 +89,7 @@ function checkoutBranch(branchName, updateForkFlag)
             printMsg(mfilename, ['The changes on the <' mainBranch '> feature (branch) of your fork have been pulled.']);
         else
             fprintf(result_gitPull);
-            error([gitCmd.lead, ['The changes on the <' mainBranch '> feature (branch) could not be pulled.', gitCmd.fail]);
+            error([gitCmd.lead, 'The changes on the <' mainBranch '> feature (branch) could not be pulled.', gitCmd.fail]);
         end
     end
 
@@ -208,7 +208,7 @@ function checkoutBranch(branchName, updateForkFlag)
                     printMsg(mfilename, ['The changes on the <' mainBranch '> feature (branch) of your fork have been pulled.']);
                 else
                     fprintf(result_gitPull);
-                    error([gitCmd.lead, ['The changes on the <' mainBranch '> feature (branch) could not be pulled.', gitCmd.fail]);
+                    error([gitCmd.lead, 'The changes on the <' mainBranch '> feature (branch) could not be pulled.', gitCmd.fail]);
                 end
 
                 % checkout the branch but do not update the fork

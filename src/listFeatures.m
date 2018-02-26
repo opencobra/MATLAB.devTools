@@ -36,12 +36,19 @@ function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
     % give an example name
     exampleBranch = gitConf.exampleBranch;
 
+    % check if the develop branch exists remotely
+    if checkRemoteBranchExistence('develop')
+        nbBranches = 3;
+    else
+        nbBranches = 2;
+    end
+
     if status == 0
         arrResult = regexp(result,'\s+','split'); %strsplit is not compatible with older versions of MATLAB
         arrResult = strtrim(arrResult);
         arrResult = arrResult(~cellfun(@isempty, arrResult));
 
-        if length(arrResult) > 3
+        if length(arrResult) > nbBranches
             fprintf('\n      Available features are:\n');
 
             % list the number of available features

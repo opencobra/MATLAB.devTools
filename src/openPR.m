@@ -23,8 +23,15 @@ function openPR(branchName)
         originCall  = '';
     end
 
+    % check if the develop branch exists remotely
+    if checkRemoteBranchExistence('develop')
+        mainBranch = 'develop';
+    else
+        mainBranch = 'master';  % fall back to master, which always exists
+    end
+
     % define the URL of the pull request
-    prURL = [gitConf.remoteRepoURL(1:end-4), '/compare/develop...', gitConf.userName, ':', branchName];
+    prURL = [gitConf.remoteRepoURL(1:end-4), '/compare/' mainBranch '...', gitConf.userName, ':', branchName];
 
     % check if this URL exists
     [status_curl, result_curl] = system(['curl -s -k --head ', prURL]);

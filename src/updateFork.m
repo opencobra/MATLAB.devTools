@@ -25,7 +25,11 @@ function updateFork(force)
     currentDir = strrep(pwd, '\', '\\');
 
     % list the branches that should be updated
-    branches = {'master', 'develop'};
+    if checkRemoteBranchExistence('develop')
+        branches = {'master', 'develop'};
+    else
+        branches = {'master'};  % fall back to master, which always exists
+    end
 
     % change to the directory of the fork
     cd(gitConf.fullForkDir)
