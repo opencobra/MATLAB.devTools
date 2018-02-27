@@ -34,8 +34,10 @@ function initContribution(branchName)
                 if ~isempty(strfind(branchName, 'develop')) || ~isempty(strfind(branchName, 'master'))
                     branchName = '';
                     fprintf([gitCmd.lead, ' -> Please use a different name that does not contain <develop> or <master>.', gitCmd.fail, gitCmd.trail]);
-                else
+                elseif ~isempty(branchName)
                     checkoutFlag = true;
+                else
+                    branchName = '';
                 end
             end
         end
