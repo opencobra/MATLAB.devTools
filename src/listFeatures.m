@@ -66,7 +66,7 @@ function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
             fprintf('\n');
         else
             reply = '';
-            while isempty(reply) || (~strcmpi(reply, 'y') && ~strcmpi(reply, 'yes')) || (~strcmpi(reply, 'n') && ~strcmpi(reply, 'no'))
+            while isempty(reply)
 
                 reply = input('   -> You do not have any features (branches). Do you want to start a new feature (branch)? Y/N [Y]: ', 's');
 
@@ -78,6 +78,8 @@ function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
                 elseif strcmpi(reply, 'n') || strcmpi(reply, 'no')
                     fprintf('   -> Please start again. Goodbye.\n')
                     exitFlag = true;
+                else
+                    reply = '';
                 end
             end
         end
