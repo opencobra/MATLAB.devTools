@@ -31,8 +31,16 @@ function deleteContribution(branchName)
             reply = input([gitCmd.lead, originCall, 'Are you sure that you want to delete the feature (branch) <', branchName, '>? YES/NO [NO]: '], 's');
 
             if strcmpi(reply, 'yes') % users MUST enter 'yes', not only 'y'
-                % checkout the develop branch
-                checkoutBranch('develop');
+
+                % check if the develop branch exists remotely
+                if checkRemoteBranchExistence('develop')
+                    mainBranch = 'develop';
+                else
+                    mainBranch = 'master';  % fall back to master, which always exists
+                end
+
+               % checkout the develop branch
+                checkoutBranch(mainBranch);
 
                 % retrieve a list of all the branches
                 if ispc
@@ -65,11 +73,8 @@ function deleteContribution(branchName)
                     error([gitCmd.lead, ' [', mfilename,'] The list of features (branches) could not be retrieved.', gitCmd.fail]);
                 end
 
-                % check if branch exists remotely
-                [status_curl, result_curl] = system(['curl -s -k --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/', branchName]);
-
                 % delete the remote branch
-                if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
+                if checkRemoteBranchExistence(branchName)
 
                     [status_gitPush, result_gitPush] = system(['git push origin --delete ', branchName]);
 
