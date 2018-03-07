@@ -1,0 +1,457 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The COBRA Toolbox &mdash; MATLAB.devTools</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="_static/img/apple-touch-icon.png">
+  
+  
+    <link rel="icon" type="image/png" sizes="32x32" href="_static/img/favicon-32x32.png">
+  
+  
+    <link rel="icon" type="image/png" sizes="16x16" href="_static/img/favicon-16x16.png">
+  
+  
+    <link rel="mask-icon" href="_static/img/safari-pinned-tab.svg" color="#5bbad5">
+  
+  
+    <link rel="manifest" href="_static/json/manifest.json">
+  
+  
+    <meta name="msapplication-config" content="_static/browserconfig.xml">
+  
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="_static/js/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href="_static/css/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/julia.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="MATLAB.devTools" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          <a href="contents.html">
+
+          
+            
+            
+              <img src="_static/img/logo_devTools.png" class="logo"/>
+            
+          
+          </a>
+          
+            <h1>MATLAB.devTools</h1>
+          
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" id="simple"/>
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <script>
+    	var options = {
+
+		url: "_static/json/functions.json",
+
+		getValue: "name",
+
+		list: {
+            onKeyEnterEvent: function(item) {
+                    return "_static/../" + item.website_url
+            },
+            maxNumberOfElements: 25,
+			match: {
+					enabled: true,
+			},
+            sort: {
+			    enabled: true
+		    }
+		},
+
+    	template: {
+	    	type: "custom",
+		    method: function(value, item) {
+                return "<span><a href='search.html?q=" + item.name + "&check_keywords=yes&area=default'>" + value + "</a>" + "<a href='_static/../" + item.website_url + "' ><img src='_static/img/link.svg'/></a></span>";
+		    }
+	    },
+
+		theme: "square"
+
+	};
+
+	$("#simple").easyAutocomplete(options);
+
+
+    </script>
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getstarted.html">How to get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">How to configure and use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/index.html">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cite.html">How to cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="funding.html">Funding</a></li>
+</ul>
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">MATLAB.devTools</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>The COBRA Toolbox</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-cobra-toolbox">
+<h1>The COBRA Toolbox<a class="headerlink" href="#the-cobra-toolbox" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://asciinema.org/a/7zg2ce5gfth7ruywptgc3i3yy"><img alt="asciicast" src="https://asciinema.org/a/7zg2ce5gfth7ruywptgc3i3yy.png" /></a></p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>A comprehensive code base such as the COBRA Toolbox evolves constantly. The
+open-source community is very active, and collaborators submit their
+contributions frequently. The more a new feature or bug fix is interlinked with
+existing functions, the higher the risk of a new addition breaking instantly
+code that is heavily used on a daily basis. In order to decrease this risk, a
+continuous integration setup interlinked with the version control system git
+has been set up. A git-tracked repository is essentially a folder with code or
+other documents of which all incremental changes are tracked by date and user.</p>
+<p>Any incremental changes to the code are called commits. The main advantage of
+git over other version control systems is the availability of branches. In
+simple terms, a branch contains a sequence of incremental changes to the code.
+A branch is also commonly referred to as a feature. Consequently, a
+contribution generally consists of several commits on a branch.</p>
+<p>Contributing to the COBRA Toolbox is straightforward. As a contributor to the
+COBRA Toolbox is likely more familiar with MATLAB than with the internal
+mechanics of git, the <cite>MATLAB.devTools</cite> have been developed specifically
+to contribute to a git-tracked repository located on the Github server. In
+Figure 6, an overview of the two online repositories as well as their local
+copies is given.  There are two ways of using the COBRA Toolbox, which depends
+on the type of user. A regular user might only want to use the opencobra
+repository and enjoy stability (option A), whereas more advanced users might
+want to develop their own features and actively make contributions to the
+opencobra repository (option B).</p>
+<p><img alt="branchModel" src="https://prince.lcsb.uni.lu/img/figure6.png" /></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Option A</strong> The <a class="reference external" href="https://github.com/opencobra/cobratoolbox">opencobra/cobratoolbox</a> repository is a
+public repository that is read-only. Once the opencobra repository has been
+installed in the folder <cite>cobratoolbox</cite>, all branches
+(including <code class="docutils literal"><span class="pre">master</span></code> and <code class="docutils literal"><span class="pre">develop</span></code>) are available locally. In the local directory
+<cite>cobratoolbox</cite> folder, the user has read and write access, but cannot push eventual
+changes back to the opencobra repository. It is the default and stable <code class="docutils literal"><span class="pre">master</span></code>
+branch only that should be used. The local copy located in the cobratoolbox
+directory can be updated (both branches).</li>
+<li><strong>Option B</strong> In order to make changes to the
+opencobra repository, or, in other words, contribute, you must obtain your own
+personal copy first. You must register on the <a class="reference external" href="https://github.com">Github website</a> in order to obtain a username. First, click on the button FORK at the top
+right corner of the official <a class="reference external" href="https://github.com/opencobra/cobratoolbox">opencobra/cobratoolbox</a> repository website
+in order to create a personal copy
+(or fork) with write and read access of the opencobra repository. This copy is
+accessible under <cite>https://github.com/&lt;username&gt;/cobratoolbox</cite>, where <cite>&lt;username&gt;</cite> is
+your Github username. In the
+<cite>fork-cobratoolbox</cite> folder, other user specific branches may exist in addition to
+the <code class="docutils literal"><span class="pre">master</span></code> and <code class="docutils literal"><span class="pre">develop</span></code> branches.</li>
+</ul>
+</div></blockquote>
+<p>After initialisation of the MATLAB.devTools, the user and developer may have two
+folders: a <code class="docutils literal"><span class="pre">cobratoolbox</span></code> folder with the stable <code class="docutils literal"><span class="pre">master</span></code> branch checked out, and a
+<code class="docutils literal"><span class="pre">fork-cobratoolbox</span></code> folder with the <code class="docutils literal"><span class="pre">develop</span></code> branch checked out. Detailed
+instructions for troubleshooting and/or contributing to the COBRA Toolbox using
+the terminal (or shell) are provided <a class="reference internal" href="troubleshooting.html#troubleshooting"><span class="std std-ref">here</span></a>.</p>
+<p>After the official opencobra version of the COBRA Toolbox has been installed,
+it is possible to install the MATLAB.devTools from within MATLAB:</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">installDevTools</span>
+</pre></div>
+</div>
+<p>With this command, the directory MATLAB.devTools is created next to the
+cobratoolbox installation directory. The MATLAB.devTools can also be installed
+from the terminal (or shell):</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git clone git@github.com:opencobra/MATLAB.devTools
+</pre></div>
+</div>
+<p><img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning"> A working internet connection is required and git and curl must be
+installed. Installation instructions are provided on the main repository page
+of the MATLAB.devTools. A valid passphrase-less SSH key must be set in the
+Github account settings in order to contribute without entering a password
+while securely communicating with the Github server.</p>
+</div>
+<div class="section" id="start-a-new-contribution">
+<h2>Start a new contribution<a class="headerlink" href="#start-a-new-contribution" title="Permalink to this headline">¶</a></h2>
+<p>The MATLAB.devTools are configured on the fly or whenever the configuration
+details are not present. The first time a user runs contribute, the personal
+repository (fork) is downloaded (cloned) into a new folder named
+<cite>fork-cobratoolbox</cite> at the location specified by the user. In this local folder,
+both <code class="docutils literal"><span class="pre">master</span></code> and <code class="docutils literal"><span class="pre">develop</span></code> branches exist, but it is the <code class="docutils literal"><span class="pre">develop</span></code> branch that is
+automatically selected (checked out). Any new contributions are derived from
+the develop branch.  Initialising a contribution using the MATLAB.devTools is
+straightforward. In MATLAB, type:</p>
+<div class="code matlab highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">contribute</span> <span class="o">%</span> <span class="n">then</span> <span class="n">select</span> <span class="n">procedure</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>If the MATLAB.devTools are already configured, procedure [1] updates the fork
+(if necessary) and initialises a new branch with a name requested during the
+process. Once the contribution is initialised, files can be added, modified or
+deleted in the <cite>fork-cobratoolbox</cite> folder. A contribution is successfully
+initialised when the user is presented with a brief summary of configuration
+details. Instructions on how to proceed are also provided.</p>
+<p><img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning"> The location of the fork must be specified as the root directory.
+There will be a warning issued if the path already contains another git-tracked
+repository.</p>
+</div>
+<div class="section" id="continue-an-existing-contribution">
+<h2>Continue an existing contribution<a class="headerlink" href="#continue-an-existing-contribution" title="Permalink to this headline">¶</a></h2>
+<p>An existing contribution can be continued after a while. This step is
+particularly important in order to retrieve all changes that have been made to
+the opencobra repository in the meantime.</p>
+<div class="code matlab highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">contribute</span> <span class="o">%</span> <span class="n">then</span> <span class="n">select</span> <span class="n">procedure</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Procedure <code class="docutils literal"><span class="pre">[2]</span></code> pulls all changes from the opencobra repository, and rebases the
+existing contribution. In other words, existing commits are shifted forward and
+placed after all commits made on the develop branch of the opencobra
+repository.</p>
+<p><img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning"> Before attempting to continue working on an existing
+feature, make sure that you published your commits.</p>
+</div>
+<div class="section" id="publish-a-contribution">
+<h2>Publish a contribution<a class="headerlink" href="#publish-a-contribution" title="Permalink to this headline">¶</a></h2>
+<p>Publishing a contribution means uploading the incremental code changes to the
+fork. The changes are available in public, but not yet available in the
+opencobra repository. A contribution may only be accepted in the official
+repository once a pull request has been submitted. It is not necessary to open
+a pull request if you want to simply upload your contribution to your fork.</p>
+<div class="code matlab highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">contribute</span> <span class="o">%</span> <span class="n">then</span> <span class="n">select</span> <span class="n">procedure</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>When running procedure <code class="docutils literal"><span class="pre">[3]</span></code>, you have two options:</p>
+<ul class="simple">
+<li><strong>Option A</strong> Simple contribution without opening a pull request: All changes
+to the code are individually listed and the user is asked explicitly which
+changes shall be added to the commit. Once all changes have been added, a
+commit message must be entered. Upon confirmation, the changes are pushed to
+the online fork automatically.</li>
+<li><strong>Option B</strong> Publishing and opening a pull request: The procedure for
+submitting a pull request is the same as option (A) with the difference that
+when selecting to open a pull request, a link is provided that leads to a
+pre-configured website according to the contributing guidelines. The pull
+request is then one click away.</li>
+</ul>
+<p><img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning"> After following procedures <code class="docutils literal"><span class="pre">[1]</span></code> and <code class="docutils literal"><span class="pre">[2]</span></code>, all changes should be
+published using procedure <code class="docutils literal"><span class="pre">[3]</span></code> before stopping to work on that contribution.
+When following procedure <code class="docutils literal"><span class="pre">[3]</span></code>, the incremental changes are uploaded to the
+remote server. It is advised to publish often, and make small incremental
+changes to the code. There is no need for opening a pull request immediately
+(option <strong>A</strong>) if there are more changes to be made. A pull request may be opened
+at any time, even manually directly from the Github website.</p>
+</div>
+<div class="section" id="deleting-a-contribution">
+<h2>Deleting a contribution<a class="headerlink" href="#deleting-a-contribution" title="Permalink to this headline">¶</a></h2>
+<p>If a contribution has been merged into the develop branch of the opencobra
+repository (accepted pull request), the contribution (feature or branch) can be
+safely deleted both locally and remotely on the fork by running contribute and
+selecting procedure <code class="docutils literal"><span class="pre">[4]</span></code>.</p>
+<p>Note that deleting a contribution deletes all the changes that have been made
+on that feature (branch). It is not possible to selectively delete a commit
+using the MATLAB.devTools. Instead, create a new branch by following procedure
+<code class="docutils literal"><span class="pre">[1]</span></code>, and follow the instructions to cherry-pick (see
+<a class="reference internal" href="troubleshooting.html#troubleshooting"><span class="std std-ref">Troubleshooting</span></a>).</p>
+<p><img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning"> Make sure that your changes are either merged or saved locally if you
+need them. Once procedure <code class="docutils literal"><span class="pre">[4]</span></code> is concluded, all changes on the deleted
+branch are removed, both locally and remotely. No commits can be recovered.</p>
+</div>
+<div class="section" id="update-your-fork">
+<h2>Update your fork<a class="headerlink" href="#update-your-fork" title="Permalink to this headline">¶</a></h2>
+<p>It is sometimes useful to simply update the fork without starting a new
+contribution. The local fork can be updated using procedure <code class="docutils literal"><span class="pre">[5]</span></code> of the
+contribute menu.</p>
+<div class="code matlab highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">contribute</span> <span class="o">%</span> <span class="n">then</span> <span class="n">select</span> <span class="n">procedure</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Before updating your fork, make sure that no changes are present in the local
+directory <cite>fork-cobratoolbox</cite>. You can do so by typing:</p>
+<div class="code matlab highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">checkStatus</span>
+</pre></div>
+</div>
+<p>If there are changes listed, publish them by selecting procedure <code class="docutils literal"><span class="pre">[3]</span></code> of the
+contribute menu.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018, the MATLAB.devTools developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

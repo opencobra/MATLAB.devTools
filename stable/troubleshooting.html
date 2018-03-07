@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Troubleshooting &mdash; MATLAB.devTools</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="_static/img/apple-touch-icon.png">
+  
+  
+    <link rel="icon" type="image/png" sizes="32x32" href="_static/img/favicon-32x32.png">
+  
+  
+    <link rel="icon" type="image/png" sizes="16x16" href="_static/img/favicon-16x16.png">
+  
+  
+    <link rel="mask-icon" href="_static/img/safari-pinned-tab.svg" color="#5bbad5">
+  
+  
+    <link rel="manifest" href="_static/json/manifest.json">
+  
+  
+    <meta name="msapplication-config" content="_static/browserconfig.xml">
+  
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="_static/js/jquery.easy-autocomplete.min.js" type="text/javascript" ></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href="_static/css/easy-autocomplete.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/julia.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="MATLAB.devTools" href="index.html"/>
+        <link rel="next" title="How to cite" href="cite.html"/>
+        <link rel="prev" title="Frequently Asked Questions (FAQ)" href="faq.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          <a href="contents.html">
+
+          
+            
+            
+              <img src="_static/img/logo_devTools.png" class="logo"/>
+            
+          
+          </a>
+          
+            <h1>MATLAB.devTools</h1>
+          
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" id="simple"/>
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+    <script>
+    	var options = {
+
+		url: "_static/json/functions.json",
+
+		getValue: "name",
+
+		list: {
+            onKeyEnterEvent: function(item) {
+                    return "_static/../" + item.website_url
+            },
+            maxNumberOfElements: 25,
+			match: {
+					enabled: true,
+			},
+            sort: {
+			    enabled: true
+		    }
+		},
+
+    	template: {
+	    	type: "custom",
+		    method: function(value, item) {
+                return "<span><a href='search.html?q=" + item.name + "&check_keywords=yes&area=default'>" + value + "</a>" + "<a href='_static/../" + item.website_url + "' ><img src='_static/img/link.svg'/></a></span>";
+		    }
+	    },
+
+		theme: "square"
+
+	};
+
+	$("#simple").easyAutocomplete(options);
+
+
+    </script>
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getstarted.html">How to get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">How to configure and use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/index.html">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions (FAQ)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-cobra-toolbox">The COBRA Toolbox</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#development-scheme">Development scheme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clone-the-fork-and-update-the-submodules">Clone the fork and update the submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-the-remotes">Configure the remotes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-contribution-and-submit-a-pull-request">Create a contribution and submit a pull request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#continue-working-on-your-branch-after-a-while-rebase">Continue working on your branch after a while (rebase)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#selectively-use-a-commit-on-your-branch-cherry-pick">Selectively use a commit on your branch (cherry-pick)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cobra-tutorials">COBRA.tutorials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fork-and-checkout-your-branch">Fork and checkout your branch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#submit-your-changes-and-open-a-pull-request">Submit your changes and open a pull request</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cite.html">How to cite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="funding.html">Funding</a></li>
+</ul>
+
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">MATLAB.devTools</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>Troubleshooting</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="troubleshooting">
+<span id="id1"></span><h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-cobra-toolbox">
+<h2>The COBRA Toolbox<a class="headerlink" href="#the-cobra-toolbox" title="Permalink to this headline">¶</a></h2>
+<p><img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning"> This section is tailored to users who feel comfortable using
+the terminal (or shell). It is recommended for other users
+to follow <a class="reference internal" href="contribute.html#contribute"><span class="std std-ref">these instructions</span></a>.</p>
+<p><img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning"> A Github account is required and <cite>git</cite> must be installed. You also
+must already have forked the <a class="reference external" href="https://www.github.com/opencobra/cobratoolbox">opencobra/cobratoolbox</a> repository by clicking on
+the fork button on the main <a class="reference external" href="https://www.github.com/opencobra/cobratoolbox">opencobra/cobratoolbox</a> repository page.</p>
+<div class="section" id="development-scheme">
+<h3>Development scheme<a class="headerlink" href="#development-scheme" title="Permalink to this headline">¶</a></h3>
+<p>The repository of the COBRA Toolbox is version controlled with the open-source
+standard <code class="docutils literal"><span class="pre">git</span></code> on the public code development site <a class="reference external" href="https://github.com">github.com</a>. Any incremental change to the code is wrapped in a
+commit, tagged with a specific tag (called SHA1), a commit message, and author
+information, such as the email address and the user name. Contributions to the
+COBRA Toolbox are consequently commits that are made on branches.</p>
+<p>The development scheme adopted in the repository of the COBRA Toolbox has two
+branches: a <cite>master</cite> and a <cite>develop</cite> branch. The stable branch is the <cite>master</cite>
+branch, while it is the <cite>develop</cite> branch that includes all new features and to
+which new contributions are merged. Contributions are submitted for review and
+testing through pull requests, the <cite>git</cite> standard. The <cite>develop</cite> branch is
+regularly merged into the <cite>master</cite> branch once testing is concluded.</p>
+<p>The development scheme has been adopted for obvious reasons: the COBRA Toolbox
+is heavily used on a daily basis, while the development community is active.
+The key advantage of this setup is that developers can work on the next stable
+release, while users can enjoy a stable version. Developers and users are
+consequently working on the same code base without interfering. Understanding
+the concept of branches is key to submitting hassle-free pull requests and
+starting to contribute using <cite>git</cite>.</p>
+</div>
+<div class="section" id="clone-the-fork-and-update-the-submodules">
+<h3>Clone the fork and update the submodules<a class="headerlink" href="#clone-the-fork-and-update-the-submodules" title="Permalink to this headline">¶</a></h3>
+<p><img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning"> Please note the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The following commands should only be run from the terminal (or the shell).</li>
+<li>An SSH key must be set in your Github account settings.</li>
+</ul>
+<p>In order to get started, clone the forked repository:</p>
+</div></blockquote>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git clone git@github.com:&lt;username&gt;/cobratoolbox.git fork-cobratoolbox
+</pre></div>
+</div>
+<p>This will create a folder called fork-cobratoolbox. Make sure to replace
+<cite>&lt;username&gt;</cite> with your Github username. Any of the following commands are meant
+to be run from within the folder of the fork called <cite>fork-cobratoolbox</cite>.</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ cd fork-cobratoolbox
+</pre></div>
+</div>
+<p>In order to complete the cloned repository with external code, it is
+recommended to clone all submodules:</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git submodule update --init
+</pre></div>
+</div>
+</div>
+<div class="section" id="configure-the-remotes">
+<h3>Configure the remotes<a class="headerlink" href="#configure-the-remotes" title="Permalink to this headline">¶</a></h3>
+<p>Note that your fork is a copy of the <a class="reference external" href="https://www.github.com/opencobra/cobratoolbox">opencobra/cobratoolbox</a> repository and is not
+automatically updated. As such, you have to configure the address of the
+<a class="reference external" href="https://www.github.com/opencobra/cobratoolbox">opencobra/cobratoolbox</a>
+repository:</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git remote add upstream git@github.com:opencobra/cobratoolbox.git
+</pre></div>
+</div>
+<p>Now, there are two addresses (also called remotes) configured: <cite>origin</cite> and
+<cite>upstream</cite>. You can verify this by typing:</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git remote -v
+</pre></div>
+</div>
+<p>In order to update your fork, run the following commands:</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git fetch upstream
+</pre></div>
+</div>
+<p>First, update the <cite>master</cite> branch:</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git checkout master # checkout the &lt;master&gt; branch locally
+$ git merge upstream/master # merge the changes from the upstream repository
+$ git push origin master # push the changes to the &lt;master&gt; branch of the fork
+</pre></div>
+</div>
+<p>Then, update the <cite>develop</cite> branch:</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git checkout develop # checkout the &lt;develop&gt; branch
+$ git merge upstream/develop # merge the changes on the &lt;develop&gt; branch from the upstream repository
+$ git push origin develop # push the changes to the &lt;develop&gt; branch of the fork
+</pre></div>
+</div>
+<p><img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning"> Should the step fail to checkout the develop branch, you should
+create the develop branch first based on the <cite>develop</cite> branch of the upstream
+repository:</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git checkout -b develop upstream/develop
+</pre></div>
+</div>
+<p>Then, you can proceed normally.</p>
+</div>
+<div class="section" id="create-a-contribution-and-submit-a-pull-request">
+<h3>Create a contribution and submit a pull request<a class="headerlink" href="#create-a-contribution-and-submit-a-pull-request" title="Permalink to this headline">¶</a></h3>
+<p>Now, as the fork is up-to-date with the upstream repository, start a new
+contribution. A new contribution must be made on a new branch, that originates
+from the <cite>develop</cite> branch. Create the new branch:</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git checkout -b &lt;myBranch&gt; develop
+</pre></div>
+</div>
+<p>Now, you can make changes in the folder <cite>fork-cobratoolbox</cite>. Once you are done
+making changes, you can contribute the files. An important command that lists
+all changes is to retrieve the repository status:</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git status
+</pre></div>
+</div>
+<p>A list is displayed with new, modified, and deleted files. You can add the changes (even deletions) by
+adding the file:</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git add &lt;fileName&gt;.&lt;fileExtension&gt;
+</pre></div>
+</div>
+<p><img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning"> Contrary to what is sometimes provided as a shortcut, it is not
+advised to add all files all at once using as this command will add all files,
+even hidden files and binaries.</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git add . # bad practice
+</pre></div>
+</div>
+<p>Then, commit the changes by setting a commit message &lt;yourMessage&gt;:</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git commit -m &quot;&lt;myMessage&gt;&quot;
+</pre></div>
+</div>
+<p>Finally, push your commit to Github:</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git push origin &lt;myBranch&gt;
+</pre></div>
+</div>
+<p>You should then see your commit online, and if ready, you can open a
+pull request. You can select your branch in the dropdown menu and list all
+commits by clicking on <cite>commits</cite>.</p>
+</div>
+<div class="section" id="continue-working-on-your-branch-after-a-while-rebase">
+<h3>Continue working on your branch after a while (rebase)<a class="headerlink" href="#continue-working-on-your-branch-after-a-while-rebase" title="Permalink to this headline">¶</a></h3>
+<p>If there have been major changes or if you want to continue working on a branch
+after a while, it is recommended to do a rebase. In simple terms, rebasing your
+branch shifts your commits to the top of the branch and includes all changes
+from the upstream repository. Before doing so, make sure that you do not have
+any uncommitted or local changes (git status).</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git checkout develop
+$ git fetch upstream
+$ git merge upstream/develop
+$ git submodule update
+$ git checkout &lt;myBranch&gt;
+$ git rebase develop
+</pre></div>
+</div>
+<p>If you do not have any conflicts, you should see messages showing that your
+changes have been applied.  If however there are conflicts, it is advised to
+use a merge tool such as <cite>kdiff3</cite>. In order to install a merge tool or abort
+the rebase process, type:</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git rebase --abort
+</pre></div>
+</div>
+<p>In order to have the changes on <cite>&lt;myBranch&gt;</cite> reflected in the online
+repository, push the changes with force. Pushing with force is required as the
+history of the branch has been rewritten during rebase.</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git push &lt;myBranch&gt; --force
+</pre></div>
+</div>
+</div>
+<div class="section" id="selectively-use-a-commit-on-your-branch-cherry-pick">
+<h3>Selectively use a commit on your branch (cherry-pick)<a class="headerlink" href="#selectively-use-a-commit-on-your-branch-cherry-pick" title="Permalink to this headline">¶</a></h3>
+<p>Imagine having two branches called <cite>&lt;myBranch-1&gt;</cite> and <cite>&lt;myBranch-2&gt;</cite>. On branch
+<cite>&lt;myBranch-1&gt;</cite> is a commit with a SHA1 that you need on <cite>&lt;myBranch-2&gt;</cite>. You can
+cherry-pick the commit from <cite>&lt;myBranch-1&gt;</cite> to <cite>&lt;myBranch-2&gt;</cite> by typing:</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git checkout myBranch-2
+$ git cherry-pick SHA1
+</pre></div>
+</div>
+<p>If there are no conflicts, the displayed message should contain the commit
+message and author information. In order to have the commit listed online,
+conclude the cherry-pick by pushing the commit to the remote repository:</p>
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git push myBranch-2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="cobra-tutorials">
+<h2>COBRA.tutorials<a class="headerlink" href="#cobra-tutorials" title="Permalink to this headline">¶</a></h2>
+<p><img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning"> This section is tailored to users who feel comfortable using
+the terminal (or shell). It is recommended for other users
+to follow <a class="reference internal" href="contribute.html#contribute"><span class="std std-ref">these instructions</span></a>.</p>
+<p><img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning"> A Github account is required and <cite>git</cite> must be installed. An SSH key
+must be set as explained in <span class="xref std std-ref">prerequisites</span>.</p>
+<div class="section" id="fork-and-checkout-your-branch">
+<h3>Fork and checkout your branch<a class="headerlink" href="#fork-and-checkout-your-branch" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Fork the <a class="reference external" href="https://www.github.com/opencobra/COBRA.tutorials">COBRA.tutorials repository</a> on Github.</p>
+</li>
+<li><p class="first">Clone the forked repository to <code class="docutils literal"><span class="pre">fork-COBRA.tutorials</span></code> located in a directory of your choice:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone git@github.com:&lt;userName&gt;/COBRA.tutorials.git fork-COBRA.tutorials.git
+</pre></div>
+</div>
+</li>
+<li><p class="first">Change to the directory <code class="docutils literal"><span class="pre">fork-COBRA.tutorials</span></code>:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> fork-COBRA.tutorials.git/
+</pre></div>
+</div>
+</li>
+<li><p class="first">Set the upstream to the <code class="docutils literal"><span class="pre">opencobra/COBRA.tutorials</span></code> repository:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> git remote add upstream git@github.com:opencobra/COBRA.tutorials.git
+</pre></div>
+</div>
+</li>
+<li><p class="first">Fetch from the upstream repository</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> git fetch upstream
+</pre></div>
+</div>
+</li>
+<li><p class="first">Checkout a new branch from <code class="docutils literal"><span class="pre">develop</span></code>:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> git checkout -b &lt;yourBranch&gt; upstream/develop
+</pre></div>
+</div>
+</li>
+<li><p class="first">Now, make your changes in the tutorial in MATLAB.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="submit-your-changes-and-open-a-pull-request">
+<h3>Submit your changes and open a pull request<a class="headerlink" href="#submit-your-changes-and-open-a-pull-request" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic" start="8">
+<li><p class="first">Once you are done making changes, add the files to your branch, where <code class="docutils literal"><span class="pre">tutorial_&lt;yourFile&gt;</span></code> is the name of the tutorial.    Make sure to add the <code class="docutils literal"><span class="pre">.m</span></code> and the <code class="docutils literal"><span class="pre">.mlx</span></code> files.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> git add tutorial_&lt;yourFile&gt;.m
+<span class="gp">$</span> git add tutorial_&lt;yourFile&gt;.mlx
+<span class="gp">$</span> git commit -m <span class="s2">&quot;Changes to tutorial_&lt;yourFile&gt;&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Push your commits on <code class="docutils literal"><span class="pre">&lt;yourBranch&gt;</span></code> to your fork:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> git push origin &lt;yourBranch&gt;
+</pre></div>
+</div>
+</li>
+<li><p class="first">Browse to your fork on <code class="docutils literal"><span class="pre">https://www.github.com/&lt;yourUserName&gt;/COBRA.tutorials</span></code>, where <code class="docutils literal"><span class="pre">&lt;yourUserName&gt;</span></code> is your Github username.</p>
+</li>
+<li><p class="first">Click on <code class="docutils literal"><span class="pre">Compare</span> <span class="pre">&amp;</span> <span class="pre">Pull</span> <span class="pre">Request</span></code>.</p>
+</li>
+<li><p class="first">Change the target branch <code class="docutils literal"><span class="pre">develop</span></code>.</p>
+</li>
+<li><p class="first">Submit your pull request.</p>
+</li>
+<li><p class="first">Wait until your pull request is accepted.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cite.html" class="btn btn-neutral float-right" title="How to cite" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="faq.html" class="btn btn-neutral" title="Frequently Asked Questions (FAQ)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018, the MATLAB.devTools developers.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
