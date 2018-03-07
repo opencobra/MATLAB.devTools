@@ -1,4 +1,4 @@
-function contribute(verbose)
+function contribute(repoName, printLevel)
 % devTools
 %
 % PURPOSE: displays a menu and calls the respective subfunctions
@@ -7,9 +7,18 @@ function contribute(verbose)
 %       2. Select an existing feature (branch) to work on.
 %       3. Publish a feature (branch).
 %       4. Delete a feature (branch).
+%
+% INPUT:
+%
+%     printLevel:     0: minimal printout (default)
+%                     1: detailed printout (debug mode)
 
     global gitConf
     global gitCmd
+    global resetDevToolsFlag
+    global DEFAULTREPONAME
+
+    resetDevToolsFlag = true;
 
     % retrieve the current directory
     currentDir = pwd;
@@ -17,18 +26,29 @@ function contribute(verbose)
     % adding the src folder of the devTools
     addpath(genpath(fileparts(which(mfilename))));
 
-    % check the system and set the configuration
-    checkSystem(mfilename);
+    % treatment of input arguments
+    if ~exist('repoName', 'var')
+        DEFAULTREPONAME = 'opencobra/cobratoolbox';  % set the default repository
+        repoName = DEFAULTREPONAME;
+    end
 
-    if nargin > 0
-        if verbose
-            gitConf.verbose = verbose;
-        else
-            gitConf.verbose = false;
+    % soft reset if the repository name is different
+    if ~isempty(gitConf)
+        if ~strcmpi(repoName, [gitConf.remoteUserName '/' gitConf.remoteRepoName])
+            resetDevTools();
         end
     end
 
-    devToolsDir = fileparts(which('contribute.m'));
+    % check the system and set the configuration
+    if exist('printLevel', 'var')
+        checkSystem(mfilename, repoName, printLevel);
+    else
+        checkSystem(mfilename, repoName);
+    end
+
+    finishup = onCleanup(@() resetDevTools());
+
+    devToolsDir = fileparts(which(mfilename));
 
     % change to the directory of the devTools
     cd(devToolsDir);
@@ -38,7 +58,7 @@ function contribute(verbose)
 
     fprintf(gitConf.launcher);
 
-    choice = input('\n      (You can abort any process using CTRL-C)\n\n      [1] Start a new feature (branch).\n      [2] Select an existing feature (branch) to work on.\n      [3] Publish a feature (branch).\n      [4] Delete a feature (branch).\n      [5] Update the fork.\n\n   -> Please select what you want to do (enter the number): ', 's');
+    choice = input('\n      (You can abort any process using CTRL+C)\n\n      [1] Start a new feature (branch).\n      [2] Select an existing feature (branch) to work on.\n      [3] Publish a feature (branch).\n      [4] Delete a feature (branch).\n      [5] Update the fork.\n\n   -> Please select what you want to do (enter the number): ', 's');
 
     choice = str2num(choice);
 
@@ -69,7 +89,7 @@ function contribute(verbose)
                 exitFlag = false;
             else
                 % initialize the development tools
-                initDevTools();
+                initDevTools(repoName);
 
                 % change to the fork diretory
                 cd(gitConf.fullForkDir);
@@ -128,6 +148,9 @@ function contribute(verbose)
         end
     end
 
+    resetDevToolsFlag = false;
+
     % change back to the current directory
     cd(currentDir);
+
 end

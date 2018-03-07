@@ -1,8 +1,14 @@
 function checkRemoteFork()
-% devTools
+% Checks whether the fork exists remotely
 %
-% PURPOSE: checks whether the fork exists remotely
+% USAGE:
 %
+%    checkRemoteFork()
+%
+% .. Author:
+%      - Laurent Heirendt
+
+
 
     global gitConf
     global gitCmd

@@ -1,8 +1,15 @@
 function openPR(branchName)
-% devTools
+% Provides a pull request URL from <branchName> to <develop> on the upstream
 %
-% PURPOSE: provides a pull request URL from <branchName> to <develop> on the upstream
+% USAGE:
 %
+%    openPR(branchName)
+%
+% INPUT:
+%    branchName:     Name of the branch for which a pull request (PR) shall be opened
+%
+% .. Author:
+%      - Laurent Heirendt
 
     global gitConf
     global gitCmd
@@ -10,14 +17,21 @@ function openPR(branchName)
     % change the directory to the local directory of the fork
     cd(gitConf.fullForkDir);
 
-    if gitConf.verbose
+    if gitConf.printLevel > 0
         originCall = [' [', mfilename, '] '];
     else
         originCall  = '';
     end
 
+    % check if the develop branch exists remotely
+    if checkRemoteBranchExistence('develop')
+        mainBranch = 'develop';
+    else
+        mainBranch = 'master';  % fall back to master, which always exists
+    end
+
     % define the URL of the pull request
-    prURL = [gitConf.remoteRepoURL(1:end-4), '/compare/develop...', gitConf.userName, ':', branchName];
+    prURL = [gitConf.remoteRepoURL(1:end-4), '/compare/' mainBranch '...', gitConf.userName, ':', branchName];
 
     % check if this URL exists
     [status_curl, result_curl] = system(['curl -s -k --head ', prURL]);

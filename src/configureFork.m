@@ -1,8 +1,12 @@
 function configureFork()
-% devTools
+% Configures the remotes of the local fork (upstream)
 %
-% PURPOSE: configures the remotes of the local fork (upstream)
+% USAGE:
 %
+%    configureFork()
+%
+% .. Author:
+%      - Laurent Heirendt
 
     global gitConf
     global gitCmd

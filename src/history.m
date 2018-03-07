@@ -1,8 +1,17 @@
 function history(fileName)
-% devTools
+% Displays the history of a file
 %
-% PURPOSE: displays the history of a file
+% USAGE:
 %
+%    history(fileName)
+%
+% INPUT:
+%    fileName:     Name of the file for which the history shall be displayed
+%
+% .. Author:
+%      - Laurent Heirendt
+
+
     global gitConf
 
     fullPath = which(fileName);

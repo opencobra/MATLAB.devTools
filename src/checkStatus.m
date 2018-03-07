@@ -1,8 +1,12 @@
 function checkStatus()
-% devTools
+% Checks the status of the repository
 %
-% PURPOSE: checks the status of the repository
+% USAGE:
 %
+%    checkStatus()
+%
+% .. Author:
+%      - Laurent Heirendt
 
     global gitConf
     global gitCmd

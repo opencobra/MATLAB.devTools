@@ -1,8 +1,12 @@
 function updateDevTools()
-% devTools
+% Update the devTools and set the SSH origin if necessary
 %
-% PURPOSE: update the devTools and set the SSH origin if necessary
+% USAGE:
 %
+%    updateDevTools()
+%
+% .. Author:
+%      - Laurent Heirendt
 
     global gitConf
     global gitCmd

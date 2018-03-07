@@ -1,8 +1,13 @@
 function checkLocalFork()
-% devTools
+% Checks the configuration of remotes in the local copy of the fork
 %
-% PURPOSE: checks the configuration of remotes in the local copy of the fork
+% USAGE:
 %
+%    checkLocalFork()
+%
+% .. Author:
+%      - Laurent Heirendt
+
 
     global gitConf
     global gitCmd

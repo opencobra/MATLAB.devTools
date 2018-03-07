@@ -1,8 +1,18 @@
 function branchExists = checkBranchExistence(branchName)
-% devTools
+% Checks if a branch exists locally
 %
-% PURPOSE: checks if a branch exists locally
+% USAGE:
 %
+%   branchExists = checkBranchExistence(branchName)
+%
+% INPUT:
+%   branchName:     Name of the local branch to be checked for existence
+%
+% OUTPUT:
+%   branchExists:   Boolean (true if `branchName` esists)
+%
+% .. Author:
+%      - Laurent Heirendt
 
     global gitConf
 

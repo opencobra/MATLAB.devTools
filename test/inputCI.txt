@@ -1,10 +1,9 @@
 cobrabot
-~/
+/home/sbg-jenkins/
 y
 n
 testFile1
 n
 y
 testFile2
-n
-n
+message-test

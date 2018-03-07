@@ -1,8 +1,15 @@
 function submitContribution(branchName)
-% devTools
+% Submit an existing feature (branch) named `branchName`
 %
-% PURPOSE: submit an existing feature (branch) named <branchName>
+% USAGE:
 %
+%    submitContribution(branchName)
+%
+% INPUT:
+%    branchName:     Name of the local branch to be pushed to the git server
+%
+% .. Author:
+%      - Laurent Heirendt
 
     global gitConf
     global gitCmd
@@ -13,7 +20,7 @@ function submitContribution(branchName)
     % check if branch exists
     checkoutBranch(branchName);
 
-    if gitConf.verbose
+    if gitConf.printLevel > 0
         originCall = [' [', mfilename, '] '];
     else
         originCall  = '';
@@ -150,14 +157,57 @@ function submitContribution(branchName)
         if countAddFiles > 0
             fprintf([gitCmd.lead, originCall, 'You have selected ', num2str(countAddFiles), ' files to be added in one commit.', gitCmd.trail]);
 
-            commitMsg = input([gitCmd.lead, originCall, ' -> Please enter a commit message (example: "Fixing bug with input arguments"): '], 's');
+            % define prohibited sequences
+            dictFlags = {'yy', 'nn', 'commit', 'abc'};
 
-            if ~isempty(commitMsg)
+            % initialize loop flag
+            incorrectCommitMsg = true;
 
-                if ~strcmp(commitMsg(1), '"') || ~strcmp(commitMsg(end), '"')
-                    commitMsg = ['"', commitMsg, '"'];
+            loopCounter = 0;
+
+            % loop as long as the commit message is not correct
+            while incorrectCommitMsg && loopCounter < 10
+                % ask the user for a commit message
+                commitMsg = input([gitCmd.lead, originCall, ' -> Please enter a commit message (example: "Fixing bug with input arguments"): '], 's');
+
+                % omit non literal characters
+                commitMsg = regexprep(commitMsg, '[^a-zA-Z0-9_-?! ]', '');
+
+                % trim the commitMsg
+                commitMsg = strtrim(commitMsg);
+
+                % add double quotes to the commit message if not set
+                if isempty(commitMsg)
+                    incorrectCommitMsg = true;
+                else
+                    if ~strcmp(commitMsg(1), '"') || ~strcmp(commitMsg(end), '"')
+                        commitMsg = ['"', commitMsg, '"'];
+                    end
                 end
 
+                % NOTE: anything below assumes "commitMsg"
+
+                % if the commit message is not empty and minimum 5 characters (+2 quotes)
+                for k = 1:length(dictFlags)
+                    if length(commitMsg) >= 4+2 && isempty(strfind(commitMsg, dictFlags{k}))
+                        incorrectCommitMsg = false;
+                        continue;
+                    else
+                        incorrectCommitMsg = true;
+                        break;
+                    end
+                end
+
+                if incorrectCommitMsg
+                    warning([gitCmd.lead, 'The commit message must be at least 5 characters long and not contain the word `commit`.']);
+                end
+
+                % increment the loop counter
+                loopCounter = loopCounter + 1;
+            end
+
+            % set the commit message
+            if ~incorrectCommitMsg
                 [status_gitCommit, result_gitCommit] = system(['git commit -m', commitMsg]);
                 fprintf([gitCmd.lead, originCall, 'Your commit message has been set.', gitCmd.success, gitCmd.trail]);
                 if status_gitCommit == 0
@@ -167,7 +217,7 @@ function submitContribution(branchName)
                     error([gitCmd.lead, ' [', mfilename,'] Your commit message cannot be set.', gitCmd.fail]);
                 end
             else
-                error([gitCmd.lead, ' [', mfilename,'] Please enter a commit message that has more than 10 characters.', gitCmd.fail]);
+                error([gitCmd.lead, ' [', mfilename,'] Your commit message was not accepted.', gitCmd.fail]);
             end
         end
 

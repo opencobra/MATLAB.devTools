@@ -1,8 +1,15 @@
 function updateFork(force)
-% devTools
+% Updates the fork and the submodules of the repository
 %
-% PURPOSE: updates the fork and the submodules of the repository
+% USAGE:
 %
+%    updateFork(force)
+%
+% INPUT:
+%    force:          Boolean flag to use force for updating the fork
+%
+% .. Author:
+%      - Laurent Heirendt
 
     global gitConf
     global gitCmd
@@ -18,7 +25,11 @@ function updateFork(force)
     currentDir = strrep(pwd, '\', '\\');
 
     % list the branches that should be updated
-    branches = {'master', 'develop'};
+    if checkRemoteBranchExistence('develop')
+        branches = {'master', 'develop'};
+    else
+        branches = {'master'};  % fall back to master, which always exists
+    end
 
     % change to the directory of the fork
     cd(gitConf.fullForkDir)
@@ -46,7 +57,7 @@ function updateFork(force)
 
             if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
                 % pull eventual changes from other contributors or administrators
-                [status_gitFetchOrigin, result_gitFetchOrigin] = system('git fetch origin ');  % no pull
+                [status_gitFetchOrigin, result_gitFetchOrigin] = system('git fetch origin');  % no pull
                 if status_gitFetchOrigin == 0
                     printMsg(mfilename, 'Changes of fork (origin) fetched.');
                 else
@@ -78,6 +89,7 @@ function updateFork(force)
                         fprintf(result_gitCheckout);
                         printMsg(mfilename, ['The feature (branch) <', branches{k}, '> could not be checked out.']);
                     end
+
                 else
                     [status_gitCheckoutCreate, result_gitCheckoutCreate] = system(['git checkout -b ', branches{k}]);
 
@@ -90,12 +102,23 @@ function updateFork(force)
                 end
 
                 % determine the number of commits that the local master branch is behind
-                [status_gitCount, result_gitCount] = system(['git rev-list --left-right --count ', branches{k}, '...upstream/', branches{k}]);
+                [status_gitCountUpstream, result_gitCountUpstream] = system(['git rev-list --left-right --count ', branches{k}, '...upstream/', branches{k}]);
 
-                if status_gitCount == 0
-                    commitsAheadBehind = str2num(char(strsplit(result_gitCount)));
+                [status_gitCountOrigin, result_gitCountOrigin] = system(['git rev-list --left-right --count ', branches{k}, '...origin/', branches{k}]);
 
-                    if length(commitsAheadBehind) > 0 && commitsAheadBehind(2) > 0
+                if status_gitCountUpstream == 0 && status_gitCountOrigin == 0
+                    commitsAheadBehindUpstream = str2num(char(strsplit(result_gitCountUpstream)));
+                    commitsAheadBehindOrigin = str2num(char(strsplit(result_gitCountOrigin)));
+
+                    if (length(commitsAheadBehindUpstream) > 0 && commitsAheadBehindUpstream(2) > 0) || (length(commitsAheadBehindOrigin) > 0 && commitsAheadBehindOrigin(1) > 0)
+
+                        [status_gitPull, result_gitPull] = system(['git pull origin ', branches{k}]);
+                        if status_gitPull == 0
+                            printMsg(mfilename, ['The <', branches{k}, '> feature (branch) of the fork could not be pulled.']);
+                        else
+                            fprintf(result_gitPull);
+                            error([gitCmd.lead, ' [', mfilename,'] Impossible to pull changes from the <', branches{k}, '> feature (branch) of the fork.', gitCmd.fail]);
+                        end
 
                         if ~force
                             % merge the changes from upstream to the branch
@@ -141,11 +164,15 @@ function updateFork(force)
                     end
                 end
             end
+
+            % initialize and update the submodules
+            updateSubmodules();
         else
             fprintf(resultList);
             error([gitCmd.lead, ' [', mfilename,'] Impossible to retrieve the features (branches) of your local fork.', gitCmd.fail]);
         end
     else
+        fprintf(result_gitStatus);
         printMsg(mfilename, ['The local fork cannot be updated as you have uncommitted changes. Please submit/publish them first.']);
     end
 

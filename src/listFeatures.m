@@ -1,8 +1,20 @@
 function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
-% devTools
+% Lists all available branches/features
 %
-% PURPOSE: lists all available branches/features
+% USAGE:
 %
+%    [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
+%
+% OUTPUT:
+%    exitFlag:         Boolean (true if proper exit of function)
+%    currentBranch:    Name of current branch
+%    arrResult:        Cell with all names of branches
+%    exampleBranch:    Name of a branch given as an example
+%
+% .. Author:
+%      - Laurent Heirendt
+
+
 
     global gitConf
 
@@ -24,12 +36,19 @@ function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
     % give an example name
     exampleBranch = gitConf.exampleBranch;
 
+    % check if the develop branch exists remotely
+    if checkRemoteBranchExistence('develop')
+        nbBranches = 3;
+    else
+        nbBranches = 2;
+    end
+
     if status == 0
         arrResult = regexp(result,'\s+','split'); %strsplit is not compatible with older versions of MATLAB
         arrResult = strtrim(arrResult);
         arrResult = arrResult(~cellfun(@isempty, arrResult));
 
-        if length(arrResult) > 2
+        if length(arrResult) > nbBranches
             fprintf('\n      Available features are:\n');
 
             % list the number of available features
@@ -46,15 +65,22 @@ function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
 
             fprintf('\n');
         else
-            reply = input('   -> You do not have any features (branches). Do you want to start a new feature (branch)? Y/N [Y]: ', 's');
+            reply = '';
+            while isempty(reply)
 
-            % decide whether to start a new feature (branch) or not
-            if ~isempty(reply) && (strcmpi(reply, 'y') || strcmpi(reply, 'yes'))
-                initContribution;
-                exitFlag = true;
-            else
-                fprintf('   -> Please start again. Goodbye.\n')
-                exitFlag = true;
+                reply = input('   -> You do not have any features (branches). Do you want to start a new feature (branch)? Y/N [Y]: ', 's');
+
+                % decide whether to start a new feature (branch) or not
+                if strcmpi(reply, 'y') || strcmpi(reply, 'yes')
+                    initContribution;
+                    exitFlag = true;
+                    break;
+                elseif strcmpi(reply, 'n') || strcmpi(reply, 'no')
+                    fprintf('   -> Please start again. Goodbye.\n')
+                    exitFlag = true;
+                else
+                    reply = '';
+                end
             end
         end
     end

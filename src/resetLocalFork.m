@@ -1,8 +1,13 @@
 function resetLocalFork()
-% devTools
+% Clean all files in the working directory and reset the fork
 %
-% PURPOSE: clean all files in the working directory and reset the fork
+% USAGE:
 %
+%    resetLocalFork()
+%
+% .. Author:
+%      - Laurent Heirendt
+
     global gitConf
     global gitCmd
 

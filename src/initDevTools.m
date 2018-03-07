@@ -1,14 +1,32 @@
-function initDevTools()
-% devTools
+function initDevTools(repoName)
+% Initializes the development tools (username and email are requested if not configured)
 %
-% PURPOSE: initializes the development tools (username and email are requested if not configured)
+% USAGE:
 %
+%    initDevTools(repoName)
+%
+% INPUT:
+%   repoName:       Name of the repository for which the devTools shall
+%                   be configured (default: `opencobra/cobratoolbox`)
+% .. Author:
+%      - Laurent Heirendt
 
     global gitConf
     global gitCmd
+    global resetDevToolsFlag
+    global DEFAULTREPONAME
+
+    % set the repoName if not given
+    if ~exist('repoName', 'var')
+        repoName = DEFAULTREPONAME;
+    end
+
+    resetDevToolsFlag = true;
+
+    finishup = onCleanup(@() resetDevTools());
 
     % check the system and set the configuration
-    checkSystem(mfilename);
+    checkSystem(mfilename, repoName);
 
     if ~isfield(gitConf, 'userName'), gitConf.userName = []; end
     if ~isfield(gitConf, 'localDir'), gitConf.localDir = []; end
@@ -19,10 +37,14 @@ function initDevTools()
     gitConf.remoteRepoName = gitConf.remoteRepoURL(sepIndices(4)+1:end-4);
     gitConf.remoteUserName = gitConf.remoteRepoURL(sepIndices(3)+1:sepIndices(4)-1);
 
+    % ignore case for the current fork (avoids problems for untracked files with case conflicts)
+    [status_gitIgnoreCase, result_gitIgnoreCase] = system('git config core.ignorecase true');
+
+    % retrieve the user name
     [status_gitConfUserGet, result_gitConfUserGet] = system('git config --get user.github-username');
     gitConf.userName = strtrim(result_gitConfUserGet);
 
-    if gitConf.verbose
+    if gitConf.printLevel > 0
         originCall = [' [', mfilename, '] '];
     else
         originCall  = '';
@@ -69,17 +91,26 @@ function initDevTools()
         end
     end
 
+    % define the name of the local fork directory
+    gitConf.forkDirName = strrep([gitConf.leadForkDirName, gitConf.remoteRepoName], '\', '\\');
+
+    % retrieve the directory of the fork from the local git configuration
+    [~, result_gitConfForkDirGet] = system(['git config --get user.', gitConf.leadForkDirName, gitConf.nickName, '.path']);
+    gitConf.fullForkDir = strtrim(result_gitConfForkDirGet);
+    gitConf.localDir = gitConf.fullForkDir;
+
     % check if the fork exists remotely
     checkRemoteFork();
 
-    % request the local directory
-    if isempty(gitConf.localDir)
+    % request the local directory if the fullForkDir is not yet known
+    if isempty(gitConf.localDir) && isempty(gitConf.fullForkDir)
 
         createDir = false;
 
         while ~createDir
-            reply = input([gitCmd.lead, originCall, ' -> Please define the local path to your fork\n       current: ', strrep(pwd,'\','\\'),'\n       Enter the path (press ENTER to use the current path): '], 's');
+            reply = input([gitCmd.lead, originCall, ' -> Please define the location of your fork\n       current: ', strrep(pwd,'\','\\'),'\n       Enter the path (press ENTER to use the current path): '], 's');
 
+            % define the local directory as the current directory if the reply is empty
             if isempty(reply)
                 gitConf.localDir = strrep(pwd, '\', '\\');
             else
@@ -91,20 +122,29 @@ function initDevTools()
                 gitConf.localDir = strrep([gitConf.localDir, filesep], '\', '\\');
             end
 
-            % warn the user of not using a fork-cobratoolbox or cobratoolbox directory as it will be cloned
-            if ~isempty(strfind(gitConf.localDir, gitConf.nickName)) || exist([gitConf.localDir, '/.git'], 'dir') == 7  % contains the nickname or a .git folder
-                reply = input([gitCmd.trail, gitCmd.lead, originCall, ' -> The specified directory already contains a ', gitConf.nickName, ' copy (clone) or is a git directory.', ...
-                               gitCmd.trail, gitCmd.lead, originCall, ' -> Please provide the directory into which your fork should be cloned. Do you want to continue? Y/N [Y]:'], 's');
-
-                if isempty(reply) || strcmpi(reply, 'y') || strcmpi(reply, 'yes')
-                    createDir = true;
-                else
-                    createDir = false;
+            % strip the fork-nickName folder from the localDir if present
+            if ~isempty(gitConf.localDir) && length(gitConf.forkDirName) <= length(gitConf.localDir)
+                if strcmp(gitConf.localDir(end-length(gitConf.forkDirName)+1:end), gitConf.forkDirName)
+                    gitConf.localDir = gitConf.localDir(1:end-length(gitConf.forkDirName));
                 end
+            end
+
+            % warn the user of not using a fork-nickName directory or a git cloned directory as it will be cloned
+            if ~isempty(strfind(gitConf.localDir, gitConf.nickName)) % contains the nickname
+                printMsg(mfilename, ['The specified directory already contains a ', gitConf.nickName, ' copy (clone).'], gitCmd.trail);
+                createDir = true;
+                gitConf.localDir = gitConf.localDir(1:end-length(gitConf.nickName)-1-length(gitConf.leadForkDirName));
+
+            elseif exist([gitConf.localDir, '/.git'], 'dir') == 7 % contains a .git folder
+                printMsg(mfilename, ['The specified directory already is a git repository (git-tracked).'], gitCmd.trail);
+
             else
                 createDir = true;
             end
         end
+
+        % define the fork directory name
+        gitConf.fullForkDir = strrep([gitConf.localDir, gitConf.forkDirName], '\', '\\');
 
         if exist(gitConf.localDir, 'dir') ~= 7
             reply = input([gitCmd.lead, originCall, ' -> The specified directory (', gitConf.localDir, ') does not exist. Do you want to create it? Y/N [Y]:'], 's');
@@ -119,9 +159,16 @@ function initDevTools()
         end
     end
 
-    % define the fork directory name
-    gitConf.forkDirName = strrep([gitConf.leadForkDirName, gitConf.remoteRepoName], '\', '\\');
-    gitConf.fullForkDir = strrep([gitConf.localDir, gitConf.forkDirName], '\', '\\');
+    resetDevToolsFlag = false;
+
+    % permanently store the fork directory in the git configuration (ask the user explicitly)
+    [status_gitConfForkDirSet, result_gitConfForkDirSet] = system(['git config --global user.', gitConf.leadForkDirName, gitConf.nickName, '.path "', gitConf.fullForkDir, '"']);
+    if status_gitConfForkDirSet == 0
+        fprintf([gitCmd.lead, originCall, 'Your fork directory has been set to: ', gitConf.fullForkDir, '. ', gitCmd.success, gitCmd.trail]);
+    else
+        fprintf(result_gitConfForkDirSet);
+        error([gitCmd.lead, ' [', mfilename,'] Your fork directory could not be set.', gitCmd.fail]);
+    end
 
     % clone the fork
     freshClone = cloneFork();
@@ -149,7 +196,9 @@ function initDevTools()
     % print the current configuration
     fprintf([gitCmd.lead, originCall, ' -- Configuration -------- ', gitCmd.trail])
     fprintf([gitCmd.lead, originCall, '    GitHub username:       ', gitConf.userName, gitCmd.trail]);
+    fprintf([gitCmd.lead, originCall, '    GitHub email:          ', gitConf.userEmail, gitCmd.trail]);
     fprintf([gitCmd.lead, originCall, '    Local directory :      ', gitConf.fullForkDir, gitCmd.trail])
     fprintf([gitCmd.lead, originCall, '    Remote fork URL:       ', gitConf.forkURL, gitCmd.trail]);
     fprintf([gitCmd.lead, originCall, '    Remote repository URL: ', gitConf.remoteRepoURL, gitCmd.trail]);
+
 end

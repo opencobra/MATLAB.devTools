@@ -1,8 +1,15 @@
 function initContribution(branchName)
-% devTools
+% Initializes a new feature (branch) named `branchName`
 %
-% PURPOSE: initializes a new feature (branch) named <branchName>
+% USAGE:
 %
+%    initContribution(branchName)
+%
+% INPUT:
+%    branchName:     Name of the local branch to be initialized
+%
+% .. Author:
+%      - Laurent Heirendt
 
     global gitConf
     global gitCmd
@@ -10,7 +17,7 @@ function initContribution(branchName)
     % initialize the development tools
     initDevTools();
 
-    if gitConf.verbose
+    if gitConf.printLevel > 0
         originCall = [' [', mfilename, '] '];
     else
         originCall  = '';
@@ -27,8 +34,10 @@ function initContribution(branchName)
                 if ~isempty(strfind(branchName, 'develop')) || ~isempty(strfind(branchName, 'master'))
                     branchName = '';
                     fprintf([gitCmd.lead, ' -> Please use a different name that does not contain <develop> or <master>.', gitCmd.fail, gitCmd.trail]);
-                else
+                elseif ~isempty(branchName)
                     checkoutFlag = true;
+                else
+                    branchName = '';
                 end
             end
         end
