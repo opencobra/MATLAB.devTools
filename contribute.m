@@ -30,16 +30,13 @@ function contribute(repoName, printLevel, autoOption)
     addpath(genpath(fileparts(which(mfilename))));
 
     % check the automatic option argument
+    autoOptionFlag = false;
     if exist('autoOption', 'var')
-        if ~isempty(autoOption)
-            if autoOption > 0 && autoOption < 6
-                autoOptionFlag = true;
-            else
-                error('Please enter an automatic menu option between 1 and 5.')
-            end
+        if ~isempty(autoOption) && autoOption > 0 && autoOption < 6
+            autoOptionFlag = true;
+        else
+            error('Please enter an automatic menu option between 1 and 5.')
         end
-    else
-        autoOptionFlag = false;
     end
 
     % treatment of input arguments
@@ -49,11 +46,9 @@ function contribute(repoName, printLevel, autoOption)
     end
 
     % soft reset if the repository name is different
-    if ~isempty(gitConf)
-        if isfield(gitConf, 'remoteUserName') && isfield(gitConf, 'remoteRepoName')
-            if exist('repoName', 'var') && ~strcmpi(repoName, [gitConf.remoteUserName '/' gitConf.remoteRepoName])
-                resetDevTools();
-            end
+    if ~isempty(gitConf) && exist('repoName', 'var') && isfield(gitConf, 'remoteUserName') && isfield(gitConf, 'remoteRepoName')
+        if ~strcmpi(repoName, [gitConf.remoteUserName '/' gitConf.remoteRepoName])
+            resetDevTools();
         end
     end
 
@@ -64,8 +59,10 @@ function contribute(repoName, printLevel, autoOption)
         checkSystem(mfilename, repoName);
     end
 
+    % perform a soft reset if interrupted
     finishup = onCleanup(@() resetDevTools());
 
+    % determine the directory of the devTools
     devToolsDir = fileparts(which(mfilename));
 
     % change to the directory of the devTools
@@ -74,8 +71,10 @@ function contribute(repoName, printLevel, autoOption)
     % update the devTools
     updateDevTools();
 
+    % print the launcher
     fprintf(gitConf.launcher);
 
+    % show the menu to select an option
     if autoOptionFlag
         choice = autoOption;
     else
@@ -83,6 +82,7 @@ function contribute(repoName, printLevel, autoOption)
         choice = str2num(choice);
     end
 
+    % evaluate the option
     if length(choice) == 0 || choice > 5 || choice < 0
         error('Please enter a number between 1 and 5.')
     else
