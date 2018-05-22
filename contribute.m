@@ -1,4 +1,4 @@
-function contribute(repoName, printLevel)
+function contribute(repoName, printLevel, autoOption)
 % devTools
 %
 % PURPOSE: displays a menu and calls the respective subfunctions
@@ -7,11 +7,14 @@ function contribute(repoName, printLevel)
 %       2. Select an existing feature (branch) to work on.
 %       3. Publish a feature (branch).
 %       4. Delete a feature (branch).
+%       5. Update the fork
 %
 % INPUT:
 %
+%     repoName:       Name of the repository (default: opencobra/cobratoolbox)
 %     printLevel:     0: minimal printout (default)
 %                     1: detailed printout (debug mode)
+%     autoOption:     menu option
 
     global gitConf
     global gitCmd
@@ -26,14 +29,24 @@ function contribute(repoName, printLevel)
     % adding the src folder of the devTools
     addpath(genpath(fileparts(which(mfilename))));
 
+    % check the automatic option argument
+    autoOptionFlag = false;
+    if exist('autoOption', 'var')
+        if ~isempty(autoOption) && autoOption > 0 && autoOption < 6
+            autoOptionFlag = true;
+        else
+            error('Please enter an automatic menu option between 1 and 5.')
+        end
+    end
+
     % treatment of input arguments
-    if ~exist('repoName', 'var')
+    if ~exist('repoName', 'var') || isempty(repoName)
         DEFAULTREPONAME = 'opencobra/cobratoolbox';  % set the default repository
         repoName = DEFAULTREPONAME;
     end
 
     % soft reset if the repository name is different
-    if ~isempty(gitConf)
+    if ~isempty(gitConf) && exist('repoName', 'var') && isfield(gitConf, 'remoteUserName') && isfield(gitConf, 'remoteRepoName')
         if ~strcmpi(repoName, [gitConf.remoteUserName '/' gitConf.remoteRepoName])
             resetDevTools();
         end
@@ -46,8 +59,10 @@ function contribute(repoName, printLevel)
         checkSystem(mfilename, repoName);
     end
 
+    % perform a soft reset if interrupted
     finishup = onCleanup(@() resetDevTools());
 
+    % determine the directory of the devTools
     devToolsDir = fileparts(which(mfilename));
 
     % change to the directory of the devTools
@@ -56,12 +71,18 @@ function contribute(repoName, printLevel)
     % update the devTools
     updateDevTools();
 
+    % print the launcher
     fprintf(gitConf.launcher);
 
-    choice = input('\n      (You can abort any process using CTRL+C)\n\n      [1] Start a new feature (branch).\n      [2] Select an existing feature (branch) to work on.\n      [3] Publish a feature (branch).\n      [4] Delete a feature (branch).\n      [5] Update the fork.\n\n   -> Please select what you want to do (enter the number): ', 's');
+    % show the menu to select an option
+    if autoOptionFlag
+        choice = autoOption;
+    else
+        choice = input('\n      (You can abort any process using CTRL+C)\n\n      [1] Start a new feature (branch).\n      [2] Select an existing feature (branch) to work on.\n      [3] Publish a feature (branch).\n      [4] Delete a feature (branch).\n      [5] Update the fork.\n\n   -> Please select what you want to do (enter the number): ', 's');
+        choice = str2num(choice);
+    end
 
-    choice = str2num(choice);
-
+    % evaluate the option
     if length(choice) == 0 || choice > 5 || choice < 0
         error('Please enter a number between 1 and 5.')
     else
