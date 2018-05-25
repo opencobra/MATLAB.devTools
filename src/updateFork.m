@@ -65,7 +65,7 @@ function updateFork(force)
                     error([gitCmd.lead, ' [', mfilename, '] Impossible to fetch changes from fork.', gitCmd.fail]);
                 end
             else
-                printMsg(mfilename, ['The develop feature (branch) does not exist on the fork.'], [gitCmd.fail, gitCmd.trail]);
+                printMsg(mfilename, ['The develop branch does not exist on the fork.'], [gitCmd.fail, gitCmd.trail]);
             end
 
             % fetch the changes from upstream
@@ -84,20 +84,20 @@ function updateFork(force)
                     [status_gitCheckout, result_gitCheckout] = system(['git checkout ', branches{k}]);
 
                     if status_gitCheckout == 0
-                        printMsg(mfilename, ['The feature (branch) <', branches{k}, '> was checked out.']);
+                        printMsg(mfilename, ['The branch <', branches{k}, '> was checked out.']);
                     else
                         fprintf(result_gitCheckout);
-                        printMsg(mfilename, ['The feature (branch) <', branches{k}, '> could not be checked out.']);
+                        printMsg(mfilename, ['The branch <', branches{k}, '> could not be checked out.']);
                     end
 
                 else
                     [status_gitCheckoutCreate, result_gitCheckoutCreate] = system(['git checkout -b ', branches{k}]);
 
                     if status_gitCheckoutCreate == 0
-                        printMsg(mfilename, ['The feature (branch) <', branches{k}, '> was checked out.']);
+                        printMsg(mfilename, ['The branch <', branches{k}, '> was checked out.']);
                     else
                         fprintf(result_gitCheckoutCreate);
-                        printMsg(mfilename, ['The feature (branch) <', branches{k}, '> could not be checked out.']);
+                        printMsg(mfilename, ['The branch <', branches{k}, '> could not be checked out.']);
                     end
                 end
 
@@ -114,10 +114,10 @@ function updateFork(force)
 
                         [status_gitPull, result_gitPull] = system(['git pull origin ', branches{k}]);
                         if status_gitPull == 0
-                            printMsg(mfilename, ['The <', branches{k}, '> feature (branch) of the fork could not be pulled.']);
+                            printMsg(mfilename, ['The <', branches{k}, '> branch of the fork could not be pulled.']);
                         else
                             fprintf(result_gitPull);
-                            error([gitCmd.lead, ' [', mfilename,'] Impossible to pull changes from the <', branches{k}, '> feature (branch) of the fork.', gitCmd.fail]);
+                            error([gitCmd.lead, ' [', mfilename,'] Impossible to pull changes from the <', branches{k}, '> branch of the fork.', gitCmd.fail]);
                         end
 
                         if ~force
@@ -134,10 +134,10 @@ function updateFork(force)
                         if force
                             [status_gitReset, result_gitReset] = system(['git reset --hard upstream/', branches{k}]);
                             if status_gitReset == 0
-                                printMsg(mfilename, ['The <', branches{k}, '> feature (branch) of the fork has been reset.']);
+                                printMsg(mfilename, ['The <', branches{k}, '> branch of the fork has been reset.']);
                             else
                                 fprintf(result_gitReset);
-                                error([gitCmd.lead, ' [', mfilename,'] Impossible to reset the <', branches{k}, '> feature (branch) of the fork.', gitCmd.fail]);
+                                error([gitCmd.lead, ' [', mfilename,'] Impossible to reset the <', branches{k}, '> branch of the fork.', gitCmd.fail]);
                             end
 
                             % set the flag for a force push
@@ -156,10 +156,10 @@ function updateFork(force)
                         [status_gitPush, result_gitPush] = system(['git push origin ', branches{k}, ' ', forceFlag]);
 
                         if status_gitPush == 0
-                            printMsg(mfilename, ['The <', branches{k}, '> feature (branch) has been updated on the fork', forceText, '.']);
+                            printMsg(mfilename, ['The <', branches{k}, '> branch has been updated on the fork', forceText, '.']);
                         else
                             fprintf(result_gitPush);
-                            error([gitCmd.lead, ' [', mfilename,'] Impossible to update the <', branches{k}, '> feature (branch) on your fork (', gitConf.forkURL, ').', gitCmd.fail]);
+                            error([gitCmd.lead, ' [', mfilename,'] Impossible to update the <', branches{k}, '> branch on your fork (', gitConf.forkURL, ').', gitCmd.fail]);
                         end
                     end
                 end
@@ -169,7 +169,7 @@ function updateFork(force)
             updateSubmodules();
         else
             fprintf(resultList);
-            error([gitCmd.lead, ' [', mfilename,'] Impossible to retrieve the features (branches) of your local fork.', gitCmd.fail]);
+            error([gitCmd.lead, ' [', mfilename,'] Impossible to retrieve the branches of your local fork.', gitCmd.fail]);
         end
     else
         fprintf(result_gitStatus);

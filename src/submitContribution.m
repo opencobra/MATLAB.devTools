@@ -1,5 +1,5 @@
 function submitContribution(branchName)
-% Submit an existing feature (branch) named `branchName`
+% Submit an existing branch named `branchName`
 %
 % USAGE:
 %
@@ -43,7 +43,7 @@ function submitContribution(branchName)
         addFileOrder = false;
         fprintf([gitCmd.lead, originCall, 'There is nothing to contribute. Please make changes to ', strrep(pwd, '\', '\\'), gitCmd.trail]);
 
-        reply = input([gitCmd.lead, originCall, ' -> Do you want to open a pull request (PR) and submit your feature (branch) <', branchName, '>? Y/N [N]: '], 's');
+        reply = input([gitCmd.lead, originCall, ' -> Do you want to open a pull request (PR) and submit your branch <', branchName, '>? Y/N [N]: '], 's');
 
         if ~isempty(reply) && (strcmpi(reply, 'y') || strcmpi(reply, 'yes'))
             openPR(branchName);
@@ -223,11 +223,11 @@ function submitContribution(branchName)
 
         % push to the branch in the fork
         if pushStatus
-            fprintf([gitCmd.lead, originCall, 'Pushing ', num2str(countAddFiles), ' change(s) to your feature (branch) <', branchName, '>', gitCmd.trail])
+            fprintf([gitCmd.lead, originCall, 'Pushing ', num2str(countAddFiles), ' change(s) to your branch <', branchName, '>', gitCmd.trail])
             [status_gitPush, result_gitPush] = system(['git push origin ', branchName, ' --force']);
 
             if status_gitPush == 0
-                reply = input([gitCmd.lead, originCall, ' -> Do you want to open a pull request (PR) and submit your feature (branch) <', branchName, '>? Y/N [N]: '], 's');
+                reply = input([gitCmd.lead, originCall, ' -> Do you want to open a pull request (PR) and submit your branch <', branchName, '>? Y/N [N]: '], 's');
 
                 if ~isempty(reply) && (strcmpi(reply, 'y') || strcmpi(reply, 'yes'))
                     openPR(branchName);

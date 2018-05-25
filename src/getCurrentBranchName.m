@@ -20,9 +20,9 @@ function currentBranch = getCurrentBranchName()
 
     if status == 0
         currentBranch = currentBranch(1:end-1);
-        printMsg(mfilename, ['The name of the current feature (branch) is <', currentBranch, '>']);
+        printMsg(mfilename, ['The name of the current branch is <', currentBranch, '>']);
     else
         fprintf(currentBranch);
-        error([gitCmd.lead, ' [', mfilename, '] The name of the current feature (branch) could not be retrieved.', gitCmd.fail]);
+        error([gitCmd.lead, ' [', mfilename, '] The name of the current branch could not be retrieved.', gitCmd.fail]);
     end
 end
