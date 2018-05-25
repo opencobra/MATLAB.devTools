@@ -23,10 +23,10 @@ COBRA Toolbox are consequently commits that are made on branches.
 
 The development scheme adopted in the repository of the COBRA Toolbox has two
 branches: a `master` and a `develop` branch. The stable branch is the `master`
-branch, while it is the `develop` branch that includes all new features and to
+branch, while it is the `develop` branch that includes all new changes to code and to
 which new contributions are merged. Contributions are submitted for review and
 testing through pull requests, the `git` standard. The `develop` branch is
-regularly merged into the `master` branch once testing is concluded. 
+regularly merged into the `master` branch once testing is concluded.
 
 The development scheme has been adopted for obvious reasons: the COBRA Toolbox
 is heavily used on a daily basis, while the development community is active.
@@ -55,7 +55,7 @@ This will create a folder called fork-cobratoolbox. Make sure to replace
 to be run from within the folder of the fork called `fork-cobratoolbox`.
 
 .. code:: console
-    
+
     $ cd fork-cobratoolbox
 
 In order to complete the cloned repository with external code, it is
@@ -125,7 +125,7 @@ contribution. A new contribution must be made on a new branch, that originates
 from the `develop` branch. Create the new branch:
 
 .. code:: console
- 
+
     $ git checkout -b <myBranch> develop
 
 Now, you can make changes in the folder `fork-cobratoolbox`. Once you are done
@@ -145,29 +145,29 @@ adding the file:
 
 |warning| Contrary to what is sometimes provided as a shortcut, it is not
 advised to add all files all at once using as this command will add all files,
-even hidden files and binaries. 
+even hidden files and binaries.
 
 .. code:: console
 
-    $ git add . # bad practice 
+    $ git add . # bad practice
 
-Then, commit the changes by setting a commit message <yourMessage>: 
+Then, commit the changes by setting a commit message <yourMessage>:
 
 .. code:: console
 
     $ git commit -m "<myMessage>"
 
-Finally, push your commit to Github: 
+Finally, push your commit to Github:
 
 .. code:: console
 
-    $ git push origin <myBranch> 
+    $ git push origin <myBranch>
 
 You should then see your commit online, and if ready, you can open a
 pull request. You can select your branch in the dropdown menu and list all
 commits by clicking on `commits`.
 
-Continue working on your branch after a while (rebase) 
+Continue working on your branch after a while (rebase)
 ------------------------------------------------------
 
 If there have been major changes or if you want to continue working on a branch
@@ -177,7 +177,7 @@ from the upstream repository. Before doing so, make sure that you do not have
 any uncommitted or local changes (git status).
 
 .. code:: console
- 
+
     $ git checkout develop
     $ git fetch upstream
     $ git merge upstream/develop
@@ -191,7 +191,7 @@ use a merge tool such as `kdiff3`. In order to install a merge tool or abort
 the rebase process, type:
 
 .. code:: console
- 
+
     $ git rebase --abort
 
 In order to have the changes on `<myBranch>` reflected in the online
@@ -199,10 +199,10 @@ repository, push the changes with force. Pushing with force is required as the
 history of the branch has been rewritten during rebase.
 
 .. code:: console
- 
+
     $ git push <myBranch> --force
 
-Selectively use a commit on your branch (cherry-pick) 
+Selectively use a commit on your branch (cherry-pick)
 -----------------------------------------------------
 
 Imagine having two branches called `<myBranch-1>` and `<myBranch-2>`. On branch
@@ -210,7 +210,7 @@ Imagine having two branches called `<myBranch-1>` and `<myBranch-2>`. On branch
 cherry-pick the commit from `<myBranch-1>` to `<myBranch-2>` by typing:
 
 .. code:: console
- 
+
     $ git checkout myBranch-2
     $ git cherry-pick SHA1
 
@@ -219,6 +219,6 @@ message and author information. In order to have the commit listed online,
 conclude the cherry-pick by pushing the commit to the remote repository:
 
 .. code:: console
- 
+
     $ git push myBranch-2
 
