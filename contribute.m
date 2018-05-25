@@ -3,10 +3,10 @@ function contribute(repoName, printLevel, autoOption)
 %
 % PURPOSE: displays a menu and calls the respective subfunctions
 %
-%       1. Start a new feature (branch):
-%       2. Select an existing feature (branch) to work on.
-%       3. Publish a feature (branch).
-%       4. Delete a feature (branch).
+%       1. Start a new branch:
+%       2. Select an existing branch to work on.
+%       3. Publish a branch.
+%       4. Delete a branch.
 %       5. Update the fork
 %
 % INPUT:
@@ -78,7 +78,7 @@ function contribute(repoName, printLevel, autoOption)
     if autoOptionFlag
         choice = autoOption;
     else
-        choice = input('\n      (You can abort any process using CTRL+C)\n\n      [1] Start a new feature (branch).\n      [2] Select an existing feature (branch) to work on.\n      [3] Publish a feature (branch).\n      [4] Delete a feature (branch).\n      [5] Update the fork.\n\n   -> Please select what you want to do (enter the number): ', 's');
+        choice = input('\n      (You can abort any process using CTRL+C)\n\n      [1] Start a new branch.\n      [2] Select an existing branch to work on.\n      [3] Publish a branch.\n      [4] Delete a branch.\n      [5] Update the fork.\n\n   -> Please select what you want to do (enter the number): ', 's');
         choice = str2num(choice);
     end
 
@@ -87,12 +87,12 @@ function contribute(repoName, printLevel, autoOption)
         error('Please enter a number between 1 and 5.')
     else
         if ~isempty(choice) && length(choice) > 0
-            % ask for a name of the feature/branch
+            % ask for a name of the branch
             if choice == 1
 
-                % list the available features if the fork is already configured
+                % list the available branches if the fork is already configured
                 if exist('gitConf.fullForkDir', 'var')
-                    %list all available features
+                    %list all available branches
                     listFeatures();
                 end
 
@@ -101,7 +101,7 @@ function contribute(repoName, printLevel, autoOption)
 
                 reply = '';
                 while isempty(reply)
-                    reply = input(['   -> Please enter a name of the new feature (branch) that you want to work on (example: ', exampleBranch, '): '], 's');
+                    reply = input(['   -> Please enter a name of the new branch that you want to work on (example: ', exampleBranch, '): '], 's');
                     if ~isempty(strfind(reply, 'develop')) || ~isempty(strfind(reply, 'master'))
                         reply = '';
                         fprintf([gitCmd.lead, 'Please use a different name that does not contain <develop> or <master>.', gitCmd.fail, gitCmd.trail]);
@@ -115,7 +115,7 @@ function contribute(repoName, printLevel, autoOption)
                 % change to the fork diretory
                 cd(gitConf.fullForkDir);
 
-                %list all available features
+                %list all available branches
                 [exitFlag, currentBranch, ~, exampleBranch] = listFeatures();
 
                 if ~strcmpi('develop', currentBranch) && ~strcmpi('master', currentBranch)
@@ -126,22 +126,22 @@ function contribute(repoName, printLevel, autoOption)
                     reply = '';
                     if choice == 2
                         while isempty(reply) && ~exitFlag
-                            reply = input(['   -> Please enter the name of the existing feature (branch) that you want to work on (example: ', exampleBranch, '): '], 's');
+                            reply = input(['   -> Please enter the name of the existing branch that you want to work on (example: ', exampleBranch, '): '], 's');
                         end
                     elseif choice == 3
                         while isempty(reply)
-                            reply = input(['   -> Please enter the name of the feature (branch) that you want to publish (example: ', exampleBranch, '): '], 's');
+                            reply = input(['   -> Please enter the name of the branch that you want to publish (example: ', exampleBranch, '): '], 's');
                         end
                     elseif choice == 4
 
-                        % list the available features if the fork is already configured
+                        % list the available branches if the fork is already configured
                         if exist('gitConf.fullForkDir', 'var')
-                            %list all available features
+                            %list all available branches
                             listFeatures();
                         end
 
                         while isempty(reply)
-                            reply = input(['   -> Please enter the name of the feature (branch) that you want to delete (example: ', exampleBranch, '): '], 's');
+                            reply = input(['   -> Please enter the name of the branch that you want to delete (example: ', exampleBranch, '): '], 's');
                         end
                     end
                 end

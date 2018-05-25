@@ -48,7 +48,7 @@ function checkoutBranch(branchName, updateForkFlag)
 
     if status_gitBranch == 0 && ~strcmpi(mainBranch, currentBranch) && isempty(result_gitStatus) && status_gitStatus == 0
 
-        printMsg(mfilename, ['The current feature (branch) ', currentBranch, ' is not the <' mainBranch '> feature (branch).'], [gitCmd.fail, gitCmd.trail]);
+        printMsg(mfilename, ['The current branch ', currentBranch, ' is not the <' mainBranch '> branch.'], [gitCmd.fail, gitCmd.trail]);
 
         % update the fork locally
         if updateForkFlag
@@ -62,21 +62,21 @@ function checkoutBranch(branchName, updateForkFlag)
         currentBranch = getCurrentBranchName();
 
         if status_gitCheckout == 0 && strcmpi(mainBranch, currentBranch)
-            printMsg(mfilename, ['The current feature (branch) is <' mainBranch '>.']);
+            printMsg(mfilename, ['The current branch is <' mainBranch '>.']);
         else
             fprintf(result_gitCheckout);
-            error([gitCmd.lead, 'An error occurred and the <' mainBranch '> feature (branch) cannot be checked out']);
+            error([gitCmd.lead, 'An error occurred and the <' mainBranch '> branch cannot be checked out']);
         end
 
         % reset the develop branch
         [status_gitReset, result_gitReset] = system(['git reset --hard upstream/' mainBranch]);
         if status_gitReset == 0
             if gitConf.printLevel > 0
-                fprintf([gitCmd.lead, ' [', mfilename, '] The current feature (branch) is <' mainBranch '>.', gitCmd.success, gitCmd.trail]);
+                fprintf([gitCmd.lead, ' [', mfilename, '] The current branch is <' mainBranch '>.', gitCmd.success, gitCmd.trail]);
             end
         else
             fprintf(result_gitReset);
-            error([gitCmd.lead, 'The <' mainBranch '> feature (branch) cannot be checked out']);
+            error([gitCmd.lead, 'The <' mainBranch '> branch cannot be checked out']);
         end
 
         % update all submodules
@@ -86,10 +86,10 @@ function checkoutBranch(branchName, updateForkFlag)
         [status_gitPull, result_gitPull] = system(['git pull origin ' mainBranch]);
 
         if status_gitPull == 0
-            printMsg(mfilename, ['The changes on the <' mainBranch '> feature (branch) of your fork have been pulled.']);
+            printMsg(mfilename, ['The changes on the <' mainBranch '> branch of your fork have been pulled.']);
         else
             fprintf(result_gitPull);
-            error([gitCmd.lead, 'The changes on the <' mainBranch '> feature (branch) could not be pulled.', gitCmd.fail]);
+            error([gitCmd.lead, 'The changes on the <' mainBranch '> branch could not be pulled.', gitCmd.fail]);
         end
     end
 
@@ -107,7 +107,7 @@ function checkoutBranch(branchName, updateForkFlag)
         [status_gitCheckout, result_gitCheckout] = system(['git checkout ', checkoutFlag, ' ', branchName]);
 
         if status_gitCheckout == 0
-            printMsg(mfilename, ['The <', branchName, '> feature (branch) has been checked out.']);
+            printMsg(mfilename, ['The <', branchName, '> branch has been checked out.']);
 
             % rebase if the branch already existed
             if ~strcmp(checkoutFlag, '-b') && isempty(strfind(branchName, 'develop')) && isempty(strfind(branchName, 'master'))
@@ -121,15 +121,15 @@ function checkoutBranch(branchName, updateForkFlag)
 
                     % if the message after rebase does not contain up to data and not cannot rebase
                     if status_gitRebase == 0 && isempty(strfind(result_gitRebase, 'up to date')) && isempty(strfind(result_gitRebase, 'Cannot rebase'))
-                        printMsg(mfilename, ['The <', branchName, '> feature (branch) has been rebased with <' mainBranch '>.']);
+                        printMsg(mfilename, ['The <', branchName, '> branch has been rebased with <' mainBranch '>.']);
 
                         % push by force the rebased branch
                         [status_gitPush, result_gitPush] = system(['git push origin ', branchName, ' --force']);
                         if status_gitPush == 0
-                            printMsg(mfilename, ['The <', branchName, '> feature (branch) has been pushed to your fork by force.']);
+                            printMsg(mfilename, ['The <', branchName, '> branch has been pushed to your fork by force.']);
                         else
                             fprintf(result_gitPush);
-                            error([gitCmd.lead, ' [', mfilename, '] The <', branchName ,'> feature (branch) could not be pushed to your fork.', gitCmd.fail]);
+                            error([gitCmd.lead, ' [', mfilename, '] The <', branchName ,'> branch could not be pushed to your fork.', gitCmd.fail]);
                         end
                     else
                         [status_gitRebaseAbort, ~] = system('git rebase --abort');
@@ -141,7 +141,7 @@ function checkoutBranch(branchName, updateForkFlag)
                         % if the message after rebase contains : cannot rebase
                         if ~isempty(strfind(result_gitRebase, 'Cannot rebase'))
                             % ask the user first to reset
-                            reply = input([gitCmd.lead, ' -> Do you want to reset your feature (branch) <', branchName, '>. Y/N [N]: '], 's');
+                            reply = input([gitCmd.lead, ' -> Do you want to reset your branch <', branchName, '>. Y/N [N]: '], 's');
 
                             if ~isempty(reply) || strcmpi(reply, 'y') || strcmpi(reply, 'yes')
 
@@ -151,16 +151,16 @@ function checkoutBranch(branchName, updateForkFlag)
                                     % hard reset of an existing branch
                                     [status_gitReset, result_gitReset] = system(['git reset --hard origin/', branchName]);
                                     if status_gitReset == 0
-                                        printMsg(mfilename, ['The <', branchName, '> feature (branch) has not been rebased with <' mainBranch '> and is up to date.']);
+                                        printMsg(mfilename, ['The <', branchName, '> branch has not been rebased with <' mainBranch '> and is up to date.']);
                                     else
                                         fprintf(result_gitReset);
                                         error([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> could not be reset.', gitCmd.fail]);
                                     end
                                 else
-                                    printMsg(mfilename, ['The remote feature (branch) <', branchName, '> does not exist and could not be reset.'], [gitCmd.fail, gitCmd.trail]);
+                                    printMsg(mfilename, ['The remote branch <', branchName, '> does not exist and could not be reset.'], [gitCmd.fail, gitCmd.trail]);
                                 end
                             else
-                                printMsg(mfilename, ['The <', branchName, '> feature (branch) has not been reset.']);
+                                printMsg(mfilename, ['The <', branchName, '> branch has not been reset.']);
                             end
                         end
                     end
@@ -170,22 +170,22 @@ function checkoutBranch(branchName, updateForkFlag)
                 [status_gitPush, result_gitPush] = system(['git push origin ', branchName]);
 
                 if status_gitPush == 0
-                    printMsg(mfilename, ['The <', branchName, '> feature (branch) has been pushed to your fork.']);
+                    printMsg(mfilename, ['The <', branchName, '> branch has been pushed to your fork.']);
                 else
                     fprintf(result_gitPush);
-                    error([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> feature (branch) could not be pushed to your fork.', gitCmd.fail]);
+                    error([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch could not be pushed to your fork.', gitCmd.fail]);
                 end
             end
         else
             if gitConf.printLevel > 0
                 fprintf(result_gitCheckout);
-                fprintf([gitCmd.lead, ' [', mfilename, '] The feature (branch) <', branchName, '> could not be checked out.', gitCmd.fail, gitCmd.trail]);
+                fprintf([gitCmd.lead, ' [', mfilename, '] The branch <', branchName, '> could not be checked out.', gitCmd.fail, gitCmd.trail]);
             end
         end
     else
         if gitConf.printLevel > 0 && ~strcmp(branchName, currentBranch)
             fprintf(result_gitStatus);
-            fprintf([gitCmd.lead, ' [', mfilename, '] Uncommited changes of the current feature (branch) <', currentBranch, '> have been migrated to the new feature <', branchName, '>.', gitCmd.success, gitCmd.trail]);
+            fprintf([gitCmd.lead, ' [', mfilename, '] Uncommited changes of the current branch <', currentBranch, '> have been migrated to the new branch <', branchName, '>.', gitCmd.success, gitCmd.trail]);
         end
 
         if ~strcmp(branchName, currentBranch)
@@ -196,7 +196,7 @@ function checkoutBranch(branchName, updateForkFlag)
             currentBranch = getCurrentBranchName();
 
             if status_gitCheckout == 0 && strcmpi(mainBranch, currentBranch)
-                printMsg(mfilename, ['The current feature (branch) is <' mainBranch '>.']);
+                printMsg(mfilename, ['The current branch is <' mainBranch '>.']);
 
                 % update all submodules
                 updateSubmodules();
@@ -205,17 +205,17 @@ function checkoutBranch(branchName, updateForkFlag)
                 [status_gitPull, result_gitPull] = system(['git pull origin ' mainBranch]);
 
                 if status_gitPull == 0
-                    printMsg(mfilename, ['The changes on the <' mainBranch '> feature (branch) of your fork have been pulled.']);
+                    printMsg(mfilename, ['The changes on the <' mainBranch '> branch of your fork have been pulled.']);
                 else
                     fprintf(result_gitPull);
-                    error([gitCmd.lead, 'The changes on the <' mainBranch '> feature (branch) could not be pulled.', gitCmd.fail]);
+                    error([gitCmd.lead, 'The changes on the <' mainBranch '> branch could not be pulled.', gitCmd.fail]);
                 end
 
                 % checkout the branch but do not update the fork
                 checkoutBranch(branchName, false);
             else
                 fprintf(result_gitCheckout);
-                fprintf([gitCmd.lead 'The <' mainBranch '> feature (branch) cannot be checked out']);
+                fprintf([gitCmd.lead 'The <' mainBranch '> branch cannot be checked out']);
             end
         end
     end
@@ -229,23 +229,23 @@ function checkoutBranch(branchName, updateForkFlag)
 
     % check if the branch exists remotely
     if branchExistsRemotely && branchExistsLocally
-        printMsg(mfilename, ['The <', branchName, '> feature (branch) exists locally and remotely on <', gitConf.forkURL, '>.']);
+        printMsg(mfilename, ['The <', branchName, '> branch exists locally and remotely on <', gitConf.forkURL, '>.']);
     else  % the branch exists locally but not remotely!
 
-        reply = input([gitCmd.lead, ' -> Your <', branchName, '> feature (branch) exists locally, but not remotely. Do you want to have your local <', branchName, '> published? Y/N [Y]:'], 's');
+        reply = input([gitCmd.lead, ' -> Your <', branchName, '> branch exists locally, but not remotely. Do you want to have your local <', branchName, '> published? Y/N [Y]:'], 's');
 
         if isempty(reply) || strcmpi(reply, 'y') || strcmpi(reply, 'yes')
             % push the newly created branch to the fork
             [status_gitPush, result_gitPush] = system(['git push origin ', branchName]);
 
             if status_gitPush == 0
-                printMsg(mfilename, ['The <', branchName, '> feature (branch) has been pushed to your fork.']);
+                printMsg(mfilename, ['The <', branchName, '> branch has been pushed to your fork.']);
             else
                 fprintf(result_gitPush);
-                error([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> feature (branch) could not be pushed to your fork.', gitCmd.fail]);
+                error([gitCmd.lead, ' [', mfilename, '] The <', branchName, '> branch could not be pushed to your fork.', gitCmd.fail]);
             end
         else
-            printMsg(mfilename, ['Your <', branchName, '> feature (branch) exists locally, but not remotely.'], gitCmd.trail);
+            printMsg(mfilename, ['Your <', branchName, '> branch exists locally, but not remotely.'], gitCmd.trail);
         end
 
     end

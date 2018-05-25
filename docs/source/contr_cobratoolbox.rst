@@ -12,7 +12,7 @@ Introduction
 
 A comprehensive code base such as the COBRA Toolbox evolves constantly. The
 open-source community is very active, and collaborators submit their
-contributions frequently. The more a new feature or bug fix is interlinked with
+contributions frequently. The more a change to code or bug fix is interlinked with
 existing functions, the higher the risk of a new addition breaking instantly
 code that is heavily used on a daily basis. In order to decrease this risk, a
 continuous integration setup interlinked with the version control system git
@@ -22,8 +22,7 @@ other documents of which all incremental changes are tracked by date and user.
 Any incremental changes to the code are called commits. The main advantage of
 git over other version control systems is the availability of branches. In
 simple terms, a branch contains a sequence of incremental changes to the code.
-A branch is also commonly referred to as a feature. Consequently, a
-contribution generally consists of several commits on a branch.
+Consequently, a contribution generally consists of several commits on a branch.
 
 Contributing to the COBRA Toolbox is straightforward. As a contributor to the
 COBRA Toolbox is likely more familiar with MATLAB than with the internal
@@ -170,12 +169,12 @@ Deleting a contribution
 -----------------------
 
 If a contribution has been merged into the develop branch of the opencobra
-repository (accepted pull request), the contribution (feature or branch) can be
+repository (accepted pull request), the contribution (branch) can be
 safely deleted both locally and remotely on the fork by running contribute and
 selecting procedure ``[4]``.
 
 Note that deleting a contribution deletes all the changes that have been made
-on that feature (branch). It is not possible to selectively delete a commit
+on that branch. It is not possible to selectively delete a commit
 using the MATLAB.devTools. Instead, create a new branch by following procedure
 ``[1]``, and follow the instructions to cherry-pick (see
 :ref:`troubleshooting`).
