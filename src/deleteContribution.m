@@ -94,5 +94,5 @@ function deleteContribution(branchName)
     end
 
     %list all available branches
-    listFeatures();
+    listBranches();
 end

@@ -66,7 +66,7 @@ openPR('add-test-CI');
 delete('test-CI.txt');
 
 % list available branches
-listFeatures();
+listBranches();
 
 % check the status of the repository
 checkStatus();

@@ -49,7 +49,7 @@ function initContribution(branchName)
         if checkBranchExistence(branchName) && checkoutFlag
             % list the available branches if the fork is already configured
             if exist('gitConf.fullForkDir', 'var')
-                listFeatures();
+                listBranches();
             end
 
             reply = input([gitCmd.lead, ' -> You already worked on a branch named <', branchName, '>. Do you want to continue working on <', branchName, '>? Y/N [Y]:'], 's');

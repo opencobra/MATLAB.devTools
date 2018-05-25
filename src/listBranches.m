@@ -1,9 +1,9 @@
-function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
+function [exitFlag, currentBranch, arrResult, exampleBranch] = listBranches()
 % Lists all available branches
 %
 % USAGE:
 %
-%    [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
+%    [exitFlag, currentBranch, arrResult, exampleBranch] = listBranches()
 %
 % OUTPUT:
 %    exitFlag:         Boolean (true if proper exit of function)

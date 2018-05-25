@@ -93,7 +93,7 @@ function contribute(repoName, printLevel, autoOption)
                 % list the available branches if the fork is already configured
                 if exist('gitConf.fullForkDir', 'var')
                     %list all available branches
-                    listFeatures();
+                    listBranches();
                 end
 
                 % define a name of an example branch
@@ -116,7 +116,7 @@ function contribute(repoName, printLevel, autoOption)
                 cd(gitConf.fullForkDir);
 
                 %list all available branches
-                [exitFlag, currentBranch, ~, exampleBranch] = listFeatures();
+                [exitFlag, currentBranch, ~, exampleBranch] = listBranches();
 
                 if ~strcmpi('develop', currentBranch) && ~strcmpi('master', currentBranch)
                     exampleBranch = currentBranch;
@@ -137,7 +137,7 @@ function contribute(repoName, printLevel, autoOption)
                         % list the available branches if the fork is already configured
                         if exist('gitConf.fullForkDir', 'var')
                             %list all available branches
-                            listFeatures();
+                            listBranches();
                         end
 
                         while isempty(reply)
