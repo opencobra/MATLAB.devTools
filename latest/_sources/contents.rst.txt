@@ -8,6 +8,7 @@ MATLAB.devTools
    installation
    getstarted
    contribute
+   bestpractices
    modules/index
    faq
    troubleshooting
