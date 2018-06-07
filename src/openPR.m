@@ -38,6 +38,7 @@ function openPR(branchName)
 
     if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
         fprintf([gitCmd.lead, originCall, 'You can open a pull request (PR) by clicking on \n\n\t', prURL, '?expand=1\n\n']);
+        fprintf([gitCmd.lead, originCall, 'Please start a new branch by running "contribute" and selecting "1" after your pull request (PR) has been reviewed and merged.\n']);
     else
         fprintf(result_curl);
         error([gitCmd.lead, ' [', mfilename,'] The branch <', branchName, '> does not exist or has no commits.', gitCmd.fail])
