@@ -65,7 +65,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="MATLAB.devTools" href="index.html"/>
-        <link rel="next" title="Functions" href="modules/index.html"/>
+        <link rel="next" title="Best practices" href="bestpractices.html"/>
         <link rel="prev" title="How to get started" href="getstarted.html"/> 
 
   
@@ -166,6 +166,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#other-repository">Other repository</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="bestpractices.html">Best practices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules/index.html">Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions (FAQ)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
@@ -240,7 +241,7 @@
 <h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
 <p>A comprehensive code base such as the COBRA Toolbox evolves constantly. The
 open-source community is very active, and collaborators submit their
-contributions frequently. The more a new feature or bug fix is interlinked with
+contributions frequently. The more a change to code or bug fix is interlinked with
 existing functions, the higher the risk of a new addition breaking instantly
 code that is heavily used on a daily basis. In order to decrease this risk, a
 continuous integration setup interlinked with the version control system git
@@ -249,8 +250,7 @@ other documents of which all incremental changes are tracked by date and user.</
 <p>Any incremental changes to the code are called commits. The main advantage of
 git over other version control systems is the availability of branches. In
 simple terms, a branch contains a sequence of incremental changes to the code.
-A branch is also commonly referred to as a feature. Consequently, a
-contribution generally consists of several commits on a branch.</p>
+Consequently, a contribution generally consists of several commits on a branch.</p>
 <p>Contributing to the COBRA Toolbox is straightforward. As a contributor to the
 COBRA Toolbox is likely more familiar with MATLAB than with the internal
 mechanics of git, the <cite>MATLAB.devTools</cite> have been developed specifically
@@ -378,11 +378,11 @@ at any time, even manually directly from the Github website.</p>
 <div class="section" id="deleting-a-contribution">
 <h3>Deleting a contribution<a class="headerlink" href="#deleting-a-contribution" title="Permalink to this headline">¶</a></h3>
 <p>If a contribution has been merged into the develop branch of the opencobra
-repository (accepted pull request), the contribution (feature or branch) can be
+repository (accepted pull request), the contribution (branch) can be
 safely deleted both locally and remotely on the fork by running contribute and
 selecting procedure <code class="docutils literal"><span class="pre">[4]</span></code>.</p>
 <p>Note that deleting a contribution deletes all the changes that have been made
-on that feature (branch). It is not possible to selectively delete a commit
+on that branch. It is not possible to selectively delete a commit
 using the MATLAB.devTools. Instead, create a new branch by following procedure
 <code class="docutils literal"><span class="pre">[1]</span></code>, and follow the instructions to cherry-pick (see
 <a class="reference internal" href="troubleshooting.html#troubleshooting"><span class="std std-ref">Troubleshooting</span></a>).</p>
@@ -442,7 +442,7 @@ command looks for a repository on <a class="reference external" href="https://ww
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="modules/index.html" class="btn btn-neutral float-right" title="Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="bestpractices.html" class="btn btn-neutral float-right" title="Best practices" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="getstarted.html" class="btn btn-neutral" title="How to get started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -458,7 +458,7 @@ command looks for a repository on <a class="reference external" href="https://ww
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
