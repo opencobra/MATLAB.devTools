@@ -48,7 +48,7 @@ You may encounter the following error:
 
 This error can have multiple reasons, but most likely, the SSH key is
 not configured properly. Please follow the `configuration
-instructions <https://github.com/opencobra/MATLAB.devTools/blob/master/PREREQUISITES.md>`__
+instructions <https://opencobra.github.io/MATLAB.devTools/stable/installation.html#pre-requisites>`__
 carefully.
 
 Another source of this error may be that you have set a passphrase when
