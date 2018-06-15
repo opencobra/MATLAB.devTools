@@ -1,17 +1,20 @@
-function contribute(repoName, printLevel)
+function contribute(repoName, printLevel, autoOption)
 % devTools
 %
 % PURPOSE: displays a menu and calls the respective subfunctions
 %
-%       1. Start a new feature (branch):
-%       2. Select an existing feature (branch) to work on.
-%       3. Publish a feature (branch).
-%       4. Delete a feature (branch).
+%       1. Start a new branch:
+%       2. Select an existing branch to work on.
+%       3. Publish a branch.
+%       4. Delete a branch.
+%       5. Update the fork
 %
 % INPUT:
 %
+%     repoName:       Name of the repository (default: opencobra/cobratoolbox)
 %     printLevel:     0: minimal printout (default)
 %                     1: detailed printout (debug mode)
+%     autoOption:     menu option
 
     global gitConf
     global gitCmd
@@ -26,14 +29,24 @@ function contribute(repoName, printLevel)
     % adding the src folder of the devTools
     addpath(genpath(fileparts(which(mfilename))));
 
+    % check the automatic option argument
+    autoOptionFlag = false;
+    if exist('autoOption', 'var')
+        if ~isempty(autoOption) && autoOption > 0 && autoOption < 6
+            autoOptionFlag = true;
+        else
+            error('Please enter an automatic menu option between 1 and 5.')
+        end
+    end
+
     % treatment of input arguments
-    if ~exist('repoName', 'var')
+    if ~exist('repoName', 'var') || isempty(repoName)
         DEFAULTREPONAME = 'opencobra/cobratoolbox';  % set the default repository
         repoName = DEFAULTREPONAME;
     end
 
     % soft reset if the repository name is different
-    if ~isempty(gitConf)
+    if ~isempty(gitConf) && exist('repoName', 'var') && isfield(gitConf, 'remoteUserName') && isfield(gitConf, 'remoteRepoName')
         if ~strcmpi(repoName, [gitConf.remoteUserName '/' gitConf.remoteRepoName])
             resetDevTools();
         end
@@ -46,8 +59,10 @@ function contribute(repoName, printLevel)
         checkSystem(mfilename, repoName);
     end
 
+    % perform a soft reset if interrupted
     finishup = onCleanup(@() resetDevTools());
 
+    % determine the directory of the devTools
     devToolsDir = fileparts(which(mfilename));
 
     % change to the directory of the devTools
@@ -56,23 +71,29 @@ function contribute(repoName, printLevel)
     % update the devTools
     updateDevTools();
 
+    % print the launcher
     fprintf(gitConf.launcher);
 
-    choice = input('\n      (You can abort any process using CTRL+C)\n\n      [1] Start a new feature (branch).\n      [2] Select an existing feature (branch) to work on.\n      [3] Publish a feature (branch).\n      [4] Delete a feature (branch).\n      [5] Update the fork.\n\n   -> Please select what you want to do (enter the number): ', 's');
+    % show the menu to select an option
+    if autoOptionFlag
+        choice = autoOption;
+    else
+        choice = input('\n      (You can abort any process using CTRL+C)\n\n      [1] Start a new branch.\n      [2] Select an existing branch to work on.\n      [3] Publish a branch.\n      [4] Delete a branch.\n      [5] Update the fork.\n\n   -> Please select what you want to do (enter the number): ', 's');
+        choice = str2num(choice);
+    end
 
-    choice = str2num(choice);
-
+    % evaluate the option
     if length(choice) == 0 || choice > 5 || choice < 0
         error('Please enter a number between 1 and 5.')
     else
         if ~isempty(choice) && length(choice) > 0
-            % ask for a name of the feature/branch
+            % ask for a name of the branch
             if choice == 1
 
-                % list the available features if the fork is already configured
+                % list the available branches if the fork is already configured
                 if exist('gitConf.fullForkDir', 'var')
-                    %list all available features
-                    listFeatures();
+                    %list all available branches
+                    listBranches();
                 end
 
                 % define a name of an example branch
@@ -80,7 +101,7 @@ function contribute(repoName, printLevel)
 
                 reply = '';
                 while isempty(reply)
-                    reply = input(['   -> Please enter a name of the new feature (branch) that you want to work on (example: ', exampleBranch, '): '], 's');
+                    reply = input(['   -> Please enter a name of the new branch that you want to work on (example: ', exampleBranch, '): '], 's');
                     if ~isempty(strfind(reply, 'develop')) || ~isempty(strfind(reply, 'master'))
                         reply = '';
                         fprintf([gitCmd.lead, 'Please use a different name that does not contain <develop> or <master>.', gitCmd.fail, gitCmd.trail]);
@@ -94,8 +115,8 @@ function contribute(repoName, printLevel)
                 % change to the fork diretory
                 cd(gitConf.fullForkDir);
 
-                %list all available features
-                [exitFlag, currentBranch, ~, exampleBranch] = listFeatures();
+                %list all available branches
+                [exitFlag, currentBranch, ~, exampleBranch] = listBranches();
 
                 if ~strcmpi('develop', currentBranch) && ~strcmpi('master', currentBranch)
                     exampleBranch = currentBranch;
@@ -105,22 +126,22 @@ function contribute(repoName, printLevel)
                     reply = '';
                     if choice == 2
                         while isempty(reply) && ~exitFlag
-                            reply = input(['   -> Please enter the name of the existing feature (branch) that you want to work on (example: ', exampleBranch, '): '], 's');
+                            reply = input(['   -> Please enter the name of the existing branch that you want to work on (example: ', exampleBranch, '): '], 's');
                         end
                     elseif choice == 3
                         while isempty(reply)
-                            reply = input(['   -> Please enter the name of the feature (branch) that you want to publish (example: ', exampleBranch, '): '], 's');
+                            reply = input(['   -> Please enter the name of the branch that you want to publish (example: ', exampleBranch, '): '], 's');
                         end
                     elseif choice == 4
 
-                        % list the available features if the fork is already configured
+                        % list the available branches if the fork is already configured
                         if exist('gitConf.fullForkDir', 'var')
-                            %list all available features
-                            listFeatures();
+                            %list all available branches
+                            listBranches();
                         end
 
                         while isempty(reply)
-                            reply = input(['   -> Please enter the name of the feature (branch) that you want to delete (example: ', exampleBranch, '): '], 's');
+                            reply = input(['   -> Please enter the name of the branch that you want to delete (example: ', exampleBranch, '): '], 's');
                         end
                     end
                 end

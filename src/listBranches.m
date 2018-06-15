@@ -1,9 +1,9 @@
-function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
-% Lists all available branches/features
+function [exitFlag, currentBranch, arrResult, exampleBranch] = listBranches()
+% Lists all available branches
 %
 % USAGE:
 %
-%    [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
+%    [exitFlag, currentBranch, arrResult, exampleBranch] = listBranches()
 %
 % OUTPUT:
 %    exitFlag:         Boolean (true if proper exit of function)
@@ -49,9 +49,9 @@ function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
         arrResult = arrResult(~cellfun(@isempty, arrResult));
 
         if length(arrResult) > nbBranches
-            fprintf('\n      Available features are:\n');
+            fprintf('\n      Available branches are:\n');
 
-            % list the number of available features
+            % list the number of available branches
             for i = 1:length(arrResult)
                 tmpName = arrResult(i);
                 tmpName = tmpName{1};
@@ -68,9 +68,9 @@ function [exitFlag, currentBranch, arrResult, exampleBranch] = listFeatures()
             reply = '';
             while isempty(reply)
 
-                reply = input('   -> You do not have any features (branches). Do you want to start a new feature (branch)? Y/N [Y]: ', 's');
+                reply = input('   -> You do not have any branches. Do you want to start a new branch? Y/N [Y]: ', 's');
 
-                % decide whether to start a new feature (branch) or not
+                % decide whether to start a new branch or not
                 if strcmpi(reply, 'y') || strcmpi(reply, 'yes')
                     initContribution;
                     exitFlag = true;

@@ -1,0 +1,3 @@
+[submodule "external/rdir"]
+	path = external/rdir
+	url = https://github.com/uni-lu/rdir.git
