@@ -126,6 +126,9 @@ function initDevTools(repoName)
             if ~isempty(gitConf.localDir) && length(gitConf.forkDirName) <= length(gitConf.localDir)
                 if strcmp(gitConf.localDir(end-length(gitConf.forkDirName)+1:end), gitConf.forkDirName)
                     gitConf.localDir = gitConf.localDir(1:end-length(gitConf.forkDirName));
+                    if ispc % strip the last character on Windows
+                        gitConf.localDir = gitConf.localDir(1:end-1);
+                    end
                 end
             end
 
