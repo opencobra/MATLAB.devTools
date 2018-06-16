@@ -109,7 +109,7 @@ function initDevTools(repoName)
 
         while ~createDir
             reply = input([gitCmd.lead, originCall, ' -> Please define the location of your fork\n       current: ', strrep(pwd,'\','\\'),'\n       Enter the path (press ENTER to use the current path): '], 's');
-
+           
             % define the local directory as the current directory if the reply is empty
             if isempty(reply)
                 gitConf.localDir = strrep(pwd, '\', '\\');
@@ -117,28 +117,25 @@ function initDevTools(repoName)
                 gitConf.localDir = reply;
             end
 
-            % add a fileseparator if not included
-            if ~strcmp(gitConf.localDir(end), filesep)
-                gitConf.localDir = strrep([gitConf.localDir, filesep], '\', '\\');
-            end
-
             % strip the fork-nickName folder from the localDir if present
             if ~isempty(gitConf.localDir) && length(gitConf.forkDirName) <= length(gitConf.localDir)
                 if strcmp(gitConf.localDir(end-length(gitConf.forkDirName)+1:end), gitConf.forkDirName)
                     gitConf.localDir = gitConf.localDir(1:end-length(gitConf.forkDirName));
-                    if ispc % strip the last character on Windows
-                        gitConf.localDir = gitConf.localDir(1:end-1);
-                    end
                 end
             end
-
+            
+            % add a fileseparator if not included
+            if ~strcmp(gitConf.localDir(end), filesep)
+                gitConf.localDir = strrep([gitConf.localDir, filesep], '\', '\\');
+            end
+            
             % warn the user of not using a fork-nickName directory or a git cloned directory as it will be cloned
             if ~isempty(strfind(gitConf.localDir, gitConf.nickName)) % contains the nickname
                 printMsg(mfilename, ['The specified directory already contains a ', gitConf.nickName, ' copy (clone).'], gitCmd.trail);
                 createDir = true;
                 gitConf.localDir = gitConf.localDir(1:end-length(gitConf.nickName)-1-length(gitConf.leadForkDirName));
 
-            elseif exist([gitConf.localDir, '/.git'], 'dir') == 7 % contains a .git folder
+            elseif exist([gitConf.localDir filesep '.git'], 'dir') == 7 % contains a .git folder
                 printMsg(mfilename, ['The specified directory already is a git repository (git-tracked).'], gitCmd.trail);
 
             else
