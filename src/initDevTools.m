@@ -34,8 +34,8 @@ function initDevTools(repoName)
     % parse the remoteRepoURL
     sepIndices = strfind(gitConf.remoteRepoURL, '/');
     gitConf.remoteServerName = gitConf.remoteRepoURL(1:sepIndices(3));
-    gitConf.remoteRepoName = gitConf.remoteRepoURL(sepIndices(4)+1:end-4);
-    gitConf.remoteUserName = gitConf.remoteRepoURL(sepIndices(3)+1:sepIndices(4)-1);
+    gitConf.remoteRepoName = gitConf.remoteRepoURL(sepIndices(4) + 1:end - 4);
+    gitConf.remoteUserName = gitConf.remoteRepoURL(sepIndices(3) + 1:sepIndices(4) - 1);
 
     % ignore case for the current fork (avoids problems for untracked files with case conflicts)
     [status_gitIgnoreCase, result_gitIgnoreCase] = system('git config core.ignorecase true');
@@ -47,11 +47,11 @@ function initDevTools(repoName)
     if gitConf.printLevel > 0
         originCall = [' [', mfilename, '] '];
     else
-        originCall  = '';
+        originCall = '';
     end
 
     if status_gitConfUserGet == 0 && isempty(strfind(gitConf.userName, ' '))
-        fprintf([gitCmd.lead, originCall, 'Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]); %
+        fprintf([gitCmd.lead, originCall, 'Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]);
     else
         printMsg(mfilename, 'The Github username could not be retrieved or is not valid.', [gitCmd.fail, gitCmd.trail]);
 
@@ -63,7 +63,7 @@ function initDevTools(repoName)
                 fprintf([gitCmd.lead, originCall, 'Your Github username is: ', gitConf.userName, '. ', gitCmd.success, gitCmd.trail]);
             else
                 fprintf(result_gitConfUserSet);
-                error([gitCmd.lead, ' [', mfilename,'] Your Github username could not be set.', gitCmd.fail]);
+                error([gitCmd.lead, ' [', mfilename, '] Your Github username could not be set.', gitCmd.fail]);
             end
         end
     end
@@ -86,7 +86,7 @@ function initDevTools(repoName)
                 fprintf([gitCmd.lead, originCall, 'Your Github email is: ', gitConf.userEmail, '. ', gitCmd.success, gitCmd.trail]);
             else
                 fprintf(result_gitConfEmailSet);
-                error([gitCmd.lead, ' [', mfilename,'] Your Github email could not be set.', gitCmd.fail]);
+                error([gitCmd.lead, ' [', mfilename, '] Your Github email could not be set.', gitCmd.fail]);
             end
         end
     end
@@ -108,7 +108,7 @@ function initDevTools(repoName)
         createDir = false;
 
         while ~createDir
-            reply = input([gitCmd.lead, originCall, ' -> Please define the location of your fork\n       current: ', strrep(pwd,'\','\\'),'\n       Enter the path (press ENTER to use the current path): '], 's');
+            reply = input([gitCmd.lead, originCall, ' -> Please define the location of your fork\n       current: ', strrep(pwd, '\','\\'),'\n       Enter the path(press ENTER to use the current path): '], 's');
 
             % define the local directory as the current directory if the reply is empty
             if isempty(reply)
@@ -117,25 +117,25 @@ function initDevTools(repoName)
                 gitConf.localDir = reply;
             end
 
+            % strip the fork-nickName folder from the localDir if present
+            if ~isempty(gitConf.localDir) && length(gitConf.forkDirName) <= length(gitConf.localDir)
+                if strcmp(gitConf.localDir(end - length(gitConf.forkDirName) + 1:end), gitConf.forkDirName)
+                    gitConf.localDir = gitConf.localDir(1:end - length(gitConf.forkDirName));
+                end
+            end
+
             % add a fileseparator if not included
             if ~strcmp(gitConf.localDir(end), filesep)
                 gitConf.localDir = strrep([gitConf.localDir, filesep], '\', '\\');
             end
 
-            % strip the fork-nickName folder from the localDir if present
-            if ~isempty(gitConf.localDir) && length(gitConf.forkDirName) <= length(gitConf.localDir)
-                if strcmp(gitConf.localDir(end-length(gitConf.forkDirName)+1:end), gitConf.forkDirName)
-                    gitConf.localDir = gitConf.localDir(1:end-length(gitConf.forkDirName));
-                end
-            end
-
             % warn the user of not using a fork-nickName directory or a git cloned directory as it will be cloned
-            if ~isempty(strfind(gitConf.localDir, gitConf.nickName)) % contains the nickname
+            if ~isempty(strfind(gitConf.localDir, gitConf.nickName))  % contains the nickname
                 printMsg(mfilename, ['The specified directory already contains a ', gitConf.nickName, ' copy (clone).'], gitCmd.trail);
                 createDir = true;
-                gitConf.localDir = gitConf.localDir(1:end-length(gitConf.nickName)-1-length(gitConf.leadForkDirName));
+                gitConf.localDir = gitConf.localDir(1:end - length(gitConf.nickName) - 1 - length(gitConf.leadForkDirName));
 
-            elseif exist([gitConf.localDir, '/.git'], 'dir') == 7 % contains a .git folder
+            elseif exist([gitConf.localDir filesep '.git'], 'dir') == 7  % contains a .git folder
                 printMsg(mfilename, ['The specified directory already is a git repository (git-tracked).'], gitCmd.trail);
 
             else
@@ -154,7 +154,7 @@ function initDevTools(repoName)
                 system(['mkdir ', gitConf.localDir]);
                 printMsg(mfilename, 'The directory has been created.');
             else
-                error([gitCmd.lead, ' [', mfilename,'] The specified directory does not exist.', gitCmd.fail]);
+                error([gitCmd.lead, ' [', mfilename, '] The specified directory does not exist.', gitCmd.fail]);
             end
         end
     end
@@ -167,7 +167,7 @@ function initDevTools(repoName)
         fprintf([gitCmd.lead, originCall, 'Your fork directory has been set to: ', gitConf.fullForkDir, '. ', gitCmd.success, gitCmd.trail]);
     else
         fprintf(result_gitConfForkDirSet);
-        error([gitCmd.lead, ' [', mfilename,'] Your fork directory could not be set.', gitCmd.fail]);
+        error([gitCmd.lead, ' [', mfilename, '] Your fork directory could not be set.', gitCmd.fail]);
     end
 
     % clone the fork
