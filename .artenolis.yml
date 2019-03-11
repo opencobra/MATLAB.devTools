@@ -22,7 +22,7 @@ script:
     # before launching the tests, make sure that the upstream repository is changed
     - cd;
     - rm -rf ~/MATLAB.devTools.CI;
-    - git clone git@github.com:uni-lu/MATLAB.devTools.CI.git;
+    - git clone git@github.com:LCSB-BioCore/MATLAB.devTools.CI.git;
     - cd MATLAB.devTools.CI;
     - git remote -v;
     - eval "$(ssh-agent -s)";
