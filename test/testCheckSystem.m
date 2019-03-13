@@ -18,7 +18,7 @@ confDevTools(nickName, 'remoteRepoURL', remoteRepoURL, 'launcher', launcher, ...
 checkSystem();
 
 % initialize the devTools
-initDevTools(); % <-- input 1: artenobot, input 2: ~/
+initDevTools(); % <-- input 1: artenobot, input 2: /path/specified/
 
 % check the devTools
 checkDevTools()
