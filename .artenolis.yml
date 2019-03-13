@@ -55,7 +55,7 @@ script:
 after_success:
 
     # remove the cloned fork-repo
-    - if [ "$MATLAB_VER" == "R2016b" ]; then
+    - if [ "$MATLAB_VER" == "R2018b" ]; then
       bash <(curl -s https://codecov.io/bash) -f "!*.lst";
       cd $CURRENT_DIR;
       pip install --upgrade --user -r docs/requirements.txt;
