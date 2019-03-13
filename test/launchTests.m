@@ -70,11 +70,10 @@ if ~isempty(strfind(getenv('HOME'), 'jenkins'))
     end
 
     % set the new badge
-    system(['cp /mnt/prince-data/jenkins/userContent/codegrade-', grade, '.svg /mnt/prince-data/jenkins/userContent/codegrade-MATLABdevTools.svg']);
-
-    % secure copy the badge from the slave
-    system('scp -P 8022 /mnt/prince-data/jenkins/userContent/codegrade-MATLABdevTools.svg jenkins@prince-server.lcsb.uni.lux:/var/lib/jenkins/userContent');
-
+    if ~isempty(strfind(getenv('HOME'), 'jenkins'))
+        coverageBadgePath = [getenv('ARTENOLIS_DATA_PATH') filesep 'MATLAB.devTools' filesep 'codegrade' filesep];
+        system(['cp ' coverageBadgePath 'codegrade-', grade, '.svg '  coverageBadgePath 'codegrade.svg']);
+    end
 end
 
 try

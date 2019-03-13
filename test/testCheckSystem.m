@@ -3,7 +3,7 @@ global gitCmd
 
 % define the configuration of the MATLAB.devTools
 launcher = '\n\n       ~~~ MATLAB.devTools ~~~\n\n';
-remoteRepoURL = 'https://github.com/uni-lu/MATLAB.devTools.CI.git';
+remoteRepoURL = 'https://github.com/LCSB-Biocore/MATLAB.devTools.CI.git';
 nickName = 'MATLAB.devTools.CI';
 printLevel = 1;
 
@@ -18,7 +18,7 @@ confDevTools(nickName, 'remoteRepoURL', remoteRepoURL, 'launcher', launcher, ...
 checkSystem();
 
 % initialize the devTools
-initDevTools(); % <-- input 1: cobrabot, input 2: ~/
+initDevTools(); % <-- input 1: artenobot, input 2: /path/specified/
 
 % check the devTools
 checkDevTools()

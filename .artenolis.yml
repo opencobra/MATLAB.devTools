@@ -7,7 +7,7 @@ before_install:
     - CURRENT_DIR=`pwd`;
 
     # remove the cloned repository even after failure
-    - rm -rf ~/MATLAB.devTools.CI;
+    - rm -rf $ARTENOLIS_DATA_PATH/repos/MATLAB.devTools.CI;
 
     # change to the current directory
     - cd $CURRENT_DIR;
@@ -20,9 +20,8 @@ script:
     - cd $CURRENT_DIR;
 
     # before launching the tests, make sure that the upstream repository is changed
-    - cd;
-    - rm -rf ~/MATLAB.devTools.CI;
-    - git clone git@github.com:uni-lu/MATLAB.devTools.CI.git;
+    - rm -rf $ARTENOLIS_DATA_PATH/repos/MATLAB.devTools.CI;
+    - git clone git@github.com:LCSB-BioCore/MATLAB.devTools.CI.git;
     - cd MATLAB.devTools.CI;
     - git remote -v;
     - eval "$(ssh-agent -s)";
@@ -50,15 +49,14 @@ script:
     # launch the tests
     - sh ./.artenolis/runtests.sh;
 
-    - cd ~/fork-MATLAB.devTools.CI;
+    - cd $ARTENOLIS_DATA_PATH/repos/fork-MATLAB.devTools.CI;
     - git reset --hard origin/develop;
 
 after_success:
 
     # remove the cloned fork-repo
-    - if [ "$MATLAB_VER" == "R2016b" ]; then
+    - if [ "$MATLAB_VER" == "R2018b" ]; then
       bash <(curl -s https://codecov.io/bash) -f "!*.lst";
-      export PATH="/home/sbg-jenkins/.local/bin":$PATH;
       cd $CURRENT_DIR;
       pip install --upgrade --user -r docs/requirements.txt;
       python -c "from documenter.deploy import Documentation; doc = Documentation('github.com/opencobra/MATLAB.devTools', ci='jenkins'); doc.deploy()";
