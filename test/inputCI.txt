@@ -1,5 +1,5 @@
 artenobot
-/mnt/artenolis-data/repos/
+/home/jenkins/
 y
 n
 testFile1
