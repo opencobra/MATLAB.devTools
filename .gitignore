@@ -36,5 +36,7 @@ Temporary Items
 [Dd]esktop.ini
 
 # Documentation related files
+docs/.documenter.enc
+docs/.documenter
 docs/source/_static/json/functions.json
 *.pyc
