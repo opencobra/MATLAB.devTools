@@ -6,14 +6,6 @@ Frequently Asked Questions (FAQ)
 General questions
 -----------------
 
-How should I name my contribution?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Initiate a contribution per theme/topic/feature/bug fix that you work
-on. Don’t mix features and think of an explicit name, i.e.
-``bug-fix-function1`` or ``add-tests-function2``. Avoid generic names,
-such as ``my-great-feature`` or ``fix`` or ``contribution-myName``.
-
 How can I check the history of a file?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -22,12 +14,6 @@ You can check the history of a file by typing in MATLAB:
 .. code:: matlab
 
     >> history('fileName.m')
-
-How do I submit a Pull Request (PR)?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Once you submit your contribution (menu option [3]), you will be
-presented with a link that leads you directly to the pull request (PR).
 
 Print more detailed debugging information (verbose)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -62,7 +48,7 @@ You may encounter the following error:
 
 This error can have multiple reasons, but most likely, the SSH key is
 not configured properly. Please follow the `configuration
-instructions <https://github.com/opencobra/MATLAB.devTools/blob/master/PREREQUISITES.md>`__
+instructions <https://opencobra.github.io/MATLAB.devTools/stable/installation.html#pre-requisites>`__
 carefully.
 
 Another source of this error may be that you have set a passphrase when
@@ -91,11 +77,11 @@ Resolve unexpected behavior - reset
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you encounter unexpected behavior, please try to reset the
-``MATLAB.devTools`` with:
+``MATLAB.devTools`` using the ``resetDevTools`` functionality.
 
-.. code:: matlab
-
-    >> resetDevTools
+.. include:: ../../README.rst
+   :start-after: begin-reset-marker
+   :end-before: end-reset-marker
 
 If you have files or changes that appear and would like to reset your
 local fork (without re-cloning) again, type:
@@ -107,7 +93,5 @@ local fork (without re-cloning) again, type:
 How can I abort a process?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can abort any process using ``CTRL-C`` (hit ``CTRL`` and ``C`` on
+You can abort any process using ``CTRL+C`` (hit ``CTRL`` and ``C`` on
 your keyboard).
-
-

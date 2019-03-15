@@ -65,7 +65,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="MATLAB.devTools" href="index.html"/>
-        <link rel="next" title="Functions" href="modules/index.html"/>
+        <link rel="next" title="Best practices" href="bestpractices.html"/>
         <link rel="prev" title="How to get started" href="getstarted.html"/> 
 
   
@@ -166,6 +166,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#other-repository">Other repository</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="bestpractices.html">Best practices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules/index.html">Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions (FAQ)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
@@ -240,7 +241,7 @@
 <h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
 <p>A comprehensive code base such as the COBRA Toolbox evolves constantly. The
 open-source community is very active, and collaborators submit their
-contributions frequently. The more a new feature or bug fix is interlinked with
+contributions frequently. The more a change to code or bug fix is interlinked with
 existing functions, the higher the risk of a new addition breaking instantly
 code that is heavily used on a daily basis. In order to decrease this risk, a
 continuous integration setup interlinked with the version control system git
@@ -249,8 +250,7 @@ other documents of which all incremental changes are tracked by date and user.</
 <p>Any incremental changes to the code are called commits. The main advantage of
 git over other version control systems is the availability of branches. In
 simple terms, a branch contains a sequence of incremental changes to the code.
-A branch is also commonly referred to as a feature. Consequently, a
-contribution generally consists of several commits on a branch.</p>
+Consequently, a contribution generally consists of several commits on a branch.</p>
 <p>Contributing to the COBRA Toolbox is straightforward. As a contributor to the
 COBRA Toolbox is likely more familiar with MATLAB than with the internal
 mechanics of git, the <cite>MATLAB.devTools</cite> have been developed specifically
@@ -297,7 +297,7 @@ it is possible to install the MATLAB.devTools from within MATLAB:</p>
 <p>With this command, the directory MATLAB.devTools is created next to the
 cobratoolbox installation directory. The MATLAB.devTools can also be installed
 from the terminal (or shell):</p>
-<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git clone git@github.com:openCOBRA/MATLAB.devTools
+<div class="code console highlight-default"><div class="highlight"><pre><span></span>$ git clone git@github.com:opencobra/MATLAB.devTools
 </pre></div>
 </div>
 <p><img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning"> A working internet connection is required and git and curl must be
@@ -378,11 +378,11 @@ at any time, even manually directly from the Github website.</p>
 <div class="section" id="deleting-a-contribution">
 <h3>Deleting a contribution<a class="headerlink" href="#deleting-a-contribution" title="Permalink to this headline">¶</a></h3>
 <p>If a contribution has been merged into the develop branch of the opencobra
-repository (accepted pull request), the contribution (feature or branch) can be
+repository (accepted pull request), the contribution (branch) can be
 safely deleted both locally and remotely on the fork by running contribute and
 selecting procedure <code class="docutils literal"><span class="pre">[4]</span></code>.</p>
 <p>Note that deleting a contribution deletes all the changes that have been made
-on that feature (branch). It is not possible to selectively delete a commit
+on that branch. It is not possible to selectively delete a commit
 using the MATLAB.devTools. Instead, create a new branch by following procedure
 <code class="docutils literal"><span class="pre">[1]</span></code>, and follow the instructions to cherry-pick (see
 <a class="reference internal" href="troubleshooting.html#troubleshooting"><span class="std std-ref">Troubleshooting</span></a>).</p>
@@ -409,30 +409,26 @@ contribute menu.</p>
 </div>
 <div class="section" id="cobra-tutorials">
 <h2>COBRA.tutorials<a class="headerlink" href="#cobra-tutorials" title="Permalink to this headline">¶</a></h2>
-<p>Coming soon.</p>
+<p>If you want to use the <code class="docutils literal"><span class="pre">MATLAB.devTools</span></code> when contributing to the
+<a class="reference external" href="https://github.com/opencobra/COBRA.tutorials">COBRA.tutorials</a>, you can simply configure
+the <code class="docutils literal"><span class="pre">MATLAB.devTools</span></code> on-the-fly by typing:</p>
+<div class="code matlab highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">contribute</span><span class="p">(</span><span class="s1">&#39;opencobra/COBRA.tutorials&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In case of troubleshooting, please refer <a href="#id2"><span class="problematic" id="id3">`this &lt;&gt;`__</span></a> section.</p>
 </div>
 <div class="section" id="other-repository">
 <h2>Other repository<a class="headerlink" href="#other-repository" title="Permalink to this headline">¶</a></h2>
-<p><img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="bulb"> The <code class="docutils literal"><span class="pre">MATLAB.devTools</span></code> can only be used with <strong>publicly accessible</strong>
-repositories.</p>
+<p><img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="bulb"> The <code class="docutils literal"><span class="pre">MATLAB.devTools</span></code> can only be used with <strong>publicly accessible</strong> repositories.</p>
 <p>If you want to use the <code class="docutils literal"><span class="pre">MATLAB.devTools</span></code> with a repository other than
-the default repository, you must set the following variables:</p>
-<div class="code matlab highlight-default"><div class="highlight"><pre><span></span><span class="n">launcher</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">       ~~~ MATLAB.devTools ~~~</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">;</span> <span class="o">%</span> <span class="n">a</span> <span class="n">message</span> <span class="k">for</span> <span class="n">the</span> <span class="n">repository</span> <span class="p">(</span><span class="nb">any</span> <span class="n">string</span><span class="p">)</span>
-<span class="n">remoteRepoURL</span> <span class="o">=</span> <span class="s1">&#39;https://server.com/repositoryName.git&#39;</span><span class="p">;</span> <span class="o">%</span> <span class="n">the</span> <span class="n">remote</span> <span class="n">url</span>
-<span class="n">nickName</span> <span class="o">=</span> <span class="s1">&#39;repoNickName&#39;</span><span class="p">;</span> <span class="o">%</span> <span class="n">a</span> <span class="n">nickName</span> <span class="n">of</span> <span class="n">the</span> <span class="n">repository</span> <span class="p">(</span><span class="nb">any</span> <span class="n">string</span><span class="p">)</span>
-<span class="n">printLevel</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="o">%</span> <span class="nb">set</span> <span class="n">the</span> <span class="n">printLevel</span> <span class="n">mode</span>
+the default repository, you may run:</p>
+<div class="code matlab highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">contribute</span><span class="p">(</span><span class="s1">&#39;userName/repositoryName&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>and run:</p>
-<div class="code matlab highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">confDevTools</span><span class="p">(</span><span class="n">launcher</span><span class="p">,</span> <span class="n">remoteRepoURL</span><span class="p">,</span> <span class="n">nickName</span><span class="p">,</span> <span class="n">printLevel</span><span class="p">);</span>  <span class="o">%</span> <span class="n">sets</span> <span class="n">the</span> <span class="n">configuration</span>
-</pre></div>
-</div>
-<p>In order to reset the configuration, type:</p>
-<div class="code matlab highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">resetDevTools</span><span class="p">();</span>
-</pre></div>
-</div>
-<p>If you want your changes to be permanent, you can set the above
-mentioned variables in <code class="docutils literal"><span class="pre">./src/confDevTools.m</span></code>.</p>
+<p>where <code class="docutils literal"><span class="pre">userName</span></code> is the name on Github of the organization or the user, and
+<code class="docutils literal"><span class="pre">repositoryName</span></code> is the name of the repository. The URL of the repository
+would be <cite>https://github.com/userName/repositoryName</cite>.  Please note that this
+command looks for a repository on <a class="reference external" href="https://www.github.com">github.com</a>.</p>
 </div>
 </div>
 
@@ -446,10 +442,10 @@ mentioned variables in <code class="docutils literal"><span class="pre">./src/co
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="modules/index.html" class="btn btn-neutral float-right" title="Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="bestpractices.html" class="btn btn-neutral float-right" title="Best practices" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="getstarted.html" class="btn btn-neutral" title="How to get started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="getstarted.html" class="btn btn-neutral float-left" title="How to get started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -458,11 +454,11 @@ mentioned variables in <code class="docutils literal"><span class="pre">./src/co
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2018, the MATLAB.devTools developers.
+        &copy; Copyright 2017-2018, the MATLAB.devTools developers
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
