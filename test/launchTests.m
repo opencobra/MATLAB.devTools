@@ -1,7 +1,7 @@
 if ~isempty(strfind(getenv('HOME'), 'jenkins'))
     % do not change the paths below
-    addpath(genpath('/home/sbg-jenkins/MOcov'));
-    addpath(genpath('/home/sbg-jenkins/jsonlab'));
+    addpath(genpath(getenv('MOCOV_PATH')))
+    addpath(genpath(getenv('JSONLAB_PATH')))
 
     % change the directory on the CI server
     cd([pwd, '/../'])
