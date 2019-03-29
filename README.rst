@@ -9,9 +9,9 @@
    </h1>
 
 +----------------+----------------+---------------+--------------+
-| MATLAB R2016b  | MATLAB R2015b  | Code Coverage | Code Grade   |
+| MATLAB R2018b  | MATLAB R2017b  | Code Coverage | Code Grade   |
 +================+================+===============+==============+
-| |Build Status| | |Build Status| | |codecov|     | |Code grade| |
+| |bs2018|       | |bs2017|       | |codecov|     | |Code grade| |
 +----------------+----------------+---------------+--------------+
 
 .. begin-description-marker
@@ -213,10 +213,10 @@ paper of The COBRA Toolbox shall we cited when referring to the ``MATLAB.devTool
 .. end-how-to-cite-marker
 
 
-.. |Build Status| image:: https://prince.lcsb.uni.lu/jenkins/buildStatus/icon?job=devTools-branches-auto/MATLAB_VER=R2016b
-   :target: https://prince.lcsb.uni.lu/jenkins/job/devTools-branches-auto/MATLAB_VER=R2016b/
-.. |Build Status| image:: https://prince.lcsb.uni.lu/jenkins/buildStatus/icon?job=devTools-branches-auto/MATLAB_VER=R2015b
-   :target: https://prince.lcsb.uni.lu/jenkins/job/devTools-branches-auto/MATLAB_VER=R2015b/
+.. |bs2018| image:: https://prince.lcsb.uni.lu/jenkins/job/devTools-branches-auto/MATLAB_VER=R2018b,label=prince-slave-linux-01/badge/icon
+   :target: https://prince.lcsb.uni.lu/jenkins/job/devTools-branches-auto/MATLAB_VER=R2018b,label=prince-slave-linux-01
+.. |bs2017| image:: https://prince.lcsb.uni.lu/jenkins/job/devTools-branches-auto/MATLAB_VER=R2017b,label=prince-slave-linux-01/badge/icon
+   :target: https://prince.lcsb.uni.lu/jenkins/job/devTools-branches-auto/MATLAB_VER=R2017b,label=prince-slave-linux-01
 .. |codecov| image:: https://codecov.io/gh/opencobra/MATLAB.devTools/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/opencobra/MATLAB.devTools/branch/master
 .. |Code grade| image:: https://prince.lcsb.uni.lu/MATLAB.devTools/img/codegrade-MATLABdevTools.svg?maxAge=0
