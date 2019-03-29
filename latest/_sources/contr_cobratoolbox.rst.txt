@@ -204,7 +204,7 @@ directory `fork-cobratoolbox`. You can do so by typing:
 If there are changes listed, publish them by selecting procedure ``[3]`` of the
 contribute menu.
 
-.. |branchModel| image:: https://prince.lcsb.uni.lu/img/figure6.png
+.. |branchModel| image:: https://prince.lcsb.uni.lu/MATLAB.devTools/img/figure6.png
 
 .. include:: ../../README.rst
    :start-after: begin-icon-marker
