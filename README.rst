@@ -219,7 +219,7 @@ paper of The COBRA Toolbox shall we cited when referring to the ``MATLAB.devTool
    :target: https://prince.lcsb.uni.lu/jenkins/job/devTools-branches-auto/MATLAB_VER=R2017b,label=prince-slave-linux-01
 .. |codecov| image:: https://codecov.io/gh/opencobra/MATLAB.devTools/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/opencobra/MATLAB.devTools/branch/master
-.. |Code grade| image:: https://prince.lcsb.uni.lu/MATLAB.devTools/img/codegrade-MATLABdevTools.svg?maxAge=0
+.. |Code grade| image:: https://prince.lcsb.uni.lu/MATLAB.devTools/codegrade/codegrade.svg?maxAge=0
 
 
 .. begin-screencast-marker
