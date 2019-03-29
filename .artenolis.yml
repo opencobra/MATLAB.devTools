@@ -60,5 +60,8 @@ after_success:
       pip install --upgrade --user -r docs/requirements.txt;
       python -c "from documenter.deploy import Documentation; doc = Documentation('github.com/opencobra/MATLAB.devTools', ci='jenkins'); doc.deploy()";
       fi
+
+after_script:
+
     - cd $ARTENOLIS_DATA_PATH/repos/fork-MATLAB.devTools.CI;
     - git reset --hard origin/develop;
