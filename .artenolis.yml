@@ -50,16 +50,23 @@ script:
     # launch the tests
     - sh ./.artenolis/runtests.sh;
 
-    - cd $ARTENOLIS_DATA_PATH/repos/fork-MATLAB.devTools.CI;
-    - git reset --hard origin/develop;
-
 after_success:
 
-    # remove the cloned fork-repo
-    - if [ "$MATLAB_VER" == "R2018b" ]; then
+    # submit coverage report
+    - if [[ "$MATLAB_VER" == "R2018b" && "$ARCH" == "Linux" ]]; then
       bash <(curl -s https://codecov.io/bash) -f "!*.lst";
+      fi
+
+    # deploy the documentation
+    - if [[ "$MATLAB_VER" == "R2018b" && "$JENKINS_PULL_REQUEST" != "True" ]]; then
       export PATH="/home/jenkins/.local/bin":$PATH;
       cd $CURRENT_DIR;
       pip install --upgrade --user -r docs/requirements.txt;
       python -c "from documenter.deploy import Documentation; doc = Documentation('github.com/opencobra/MATLAB.devTools', ci='jenkins'); doc.deploy()";
       fi
+
+after_script:
+
+    # reset the fork
+    - cd $ARTENOLIS_DATA_PATH/repos/fork-MATLAB.devTools.CI;
+    - git reset --hard origin/develop;
