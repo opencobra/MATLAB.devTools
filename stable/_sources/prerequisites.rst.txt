@@ -122,10 +122,10 @@ shell). On **Windows**, start ``GUI Bash``. Then type
 Please replace ``"yourGitHubUsername"`` and ``"first.last@server.com"``
 with your respective credentials.
 
-.. |windows0| image:: https://prince.lcsb.uni.lu/img/installation_git_windows_0.png
+.. |windows0| image:: https://prince.lcsb.uni.lu/MATLAB.devTools/img/installation_git_windows_0.png
    :width: 280px
 
-.. |windows1| image:: https://prince.lcsb.uni.lu/img/installation_git_windows_1.png
+.. |windows1| image:: https://prince.lcsb.uni.lu/MATLAB.devTools/img/installation_git_windows_1.png
    :width: 280px
 
 .. include:: ../../README.rst
