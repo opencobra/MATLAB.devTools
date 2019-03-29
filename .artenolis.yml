@@ -52,9 +52,13 @@ script:
 
 after_success:
 
-    # remove the cloned fork-repo
-    - if [[ "$MATLAB_VER" == "R2018b" && "$JENKINS_PULL_REQUEST" != "True" ]]; then
+    # submit coverage report
+    - if [[ "$MATLAB_VER" == "R2018b" && "$ARCH" == "Linux" ]]; then
       bash <(curl -s https://codecov.io/bash) -f "!*.lst";
+      fi
+
+    # deploy the documentation
+    - if [[ "$MATLAB_VER" == "R2018b" && "$JENKINS_PULL_REQUEST" != "True" ]]; then
       export PATH="/home/jenkins/.local/bin":$PATH;
       cd $CURRENT_DIR;
       pip install --upgrade --user -r docs/requirements.txt;
@@ -63,5 +67,6 @@ after_success:
 
 after_script:
 
+    # reset the fork
     - cd $ARTENOLIS_DATA_PATH/repos/fork-MATLAB.devTools.CI;
     - git reset --hard origin/develop;
