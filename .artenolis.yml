@@ -53,7 +53,7 @@ script:
 after_success:
 
     # remove the cloned fork-repo
-    - if [ "$MATLAB_VER" == "R2018b" ]; then
+    - if [[ "$MATLAB_VER" == "R2018b" && "$JENKINS_PULL_REQUEST" != "True" ]]; then
       bash <(curl -s https://codecov.io/bash) -f "!*.lst";
       export PATH="/home/jenkins/.local/bin":$PATH;
       cd $CURRENT_DIR;
