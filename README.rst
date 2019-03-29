@@ -9,9 +9,9 @@
    </h1>
 
 +----------------+----------------+---------------+--------------+
-| MATLAB R2016b  | MATLAB R2015b  | Code Coverage | Code Grade   |
+| MATLAB R2018b  | MATLAB R2017b  | Code Coverage | Code Grade   |
 +================+================+===============+==============+
-| |Build Status| | |Build Status| | |codecov|     | |Code grade| |
+| |bs2018|       | |bs2017|       | |codecov|     | |Code grade| |
 +----------------+----------------+---------------+--------------+
 
 .. begin-description-marker
@@ -207,19 +207,19 @@ paper of The COBRA Toolbox shall we cited when referring to the ``MATLAB.devTool
     A. Saunders, Costas D. Maranas, Nathan E. Lewis, Thomas Sauter,
     Bernhard Ø. Palsson, Ines Thiele, Ronan M.T. Fleming, **Creation and
     analysis of biochemical constraint-based models: the COBRA Toolbox
-    v3.0** (submitted), 2017,
-    `arXiv:1710.04038 <https://arxiv.org/abs/1710.04038>`__.
+    v3.0**, Nature Protocols, volume 14, pages 639–702, 2019
+    `doi.org/10.1038/s41596-018-0098-2 <https://doi.org/10.1038/s41596-018-0098-2>`__.
 
 .. end-how-to-cite-marker
 
 
-.. |Build Status| image:: https://prince.lcsb.uni.lu/jenkins/buildStatus/icon?job=devTools-branches-auto/MATLAB_VER=R2016b
-   :target: https://prince.lcsb.uni.lu/jenkins/job/devTools-branches-auto/MATLAB_VER=R2016b/
-.. |Build Status| image:: https://prince.lcsb.uni.lu/jenkins/buildStatus/icon?job=devTools-branches-auto/MATLAB_VER=R2015b
-   :target: https://prince.lcsb.uni.lu/jenkins/job/devTools-branches-auto/MATLAB_VER=R2015b/
+.. |bs2018| image:: https://prince.lcsb.uni.lu/jenkins/job/devTools-branches-auto/MATLAB_VER=R2018b,label=prince-slave-linux-01/badge/icon
+   :target: https://prince.lcsb.uni.lu/jenkins/job/devTools-branches-auto/MATLAB_VER=R2018b,label=prince-slave-linux-01
+.. |bs2017| image:: https://prince.lcsb.uni.lu/jenkins/job/devTools-branches-auto/MATLAB_VER=R2017b,label=prince-slave-linux-01/badge/icon
+   :target: https://prince.lcsb.uni.lu/jenkins/job/devTools-branches-auto/MATLAB_VER=R2017b,label=prince-slave-linux-01
 .. |codecov| image:: https://codecov.io/gh/opencobra/MATLAB.devTools/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/opencobra/MATLAB.devTools/branch/master
-.. |Code grade| image:: https://prince.lcsb.uni.lu/jenkins/userContent/codegrade-MATLABdevTools.svg?maxAge=0
+.. |Code grade| image:: https://prince.lcsb.uni.lu/MATLAB.devTools/codegrade/codegrade.svg?maxAge=0
 
 
 .. begin-screencast-marker
@@ -233,30 +233,30 @@ paper of The COBRA Toolbox shall we cited when referring to the ``MATLAB.devTool
 .. begin-icon-marker
 .. |macos| raw:: html
 
-   <img src="https://prince.lcsb.uni.lu/jenkins/userContent/apple.png" height="20px" width="20px" alt="macOS">
+   <img src="https://prince.lcsb.uni.lu/MATLAB.devTools/img/apple.png" height="20px" width="20px" alt="macOS">
 
 .. |linux| raw:: html
 
-   <img src="https://prince.lcsb.uni.lu/jenkins/userContent/linux.png" height="20px" width="20px" alt="linux">
+   <img src="https://prince.lcsb.uni.lu/MATLAB.devTools/img/linux.png" height="20px" width="20px" alt="linux">
 
 .. |windows| raw:: html
 
-   <img src="https://prince.lcsb.uni.lu/jenkins/userContent/windows.png" height="20px" width="20px" alt="windows">
+   <img src="https://prince.lcsb.uni.lu/MATLAB.devTools/img/windows.png" height="20px" width="20px" alt="windows">
 
 .. |matlab| raw:: html
 
-   <img src="https://prince.lcsb.uni.lu/jenkins/userContent/matlab.png" height="20px" width="20px" alt="matlab">
+   <img src="https://prince.lcsb.uni.lu/MATLAB.devTools/img/matlab.png" height="20px" width="20px" alt="matlab">
 
 .. |important| raw:: html
 
-   <img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="bulb">
+   <img src="https://prince.lcsb.uni.lu/MATLAB.devTools/img/warning.png" height="20px" width="20px" alt="bulb">
 
 .. |warning| raw:: html
 
-   <img src="https://prince.lcsb.uni.lu/jenkins/userContent/warning.png" height="20px" width="20px" alt="warning">
+   <img src="https://prince.lcsb.uni.lu/MATLAB.devTools/img/warning.png" height="20px" width="20px" alt="warning">
 
 .. |bulb| raw:: html
 
-   <img src="https://prince.lcsb.uni.lu/jenkins/userContent/bulb.png" height="20px" width="20px" alt="bulb">
+   <img src="https://prince.lcsb.uni.lu/MATLAB.devTools/img/bulb.png" height="20px" width="20px" alt="bulb">
 
 .. end-icon-marker

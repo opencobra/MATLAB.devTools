@@ -1,5 +1,5 @@
-cobrabot
-/home/sbg-jenkins/
+artenobot
+/mnt/artenolis-data/repos/
 y
 n
 testFile1

@@ -1,10 +1,14 @@
-if ~isempty(strfind(getenv('HOME'), 'jenkins'))
-    % do not change the paths below
-    addpath(genpath('/home/sbg-jenkins/MOcov'));
-    addpath(genpath('/home/sbg-jenkins/jsonlab'));
+if ~isempty(getenv('MOCOV_PATH')) && ~isempty(getenv('JSONLAB_PATH'))
+    addpath(genpath(getenv('MOCOV_PATH')))
+    addpath(genpath(getenv('JSONLAB_PATH')))
+    COVERAGE = true;
 
     % change the directory on the CI server
-    cd([pwd, '/../'])
+    cd([pwd filesep '..' filesep])
+
+    fprintf('MoCov and JsonLab are on path, coverage will be computed.\n')
+else
+    COVERAGE = false;
 end
 
 % include the root folder and all subfolders
@@ -70,52 +74,55 @@ if ~isempty(strfind(getenv('HOME'), 'jenkins'))
     end
 
     % set the new badge
-    system(['cp /mnt/prince-data/jenkins/userContent/codegrade-', grade, '.svg /mnt/prince-data/jenkins/userContent/codegrade-MATLABdevTools.svg']);
-
-    % secure copy the badge from the slave
-    system('scp -P 8022 /mnt/prince-data/jenkins/userContent/codegrade-MATLABdevTools.svg jenkins@prince-server.lcsb.uni.lux:/var/lib/jenkins/userContent');
-
+    if ~isempty(strfind(getenv('HOME'), 'jenkins'))
+        coverageBadgePath = [getenv('ARTENOLIS_DATA_PATH') filesep 'MATLAB.devTools' filesep 'codegrade' filesep];
+        system(['cp ' coverageBadgePath 'codegrade-', grade, '.svg '  coverageBadgePath 'codegrade.svg']);
+    end
 end
 
 try
     % run the tests in the subfolder recursively
     result = runtests('./test', 'Recursively', true);
 
-    % write coverage based on profile('info')
-    mocov('-cover','./src',...
-          '-profile_info',...
-          '-cover_json_file','coverage.json',...
-          '-cover_method', 'profile');
+    if COVERAGE
+        % write coverage based on profile('info')
+        fprintf(['Running MoCov ... Current directory: ' pwd '\n']);
 
-    sumFailed = 0;
-    sumIncomplete = 0;
+        mocov('-cover','./src',...
+            '-profile_info',...
+            '-cover_json_file','coverage.json',...
+            '-cover_method', 'profile');
 
-    for i = 1:size(result,2)
-        sumFailed = sumFailed + result(i).Failed;
-        sumIncomplete = sumIncomplete + result(i).Incomplete;
+        sumFailed = 0;
+        sumIncomplete = 0;
+
+        for i = 1:size(result,2)
+            sumFailed = sumFailed + result(i).Failed;
+            sumIncomplete = sumIncomplete + result(i).Incomplete;
+        end
+
+        % load the coverage file
+        data = loadjson('coverage.json', 'SimplifyCell', 1);
+
+        sf = data.source_files;
+        clFiles = zeros(length(sf), 1);
+        tlFiles = zeros(length(sf), 1);
+
+        for i = 1:length(sf)
+            clFiles(i) = nnz(sf(i).coverage);
+            tlFiles(i) = length(sf(i).coverage);
+        end
+
+        % average the values for each file
+        cl = sum(clFiles);
+        tl = sum(tlFiles);
+
+        % print out a summary table
+        table(result)
+
+        % print out the coverage as requested by gitlab
+        fprintf('Covered Lines: %i, Total Lines: %i, Coverage: %f%%.\n', cl, tl, cl/tl * 100);
     end
-
-    % load the coverage file
-    data = loadjson('coverage.json', 'SimplifyCell', 1);
-
-    sf = data.source_files;
-    clFiles = zeros(length(sf), 1);
-    tlFiles = zeros(length(sf), 1);
-
-    for i = 1:length(sf)
-        clFiles(i) = nnz(sf(i).coverage);
-        tlFiles(i) = length(sf(i).coverage);
-    end
-
-    % average the values for each file
-    cl = sum(clFiles);
-    tl = sum(tlFiles);
-
-    % print out a summary table
-    table(result)
-
-    % print out the coverage as requested by gitlab
-    fprintf('Covered Lines: %i, Total Lines: %i, Coverage: %f%%.\n', cl, tl, cl/tl * 100);
 
     if sumFailed > 0 || sumIncomplete > 0
         exit_code = 1;
