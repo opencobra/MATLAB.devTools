@@ -50,9 +50,6 @@ script:
     # launch the tests
     - sh ./.artenolis/runtests.sh;
 
-    - cd $ARTENOLIS_DATA_PATH/repos/fork-MATLAB.devTools.CI;
-    - git reset --hard origin/develop;
-
 after_success:
 
     # remove the cloned fork-repo
@@ -63,3 +60,5 @@ after_success:
       pip install --upgrade --user -r docs/requirements.txt;
       python -c "from documenter.deploy import Documentation; doc = Documentation('github.com/opencobra/MATLAB.devTools', ci='jenkins'); doc.deploy()";
       fi
+    - cd $ARTENOLIS_DATA_PATH/repos/fork-MATLAB.devTools.CI;
+    - git reset --hard origin/develop;
