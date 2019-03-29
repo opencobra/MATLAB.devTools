@@ -18,7 +18,7 @@ MATLAB.devTools - Contribute the smart way
     </style>
 
     <div class="alert alert-info" align="center">
-        View MATLAB.devTools <strong>source code</strong> on <a href="https://github.com/opencobra/MATLAB.devTools/"><img src="https://prince.lcsb.uni.lu/img/logos/github.png" style="height: 40px !important;"></a>.
+        View MATLAB.devTools <strong>source code</strong> on <a href="https://github.com/opencobra/MATLAB.devTools/"><img src="https://prince.lcsb.uni.lu/MATLAB.devTools/img/github.png" style="height: 40px !important;"></a>.
     </div>
 
 .. include:: ../../README.rst
