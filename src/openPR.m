@@ -35,9 +35,15 @@ function openPR(branchName)
 
     % check if this URL exists
     [status_curl, result_curl] = system(['curl -s -k --head ', prURL]);
-
+    
     if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
-        fprintf([gitCmd.lead, originCall, 'You can open a pull request (PR) by clicking on \n\n\t', prURL, '?expand=1\n\n']);
+        %         url = 'https://www.mathworks.com';
+        %     sitename = 'The MathWorks Web Site';
+        %     fprintf('<a href = "%s">%s</a>\n',url,sitename)
+        fprintf([gitCmd.lead, originCall, 'You can open a pull request (PR) by clicking on \n'])
+        url = [prURL '?expand=1'];
+        sitename = url;
+        fprintf('<a href = "%s">%s</a>\n',url,sitename)
         fprintf([gitCmd.lead, originCall, 'Please start a new branch by running "contribute" and selecting "1" after your pull request (PR) has been reviewed and merged.\n']);
     else
         fprintf(result_curl);

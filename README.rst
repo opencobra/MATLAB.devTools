@@ -72,16 +72,36 @@ Some issues that can arise during installation are addressed in the
 
 .. end-installation-marker
 
-Do you want to contribute to The COBRA Toolbox?
+How contribute to The COBRA Toolbox?
 -----------------------------------------------
 
 |asciicast|
+
+1. Create a github account, with these `instructions
+<https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/signing-up-for-github>`__.
+
+2. Create your own fork of the COBRA Toolbox by navigating to 
+`https://github.com/opencobra/cobratoolbox <https://github.com/opencobra/cobratoolbox>` then 
+in the top-right corner of the page, click Fork__.
+
+
+3. Create a local clone of your fork using the commands
+$ cd yourCodeDirectory
+Replace yourCodeDirectory with your directory of choice, but is important not to place it in a folder that is automatically synced with some cloud drive.
+
+$ git clone https://github.com/YOUR-USERNAME/cobratoolbox.git fork-cobratoolbox
+It is important to clone into a folder named fork-cobratoolbox because that is how MATLAB.devTools recognises your local clone of your COBRA Toolbox fork.
+
+4. Proceed with the steps below on How do I use the ``MATLAB.devTools``?
+More information about creating your own fork is avaialable `here
+<https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo>`__.
 
 More information about `the COBRA Toolbox
 <https://github.com/opencobra/cobratoolbox>`__ is given `here
 <https://opencobra.github.io/cobratoolbox>`__.
 
-How do I use the ``MATLAB.devTools``?
+
+How do I use ``MATLAB.devTools``?
 -------------------------------------
 
 .. begin-getstarted-marker
