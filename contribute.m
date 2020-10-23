@@ -1,20 +1,17 @@
 function contribute(repoName, printLevel, autoOption)
 % devTools
 %
-% PURPOSE: displays a menu and calls the respective subfunctions
-%
-%       1. Start a new branch:
-%       2. Select an existing branch to work on.
-%       3. Publish a branch.
-%       4. Delete a branch.
-%       5. Update the fork
-%
 % INPUT:
 %
 %     repoName:       Name of the repository (default: opencobra/cobratoolbox)
 %     printLevel:     0: minimal printout (default)
 %                     1: detailed printout (debug mode)
 %     autoOption:     menu option
+%                       1. Start a new branch:
+%                       2. Select an existing branch to work on.
+%                       3. Publish a branch.
+%                       4. Delete a branch.
+%                       5. Update the fork
 
     global gitConf
     global gitCmd
