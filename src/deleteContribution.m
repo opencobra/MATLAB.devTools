@@ -10,6 +10,7 @@ function deleteContribution(branchName)
 %
 % .. Author:
 %      - Laurent Heirendt
+%      - Agnieszka Wegrzyn fix upstream/origin branch removal
 
     global gitConf
     global gitCmd
@@ -74,18 +75,50 @@ function deleteContribution(branchName)
                 end
 
                 % delete the remote branch
-                if checkRemoteBranchExistence(branchName)
+                [branchExists_up, branchExists_org] = checkRemoteBranchExistence(branchName);
+                
+                if branchExists_org
+                    reply = '';
 
-                    [status_gitPush, result_gitPush] = system(['git push origin --delete ', branchName]);
+                    while isempty(reply) || ~strcmpi(reply, 'yes')
 
-                    if status_gitPush == 0
-                        fprintf([gitCmd.lead, originCall, 'The remote <', branchName, '> branch has been deleted.', gitCmd.success, gitCmd.trail]);
-                    else
-                        fprintf(result_gitPush);
-                        error([gitCmd.lead, ' [', mfilename,'] The remote <', branchName,'> branch could not be deleted.', gitCmd.fail]);
+                        reply = input([gitCmd.lead, originCall, 'Are you sure that you want to delete the branch <', branchName, '> on ORIGIN? YES/NO [NO]: '], 's');
+
+                        if strcmpi(reply, 'yes') % users MUST enter 'yes', not only 'y'
+                            [status_gitPush, result_gitPush] = system(['git push origin --delete ', branchName]);
+
+                            if status_gitPush == 0
+                                fprintf([gitCmd.lead, originCall, 'The remote (origin) <', branchName, '> branch has been deleted.', gitCmd.success, gitCmd.trail]);
+                            else
+                                fprintf(result_gitPush);
+                                error([gitCmd.lead, ' [', mfilename,'] The remote (origin) <', branchName,'> branch could not be deleted.', gitCmd.fail]);
+                            end
+                        end
                     end
                 else
-                    fprintf([gitCmd.lead, originCall, 'The remote <', branchName,'> branch does not exist.', gitCmd.fail, gitCmd.trail]);
+                    fprintf([gitCmd.lead, originCall, 'The remote (origin) <', branchName,'> branch does not exist.', gitCmd.fail, gitCmd.trail]);
+                end
+                
+                if branchExists_up
+                    reply = '';
+
+                    while isempty(reply) || ~strcmpi(reply, 'yes')
+
+                        reply = input([gitCmd.lead, originCall, 'Are you sure that you want to delete the branch <', branchName, '> on UPSTREAM? YES/NO [NO]: '], 's');
+
+                        if strcmpi(reply, 'yes') % users MUST enter 'yes', not only 'y'
+                            [status_gitPush, result_gitPush] = system(['git push upstream --delete ', branchName]);
+
+                            if status_gitPush == 0
+                                fprintf([gitCmd.lead, originCall, 'The remote (upstream) <', branchName, '> branch has been deleted.', gitCmd.success, gitCmd.trail]);
+                            else
+                                fprintf(result_gitPush);
+                                error([gitCmd.lead, ' [', mfilename,'] The remote (upstream) <', branchName,'> branch could not be deleted.', gitCmd.fail]);
+                            end
+                        end
+                    end
+                else
+                    fprintf([gitCmd.lead, originCall, 'The remote (upstream) <', branchName,'> branch does not exist.', gitCmd.fail, gitCmd.trail]);
                 end
             end
         end
