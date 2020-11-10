@@ -107,7 +107,7 @@ function contribute(repoName, printLevel, autoOption)
                 exitFlag = false;
             else
                 % initialize the development tools
-                initDevTools(repoName);
+                initDevTools(repoName,currentDir);
 
                 % change to the fork diretory
                 cd(gitConf.fullForkDir);

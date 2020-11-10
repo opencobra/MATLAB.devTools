@@ -1,4 +1,4 @@
-function initDevTools(repoName)
+function initDevTools(repoName,currentDir)
 % Initializes the development tools (username and email are requested if not configured)
 %
 % USAGE:
@@ -108,7 +108,7 @@ function initDevTools(repoName)
         createDir = false;
 
         while ~createDir
-            reply = input([gitCmd.lead, originCall, ' -> Please define the location of your fork\n       current: ', strrep(pwd, '\','\\'),'\n       Enter the path(press ENTER to use the current path): '], 's');
+            reply = input([gitCmd.lead, originCall, ' -> Please define the location of your fork\n       current: ', strrep(currentDir, '\','\\'),'\n       Enter the path(press ENTER to use the current path): '], 's');
 
             % define the local directory as the current directory if the reply is empty
             if isempty(reply)

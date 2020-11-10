@@ -78,6 +78,8 @@ function submitContribution(branchName)
         for i = 1:length(arrResult)
             tmpFileName = arrResult(i);
 
+           
+            
             % split the file name into 2 parts
             tmpFileNameChunks = strsplit(tmpFileName{1}, ' ');
 
@@ -96,6 +98,10 @@ function submitContribution(branchName)
                     fullFileName = tmpFileNameChunks{k+1};
                 end
             end
+            
+            
+            [FILEPATH,NAME,EXT] = fileparts(fullFileName);
+
 
             % add deleted files
             if ~isempty(tmpFileName) && ~isempty(strfind(fullFileStatus, 'D'))
@@ -125,6 +131,18 @@ function submitContribution(branchName)
                     else
                         fprintf(result);
                         error([gitCmd.lead, ' [', mfilename,'] The file <', fullFileName, '> could not be added to the stage.', gitCmd.fail]);
+                    end
+                end
+                
+                %if this is an mlx file, create the mlx then add it
+                if strcmp(EXT,'.mlx')
+                    mlxFile=which(fullFileName);
+                    if isempty(mlxFile)
+                        error([fullFileName ' not in matlab path'])
+                    else
+                        [FILEPATH,NAME,EXT] = fileparts(mlxFile);            
+                        mFile = mlx2m(mlxFile);
+                        [status, result] = system(['git add ', mFile]);
                     end
                 end
             end
