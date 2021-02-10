@@ -67,7 +67,7 @@ function confDevTools(repoName, varargin)
 
     % check if the remoteRepoURL exists before proceeding
     [status_curl, result_curl] = system(['curl -s -k --head ', tmpRemoteRepoURL]);
-    if ~(status_curl == 0 && ~isempty(strfind(result_curl, '200 OK')))
+    if ~(status_curl == 0 && ~isempty(strfind(result_curl, '200')))
          error([' [', mfilename, '] The URL (' remoteRepoURL ') is not reachable or does not exist.']);
     end
 

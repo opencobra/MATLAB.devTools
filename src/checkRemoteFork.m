@@ -22,7 +22,7 @@ function checkRemoteFork()
         [status_curl, result_curl] = system(['curl -s -k --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName]);
 
         % check if the URL exists
-        if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
+        if status_curl == 0 && ~isempty(strfind(result_curl, '200'))
             gitConf.forkURL = [gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '.git'];
 
             printMsg(mfilename, ['The original repository has already been forked on Github (', gitConf.forkURL,').']);

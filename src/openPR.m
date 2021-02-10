@@ -36,7 +36,7 @@ function openPR(branchName)
     % check if this URL exists
     [status_curl, result_curl] = system(['curl -s -k --head ', prURL]);
     
-    if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
+    if status_curl == 0 && ~isempty(strfind(result_curl, '200'))
         %         url = 'https://www.mathworks.com';
         %     sitename = 'The MathWorks Web Site';
         %     fprintf('<a href = "%s">%s</a>\n',url,sitename)

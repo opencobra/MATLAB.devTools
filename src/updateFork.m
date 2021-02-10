@@ -55,7 +55,7 @@ function updateFork(force)
             % check if the develop branch exists on the fork
             [status_curl, result_curl] = system(['curl -s -k --head ', gitConf.remoteServerName, gitConf.userName, '/', gitConf.remoteRepoName, '/tree/develop']);
 
-            if status_curl == 0 && ~isempty(strfind(result_curl, '200 OK'))
+            if status_curl == 0 && ~isempty(strfind(result_curl, '200'))
                 % pull eventual changes from other contributors or administrators
                 [status_gitFetchOrigin, result_gitFetchOrigin] = system('git fetch origin');  % no pull
                 if status_gitFetchOrigin == 0
