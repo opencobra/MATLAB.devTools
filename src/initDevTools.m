@@ -96,8 +96,13 @@ function initDevTools(repoName,currentDir)
 
     % retrieve the directory of the fork from the local git configuration
     [~, result_gitConfForkDirGet] = system(['git config --get user.', gitConf.leadForkDirName, gitConf.nickName, '.path']);
-    gitConf.fullForkDir = strtrim(result_gitConfForkDirGet);
-    gitConf.localDir = gitConf.fullForkDir;
+    if isempty(result_gitConfForkDirGet)
+        gitConf.fullForkDir=currentDir;
+        gitConf.localDir = gitConf.fullForkDir;
+    else
+        gitConf.fullForkDir = strtrim(result_gitConfForkDirGet);
+        gitConf.localDir = gitConf.fullForkDir;
+    end
 
     % check if the fork exists remotely
     checkRemoteFork();
