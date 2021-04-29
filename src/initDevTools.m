@@ -8,8 +8,8 @@ function initDevTools(repoName,currentDir)
 % INPUT:
 %   repoName:       Name of the repository for which the devTools shall
 %                   be configured (default: `opencobra/cobratoolbox`)
-% .. Author:
-%      - Laurent Heirendt
+% .. Authors:
+%      - Laurent Heirendt, Ronan Fleming
 
     global gitConf
     global gitCmd
@@ -20,7 +20,9 @@ function initDevTools(repoName,currentDir)
     if ~exist('repoName', 'var')
         repoName = DEFAULTREPONAME;
     end
-
+    if ~exist('currentDir', 'var')
+        currentDir = pwd;
+    end
     resetDevToolsFlag = true;
 
     finishup = onCleanup(@() resetDevTools());
@@ -97,6 +99,7 @@ function initDevTools(repoName,currentDir)
     % retrieve the directory of the fork from the local git configuration
     [~, result_gitConfForkDirGet] = system(['git config --get user.', gitConf.leadForkDirName, gitConf.nickName, '.path']);
     if isempty(result_gitConfForkDirGet)
+        fprintf('%s%s%s\n','Attempting to progress by assuming the current directory (', currentDir, ') is a fork directory.')
         gitConf.fullForkDir=currentDir;
         gitConf.localDir = gitConf.fullForkDir;
     else
