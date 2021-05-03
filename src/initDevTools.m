@@ -195,7 +195,14 @@ function initDevTools(repoName,currentDir)
 
         % only update if there are no local changes
         if status_gitStatus == 0 && isempty(result_gitStatus)
-            updateFork(true);
+            reply = input([gitCmd.lead, originCall, ' Do you want to update your fork? Y/N [Y]:'], 's');
+
+            % update fork if requested
+            if (isempty(reply) || strcmpi(reply, 'y') || strcmpi(reply, 'yes'))
+                updateFork(true);
+            end
+            
+            
         else
             printMsg(mfilename, 'The local fork cannot be updated as you have uncommitted changes.', [gitCmd.fail, gitCmd.trail]);
         end
