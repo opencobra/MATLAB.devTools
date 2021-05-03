@@ -102,9 +102,9 @@ function initDevTools(repoName,currentDir)
         gitConf.fullForkDir = strtrim(result_gitConfForkDirGet);
         gitConf.localDir = gitConf.fullForkDir;
     else
-        fprintf('%s\n','No existing information about the location of the fork directory.')
-        gitConf.fullForkDir = '';
-        gitConf.localDir = '';
+        fprintf('%s%s%s\n','Would you like to set up current directory (', currentDir, ') as a fork directory.')
+        gitConf.fullForkDir=currentDir;
+        gitConf.localDir = gitConf.fullForkDir;
     end
 
     % check if the fork exists remotely
