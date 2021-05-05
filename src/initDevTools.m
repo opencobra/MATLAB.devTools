@@ -98,13 +98,13 @@ function initDevTools(repoName,currentDir)
 
     % retrieve the directory of the fork from the local git configuration
     [~, result_gitConfForkDirGet] = system(['git config --get user.', gitConf.leadForkDirName, gitConf.nickName, '.path']);
-    if isempty(result_gitConfForkDirGet)
-        fprintf('%s%s%s\n','Attempting to progress by assuming the current directory (', currentDir, ') is a fork directory.')
-        gitConf.fullForkDir=currentDir;
-        gitConf.localDir = gitConf.fullForkDir;
-    else
+    if ~isempty(result_gitConfForkDirGet)
         gitConf.fullForkDir = strtrim(result_gitConfForkDirGet);
         gitConf.localDir = gitConf.fullForkDir;
+    else
+        fprintf('%s\n','No existing information about the location of the fork directory.')
+        gitConf.fullForkDir = '';
+        gitConf.localDir = '';
     end
 
     % check if the fork exists remotely
@@ -195,7 +195,14 @@ function initDevTools(repoName,currentDir)
 
         % only update if there are no local changes
         if status_gitStatus == 0 && isempty(result_gitStatus)
-            updateFork(true);
+            reply = input([gitCmd.lead, originCall, ' Do you want to update your fork? Y/N [Y]:'], 's');
+
+            % update fork if requested
+            if (isempty(reply) || strcmpi(reply, 'y') || strcmpi(reply, 'yes'))
+                updateFork(true);
+            end
+            
+            
         else
             printMsg(mfilename, 'The local fork cannot be updated as you have uncommitted changes.', [gitCmd.fail, gitCmd.trail]);
         end

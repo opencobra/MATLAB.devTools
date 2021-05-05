@@ -1,3 +1,0 @@
-[submodule "external/rdir"]
-	path = external/rdir
-	url = https://github.com/LCSB-BioCore/rdir.git
