@@ -67,6 +67,12 @@ function confDevTools(repoName, varargin)
 
     % check if the remoteRepoURL exists before proceeding
     [status_curl, result_curl] = system(['curl -s -k --head ', tmpRemoteRepoURL]);
+    if contains(result_curl,'not found (required by curl)')
+        disp('Cannot find the required curl libraries. Try replacing matlab libcurl with system libcurl, e.g.:')
+        disp('mv /usr/local/bin/MATLAB/R2021a/bin/glnxa64/libcurl.so.4 /usr/local/bin/MATLAB/R2021a/bin/glnxa64/libcurl.so.4_matlab')
+        disp('cp /usr/lib/x86_64-linux-gnu/libcurl.so.4 /usr/local/bin/MATLAB/R2021a/bin/glnxa64/libcurl.so.4')
+    end
+    
     if ~(status_curl == 0 && ~isempty(strfind(result_curl, '200')))
          error([' [', mfilename, '] The URL (' remoteRepoURL ') is not reachable or does not exist.']);
     end

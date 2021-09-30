@@ -12,6 +12,10 @@ function contribute(repoName, printLevel, autoOption)
 %                       3. Publish a branch.
 %                       4. Delete a branch.
 %                       5. Update the fork
+%
+% EXAMPLES:
+%     contribute('opencobra/cobratoolbox')
+%     contribute('opencobra/COBRA.tutorials')
 
     global gitConf
     global gitCmd

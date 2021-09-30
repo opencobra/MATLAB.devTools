@@ -114,7 +114,7 @@ function submitContribution(branchName)
                         printMsg(mfilename, ['The file ', fullFileName, ' has been added to the stage.']);
                     else
                         fprintf(result);
-                        error([gitCmd.lead, ' [', mfilename,'] The file ', fullFileName, ' could not be added to the stage.', gitCmd.fail]);
+                        warning([gitCmd.lead, ' [', mfilename,'] The file ', fullFileName, ' could not be added to the stage.', gitCmd.fail]);
                     end
                 end
             end
@@ -134,7 +134,7 @@ function submitContribution(branchName)
                     end
                 end
                 
-                %if this is an mlx file, create the mlx then add it
+                %if this is an mlx file, create the m file then add it
                 if strcmp(EXT,'.mlx')
                     mlxFile=which(fullFileName);
                     if isempty(mlxFile)
