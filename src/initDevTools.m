@@ -1,4 +1,4 @@
-function initDevTools(repoName,currentDir)
+function initDevTools(repoName,currentDir,printLevel)
 % Initializes the development tools (username and email are requested if not configured)
 %
 % USAGE:
@@ -23,12 +23,15 @@ function initDevTools(repoName,currentDir)
     if ~exist('currentDir', 'var')
         currentDir = pwd;
     end
+    if ~exist('printLevel', 'var')
+        printLevel = 1;%by default print to screen
+    end
     resetDevToolsFlag = true;
 
     finishup = onCleanup(@() resetDevTools());
 
     % check the system and set the configuration
-    checkSystem(mfilename, repoName);
+    checkSystem(mfilename, repoName, printLevel);
 
     if ~isfield(gitConf, 'userName'), gitConf.userName = []; end
     if ~isfield(gitConf, 'localDir'), gitConf.localDir = []; end

@@ -19,19 +19,19 @@ function checkSystem(callerName, repoName, printLevel)
     global gitCmd
 
     % set the callerName
-    if ~exist('printLevel', 'var')
+    if ~exist('callerName', 'var')
         callerName = '';
     else
         callerName = ['(caller: ', callerName, ')'];
     end
 
     % set the repoName if not given
-    if nargin < 2 || ~exist('repoName', 'var')
+    if ~exist('repoName', 'var')
         repoName = 'opencobra/cobratoolbox';
     end
 
-    if ~exist('printLevel', 'var') && isempty(gitConf)
-        printLevel = 0;
+    if ~exist('printLevel', 'var')
+        printLevel = 1;%by default print
     end
 
     % if a configuration has already been set, configure the devTools accordingly
@@ -39,6 +39,7 @@ function checkSystem(callerName, repoName, printLevel)
         % default configuration of the devTools is the DEFAULTREPONAME repository
         confDevTools(repoName, 'printLevel', printLevel);
     else
+        gitConf.printLevel = printLevel;
         % write instructions how to reset the devTools when they already configured
         if strcmpi(callerName, 'contribute')
             fprintf('\n');
