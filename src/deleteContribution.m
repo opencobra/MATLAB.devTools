@@ -113,7 +113,7 @@ function deleteContribution(branchName)
                                 fprintf([gitCmd.lead, originCall, 'The remote (upstream) <', branchName, '> branch has been deleted.', gitCmd.success, gitCmd.trail]);
                             else
                                 fprintf(result_gitPush);
-                                error([gitCmd.lead, ' [', mfilename,'] The remote (upstream) <', branchName,'> branch could not be deleted.', gitCmd.fail]);
+                                warning([gitCmd.lead, ' [', mfilename,'] The remote (upstream) <', branchName,'> branch could not be deleted.', gitCmd.fail]);
                             end
                         end
                     end
