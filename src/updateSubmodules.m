@@ -58,10 +58,10 @@ function updateSubmodules()
         [status_gitSubmodule, result_gitSubmodule] = system('git submodule update');
         
         if status_gitSubmodule == 0
-            printMsg(mfilename, 'The submodules have been initialized.');
+            printMsg(mfilename, 'The submodules have been updated.');
         else
             fprintf(result_gitSubmodule);
-            error([gitCmd.lead, ' [', mfilename,'] The submodules could not be initialized.', gitCmd.fail]);
+            error([gitCmd.lead, ' [', mfilename,'] The submodules could not be updated.', gitCmd.fail]);
         end
         
         % update the submodules
@@ -76,6 +76,16 @@ function updateSubmodules()
             end
         end
     else
+        % update submodules
+        [status_gitSubmodule, result_gitSubmodule] = system('git submodule update');
+        
+        if status_gitSubmodule == 0
+            printMsg(mfilename, 'The submodules have been updated.');
+        else
+            fprintf(result_gitSubmodule);
+            error([gitCmd.lead, ' [', mfilename,'] The submodules could not be updated.', gitCmd.fail]);
+        end
+
         %Check for changes to submodules
         [status_gitSubmodule, result_gitSubmodule] = system('git submodule foreach git status');
         if status_gitSubmodule==0
